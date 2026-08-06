@@ -1,0 +1,85 @@
+{
+	"format_version": "1.9.0",
+	"credit": "Made with Blockbench",
+	"texture_size": [64, 64],
+	"textures": {
+		"0": "create_industrial_details:block/mooring_bollard",
+		"particle": "create_industrial_details:block/mooring_bollard"
+	},
+	"elements": [
+		{
+			"name": "Top Cap",
+			"from": [2, 12, 2],
+			"to": [14, 15, 14],
+			"faces": {
+				"north": {"uv": [6.5, 4, 9.5, 4.75], "texture": "#0"},
+				"east": {"uv": [6.5, 4.75, 9.5, 5.5], "texture": "#0"},
+				"south": {"uv": [0, 7, 3, 7.75], "texture": "#0"},
+				"west": {"uv": [7.5, 5.5, 10.5, 6.25], "texture": "#0"},
+				"up": {"uv": [6.5, 3, 3.5, 0], "texture": "#0"},
+				"down": {"uv": [6.5, 3, 3.5, 6], "texture": "#0"}
+			}
+		},
+		{
+			"name": "Upper Collar",
+			"from": [4, 10, 4],
+			"to": [12, 12, 12],
+			"faces": {
+				"north": {"uv": [8.5, 2, 10.5, 2.5], "texture": "#0"},
+				"east": {"uv": [8.5, 2.5, 10.5, 3], "texture": "#0"},
+				"south": {"uv": [8.5, 3, 10.5, 3.5], "texture": "#0"},
+				"west": {"uv": [8.5, 3.5, 10.5, 4], "texture": "#0"},
+				"up": {"uv": [5.5, 8, 3.5, 6], "texture": "#0"},
+				"down": {"uv": [7.5, 6, 5.5, 8], "texture": "#0"}
+			}
+		},
+		{
+			"name": "Main Post",
+			"from": [5, 4, 5],
+			"to": [11, 10, 11],
+			"faces": {
+				"north": {"uv": [7.5, 6.25, 9, 7.75], "texture": "#0"},
+				"east": {"uv": [0, 7.75, 1.5, 9.25], "texture": "#0"},
+				"south": {"uv": [1.5, 7.75, 3, 9.25], "texture": "#0"},
+				"west": {"uv": [7.5, 7.75, 9, 9.25], "texture": "#0"},
+				"up": {"uv": [4.5, 9.5, 3, 8], "texture": "#0"},
+				"down": {"uv": [6, 8, 4.5, 9.5], "texture": "#0"}
+			}
+		},
+		{
+			"name": "Lower Collar",
+			"from": [4, 2, 4],
+			"to": [12, 4, 12],
+			"faces": {
+				"north": {"uv": [9, 6.25, 11, 6.75], "texture": "#0"},
+				"east": {"uv": [9, 6.75, 11, 7.25], "texture": "#0"},
+				"south": {"uv": [9, 7.25, 11, 7.75], "texture": "#0"},
+				"west": {"uv": [9, 7.75, 11, 8.25], "texture": "#0"},
+				"up": {"uv": [8.5, 2, 6.5, 0], "texture": "#0"},
+				"down": {"uv": [8.5, 2, 6.5, 4], "texture": "#0"}
+			}
+		},
+		{
+			"name": "Base Plate",
+			"from": [1, 0, 1],
+			"to": [15, 2, 15],
+			"faces": {
+				"north": {"uv": [8.5, 0, 12, 0.5], "texture": "#0"},
+				"east": {"uv": [8.5, 0.5, 12, 1], "texture": "#0"},
+				"south": {"uv": [8.5, 1, 12, 1.5], "texture": "#0"},
+				"west": {"uv": [8.5, 1.5, 12, 2], "texture": "#0"},
+				"up": {"uv": [3.5, 3.5, 0, 0], "texture": "#0"},
+				"down": {"uv": [3.5, 3.5, 0, 7], "texture": "#0"}
+			}
+		}
+	],
+	"groups": [
+		{
+			"name": "Mooring Bollard",
+			"origin": [8, 8, 8],
+			"scope": 0,
+			"color": 0,
+			"children": [0, 1, 2, 3, 4]
+		}
+	]
+}

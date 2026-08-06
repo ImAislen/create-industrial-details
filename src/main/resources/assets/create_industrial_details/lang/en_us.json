@@ -1,4 +1,5 @@
 {
   "itemGroup.create_industrial_details": "Create: Industrial Details",
-  "block.create_industrial_details.cast_iron_block": "Cast Iron Block"
+  "block.create_industrial_details.cast_iron_block": "Cast Iron Block",
+  "block.create_industrial_details.mooring_bollard": "Mooring Bollard"
 }

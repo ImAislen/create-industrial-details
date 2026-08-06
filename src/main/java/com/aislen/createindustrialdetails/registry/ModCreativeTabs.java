@@ -33,6 +33,7 @@ public final class ModCreativeTabs {
                             )
                             .displayItems((parameters, output) -> {
                                 output.accept(ModBlocks.CAST_IRON_BLOCK.get());
+                                output.accept(ModBlocks.MOORING_BOLLARD.get());
                             })
                             .build()
             );

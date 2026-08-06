@@ -26,6 +26,17 @@ public final class ModBlocks {
                                     .sound(SoundType.METAL)
                     )
             );
+    public static final DeferredBlock<Block> MOORING_BOLLARD =
+            registerBlockWithItem(
+                    "mooring_bollard",
+                    () -> new Block(
+                            BlockBehaviour.Properties.of()
+                                    .mapColor(MapColor.COLOR_BLACK)
+                                    .strength(5.0F, 6.0F)
+                                    .requiresCorrectToolForDrops()
+                                    .sound(SoundType.METAL)
+                    )
+            );
 
     private ModBlocks() {
     }

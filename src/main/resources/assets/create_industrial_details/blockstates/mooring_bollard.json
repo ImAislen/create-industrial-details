@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "create_industrial_details:block/mooring_bollard"
+    }
+  }
+}
