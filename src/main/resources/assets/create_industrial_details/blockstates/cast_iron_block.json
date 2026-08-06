@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "create_industrial_details:block/cast_iron_block"
+    }
+  }
+}
