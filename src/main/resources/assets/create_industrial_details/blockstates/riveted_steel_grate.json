@@ -1,0 +1,21 @@
+{
+  "multipart": [
+    {
+      "when": {
+        "axis": "z"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_grate"
+      }
+    },
+    {
+      "when": {
+        "axis": "x"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_grate",
+        "y": 90
+      }
+    }
+  ]
+}

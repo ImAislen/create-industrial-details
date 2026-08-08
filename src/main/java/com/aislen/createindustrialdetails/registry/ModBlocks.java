@@ -12,6 +12,9 @@ import java.util.function.BiFunction;
 
 import com.aislen.createindustrialdetails.block.RivetedSteelPanelShaftPenetrationBlock;
 import com.aislen.createindustrialdetails.item.RivetedSteelPanelItem;
+import com.aislen.createindustrialdetails.block.RivetedSteelGrateBlock;
+import com.aislen.createindustrialdetails.block.RivetedSteelHatchBlock;
+
 
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
@@ -33,9 +36,38 @@ public final class ModBlocks {
                                     .mapColor(MapColor.COLOR_BLACK)
                                     .strength(5.0F, 6.0F)
                                     .requiresCorrectToolForDrops()
-                                    .sound(SoundType.METAL)
+                                    .sound(SoundType.NETHERITE_BLOCK)
                     )
             );
+
+    public static final DeferredBlock<RivetedSteelHatchBlock>
+            RIVETED_STEEL_HATCH =
+            registerBlockWithItem(
+                    "riveted_steel_hatch",
+                    () -> new RivetedSteelHatchBlock(
+                            BlockBehaviour.Properties.of()
+                                    .strength(3.5F, 6.0F)
+                                    .sound(SoundType.NETHERITE_BLOCK)
+                                    .requiresCorrectToolForDrops()
+                                    .noOcclusion()
+                    )
+            );
+
+    public static final DeferredBlock<RivetedSteelGrateBlock>
+            RIVETED_STEEL_GRATE =
+            registerBlockWithItem(
+                    "riveted_steel_grate",
+                    () -> new RivetedSteelGrateBlock(
+                            BlockBehaviour.Properties.of()
+                                    .strength(3.5F, 6.0F)
+                                    .sound(SoundType.NETHERITE_BLOCK)
+                                    .requiresCorrectToolForDrops()
+                                    .noOcclusion()
+                    )
+
+            );
+
+
     private static <T extends Block> DeferredBlock<T> registerBlockWithItem(
             String name,
             Supplier<? extends T> blockFactory,

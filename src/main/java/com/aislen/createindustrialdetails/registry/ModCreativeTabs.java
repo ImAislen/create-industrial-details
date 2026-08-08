@@ -35,6 +35,8 @@ public final class ModCreativeTabs {
                                 output.accept(ModBlocks.CAST_IRON_BLOCK.get());
                                 output.accept(ModBlocks.MOORING_BOLLARD.get());
                                 output.accept(ModBlocks.RIVETED_STEEL_PANEL.get());
+                                output.accept(ModBlocks.RIVETED_STEEL_GRATE.get());
+                                output.accept(ModBlocks.RIVETED_STEEL_HATCH.get());
                             })
                             .build()
             );

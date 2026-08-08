@@ -3,11 +3,15 @@ package com.aislen.createindustrialdetails;
 import com.aislen.createindustrialdetails.registry.ModBlocks;
 import com.aislen.createindustrialdetails.registry.ModCreativeTabs;
 import com.aislen.createindustrialdetails.registry.ModItems;
+import com.aislen.createindustrialdetails.registry.ModTooltips;
+import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import com.mojang.logging.LogUtils;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
 import org.slf4j.Logger;
+
+
 
 @Mod(CreateIndustrialDetails.MOD_ID)
 public final class CreateIndustrialDetails {
@@ -21,7 +25,13 @@ public final class CreateIndustrialDetails {
         ModBlocks.register(modEventBus);
         ModItems.register(modEventBus);
         ModCreativeTabs.register(modEventBus);
+        modEventBus.addListener(
+                CreateIndustrialDetails::commonSetup
+        );
 
         LOGGER.info("Create: Industrial Details initialized.");
+    }
+    private static void commonSetup(FMLCommonSetupEvent event) {
+        event.enqueueWork(ModTooltips::register);
     }
 }

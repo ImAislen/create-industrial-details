@@ -2,5 +2,13 @@
   "itemGroup.create_industrial_details": "Create: Industrial Details",
   "block.create_industrial_details.cast_iron_block": "Cast Iron Block",
   "block.create_industrial_details.mooring_bollard": "Mooring Bollard",
-  "block.create_industrial_details.riveted_steel_panel": "Riveted Steel Panel"
+  "block.create_industrial_details.riveted_steel_panel": "Riveted Steel Panel",
+  "block.create_industrial_details.riveted_steel_grate": "Riveted Steel Grate",
+  "block.create_industrial_details.riveted_steel_hatch": "Riveted Steel Hatch",
+
+
+  "block.create_industrial_details.riveted_steel_grate.tooltip.summary": "Can be _waterlogged_.",
+  "block.create_industrial_details.riveted_steel_grate.tooltip.condition1": "Encased Fan",
+  "block.create_industrial_details.riveted_steel_grate.tooltip.behaviour1": "Airflow passes through the grate."
+
 }
