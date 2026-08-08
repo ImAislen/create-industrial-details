@@ -8,8 +8,18 @@ import net.minecraft.world.level.material.MapColor;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredRegister;
+import java.util.function.BiFunction;
+
+import com.aislen.createindustrialdetails.block.RivetedSteelPanelShaftPenetrationBlock;
+import com.aislen.createindustrialdetails.item.RivetedSteelPanelItem;
+
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.Item;
 
 import java.util.function.Supplier;
+
+import com.aislen.createindustrialdetails.block.MooringBollardBlock;
+import com.aislen.createindustrialdetails.block.RivetedSteelPanelBlock;
 
 public final class ModBlocks {
     public static final DeferredRegister.Blocks BLOCKS =
@@ -26,15 +36,49 @@ public final class ModBlocks {
                                     .sound(SoundType.METAL)
                     )
             );
-    public static final DeferredBlock<Block> MOORING_BOLLARD =
+    private static <T extends Block> DeferredBlock<T> registerBlockWithItem(
+            String name,
+            Supplier<? extends T> blockFactory,
+            BiFunction<T, Item.Properties, ? extends BlockItem> itemFactory
+    ) {
+        DeferredBlock<T> block = BLOCKS.register(name, blockFactory);
+        ModItems.registerBlockItem(name, block, itemFactory);
+        return block;
+    }
+    public static final DeferredBlock<MooringBollardBlock> MOORING_BOLLARD =
             registerBlockWithItem(
                     "mooring_bollard",
-                    () -> new Block(
+                    () -> new MooringBollardBlock(
                             BlockBehaviour.Properties.of()
                                     .mapColor(MapColor.COLOR_BLACK)
                                     .strength(5.0F, 6.0F)
                                     .requiresCorrectToolForDrops()
                                     .sound(SoundType.METAL)
+                                    .noOcclusion()
+                    )
+            );
+
+    public static final DeferredBlock<RivetedSteelPanelBlock> RIVETED_STEEL_PANEL =
+            registerBlockWithItem(
+                    "riveted_steel_panel",
+                    () -> new RivetedSteelPanelBlock(
+                            BlockBehaviour.Properties.of()
+                                    .strength(3.5F, 6.0F)
+                                    .sound(SoundType.METAL)
+                                    .requiresCorrectToolForDrops()
+                                    .noOcclusion()
+                    ),
+                    RivetedSteelPanelItem::new
+            );
+    public static final DeferredBlock<RivetedSteelPanelShaftPenetrationBlock>
+            RIVETED_STEEL_PANEL_SHAFT_PENETRATION =
+            BLOCKS.register(
+                    "riveted_steel_panel_shaft_penetration",
+                    () -> new RivetedSteelPanelShaftPenetrationBlock(
+                            BlockBehaviour.Properties.of()
+                                    .strength(3.5F, 6.0F)
+                                    .sound(SoundType.METAL)
+                                    .noOcclusion()
                     )
             );
 

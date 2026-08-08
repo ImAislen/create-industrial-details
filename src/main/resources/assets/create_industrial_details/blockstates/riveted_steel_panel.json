@@ -1,0 +1,1877 @@
+{
+  "multipart": [
+    {
+      "when": {
+        "facing": "north"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/center"
+      }
+    },
+    {
+      "when": {
+        "facing": "east"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/center",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "south"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/center",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "west"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/center",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "up"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/center",
+        "x": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "down"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/center",
+        "x": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "connected_top": "false"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/edge_top"
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "connected_top": "true"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/fill_top"
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "connected_right": "false"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/edge_right"
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "connected_right": "true"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/fill_right"
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "connected_bottom": "false"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/edge_bottom"
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "connected_bottom": "true"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/fill_bottom"
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "connected_left": "false"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/edge_left"
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "connected_left": "true"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/fill_left"
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "connected_top": "false"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/edge_top",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "connected_top": "true"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/fill_top",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "connected_right": "false"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/edge_right",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "connected_right": "true"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/fill_right",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "connected_bottom": "false"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/edge_bottom",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "connected_bottom": "true"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/fill_bottom",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "connected_left": "false"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/edge_left",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "connected_left": "true"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/fill_left",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "connected_top": "false"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/edge_top",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "connected_top": "true"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/fill_top",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "connected_right": "false"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/edge_right",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "connected_right": "true"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/fill_right",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "connected_bottom": "false"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/edge_bottom",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "connected_bottom": "true"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/fill_bottom",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "connected_left": "false"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/edge_left",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "connected_left": "true"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/fill_left",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "connected_top": "false"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/edge_top",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "connected_top": "true"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/fill_top",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "connected_right": "false"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/edge_right",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "connected_right": "true"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/fill_right",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "connected_bottom": "false"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/edge_bottom",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "connected_bottom": "true"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/fill_bottom",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "connected_left": "false"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/edge_left",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "connected_left": "true"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/fill_left",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "up",
+        "connected_top": "false"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/edge_top",
+        "x": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "up",
+        "connected_top": "true"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/fill_top",
+        "x": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "up",
+        "connected_right": "false"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/edge_right",
+        "x": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "up",
+        "connected_right": "true"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/fill_right",
+        "x": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "up",
+        "connected_bottom": "false"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/edge_bottom",
+        "x": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "up",
+        "connected_bottom": "true"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/fill_bottom",
+        "x": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "up",
+        "connected_left": "false"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/edge_left",
+        "x": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "up",
+        "connected_left": "true"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/fill_left",
+        "x": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "down",
+        "connected_top": "false"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/edge_top",
+        "x": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "down",
+        "connected_top": "true"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/fill_top",
+        "x": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "down",
+        "connected_right": "false"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/edge_right",
+        "x": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "down",
+        "connected_right": "true"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/fill_right",
+        "x": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "down",
+        "connected_bottom": "false"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/edge_bottom",
+        "x": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "down",
+        "connected_bottom": "true"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/fill_bottom",
+        "x": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "down",
+        "connected_left": "false"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/edge_left",
+        "x": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "down",
+        "connected_left": "true"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/fill_left",
+        "x": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "connected_top": "false",
+        "connected_left": "false"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/corner_top_left"
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "connected_top": "false",
+        "connected_left": "true"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/corner_top_left"
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "connected_top": "true",
+        "connected_left": "false"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/corner_top_left"
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "connected_top": "true",
+        "connected_left": "true",
+        "inner_top_left": "true"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/corner_inner_top_left"
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "connected_top": "true",
+        "connected_left": "true",
+        "inner_top_left": "false"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/corner_flat_top_left"
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "connected_top": "false",
+        "connected_right": "false"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/corner_top_right"
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "connected_top": "false",
+        "connected_right": "true"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/corner_top_right"
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "connected_top": "true",
+        "connected_right": "false"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/corner_top_right"
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "connected_top": "true",
+        "connected_right": "true",
+        "inner_top_right": "true"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/corner_inner_top_right"
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "connected_top": "true",
+        "connected_right": "true",
+        "inner_top_right": "false"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/corner_flat_top_right"
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "connected_bottom": "false",
+        "connected_left": "false"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/corner_bottom_left"
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "connected_bottom": "false",
+        "connected_left": "true"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/corner_bottom_left"
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "connected_bottom": "true",
+        "connected_left": "false"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/corner_bottom_left"
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "connected_bottom": "true",
+        "connected_left": "true",
+        "inner_bottom_left": "true"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/corner_inner_bottom_left"
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "connected_bottom": "true",
+        "connected_left": "true",
+        "inner_bottom_left": "false"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/corner_flat_bottom_left"
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "connected_bottom": "false",
+        "connected_right": "false"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/corner_bottom_right"
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "connected_bottom": "false",
+        "connected_right": "true"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/corner_bottom_right"
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "connected_bottom": "true",
+        "connected_right": "false"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/corner_bottom_right"
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "connected_bottom": "true",
+        "connected_right": "true",
+        "inner_bottom_right": "true"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/corner_inner_bottom_right"
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "connected_bottom": "true",
+        "connected_right": "true",
+        "inner_bottom_right": "false"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/corner_flat_bottom_right"
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "connected_top": "false",
+        "connected_left": "false"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/corner_top_left",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "connected_top": "false",
+        "connected_left": "true"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/corner_top_left",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "connected_top": "true",
+        "connected_left": "false"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/corner_top_left",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "connected_top": "true",
+        "connected_left": "true",
+        "inner_top_left": "true"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/corner_inner_top_left",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "connected_top": "true",
+        "connected_left": "true",
+        "inner_top_left": "false"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/corner_flat_top_left",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "connected_top": "false",
+        "connected_right": "false"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/corner_top_right",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "connected_top": "false",
+        "connected_right": "true"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/corner_top_right",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "connected_top": "true",
+        "connected_right": "false"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/corner_top_right",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "connected_top": "true",
+        "connected_right": "true",
+        "inner_top_right": "true"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/corner_inner_top_right",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "connected_top": "true",
+        "connected_right": "true",
+        "inner_top_right": "false"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/corner_flat_top_right",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "connected_bottom": "false",
+        "connected_left": "false"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/corner_bottom_left",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "connected_bottom": "false",
+        "connected_left": "true"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/corner_bottom_left",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "connected_bottom": "true",
+        "connected_left": "false"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/corner_bottom_left",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "connected_bottom": "true",
+        "connected_left": "true",
+        "inner_bottom_left": "true"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/corner_inner_bottom_left",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "connected_bottom": "true",
+        "connected_left": "true",
+        "inner_bottom_left": "false"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/corner_flat_bottom_left",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "connected_bottom": "false",
+        "connected_right": "false"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/corner_bottom_right",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "connected_bottom": "false",
+        "connected_right": "true"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/corner_bottom_right",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "connected_bottom": "true",
+        "connected_right": "false"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/corner_bottom_right",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "connected_bottom": "true",
+        "connected_right": "true",
+        "inner_bottom_right": "true"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/corner_inner_bottom_right",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "connected_bottom": "true",
+        "connected_right": "true",
+        "inner_bottom_right": "false"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/corner_flat_bottom_right",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "connected_top": "false",
+        "connected_left": "false"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/corner_top_left",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "connected_top": "false",
+        "connected_left": "true"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/corner_top_left",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "connected_top": "true",
+        "connected_left": "false"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/corner_top_left",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "connected_top": "true",
+        "connected_left": "true",
+        "inner_top_left": "true"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/corner_inner_top_left",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "connected_top": "true",
+        "connected_left": "true",
+        "inner_top_left": "false"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/corner_flat_top_left",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "connected_top": "false",
+        "connected_right": "false"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/corner_top_right",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "connected_top": "false",
+        "connected_right": "true"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/corner_top_right",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "connected_top": "true",
+        "connected_right": "false"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/corner_top_right",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "connected_top": "true",
+        "connected_right": "true",
+        "inner_top_right": "true"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/corner_inner_top_right",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "connected_top": "true",
+        "connected_right": "true",
+        "inner_top_right": "false"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/corner_flat_top_right",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "connected_bottom": "false",
+        "connected_left": "false"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/corner_bottom_left",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "connected_bottom": "false",
+        "connected_left": "true"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/corner_bottom_left",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "connected_bottom": "true",
+        "connected_left": "false"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/corner_bottom_left",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "connected_bottom": "true",
+        "connected_left": "true",
+        "inner_bottom_left": "true"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/corner_inner_bottom_left",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "connected_bottom": "true",
+        "connected_left": "true",
+        "inner_bottom_left": "false"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/corner_flat_bottom_left",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "connected_bottom": "false",
+        "connected_right": "false"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/corner_bottom_right",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "connected_bottom": "false",
+        "connected_right": "true"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/corner_bottom_right",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "connected_bottom": "true",
+        "connected_right": "false"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/corner_bottom_right",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "connected_bottom": "true",
+        "connected_right": "true",
+        "inner_bottom_right": "true"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/corner_inner_bottom_right",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "connected_bottom": "true",
+        "connected_right": "true",
+        "inner_bottom_right": "false"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/corner_flat_bottom_right",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "connected_top": "false",
+        "connected_left": "false"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/corner_top_left",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "connected_top": "false",
+        "connected_left": "true"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/corner_top_left",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "connected_top": "true",
+        "connected_left": "false"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/corner_top_left",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "connected_top": "true",
+        "connected_left": "true",
+        "inner_top_left": "true"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/corner_inner_top_left",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "connected_top": "true",
+        "connected_left": "true",
+        "inner_top_left": "false"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/corner_flat_top_left",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "connected_top": "false",
+        "connected_right": "false"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/corner_top_right",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "connected_top": "false",
+        "connected_right": "true"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/corner_top_right",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "connected_top": "true",
+        "connected_right": "false"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/corner_top_right",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "connected_top": "true",
+        "connected_right": "true",
+        "inner_top_right": "true"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/corner_inner_top_right",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "connected_top": "true",
+        "connected_right": "true",
+        "inner_top_right": "false"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/corner_flat_top_right",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "connected_bottom": "false",
+        "connected_left": "false"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/corner_bottom_left",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "connected_bottom": "false",
+        "connected_left": "true"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/corner_bottom_left",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "connected_bottom": "true",
+        "connected_left": "false"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/corner_bottom_left",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "connected_bottom": "true",
+        "connected_left": "true",
+        "inner_bottom_left": "true"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/corner_inner_bottom_left",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "connected_bottom": "true",
+        "connected_left": "true",
+        "inner_bottom_left": "false"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/corner_flat_bottom_left",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "connected_bottom": "false",
+        "connected_right": "false"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/corner_bottom_right",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "connected_bottom": "false",
+        "connected_right": "true"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/corner_bottom_right",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "connected_bottom": "true",
+        "connected_right": "false"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/corner_bottom_right",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "connected_bottom": "true",
+        "connected_right": "true",
+        "inner_bottom_right": "true"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/corner_inner_bottom_right",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "connected_bottom": "true",
+        "connected_right": "true",
+        "inner_bottom_right": "false"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/corner_flat_bottom_right",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "up",
+        "connected_top": "false",
+        "connected_left": "false"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/corner_top_left",
+        "x": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "up",
+        "connected_top": "false",
+        "connected_left": "true"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/corner_top_left",
+        "x": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "up",
+        "connected_top": "true",
+        "connected_left": "false"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/corner_top_left",
+        "x": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "up",
+        "connected_top": "true",
+        "connected_left": "true",
+        "inner_top_left": "true"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/corner_inner_top_left",
+        "x": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "up",
+        "connected_top": "true",
+        "connected_left": "true",
+        "inner_top_left": "false"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/corner_flat_top_left",
+        "x": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "up",
+        "connected_top": "false",
+        "connected_right": "false"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/corner_top_right",
+        "x": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "up",
+        "connected_top": "false",
+        "connected_right": "true"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/corner_top_right",
+        "x": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "up",
+        "connected_top": "true",
+        "connected_right": "false"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/corner_top_right",
+        "x": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "up",
+        "connected_top": "true",
+        "connected_right": "true",
+        "inner_top_right": "true"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/corner_inner_top_right",
+        "x": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "up",
+        "connected_top": "true",
+        "connected_right": "true",
+        "inner_top_right": "false"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/corner_flat_top_right",
+        "x": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "up",
+        "connected_bottom": "false",
+        "connected_left": "false"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/corner_bottom_left",
+        "x": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "up",
+        "connected_bottom": "false",
+        "connected_left": "true"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/corner_bottom_left",
+        "x": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "up",
+        "connected_bottom": "true",
+        "connected_left": "false"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/corner_bottom_left",
+        "x": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "up",
+        "connected_bottom": "true",
+        "connected_left": "true",
+        "inner_bottom_left": "true"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/corner_inner_bottom_left",
+        "x": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "up",
+        "connected_bottom": "true",
+        "connected_left": "true",
+        "inner_bottom_left": "false"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/corner_flat_bottom_left",
+        "x": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "up",
+        "connected_bottom": "false",
+        "connected_right": "false"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/corner_bottom_right",
+        "x": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "up",
+        "connected_bottom": "false",
+        "connected_right": "true"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/corner_bottom_right",
+        "x": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "up",
+        "connected_bottom": "true",
+        "connected_right": "false"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/corner_bottom_right",
+        "x": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "up",
+        "connected_bottom": "true",
+        "connected_right": "true",
+        "inner_bottom_right": "true"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/corner_inner_bottom_right",
+        "x": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "up",
+        "connected_bottom": "true",
+        "connected_right": "true",
+        "inner_bottom_right": "false"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/corner_flat_bottom_right",
+        "x": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "down",
+        "connected_top": "false",
+        "connected_left": "false"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/corner_top_left",
+        "x": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "down",
+        "connected_top": "false",
+        "connected_left": "true"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/corner_top_left",
+        "x": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "down",
+        "connected_top": "true",
+        "connected_left": "false"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/corner_top_left",
+        "x": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "down",
+        "connected_top": "true",
+        "connected_left": "true",
+        "inner_top_left": "true"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/corner_inner_top_left",
+        "x": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "down",
+        "connected_top": "true",
+        "connected_left": "true",
+        "inner_top_left": "false"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/corner_flat_top_left",
+        "x": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "down",
+        "connected_top": "false",
+        "connected_right": "false"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/corner_top_right",
+        "x": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "down",
+        "connected_top": "false",
+        "connected_right": "true"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/corner_top_right",
+        "x": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "down",
+        "connected_top": "true",
+        "connected_right": "false"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/corner_top_right",
+        "x": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "down",
+        "connected_top": "true",
+        "connected_right": "true",
+        "inner_top_right": "true"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/corner_inner_top_right",
+        "x": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "down",
+        "connected_top": "true",
+        "connected_right": "true",
+        "inner_top_right": "false"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/corner_flat_top_right",
+        "x": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "down",
+        "connected_bottom": "false",
+        "connected_left": "false"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/corner_bottom_left",
+        "x": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "down",
+        "connected_bottom": "false",
+        "connected_left": "true"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/corner_bottom_left",
+        "x": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "down",
+        "connected_bottom": "true",
+        "connected_left": "false"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/corner_bottom_left",
+        "x": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "down",
+        "connected_bottom": "true",
+        "connected_left": "true",
+        "inner_bottom_left": "true"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/corner_inner_bottom_left",
+        "x": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "down",
+        "connected_bottom": "true",
+        "connected_left": "true",
+        "inner_bottom_left": "false"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/corner_flat_bottom_left",
+        "x": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "down",
+        "connected_bottom": "false",
+        "connected_right": "false"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/corner_bottom_right",
+        "x": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "down",
+        "connected_bottom": "false",
+        "connected_right": "true"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/corner_bottom_right",
+        "x": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "down",
+        "connected_bottom": "true",
+        "connected_right": "false"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/corner_bottom_right",
+        "x": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "down",
+        "connected_bottom": "true",
+        "connected_right": "true",
+        "inner_bottom_right": "true"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/corner_inner_bottom_right",
+        "x": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "down",
+        "connected_bottom": "true",
+        "connected_right": "true",
+        "inner_bottom_right": "false"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_panel/corner_flat_bottom_right",
+        "x": 90
+      }
+    }
+  ]
+}

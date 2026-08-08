@@ -7,6 +7,14 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
+import java.util.function.BiFunction;
+
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.level.block.Block;
+
+import com.aislen.createindustrialdetails.item.RivetedSteelPanelItem;
+
 
 public final class ModItems {
     public static final DeferredRegister.Items ITEMS =
@@ -23,6 +31,16 @@ public final class ModItems {
             DeferredBlock<T> block
     ) {
         return ITEMS.registerSimpleBlockItem(name, block);
+    }
+    static <T extends Block> void registerBlockItem(
+            String name,
+            java.util.function.Supplier<? extends T> block,
+            BiFunction<T, Item.Properties, ? extends BlockItem> itemFactory
+    ) {
+        ITEMS.register(
+                name,
+                () -> itemFactory.apply(block.get(), new Item.Properties())
+        );
     }
 
     public static void register(IEventBus modEventBus) {

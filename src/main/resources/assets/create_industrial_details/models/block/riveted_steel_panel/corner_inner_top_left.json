@@ -1,0 +1,83 @@
+{
+  "format_version": "1.9.0",
+  "credit": "Inner concave corner component generated for Create: Industrial Details",
+  "texture_size": [
+    64,
+    64
+  ],
+  "textures": {
+    "0": "create_industrial_details:block/riveted_steel_panel",
+    "particle": "create_industrial_details:block/riveted_steel_panel"
+  },
+  "elements": [
+    {
+      "name": "Inner Top Left Corner",
+      "from": [
+        0,
+        14,
+        14
+      ],
+      "to": [
+        2,
+        16,
+        16
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            0.0,
+            8.5,
+            0.5,
+            9.0
+          ],
+          "texture": "#0"
+        },
+        "south": {
+          "uv": [
+            4.5,
+            8.5,
+            5.0,
+            9.0
+          ],
+          "texture": "#0"
+        },
+        "east": {
+          "uv": [
+            0.0,
+            12.0,
+            0.5,
+            12.5
+          ],
+          "texture": "#0"
+        },
+        "west": {
+          "uv": [
+            0.0,
+            12.0,
+            0.5,
+            12.5
+          ],
+          "texture": "#0"
+        },
+        "up": {
+          "uv": [
+            0.0,
+            12.0,
+            0.5,
+            12.5
+          ],
+          "texture": "#0"
+        },
+        "down": {
+          "uv": [
+            0.0,
+            12.0,
+            0.5,
+            12.5
+          ],
+          "texture": "#0"
+        }
+      }
+    }
+  ]
+}
