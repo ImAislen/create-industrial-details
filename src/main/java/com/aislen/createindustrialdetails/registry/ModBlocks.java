@@ -1,6 +1,7 @@
 package com.aislen.createindustrialdetails.registry;
 
 import com.aislen.createindustrialdetails.CreateIndustrialDetails;
+import com.aislen.createindustrialdetails.block.*;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -10,19 +11,13 @@ import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import java.util.function.BiFunction;
 
-import com.aislen.createindustrialdetails.block.RivetedSteelPanelShaftPenetrationBlock;
 import com.aislen.createindustrialdetails.item.RivetedSteelPanelItem;
-import com.aislen.createindustrialdetails.block.RivetedSteelGrateBlock;
-import com.aislen.createindustrialdetails.block.RivetedSteelHatchBlock;
-
+import com.aislen.createindustrialdetails.block.RivetedSteelBeamBlock;
 
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 
 import java.util.function.Supplier;
-
-import com.aislen.createindustrialdetails.block.MooringBollardBlock;
-import com.aislen.createindustrialdetails.block.RivetedSteelPanelBlock;
 
 public final class ModBlocks {
     public static final DeferredRegister.Blocks BLOCKS =
@@ -37,6 +32,19 @@ public final class ModBlocks {
                                     .strength(5.0F, 6.0F)
                                     .requiresCorrectToolForDrops()
                                     .sound(SoundType.NETHERITE_BLOCK)
+                    )
+            );
+
+    public static final DeferredBlock<RivetedSteelBeamBlock>
+            RIVETED_STEEL_BEAM =
+            registerBlockWithItem(
+                    "riveted_steel_beam",
+                    () -> new RivetedSteelBeamBlock(
+                            BlockBehaviour.Properties.of()
+                                    .strength(3.5F, 6.0F)
+                                    .sound(SoundType.NETHERITE_BLOCK)
+                                    .requiresCorrectToolForDrops()
+                                    .noOcclusion()
                     )
             );
 

@@ -1,0 +1,60 @@
+{
+  "multipart": [
+    {
+      "when": {
+        "axis": "z"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_beam_core"
+      }
+    },
+    {
+      "when": {
+        "axis": "x"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_beam_core_x"
+      }
+    },
+    {
+      "when": {
+        "axis": "y",
+        "vertical_rotated": "false"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_beam_core_y"
+      }
+    },
+    {
+      "when": {
+        "axis": "y",
+        "vertical_rotated": "true"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_beam_core_y_rotated"
+      }
+    },
+
+    {
+      "when": {
+        "axis": "z",
+        "x": "true",
+        "z": "true"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_beam_cross"
+      }
+    },
+    {
+      "when": {
+        "axis": "x",
+        "x": "true",
+        "z": "true"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel_beam_cross",
+        "y": 90
+      }
+    }
+  ]
+}

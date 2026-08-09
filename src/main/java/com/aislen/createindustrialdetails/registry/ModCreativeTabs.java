@@ -37,6 +37,7 @@ public final class ModCreativeTabs {
                                 output.accept(ModBlocks.RIVETED_STEEL_PANEL.get());
                                 output.accept(ModBlocks.RIVETED_STEEL_GRATE.get());
                                 output.accept(ModBlocks.RIVETED_STEEL_HATCH.get());
+                                output.accept(ModBlocks.RIVETED_STEEL_BEAM.get());
                             })
                             .build()
             );
