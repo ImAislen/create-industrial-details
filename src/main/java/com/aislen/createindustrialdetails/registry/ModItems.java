@@ -2,19 +2,14 @@ package com.aislen.createindustrialdetails.registry;
 
 import com.aislen.createindustrialdetails.CreateIndustrialDetails;
 import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
+
 import java.util.function.BiFunction;
-
-import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.level.block.Block;
-
-import com.aislen.createindustrialdetails.item.RivetedSteelPanelItem;
-
 
 public final class ModItems {
     public static final DeferredRegister.Items ITEMS =

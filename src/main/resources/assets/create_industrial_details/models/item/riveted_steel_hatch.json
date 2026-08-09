@@ -1,5 +1,5 @@
 {
-  "parent": "create_industrial_details:block/riveted_steel_hatch",
+  "parent": "create_industrial_details:block/riveted_steel/riveted_steel_hatch/riveted_steel_hatch",
   "display": {
     "firstperson_righthand": {
       "scale": [0.65, 0.65, 0.65]

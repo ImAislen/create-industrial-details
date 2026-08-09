@@ -1,0 +1,369 @@
+{
+  "format_version": "1.9.0",
+  "credit": "Made with Blockbench; connected components generated for Create: Industrial Details",
+  "texture_size": [
+    64,
+    64
+  ],
+  "textures": {
+    "0": "create_industrial_details:block/riveted_steel/riveted_steel_panel",
+    "particle": "create_industrial_details:block/riveted_steel/riveted_steel_panel"
+  },
+  "elements": [
+    {
+      "name": "Bottom Border",
+      "from": [
+        0,
+        0,
+        14
+      ],
+      "to": [
+        16,
+        2,
+        16
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            0.0,
+            4.0,
+            4.0,
+            4.5
+          ],
+          "texture": "#0"
+        },
+        "east": {
+          "uv": [
+            8.5,
+            4.0,
+            9.0,
+            4.5
+          ],
+          "texture": "#0"
+        },
+        "south": {
+          "uv": [
+            4.5,
+            4.0,
+            8.5,
+            4.5
+          ],
+          "texture": "#0"
+        },
+        "west": {
+          "uv": [
+            4.0,
+            4.0,
+            4.5,
+            4.5
+          ],
+          "texture": "#0"
+        },
+        "up": {
+          "uv": [
+            4.5,
+            4.0,
+            4.0,
+            0.0
+          ],
+          "texture": "#0",
+          "rotation": 270
+        },
+        "down": {
+          "uv": [
+            5.0,
+            0.0,
+            4.5,
+            4.0
+          ],
+          "texture": "#0",
+          "rotation": 90
+        }
+      }
+    },
+    {
+      "name": "North Border",
+      "from": [
+        0,
+        2,
+        14
+      ],
+      "to": [
+        2,
+        14,
+        16
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            9.0,
+            0.5,
+            9.5,
+            3.5
+          ],
+          "texture": "#0"
+        },
+        "east": {
+          "uv": [
+            10.5,
+            0.5,
+            11.0,
+            3.5
+          ],
+          "texture": "#0"
+        },
+        "south": {
+          "uv": [
+            10.0,
+            0.5,
+            10.5,
+            3.5
+          ],
+          "texture": "#0"
+        },
+        "west": {
+          "uv": [
+            9.5,
+            0.5,
+            10.0,
+            3.5
+          ],
+          "texture": "#0"
+        },
+        "up": {
+          "uv": [
+            10.0,
+            0.5,
+            9.5,
+            0.0
+          ],
+          "texture": "#0",
+          "rotation": 270
+        },
+        "down": {
+          "uv": [
+            10.5,
+            0.0,
+            10.0,
+            0.5
+          ],
+          "texture": "#0",
+          "rotation": 90
+        }
+      }
+    },
+    {
+      "name": "South Border",
+      "from": [
+        14,
+        2,
+        14
+      ],
+      "to": [
+        16,
+        14,
+        16
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            9.0,
+            4.5,
+            9.5,
+            7.5
+          ],
+          "texture": "#0"
+        },
+        "east": {
+          "uv": [
+            10.5,
+            4.5,
+            11.0,
+            7.5
+          ],
+          "texture": "#0"
+        },
+        "south": {
+          "uv": [
+            10.0,
+            4.5,
+            10.5,
+            7.5
+          ],
+          "texture": "#0"
+        },
+        "west": {
+          "uv": [
+            9.5,
+            4.5,
+            10.0,
+            7.5
+          ],
+          "texture": "#0"
+        },
+        "up": {
+          "uv": [
+            10.0,
+            4.5,
+            9.5,
+            4.0
+          ],
+          "texture": "#0",
+          "rotation": 270
+        },
+        "down": {
+          "uv": [
+            10.5,
+            4.0,
+            10.0,
+            4.5
+          ],
+          "texture": "#0",
+          "rotation": 90
+        }
+      }
+    },
+    {
+      "name": "Top Border",
+      "from": [
+        0,
+        14,
+        14
+      ],
+      "to": [
+        16,
+        16,
+        16
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            0.0,
+            8.5,
+            4.0,
+            9.0
+          ],
+          "texture": "#0"
+        },
+        "east": {
+          "uv": [
+            8.5,
+            8.5,
+            9.0,
+            9.0
+          ],
+          "texture": "#0"
+        },
+        "south": {
+          "uv": [
+            4.5,
+            8.5,
+            8.5,
+            9.0
+          ],
+          "texture": "#0"
+        },
+        "west": {
+          "uv": [
+            4.0,
+            8.5,
+            4.5,
+            9.0
+          ],
+          "texture": "#0"
+        },
+        "up": {
+          "uv": [
+            4.5,
+            8.5,
+            4.0,
+            4.5
+          ],
+          "texture": "#0",
+          "rotation": 270
+        },
+        "down": {
+          "uv": [
+            5.0,
+            4.5,
+            4.5,
+            8.5
+          ],
+          "texture": "#0",
+          "rotation": 90
+        }
+      }
+    },
+    {
+      "name": "Center Panel",
+      "from": [
+        2,
+        2,
+        15
+      ],
+      "to": [
+        14,
+        14,
+        16
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            0.0,
+            12.0,
+            3.0,
+            15.0
+          ],
+          "texture": "#0"
+        },
+        "east": {
+          "uv": [
+            6.25,
+            12.0,
+            6.5,
+            15.0
+          ],
+          "texture": "#0"
+        },
+        "south": {
+          "uv": [
+            3.25,
+            12.0,
+            6.25,
+            15.0
+          ],
+          "texture": "#0"
+        },
+        "west": {
+          "uv": [
+            3.0,
+            12.0,
+            3.25,
+            15.0
+          ],
+          "texture": "#0"
+        },
+        "up": {
+          "uv": [
+            3.25,
+            12.0,
+            3.0,
+            9.0
+          ],
+          "texture": "#0",
+          "rotation": 270
+        },
+        "down": {
+          "uv": [
+            3.5,
+            9.0,
+            3.25,
+            12.0
+          ],
+          "texture": "#0",
+          "rotation": 90
+        }
+      }
+    }
+  ]
+}

@@ -5,7 +5,7 @@
         "axis": "z"
       },
       "apply": {
-        "model": "create_industrial_details:block/riveted_steel_grate"
+        "model": "create_industrial_details:block/riveted_steel/riveted_steel_grate/riveted_steel_grate"
       }
     },
     {
@@ -13,7 +13,7 @@
         "axis": "x"
       },
       "apply": {
-        "model": "create_industrial_details:block/riveted_steel_grate",
+        "model": "create_industrial_details:block/riveted_steel/riveted_steel_grate/riveted_steel_grate",
         "y": 90
       }
     }

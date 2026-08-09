@@ -3,7 +3,7 @@ package com.aislen.createindustrialdetails.client.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.aislen.createindustrialdetails.block.RivetedSteelBeamBlock;
+import com.aislen.createindustrialdetails.content.block.rivetedsteel.beam.RivetedSteelBeamBlock;
 import com.simibubi.create.content.decoration.girder.GirderBlock;
 
 import net.minecraft.client.renderer.RenderType;

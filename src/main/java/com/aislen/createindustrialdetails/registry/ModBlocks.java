@@ -1,7 +1,13 @@
 package com.aislen.createindustrialdetails.registry;
 
 import com.aislen.createindustrialdetails.CreateIndustrialDetails;
-import com.aislen.createindustrialdetails.block.*;
+import com.aislen.createindustrialdetails.content.block.MooringBollardBlock;
+import com.aislen.createindustrialdetails.content.block.rivetedsteel.RivetedSteelGrateBlock;
+import com.aislen.createindustrialdetails.content.block.rivetedsteel.RivetedSteelHatchBlock;
+import com.aislen.createindustrialdetails.content.block.rivetedsteel.beam.RivetedSteelBeamBlock;
+import com.aislen.createindustrialdetails.content.block.rivetedsteel.panel.RivetedSteelPanelBlock;
+import com.aislen.createindustrialdetails.content.block.rivetedsteel.panel.RivetedSteelPanelShaftPenetrationBlock;
+import com.aislen.createindustrialdetails.content.item.rivetedsteel.RivetedSteelPanelItem;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -10,9 +16,6 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import java.util.function.BiFunction;
-
-import com.aislen.createindustrialdetails.item.RivetedSteelPanelItem;
-import com.aislen.createindustrialdetails.block.RivetedSteelBeamBlock;
 
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;

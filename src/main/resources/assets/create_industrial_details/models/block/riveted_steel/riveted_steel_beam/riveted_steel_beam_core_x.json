@@ -1,0 +1,9 @@
+{
+  "parent": "create_industrial_details:block/riveted_steel/riveted_steel_beam/riveted_steel_beam_core",
+  "transform": {
+    "rotation": {
+      "y": 90
+    },
+    "origin": "center"
+  }
+}

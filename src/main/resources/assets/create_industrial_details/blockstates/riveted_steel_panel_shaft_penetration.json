@@ -1,141 +1,141 @@
 {
   "variants": {
     "axis_along_first=false,facing=north,type=pipe": {
-      "model": "create_industrial_details:block/riveted_steel_panel/shaft_penetration"
+      "model": "create_industrial_details:block/riveted_steel/riveted_steel_panel/shaft_penetration"
     },
     "axis_along_first=true,facing=north,type=pipe": {
-      "model": "create_industrial_details:block/riveted_steel_panel/shaft_penetration"
+      "model": "create_industrial_details:block/riveted_steel/riveted_steel_panel/shaft_penetration"
     },
     "axis_along_first=false,facing=north,type=cog": {
-      "model": "create_industrial_details:block/riveted_steel_panel/shaft_penetration"
+      "model": "create_industrial_details:block/riveted_steel/riveted_steel_panel/shaft_penetration"
     },
     "axis_along_first=true,facing=north,type=cog": {
-      "model": "create_industrial_details:block/riveted_steel_panel/shaft_penetration"
+      "model": "create_industrial_details:block/riveted_steel/riveted_steel_panel/shaft_penetration"
     },
     "axis_along_first=false,facing=north,type=shaft": {
-      "model": "create_industrial_details:block/riveted_steel_panel/shaft_penetration"
+      "model": "create_industrial_details:block/riveted_steel/riveted_steel_panel/shaft_penetration"
     },
     "axis_along_first=true,facing=north,type=shaft": {
-      "model": "create_industrial_details:block/riveted_steel_panel/shaft_penetration"
+      "model": "create_industrial_details:block/riveted_steel/riveted_steel_panel/shaft_penetration"
     },
     "axis_along_first=false,facing=east,type=pipe": {
-      "model": "create_industrial_details:block/riveted_steel_panel/shaft_penetration",
+      "model": "create_industrial_details:block/riveted_steel/riveted_steel_panel/shaft_penetration",
       "y": 90
     },
     "axis_along_first=true,facing=east,type=pipe": {
-      "model": "create_industrial_details:block/riveted_steel_panel/shaft_penetration",
+      "model": "create_industrial_details:block/riveted_steel/riveted_steel_panel/shaft_penetration",
       "y": 90
     },
     "axis_along_first=false,facing=east,type=cog": {
-      "model": "create_industrial_details:block/riveted_steel_panel/shaft_penetration",
+      "model": "create_industrial_details:block/riveted_steel/riveted_steel_panel/shaft_penetration",
       "y": 90
     },
     "axis_along_first=true,facing=east,type=cog": {
-      "model": "create_industrial_details:block/riveted_steel_panel/shaft_penetration",
+      "model": "create_industrial_details:block/riveted_steel/riveted_steel_panel/shaft_penetration",
       "y": 90
     },
     "axis_along_first=false,facing=east,type=shaft": {
-      "model": "create_industrial_details:block/riveted_steel_panel/shaft_penetration",
+      "model": "create_industrial_details:block/riveted_steel/riveted_steel_panel/shaft_penetration",
       "y": 90
     },
     "axis_along_first=true,facing=east,type=shaft": {
-      "model": "create_industrial_details:block/riveted_steel_panel/shaft_penetration",
+      "model": "create_industrial_details:block/riveted_steel/riveted_steel_panel/shaft_penetration",
       "y": 90
     },
     "axis_along_first=false,facing=south,type=pipe": {
-      "model": "create_industrial_details:block/riveted_steel_panel/shaft_penetration",
+      "model": "create_industrial_details:block/riveted_steel/riveted_steel_panel/shaft_penetration",
       "y": 180
     },
     "axis_along_first=true,facing=south,type=pipe": {
-      "model": "create_industrial_details:block/riveted_steel_panel/shaft_penetration",
+      "model": "create_industrial_details:block/riveted_steel/riveted_steel_panel/shaft_penetration",
       "y": 180
     },
     "axis_along_first=false,facing=south,type=cog": {
-      "model": "create_industrial_details:block/riveted_steel_panel/shaft_penetration",
+      "model": "create_industrial_details:block/riveted_steel/riveted_steel_panel/shaft_penetration",
       "y": 180
     },
     "axis_along_first=true,facing=south,type=cog": {
-      "model": "create_industrial_details:block/riveted_steel_panel/shaft_penetration",
+      "model": "create_industrial_details:block/riveted_steel/riveted_steel_panel/shaft_penetration",
       "y": 180
     },
     "axis_along_first=false,facing=south,type=shaft": {
-      "model": "create_industrial_details:block/riveted_steel_panel/shaft_penetration",
+      "model": "create_industrial_details:block/riveted_steel/riveted_steel_panel/shaft_penetration",
       "y": 180
     },
     "axis_along_first=true,facing=south,type=shaft": {
-      "model": "create_industrial_details:block/riveted_steel_panel/shaft_penetration",
+      "model": "create_industrial_details:block/riveted_steel/riveted_steel_panel/shaft_penetration",
       "y": 180
     },
     "axis_along_first=false,facing=west,type=pipe": {
-      "model": "create_industrial_details:block/riveted_steel_panel/shaft_penetration",
+      "model": "create_industrial_details:block/riveted_steel/riveted_steel_panel/shaft_penetration",
       "y": 270
     },
     "axis_along_first=true,facing=west,type=pipe": {
-      "model": "create_industrial_details:block/riveted_steel_panel/shaft_penetration",
+      "model": "create_industrial_details:block/riveted_steel/riveted_steel_panel/shaft_penetration",
       "y": 270
     },
     "axis_along_first=false,facing=west,type=cog": {
-      "model": "create_industrial_details:block/riveted_steel_panel/shaft_penetration",
+      "model": "create_industrial_details:block/riveted_steel/riveted_steel_panel/shaft_penetration",
       "y": 270
     },
     "axis_along_first=true,facing=west,type=cog": {
-      "model": "create_industrial_details:block/riveted_steel_panel/shaft_penetration",
+      "model": "create_industrial_details:block/riveted_steel/riveted_steel_panel/shaft_penetration",
       "y": 270
     },
     "axis_along_first=false,facing=west,type=shaft": {
-      "model": "create_industrial_details:block/riveted_steel_panel/shaft_penetration",
+      "model": "create_industrial_details:block/riveted_steel/riveted_steel_panel/shaft_penetration",
       "y": 270
     },
     "axis_along_first=true,facing=west,type=shaft": {
-      "model": "create_industrial_details:block/riveted_steel_panel/shaft_penetration",
+      "model": "create_industrial_details:block/riveted_steel/riveted_steel_panel/shaft_penetration",
       "y": 270
     },
     "axis_along_first=false,facing=up,type=pipe": {
-      "model": "create_industrial_details:block/riveted_steel_panel/shaft_penetration",
+      "model": "create_industrial_details:block/riveted_steel/riveted_steel_panel/shaft_penetration",
       "x": 270
     },
     "axis_along_first=true,facing=up,type=pipe": {
-      "model": "create_industrial_details:block/riveted_steel_panel/shaft_penetration",
+      "model": "create_industrial_details:block/riveted_steel/riveted_steel_panel/shaft_penetration",
       "x": 270
     },
     "axis_along_first=false,facing=up,type=cog": {
-      "model": "create_industrial_details:block/riveted_steel_panel/shaft_penetration",
+      "model": "create_industrial_details:block/riveted_steel/riveted_steel_panel/shaft_penetration",
       "x": 270
     },
     "axis_along_first=true,facing=up,type=cog": {
-      "model": "create_industrial_details:block/riveted_steel_panel/shaft_penetration",
+      "model": "create_industrial_details:block/riveted_steel/riveted_steel_panel/shaft_penetration",
       "x": 270
     },
     "axis_along_first=false,facing=up,type=shaft": {
-      "model": "create_industrial_details:block/riveted_steel_panel/shaft_penetration",
+      "model": "create_industrial_details:block/riveted_steel/riveted_steel_panel/shaft_penetration",
       "x": 270
     },
     "axis_along_first=true,facing=up,type=shaft": {
-      "model": "create_industrial_details:block/riveted_steel_panel/shaft_penetration",
+      "model": "create_industrial_details:block/riveted_steel/riveted_steel_panel/shaft_penetration",
       "x": 270
     },
     "axis_along_first=false,facing=down,type=pipe": {
-      "model": "create_industrial_details:block/riveted_steel_panel/shaft_penetration",
+      "model": "create_industrial_details:block/riveted_steel/riveted_steel_panel/shaft_penetration",
       "x": 90
     },
     "axis_along_first=true,facing=down,type=pipe": {
-      "model": "create_industrial_details:block/riveted_steel_panel/shaft_penetration",
+      "model": "create_industrial_details:block/riveted_steel/riveted_steel_panel/shaft_penetration",
       "x": 90
     },
     "axis_along_first=false,facing=down,type=cog": {
-      "model": "create_industrial_details:block/riveted_steel_panel/shaft_penetration",
+      "model": "create_industrial_details:block/riveted_steel/riveted_steel_panel/shaft_penetration",
       "x": 90
     },
     "axis_along_first=true,facing=down,type=cog": {
-      "model": "create_industrial_details:block/riveted_steel_panel/shaft_penetration",
+      "model": "create_industrial_details:block/riveted_steel/riveted_steel_panel/shaft_penetration",
       "x": 90
     },
     "axis_along_first=false,facing=down,type=shaft": {
-      "model": "create_industrial_details:block/riveted_steel_panel/shaft_penetration",
+      "model": "create_industrial_details:block/riveted_steel/riveted_steel_panel/shaft_penetration",
       "x": 90
     },
     "axis_along_first=true,facing=down,type=shaft": {
-      "model": "create_industrial_details:block/riveted_steel_panel/shaft_penetration",
+      "model": "create_industrial_details:block/riveted_steel/riveted_steel_panel/shaft_penetration",
       "x": 90
     }
   }

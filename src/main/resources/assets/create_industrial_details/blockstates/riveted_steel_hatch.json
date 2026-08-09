@@ -1,66 +1,66 @@
 {
   "variants": {
     "facing=north,half=bottom,open=false": {
-      "model": "create_industrial_details:block/riveted_steel_hatch",
+      "model": "create_industrial_details:block/riveted_steel/riveted_steel_hatch/riveted_steel_hatch",
       "y": 180
     },
     "facing=east,half=bottom,open=false": {
-      "model": "create_industrial_details:block/riveted_steel_hatch",
+      "model": "create_industrial_details:block/riveted_steel/riveted_steel_hatch/riveted_steel_hatch",
       "y": 270
     },
     "facing=south,half=bottom,open=false": {
-      "model": "create_industrial_details:block/riveted_steel_hatch"
+      "model": "create_industrial_details:block/riveted_steel/riveted_steel_hatch/riveted_steel_hatch"
     },
     "facing=west,half=bottom,open=false": {
-      "model": "create_industrial_details:block/riveted_steel_hatch",
+      "model": "create_industrial_details:block/riveted_steel/riveted_steel_hatch/riveted_steel_hatch",
       "y": 90
     },
 
     "facing=north,half=bottom,open=true": {
-      "model": "create_industrial_details:block/riveted_steel_hatch_open",
+      "model": "create_industrial_details:block/riveted_steel/riveted_steel_hatch/riveted_steel_hatch_open",
       "y": 180
     },
     "facing=east,half=bottom,open=true": {
-      "model": "create_industrial_details:block/riveted_steel_hatch_open",
+      "model": "create_industrial_details:block/riveted_steel/riveted_steel_hatch/riveted_steel_hatch_open",
       "y": 270
     },
     "facing=south,half=bottom,open=true": {
-      "model": "create_industrial_details:block/riveted_steel_hatch_open"
+      "model": "create_industrial_details:block/riveted_steel/riveted_steel_hatch/riveted_steel_hatch_open"
     },
     "facing=west,half=bottom,open=true": {
-      "model": "create_industrial_details:block/riveted_steel_hatch_open",
+      "model": "create_industrial_details:block/riveted_steel/riveted_steel_hatch/riveted_steel_hatch_open",
       "y": 90
     },
 
     "facing=north,half=top,open=false": {
-      "model": "create_industrial_details:block/riveted_steel_hatch_top",
+      "model": "create_industrial_details:block/riveted_steel/riveted_steel_hatch/riveted_steel_hatch_top",
       "y": 180
     },
     "facing=east,half=top,open=false": {
-      "model": "create_industrial_details:block/riveted_steel_hatch_top",
+      "model": "create_industrial_details:block/riveted_steel/riveted_steel_hatch/riveted_steel_hatch_top",
       "y": 270
     },
     "facing=south,half=top,open=false": {
-      "model": "create_industrial_details:block/riveted_steel_hatch_top"
+      "model": "create_industrial_details:block/riveted_steel/riveted_steel_hatch/riveted_steel_hatch_top"
     },
     "facing=west,half=top,open=false": {
-      "model": "create_industrial_details:block/riveted_steel_hatch_top",
+      "model": "create_industrial_details:block/riveted_steel/riveted_steel_hatch/riveted_steel_hatch_top",
       "y": 90
     },
 
     "facing=north,half=top,open=true": {
-      "model": "create_industrial_details:block/riveted_steel_hatch_open_top",
+      "model": "create_industrial_details:block/riveted_steel/riveted_steel_hatch/riveted_steel_hatch_open_top",
       "y": 180
     },
     "facing=east,half=top,open=true": {
-      "model": "create_industrial_details:block/riveted_steel_hatch_open_top",
+      "model": "create_industrial_details:block/riveted_steel/riveted_steel_hatch/riveted_steel_hatch_open_top",
       "y": 270
     },
     "facing=south,half=top,open=true": {
-      "model": "create_industrial_details:block/riveted_steel_hatch_open_top"
+      "model": "create_industrial_details:block/riveted_steel/riveted_steel_hatch/riveted_steel_hatch_open_top"
     },
     "facing=west,half=top,open=true": {
-      "model": "create_industrial_details:block/riveted_steel_hatch_open_top",
+      "model": "create_industrial_details:block/riveted_steel/riveted_steel_hatch/riveted_steel_hatch_open_top",
       "y": 90
     }
   }

@@ -5,7 +5,7 @@
         "axis": "z"
       },
       "apply": {
-        "model": "create_industrial_details:block/riveted_steel_beam_core"
+        "model": "create_industrial_details:block/riveted_steel/riveted_steel_beam/riveted_steel_beam_core"
       }
     },
     {
@@ -13,7 +13,7 @@
         "axis": "x"
       },
       "apply": {
-        "model": "create_industrial_details:block/riveted_steel_beam_core_x"
+        "model": "create_industrial_details:block/riveted_steel/riveted_steel_beam/riveted_steel_beam_core_x"
       }
     },
     {
@@ -22,7 +22,7 @@
         "vertical_rotated": "false"
       },
       "apply": {
-        "model": "create_industrial_details:block/riveted_steel_beam_core_y"
+        "model": "create_industrial_details:block/riveted_steel/riveted_steel_beam/riveted_steel_beam_core_y"
       }
     },
     {
@@ -31,7 +31,7 @@
         "vertical_rotated": "true"
       },
       "apply": {
-        "model": "create_industrial_details:block/riveted_steel_beam_core_y_rotated"
+        "model": "create_industrial_details:block/riveted_steel/riveted_steel_beam/riveted_steel_beam_core_y_rotated"
       }
     },
 
@@ -42,7 +42,7 @@
         "z": "true"
       },
       "apply": {
-        "model": "create_industrial_details:block/riveted_steel_beam_cross"
+        "model": "create_industrial_details:block/riveted_steel/riveted_steel_beam/riveted_steel_beam_cross"
       }
     },
     {
@@ -52,7 +52,7 @@
         "z": "true"
       },
       "apply": {
-        "model": "create_industrial_details:block/riveted_steel_beam_cross",
+        "model": "create_industrial_details:block/riveted_steel/riveted_steel_beam/riveted_steel_beam_cross",
         "y": 90
       }
     }

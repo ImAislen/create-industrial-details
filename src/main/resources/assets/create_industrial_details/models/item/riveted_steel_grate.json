@@ -1,5 +1,5 @@
 {
-  "parent": "create_industrial_details:block/riveted_steel_grate",
+  "parent": "create_industrial_details:block/riveted_steel/riveted_steel_grate/riveted_steel_grate",
   "display": {
     "firstperson_righthand": {
       "scale": [0.45, 0.45, 0.45]
