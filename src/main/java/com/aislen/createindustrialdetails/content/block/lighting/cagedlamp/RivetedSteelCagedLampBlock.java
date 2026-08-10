@@ -1,5 +1,11 @@
 package com.aislen.createindustrialdetails.content.block.lighting.cagedlamp;
-
+import net.minecraft.world.level.block.state.properties.EnumProperty;
+import net.minecraft.world.ItemInteractionResult;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.DyeItem;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.phys.BlockHitResult;
 import com.simibubi.create.content.equipment.wrench.IWrenchable;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -31,6 +37,8 @@ public class RivetedSteelCagedLampBlock extends Block implements IWrenchable {
     public static final BooleanProperty PERPENDICULAR = BooleanProperty.create("perpendicular");
     public static final BooleanProperty LIT = BlockStateProperties.LIT;
     public static final BooleanProperty INVERTED = BooleanProperty.create("inverted");
+    public static final EnumProperty<RivetedSteelCagedLampColor> COLOR =
+            EnumProperty.create("color", RivetedSteelCagedLampColor.class);
 
     // Shapes
 
@@ -82,11 +90,14 @@ public class RivetedSteelCagedLampBlock extends Block implements IWrenchable {
     public RivetedSteelCagedLampBlock(Properties properties) {
         super(properties);
 
-        registerDefaultState(stateDefinition.any()
-                .setValue(FACING, Direction.SOUTH)
-                .setValue(PERPENDICULAR, false)
-                .setValue(LIT, false)
-                .setValue(INVERTED, false));
+        registerDefaultState(
+                defaultBlockState()
+                        .setValue(FACING, Direction.NORTH)
+                        .setValue(LIT, false)
+                        .setValue(INVERTED, false)
+                        .setValue(COLOR, RivetedSteelCagedLampColor.NATURAL)
+        );
+
     }
 
     // State
@@ -94,7 +105,7 @@ public class RivetedSteelCagedLampBlock extends Block implements IWrenchable {
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         super.createBlockStateDefinition(builder);
-        builder.add(FACING, PERPENDICULAR, LIT, INVERTED);
+        builder.add(FACING, PERPENDICULAR, LIT, INVERTED, COLOR);
     }
 
     @Override
@@ -167,6 +178,40 @@ public class RivetedSteelCagedLampBlock extends Block implements IWrenchable {
         }
 
         return InteractionResult.SUCCESS;
+    }
+
+    // Dye
+
+    @Override
+    protected ItemInteractionResult useItemOn(
+            ItemStack stack,
+            BlockState state,
+            Level level,
+            BlockPos pos,
+            Player player,
+            InteractionHand hand,
+            BlockHitResult hitResult
+    ) {
+        if (!(stack.getItem() instanceof DyeItem dyeItem))
+            return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+
+        RivetedSteelCagedLampColor color =
+                RivetedSteelCagedLampColor.fromDye(dyeItem.getDyeColor());
+
+        if (state.getValue(COLOR) == color)
+            return ItemInteractionResult.sidedSuccess(level.isClientSide);
+
+        if (!level.isClientSide) {
+            level.setBlockAndUpdate(
+                    pos,
+                    state.setValue(COLOR, color)
+            );
+
+            if (!player.hasInfiniteMaterials())
+                stack.shrink(1);
+        }
+
+        return ItemInteractionResult.sidedSuccess(level.isClientSide);
     }
 
     // Support

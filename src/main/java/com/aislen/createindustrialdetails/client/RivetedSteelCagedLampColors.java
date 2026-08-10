@@ -15,21 +15,42 @@ import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
 public final class RivetedSteelCagedLampColors {
 
     private static final int OFF_COLOR = 0xFFB9B39F;
-    private static final int LIT_COLOR = 0xFFFFE2A3;
+    private static final int LIT_COLOR = 0xFFFFFFFF;
 
     @SubscribeEvent
     public static void registerBlockColors(RegisterColorHandlersEvent.Block event) {
         event.register(
                 (state, level, pos, tintIndex) -> {
-                    if (tintIndex != 0)
+                    if (tintIndex != 0) {
                         return 0xFFFFFFFF;
+                    }
 
-                    return state.getValue(RivetedSteelCagedLampBlock.LIT)
-                            ? LIT_COLOR
-                            : OFF_COLOR;
+                    int tint = state.getValue(RivetedSteelCagedLampBlock.COLOR).getTintColor();
+
+                    if (state.getValue(RivetedSteelCagedLampBlock.LIT)) {
+                        return tint;
+                    }
+
+                    return mix(tint, 0xD8D1BF, 0.35f);
                 },
                 ModBlocks.RIVETED_STEEL_CAGED_LAMP.get()
         );
+    }
+
+    private static int mix(int a, int b, float t) {
+        int ar = (a >> 16) & 0xFF;
+        int ag = (a >> 8) & 0xFF;
+        int ab = a & 0xFF;
+
+        int br = (b >> 16) & 0xFF;
+        int bg = (b >> 8) & 0xFF;
+        int bb = b & 0xFF;
+
+        int r = Math.round(ar + (br - ar) * t);
+        int g = Math.round(ag + (bg - ag) * t);
+        int bl = Math.round(ab + (bb - ab) * t);
+
+        return (r << 16) | (g << 8) | bl;
     }
 
     @SubscribeEvent
