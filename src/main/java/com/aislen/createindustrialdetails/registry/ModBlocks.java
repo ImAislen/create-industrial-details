@@ -8,6 +8,7 @@ import com.aislen.createindustrialdetails.content.block.rivetedsteel.beam.Rivete
 import com.aislen.createindustrialdetails.content.block.rivetedsteel.panel.RivetedSteelPanelBlock;
 import com.aislen.createindustrialdetails.content.block.rivetedsteel.panel.RivetedSteelPanelShaftPenetrationBlock;
 import com.aislen.createindustrialdetails.content.item.rivetedsteel.RivetedSteelPanelItem;
+import com.aislen.createindustrialdetails.content.block.lighting.cagedlamp.RivetedSteelCagedLampBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -35,6 +36,19 @@ public final class ModBlocks {
                                     .strength(5.0F, 6.0F)
                                     .requiresCorrectToolForDrops()
                                     .sound(SoundType.NETHERITE_BLOCK)
+                    )
+            );
+
+
+    public static final DeferredBlock<RivetedSteelCagedLampBlock> RIVETED_STEEL_CAGED_LAMP =
+            registerBlockWithItem(
+                    "riveted_steel_caged_lamp",
+                    () -> new RivetedSteelCagedLampBlock(
+                            BlockBehaviour.Properties.of()
+                                    .strength(1.5F, 6.0F)
+                                    .sound(SoundType.NETHERITE_BLOCK)
+                                    .noOcclusion()
+                                    .lightLevel(state -> state.getValue(RivetedSteelCagedLampBlock.LIT) ? 15 : 0)
                     )
             );
 

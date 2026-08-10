@@ -6,6 +6,7 @@
   "block.create_industrial_details.riveted_steel_grate": "Riveted Steel Grate",
   "block.create_industrial_details.riveted_steel_hatch": "Riveted Steel Hatch",
   "block.create_industrial_details.riveted_steel_beam": "Riveted Steel Beam",
+  "block.create_industrial_details.riveted_steel_caged_lamp": "Riveted Steel Caged Lamp",
 
 
   "block.create_industrial_details.riveted_steel_grate.tooltip.summary": "Can be _waterlogged_.",

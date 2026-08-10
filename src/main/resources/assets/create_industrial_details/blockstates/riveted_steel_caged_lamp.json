@@ -1,0 +1,217 @@
+{
+  "multipart": [
+    {
+      "when": {
+        "facing": "south",
+        "perpendicular": "false",
+        "lit": "false"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel/riveted_steel_caged_lamp/wall"
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "perpendicular": "false",
+        "lit": "false"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel/riveted_steel_caged_lamp/wall",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "perpendicular": "false",
+        "lit": "false"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel/riveted_steel_caged_lamp/wall",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "perpendicular": "false",
+        "lit": "false"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel/riveted_steel_caged_lamp/wall",
+        "y": 270
+      }
+    },
+
+    {
+      "when": {
+        "facing": "south",
+        "perpendicular": "true",
+        "lit": "false"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel/riveted_steel_caged_lamp/wall_perpendicular"
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "perpendicular": "true",
+        "lit": "false"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel/riveted_steel_caged_lamp/wall_perpendicular",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "perpendicular": "true",
+        "lit": "false"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel/riveted_steel_caged_lamp/wall_perpendicular",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "perpendicular": "true",
+        "lit": "false"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel/riveted_steel_caged_lamp/wall_perpendicular",
+        "y": 270
+      }
+    },
+
+    {
+      "when": {
+        "facing": "up",
+        "lit": "false"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel/riveted_steel_caged_lamp/floor"
+      }
+    },
+    {
+      "when": {
+        "facing": "down",
+        "lit": "false"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel/riveted_steel_caged_lamp/ceiling"
+      }
+    },
+
+    {
+      "when": {
+        "facing": "south",
+        "perpendicular": "false",
+        "lit": "true"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel/riveted_steel_caged_lamp/wall_lit"
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "perpendicular": "false",
+        "lit": "true"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel/riveted_steel_caged_lamp/wall_lit",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "perpendicular": "false",
+        "lit": "true"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel/riveted_steel_caged_lamp/wall_lit",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "perpendicular": "false",
+        "lit": "true"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel/riveted_steel_caged_lamp/wall_lit",
+        "y": 270
+      }
+    },
+
+    {
+      "when": {
+        "facing": "south",
+        "perpendicular": "true",
+        "lit": "true"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel/riveted_steel_caged_lamp/wall_perpendicular_lit"
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "perpendicular": "true",
+        "lit": "true"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel/riveted_steel_caged_lamp/wall_perpendicular_lit",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "perpendicular": "true",
+        "lit": "true"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel/riveted_steel_caged_lamp/wall_perpendicular_lit",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "perpendicular": "true",
+        "lit": "true"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel/riveted_steel_caged_lamp/wall_perpendicular_lit",
+        "y": 270
+      }
+    },
+
+    {
+      "when": {
+        "facing": "up",
+        "lit": "true"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel/riveted_steel_caged_lamp/floor_lit"
+      }
+    },
+    {
+      "when": {
+        "facing": "down",
+        "lit": "true"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel/riveted_steel_caged_lamp/ceiling_lit"
+      }
+    }
+  ]
+}
