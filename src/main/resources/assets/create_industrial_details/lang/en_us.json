@@ -11,6 +11,8 @@
   "menu.create_industrial_details.riveted_steel_caged_lamp": "Caged Lamp Configuration",
   "menu.create_industrial_details.riveted_steel_caged_lamp.status": "Status: %s",
   "menu.create_industrial_details.riveted_steel_caged_lamp.mode": "Mode: %s",
+  "menu.create_industrial_details.riveted_steel_caged_lamp.redstone_mode": "Redstone Mode",
+  "menu.create_industrial_details.riveted_steel_caged_lamp.wireless_frequency": "Wireless Frequency",
   "menu.create_industrial_details.value.on": "On",
   "menu.create_industrial_details.value.off": "Off",
   "menu.create_industrial_details.value.normal": "Normal",

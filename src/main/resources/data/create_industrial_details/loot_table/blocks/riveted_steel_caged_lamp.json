@@ -26,6 +26,13 @@
                   }
                 }
               ]
+            },
+            {
+              "function": "minecraft:copy_components",
+              "source": "block_entity",
+              "include": [
+                "create_industrial_details:riveted_steel_caged_lamp_frequencies"
+              ]
             }
           ]
         }

@@ -3,6 +3,7 @@ package com.aislen.createindustrialdetails;
 import com.aislen.createindustrialdetails.registry.ModBlocks;
 import com.aislen.createindustrialdetails.registry.ModBlockEntities;
 import com.aislen.createindustrialdetails.registry.ModCreativeTabs;
+import com.aislen.createindustrialdetails.registry.ModDataComponents;
 import com.aislen.createindustrialdetails.registry.ModItems;
 import com.aislen.createindustrialdetails.registry.ModMenus;
 import com.aislen.createindustrialdetails.registry.ModTooltips;
@@ -24,6 +25,7 @@ public final class CreateIndustrialDetails {
             IEventBus modEventBus,
             ModContainer modContainer
     ) {
+        ModDataComponents.register(modEventBus);
         ModBlocks.register(modEventBus);
         ModBlockEntities.register(modEventBus);
         ModItems.register(modEventBus);

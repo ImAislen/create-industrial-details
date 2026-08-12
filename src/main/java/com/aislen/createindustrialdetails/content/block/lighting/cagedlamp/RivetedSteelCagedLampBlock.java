@@ -159,12 +159,39 @@ public class RivetedSteelCagedLampBlock
             updateLitState(state, level, pos);
     }
 
-    private static void updateLitState(BlockState state, Level level, BlockPos pos) {
-        boolean powered = level.hasNeighborSignal(pos);
-        boolean lit = powered ^ state.getValue(INVERTED);
+    static void updateLitState(BlockState state, Level level, BlockPos pos) {
+        boolean lit = shouldBeLit(level, pos, state.getValue(INVERTED));
 
         if (state.getValue(LIT) != lit)
             level.setBlock(pos, state.setValue(LIT, lit), Block.UPDATE_CLIENTS);
+    }
+
+    static boolean setInverted(
+            BlockState state,
+            Level level,
+            BlockPos pos,
+            boolean inverted
+    ) {
+        if (state.getValue(INVERTED) == inverted)
+            return false;
+
+        level.setBlock(
+                pos,
+                state
+                        .setValue(INVERTED, inverted)
+                        .setValue(LIT, shouldBeLit(level, pos, inverted)),
+                Block.UPDATE_CLIENTS
+        );
+        return true;
+    }
+
+    private static boolean shouldBeLit(Level level, BlockPos pos, boolean inverted) {
+        boolean wirelessPowered =
+                level.getBlockEntity(pos)
+                        instanceof RivetedSteelCagedLampBlockEntity lamp
+                        && lamp.hasWirelessPower();
+        boolean powered = level.hasNeighborSignal(pos) || wirelessPowered;
+        return powered ^ inverted;
     }
 
     // Wrench
@@ -199,15 +226,7 @@ public class RivetedSteelCagedLampBlock
     ) {
         if (!level.isClientSide) {
             boolean inverted = !state.getValue(INVERTED);
-            boolean lit = level.hasNeighborSignal(pos) ^ inverted;
-
-            level.setBlock(
-                    pos,
-                    state
-                            .setValue(INVERTED, inverted)
-                            .setValue(LIT, lit),
-                    Block.UPDATE_CLIENTS
-            );
+            setInverted(state, level, pos, inverted);
 
             level.playSound(
                     null,
