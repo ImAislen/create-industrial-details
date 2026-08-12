@@ -1,7 +1,0 @@
-{
-  "parent": "create_industrial_details:block/riveted_steel/riveted_steel_caged_lamp/wall_perpendicular_base",
-  "textures": {
-    "0": "create_industrial_details:block/riveted_steel/caged_lamp",
-    "particle": "create_industrial_details:block/riveted_steel/caged_lamp"
-  }
-}

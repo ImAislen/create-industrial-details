@@ -48,7 +48,7 @@ public final class ModBlocks {
                                     .strength(1.5F, 6.0F)
                                     .sound(SoundType.NETHERITE_BLOCK)
                                     .noOcclusion()
-                                    .lightLevel(state -> state.getValue(RivetedSteelCagedLampBlock.LIT) ? 15 : 0)
+                                    .lightLevel(state -> state.getValue(RivetedSteelCagedLampBlock.LIT) ? 12 : 0)
                     )
             );
 

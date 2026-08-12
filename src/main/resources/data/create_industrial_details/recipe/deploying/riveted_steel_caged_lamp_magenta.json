@@ -1,0 +1,21 @@
+{
+  "type": "create:deploying",
+  "ingredients": [
+    {
+      "item": "create_industrial_details:riveted_steel_caged_lamp"
+    },
+    {
+      "item": "minecraft:magenta_dye"
+    }
+  ],
+  "results": [
+    {
+      "id": "create_industrial_details:riveted_steel_caged_lamp",
+      "components": {
+        "minecraft:block_state": {
+          "color": "magenta"
+        }
+      }
+    }
+  ]
+}

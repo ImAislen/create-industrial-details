@@ -9,6 +9,7 @@ import net.minecraft.world.phys.BlockHitResult;
 import com.simibubi.create.content.equipment.wrench.IWrenchable;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.item.context.UseOnContext;
@@ -18,8 +19,10 @@ import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.Mirror;
 import net.minecraft.world.level.block.Rotation;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -28,8 +31,12 @@ import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 
-public class RivetedSteelCagedLampBlock extends Block implements IWrenchable {
+public class RivetedSteelCagedLampBlock
+        extends Block
+        implements EntityBlock, IWrenchable {
 
     // Properties
 
@@ -100,6 +107,11 @@ public class RivetedSteelCagedLampBlock extends Block implements IWrenchable {
 
     }
 
+    @Override
+    public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+        return new RivetedSteelCagedLampBlockEntity(pos, state);
+    }
+
     // State
 
     @Override
@@ -162,6 +174,29 @@ public class RivetedSteelCagedLampBlock extends Block implements IWrenchable {
         Level level = context.getLevel();
         BlockPos pos = context.getClickedPos();
 
+        if (!level.isClientSide
+                && context.getPlayer() instanceof ServerPlayer serverPlayer
+                && level.getBlockEntity(pos)
+                instanceof RivetedSteelCagedLampBlockEntity lampBlockEntity) {
+            serverPlayer.openMenu(
+                    lampBlockEntity,
+                    buffer -> buffer.writeBlockPos(pos)
+            );
+        }
+
+        return InteractionResult.SUCCESS;
+    }
+
+    // Interaction
+
+    @Override
+    protected InteractionResult useWithoutItem(
+            BlockState state,
+            Level level,
+            BlockPos pos,
+            Player player,
+            BlockHitResult hitResult
+    ) {
         if (!level.isClientSide) {
             boolean inverted = !state.getValue(INVERTED);
             boolean lit = level.hasNeighborSignal(pos) ^ inverted;
@@ -174,10 +209,17 @@ public class RivetedSteelCagedLampBlock extends Block implements IWrenchable {
                     Block.UPDATE_CLIENTS
             );
 
-            IWrenchable.playRotateSound(level, pos);
+            level.playSound(
+                    null,
+                    pos,
+                    SoundEvents.LEVER_CLICK,
+                    SoundSource.BLOCKS,
+                    0.3F,
+                    inverted ? 0.6F : 0.5F
+            );
         }
 
-        return InteractionResult.SUCCESS;
+        return InteractionResult.sidedSuccess(level.isClientSide);
     }
 
     // Dye
@@ -192,26 +234,30 @@ public class RivetedSteelCagedLampBlock extends Block implements IWrenchable {
             InteractionHand hand,
             BlockHitResult hitResult
     ) {
-        if (!(stack.getItem() instanceof DyeItem dyeItem))
-            return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+        if (stack.getItem() instanceof DyeItem dyeItem) {
+            RivetedSteelCagedLampColor color =
+                    RivetedSteelCagedLampColor.fromDye(dyeItem.getDyeColor());
 
-        RivetedSteelCagedLampColor color =
-                RivetedSteelCagedLampColor.fromDye(dyeItem.getDyeColor());
+            if (state.getValue(COLOR) == color)
+                return ItemInteractionResult.sidedSuccess(level.isClientSide);
 
-        if (state.getValue(COLOR) == color)
+            if (!level.isClientSide) {
+                level.setBlockAndUpdate(
+                        pos,
+                        state.setValue(COLOR, color)
+                );
+
+                if (!player.hasInfiniteMaterials())
+                    stack.shrink(1);
+            }
+
             return ItemInteractionResult.sidedSuccess(level.isClientSide);
-
-        if (!level.isClientSide) {
-            level.setBlockAndUpdate(
-                    pos,
-                    state.setValue(COLOR, color)
-            );
-
-            if (!player.hasInfiniteMaterials())
-                stack.shrink(1);
         }
 
-        return ItemInteractionResult.sidedSuccess(level.isClientSide);
+        if (stack.isEmpty())
+            return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+
+        return ItemInteractionResult.SKIP_DEFAULT_BLOCK_INTERACTION;
     }
 
     // Support

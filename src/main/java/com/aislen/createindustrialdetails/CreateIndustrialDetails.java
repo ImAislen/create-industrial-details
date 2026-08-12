@@ -1,8 +1,10 @@
 package com.aislen.createindustrialdetails;
 
 import com.aislen.createindustrialdetails.registry.ModBlocks;
+import com.aislen.createindustrialdetails.registry.ModBlockEntities;
 import com.aislen.createindustrialdetails.registry.ModCreativeTabs;
 import com.aislen.createindustrialdetails.registry.ModItems;
+import com.aislen.createindustrialdetails.registry.ModMenus;
 import com.aislen.createindustrialdetails.registry.ModTooltips;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import com.mojang.logging.LogUtils;
@@ -23,7 +25,9 @@ public final class CreateIndustrialDetails {
             ModContainer modContainer
     ) {
         ModBlocks.register(modEventBus);
+        ModBlockEntities.register(modEventBus);
         ModItems.register(modEventBus);
+        ModMenus.register(modEventBus);
         ModCreativeTabs.register(modEventBus);
         modEventBus.addListener(
                 CreateIndustrialDetails::commonSetup

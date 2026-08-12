@@ -3,11 +3,105 @@
     {
       "when": {
         "facing": "south",
+        "perpendicular": "false"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel/riveted_steel_caged_lamp/wall_body"
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "perpendicular": "false"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel/riveted_steel_caged_lamp/wall_body",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "perpendicular": "false"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel/riveted_steel_caged_lamp/wall_body",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "perpendicular": "false"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel/riveted_steel_caged_lamp/wall_body",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "perpendicular": "true"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel/riveted_steel_caged_lamp/wall_perpendicular_body"
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "perpendicular": "true"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel/riveted_steel_caged_lamp/wall_perpendicular_body",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "perpendicular": "true"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel/riveted_steel_caged_lamp/wall_perpendicular_body",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "perpendicular": "true"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel/riveted_steel_caged_lamp/wall_perpendicular_body",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "up"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel/riveted_steel_caged_lamp/floor_body"
+      }
+    },
+    {
+      "when": {
+        "facing": "down"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/riveted_steel/riveted_steel_caged_lamp/ceiling_body"
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
         "perpendicular": "false",
         "lit": "false"
       },
       "apply": {
-        "model": "create_industrial_details:block/riveted_steel/riveted_steel_caged_lamp/wall"
+        "model": "create_industrial_details:block/riveted_steel/riveted_steel_caged_lamp/wall_bulb"
       }
     },
     {
@@ -17,7 +111,7 @@
         "lit": "false"
       },
       "apply": {
-        "model": "create_industrial_details:block/riveted_steel/riveted_steel_caged_lamp/wall",
+        "model": "create_industrial_details:block/riveted_steel/riveted_steel_caged_lamp/wall_bulb",
         "y": 90
       }
     },
@@ -28,7 +122,7 @@
         "lit": "false"
       },
       "apply": {
-        "model": "create_industrial_details:block/riveted_steel/riveted_steel_caged_lamp/wall",
+        "model": "create_industrial_details:block/riveted_steel/riveted_steel_caged_lamp/wall_bulb",
         "y": 180
       }
     },
@@ -39,11 +133,10 @@
         "lit": "false"
       },
       "apply": {
-        "model": "create_industrial_details:block/riveted_steel/riveted_steel_caged_lamp/wall",
+        "model": "create_industrial_details:block/riveted_steel/riveted_steel_caged_lamp/wall_bulb",
         "y": 270
       }
     },
-
     {
       "when": {
         "facing": "south",
@@ -51,7 +144,7 @@
         "lit": "false"
       },
       "apply": {
-        "model": "create_industrial_details:block/riveted_steel/riveted_steel_caged_lamp/wall_perpendicular"
+        "model": "create_industrial_details:block/riveted_steel/riveted_steel_caged_lamp/wall_perpendicular_bulb"
       }
     },
     {
@@ -61,7 +154,7 @@
         "lit": "false"
       },
       "apply": {
-        "model": "create_industrial_details:block/riveted_steel/riveted_steel_caged_lamp/wall_perpendicular",
+        "model": "create_industrial_details:block/riveted_steel/riveted_steel_caged_lamp/wall_perpendicular_bulb",
         "y": 90
       }
     },
@@ -72,7 +165,7 @@
         "lit": "false"
       },
       "apply": {
-        "model": "create_industrial_details:block/riveted_steel/riveted_steel_caged_lamp/wall_perpendicular",
+        "model": "create_industrial_details:block/riveted_steel/riveted_steel_caged_lamp/wall_perpendicular_bulb",
         "y": 180
       }
     },
@@ -83,18 +176,17 @@
         "lit": "false"
       },
       "apply": {
-        "model": "create_industrial_details:block/riveted_steel/riveted_steel_caged_lamp/wall_perpendicular",
+        "model": "create_industrial_details:block/riveted_steel/riveted_steel_caged_lamp/wall_perpendicular_bulb",
         "y": 270
       }
     },
-
     {
       "when": {
         "facing": "up",
         "lit": "false"
       },
       "apply": {
-        "model": "create_industrial_details:block/riveted_steel/riveted_steel_caged_lamp/floor"
+        "model": "create_industrial_details:block/riveted_steel/riveted_steel_caged_lamp/floor_bulb"
       }
     },
     {
@@ -103,10 +195,9 @@
         "lit": "false"
       },
       "apply": {
-        "model": "create_industrial_details:block/riveted_steel/riveted_steel_caged_lamp/ceiling"
+        "model": "create_industrial_details:block/riveted_steel/riveted_steel_caged_lamp/ceiling_bulb"
       }
     },
-
     {
       "when": {
         "facing": "south",
@@ -114,7 +205,7 @@
         "lit": "true"
       },
       "apply": {
-        "model": "create_industrial_details:block/riveted_steel/riveted_steel_caged_lamp/wall_lit"
+        "model": "create_industrial_details:block/riveted_steel/riveted_steel_caged_lamp/wall_bulb_lit"
       }
     },
     {
@@ -124,7 +215,7 @@
         "lit": "true"
       },
       "apply": {
-        "model": "create_industrial_details:block/riveted_steel/riveted_steel_caged_lamp/wall_lit",
+        "model": "create_industrial_details:block/riveted_steel/riveted_steel_caged_lamp/wall_bulb_lit",
         "y": 90
       }
     },
@@ -135,7 +226,7 @@
         "lit": "true"
       },
       "apply": {
-        "model": "create_industrial_details:block/riveted_steel/riveted_steel_caged_lamp/wall_lit",
+        "model": "create_industrial_details:block/riveted_steel/riveted_steel_caged_lamp/wall_bulb_lit",
         "y": 180
       }
     },
@@ -146,11 +237,10 @@
         "lit": "true"
       },
       "apply": {
-        "model": "create_industrial_details:block/riveted_steel/riveted_steel_caged_lamp/wall_lit",
+        "model": "create_industrial_details:block/riveted_steel/riveted_steel_caged_lamp/wall_bulb_lit",
         "y": 270
       }
     },
-
     {
       "when": {
         "facing": "south",
@@ -158,7 +248,7 @@
         "lit": "true"
       },
       "apply": {
-        "model": "create_industrial_details:block/riveted_steel/riveted_steel_caged_lamp/wall_perpendicular_lit"
+        "model": "create_industrial_details:block/riveted_steel/riveted_steel_caged_lamp/wall_perpendicular_bulb_lit"
       }
     },
     {
@@ -168,7 +258,7 @@
         "lit": "true"
       },
       "apply": {
-        "model": "create_industrial_details:block/riveted_steel/riveted_steel_caged_lamp/wall_perpendicular_lit",
+        "model": "create_industrial_details:block/riveted_steel/riveted_steel_caged_lamp/wall_perpendicular_bulb_lit",
         "y": 90
       }
     },
@@ -179,7 +269,7 @@
         "lit": "true"
       },
       "apply": {
-        "model": "create_industrial_details:block/riveted_steel/riveted_steel_caged_lamp/wall_perpendicular_lit",
+        "model": "create_industrial_details:block/riveted_steel/riveted_steel_caged_lamp/wall_perpendicular_bulb_lit",
         "y": 180
       }
     },
@@ -190,18 +280,17 @@
         "lit": "true"
       },
       "apply": {
-        "model": "create_industrial_details:block/riveted_steel/riveted_steel_caged_lamp/wall_perpendicular_lit",
+        "model": "create_industrial_details:block/riveted_steel/riveted_steel_caged_lamp/wall_perpendicular_bulb_lit",
         "y": 270
       }
     },
-
     {
       "when": {
         "facing": "up",
         "lit": "true"
       },
       "apply": {
-        "model": "create_industrial_details:block/riveted_steel/riveted_steel_caged_lamp/floor_lit"
+        "model": "create_industrial_details:block/riveted_steel/riveted_steel_caged_lamp/floor_bulb_lit"
       }
     },
     {
@@ -210,7 +299,7 @@
         "lit": "true"
       },
       "apply": {
-        "model": "create_industrial_details:block/riveted_steel/riveted_steel_caged_lamp/ceiling_lit"
+        "model": "create_industrial_details:block/riveted_steel/riveted_steel_caged_lamp/ceiling_bulb_lit"
       }
     }
   ]

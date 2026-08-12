@@ -1,0 +1,40 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "create_industrial_details:riveted_steel_caged_lamp",
+          "functions": [
+            {
+              "function": "minecraft:copy_state",
+              "block": "create_industrial_details:riveted_steel_caged_lamp",
+              "properties": [
+                "color"
+              ],
+              "conditions": [
+                {
+                  "condition": "minecraft:inverted",
+                  "term": {
+                    "condition": "minecraft:block_state_property",
+                    "block": "create_industrial_details:riveted_steel_caged_lamp",
+                    "properties": {
+                      "color": "natural"
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ]
+    }
+  ]
+}

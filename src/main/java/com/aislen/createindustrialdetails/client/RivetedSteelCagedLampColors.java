@@ -2,11 +2,14 @@ package com.aislen.createindustrialdetails.client;
 
 import com.aislen.createindustrialdetails.CreateIndustrialDetails;
 import com.aislen.createindustrialdetails.content.block.lighting.cagedlamp.RivetedSteelCagedLampBlock;
+import com.aislen.createindustrialdetails.content.block.lighting.cagedlamp.RivetedSteelCagedLampColor;
 import com.aislen.createindustrialdetails.registry.ModBlocks;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.world.item.component.BlockItemStateProperties;
 
 @EventBusSubscriber(
         modid = CreateIndustrialDetails.MOD_ID,
@@ -56,9 +59,24 @@ public final class RivetedSteelCagedLampColors {
     @SubscribeEvent
     public static void registerItemColors(RegisterColorHandlersEvent.Item event) {
         event.register(
-                (stack, tintIndex) -> tintIndex == 0
-                        ? OFF_COLOR
-                        : 0xFFFFFFFF,
+                (stack, tintIndex) -> {
+                    if (tintIndex != 0)
+                        return 0xFFFFFFFF;
+
+                    BlockItemStateProperties properties =
+                            stack.getOrDefault(
+                                    DataComponents.BLOCK_STATE,
+                                    BlockItemStateProperties.EMPTY
+                            );
+
+                    RivetedSteelCagedLampColor color =
+                            properties.get(RivetedSteelCagedLampBlock.COLOR);
+
+                    if (color == null)
+                        color = RivetedSteelCagedLampColor.NATURAL;
+
+                    return mix(color.getTintColor(), 0xD8D1BF, 0.35f);
+                },
                 ModBlocks.RIVETED_STEEL_CAGED_LAMP.get().asItem()
         );
     }

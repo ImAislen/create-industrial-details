@@ -8,6 +8,13 @@
   "block.create_industrial_details.riveted_steel_beam": "Riveted Steel Beam",
   "block.create_industrial_details.riveted_steel_caged_lamp": "Riveted Steel Caged Lamp",
 
+  "menu.create_industrial_details.riveted_steel_caged_lamp": "Caged Lamp Configuration",
+  "menu.create_industrial_details.riveted_steel_caged_lamp.status": "Status: %s",
+  "menu.create_industrial_details.riveted_steel_caged_lamp.mode": "Mode: %s",
+  "menu.create_industrial_details.value.on": "On",
+  "menu.create_industrial_details.value.off": "Off",
+  "menu.create_industrial_details.value.normal": "Normal",
+  "menu.create_industrial_details.value.inverted": "Inverted",
 
   "block.create_industrial_details.riveted_steel_grate.tooltip.summary": "Can be _waterlogged_.",
   "block.create_industrial_details.riveted_steel_grate.tooltip.condition1": "Encased Fan",
