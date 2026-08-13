@@ -28,13 +28,10 @@ public final class RivetedSteelCagedLampColors {
                         return 0xFFFFFFFF;
                     }
 
-                    int tint = state.getValue(RivetedSteelCagedLampBlock.COLOR).getTintColor();
-
-                    if (state.getValue(RivetedSteelCagedLampBlock.LIT)) {
-                        return tint;
-                    }
-
-                    return mix(tint, 0xD8D1BF, 0.35f);
+                    return getDisplayColor(
+                            state.getValue(RivetedSteelCagedLampBlock.COLOR),
+                            state.getValue(RivetedSteelCagedLampBlock.LIT)
+                    );
                 },
                 ModBlocks.RIVETED_STEEL_CAGED_LAMP.get()
         );
@@ -54,6 +51,14 @@ public final class RivetedSteelCagedLampColors {
         int bl = Math.round(ab + (bb - ab) * t);
 
         return (r << 16) | (g << 8) | bl;
+    }
+
+    public static int getDisplayColor(
+            RivetedSteelCagedLampColor color,
+            boolean lit
+    ) {
+        int tint = color.getTintColor();
+        return lit ? tint : mix(tint, 0xD8D1BF, 0.35f);
     }
 
     @SubscribeEvent

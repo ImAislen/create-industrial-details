@@ -18,9 +18,7 @@ public final class ModItems {
     private ModItems() {
     }
 
-    /**
-     * Registers the inventory item corresponding to a block.
-     */
+
     static <T extends Block> DeferredItem<BlockItem> registerBlockItem(
             String name,
             DeferredBlock<T> block

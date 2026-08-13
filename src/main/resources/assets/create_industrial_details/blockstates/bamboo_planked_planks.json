@@ -1,0 +1,11 @@
+{
+  "variants": {
+    "half=top": {
+      "model": "create_industrial_details:block/planked_planks/bamboo_planked_planks"
+    },
+    "half=bottom": {
+      "model": "create_industrial_details:block/planked_planks/bamboo_planked_planks",
+      "x": 180
+    }
+  }
+}

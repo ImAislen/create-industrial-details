@@ -8,15 +8,34 @@
   "block.create_industrial_details.riveted_steel_beam": "Riveted Steel Beam",
   "block.create_industrial_details.riveted_steel_caged_lamp": "Riveted Steel Caged Lamp",
 
+  "block.create_industrial_details.acacia_planked_planks": "Acacia Planked Planks",
+  "block.create_industrial_details.bamboo_planked_planks": "Bamboo Planked Planks",
+  "block.create_industrial_details.birch_planked_planks": "Birch Planked Planks",
+  "block.create_industrial_details.cherry_planked_planks": "Cherry Planked Planks",
+  "block.create_industrial_details.crimson_planked_planks": "Crimson Planked Planks",
+  "block.create_industrial_details.darkoak_planked_planks": "Dark Oak Planked Planks",
+  "block.create_industrial_details.jungle_planked_planks": "Jungle Planked Planks",
+  "block.create_industrial_details.mangrove_planked_planks": "Mangrove Planked Planks",
+  "block.create_industrial_details.oak_planked_planks": "Oak Planked Planks",
+  "block.create_industrial_details.spruce_planked_planks": "Spruce Planked Planks",
+  "block.create_industrial_details.warped_planked_planks": "Warped Planked Planks",
+
+
+
   "menu.create_industrial_details.riveted_steel_caged_lamp": "Caged Lamp Configuration",
   "menu.create_industrial_details.riveted_steel_caged_lamp.status": "Status: %s",
   "menu.create_industrial_details.riveted_steel_caged_lamp.mode": "Mode: %s",
   "menu.create_industrial_details.riveted_steel_caged_lamp.redstone_mode": "Redstone Mode",
   "menu.create_industrial_details.riveted_steel_caged_lamp.wireless_frequency": "Wireless Frequency",
+  "menu.create_industrial_details.riveted_steel_caged_lamp.lamp_status": "Lamp Status:",
+  "menu.create_industrial_details.riveted_steel_caged_lamp.normal.tooltip": "Lights when powered",
+  "menu.create_industrial_details.riveted_steel_caged_lamp.inverted.tooltip": "Lights when unpowered",
   "menu.create_industrial_details.value.on": "On",
   "menu.create_industrial_details.value.off": "Off",
   "menu.create_industrial_details.value.normal": "Normal",
   "menu.create_industrial_details.value.inverted": "Inverted",
+
+
 
   "block.create_industrial_details.riveted_steel_grate.tooltip.summary": "Can be _waterlogged_.",
   "block.create_industrial_details.riveted_steel_grate.tooltip.condition1": "Encased Fan",

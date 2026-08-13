@@ -1,6 +1,7 @@
 package com.aislen.createindustrialdetails.registry;
 
 import com.aislen.createindustrialdetails.CreateIndustrialDetails;
+import net.minecraft.world.level.block.Blocks;
 import com.aislen.createindustrialdetails.content.block.MooringBollardBlock;
 import com.aislen.createindustrialdetails.content.block.rivetedsteel.RivetedSteelGrateBlock;
 import com.aislen.createindustrialdetails.content.block.rivetedsteel.RivetedSteelHatchBlock;
@@ -9,6 +10,7 @@ import com.aislen.createindustrialdetails.content.block.rivetedsteel.panel.Rivet
 import com.aislen.createindustrialdetails.content.block.rivetedsteel.panel.RivetedSteelPanelShaftPenetrationBlock;
 import com.aislen.createindustrialdetails.content.item.rivetedsteel.RivetedSteelPanelItem;
 import com.aislen.createindustrialdetails.content.block.lighting.cagedlamp.RivetedSteelCagedLampBlock;
+import com.aislen.createindustrialdetails.content.block.plankedplanks.PlankedPlanksBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -26,6 +28,18 @@ import java.util.function.Supplier;
 public final class ModBlocks {
     public static final DeferredRegister.Blocks BLOCKS =
             DeferredRegister.createBlocks(CreateIndustrialDetails.MOD_ID);
+
+
+    private static <T extends Block> DeferredBlock<T> registerBlockWithItem(
+            String name,
+            Supplier<? extends T> blockFactory,
+            BiFunction<T, Item.Properties, ? extends BlockItem> itemFactory
+    ) {
+        DeferredBlock<T> block = BLOCKS.register(name, blockFactory);
+        ModItems.registerBlockItem(name, block, itemFactory);
+        return block;
+    }
+
 
     public static final DeferredBlock<Block> CAST_IRON_BLOCK =
             registerBlockWithItem(
@@ -93,15 +107,7 @@ public final class ModBlocks {
             );
 
 
-    private static <T extends Block> DeferredBlock<T> registerBlockWithItem(
-            String name,
-            Supplier<? extends T> blockFactory,
-            BiFunction<T, Item.Properties, ? extends BlockItem> itemFactory
-    ) {
-        DeferredBlock<T> block = BLOCKS.register(name, blockFactory);
-        ModItems.registerBlockItem(name, block, itemFactory);
-        return block;
-    }
+
     public static final DeferredBlock<MooringBollardBlock> MOORING_BOLLARD =
             registerBlockWithItem(
                     "mooring_bollard",
@@ -138,6 +144,133 @@ public final class ModBlocks {
                                     .noOcclusion()
                     )
             );
+
+
+
+    //Planked Planks
+
+    public static final DeferredBlock<PlankedPlanksBlock> ACACIA_PLANKED_PLANKS =
+            registerBlockWithItem(
+                    "acacia_planked_planks",
+                    () -> new PlankedPlanksBlock(
+                            BlockBehaviour.Properties
+                                    .ofFullCopy(Blocks.OAK_PLANKS)
+                                    .noOcclusion()
+                    ),
+                    BlockItem::new
+            );
+
+    public static final DeferredBlock<PlankedPlanksBlock> BAMBOO_PLANKED_PLANKS =
+            registerBlockWithItem(
+                    "bamboo_planked_planks",
+                    () -> new PlankedPlanksBlock(
+                            BlockBehaviour.Properties
+                                    .ofFullCopy(Blocks.OAK_PLANKS)
+                                    .noOcclusion()
+                    ),
+                    BlockItem::new
+            );
+
+    public static final DeferredBlock<PlankedPlanksBlock> BIRCH_PLANKED_PLANKS =
+            registerBlockWithItem(
+                    "birch_planked_planks",
+                    () -> new PlankedPlanksBlock(
+                            BlockBehaviour.Properties
+                                    .ofFullCopy(Blocks.OAK_PLANKS)
+                                    .noOcclusion()
+                    ),
+                    BlockItem::new
+            );
+
+    public static final DeferredBlock<PlankedPlanksBlock> CHERRY_PLANKED_PLANKS =
+            registerBlockWithItem(
+                    "cherry_planked_planks",
+                    () -> new PlankedPlanksBlock(
+                            BlockBehaviour.Properties
+                                    .ofFullCopy(Blocks.OAK_PLANKS)
+                                    .noOcclusion()
+                    ),
+                    BlockItem::new
+            );
+
+    public static final DeferredBlock<PlankedPlanksBlock> CRIMSON_PLANKED_PLANKS =
+            registerBlockWithItem(
+                    "crimson_planked_planks",
+                    () -> new PlankedPlanksBlock(
+                            BlockBehaviour.Properties
+                                    .ofFullCopy(Blocks.OAK_PLANKS)
+                                    .noOcclusion()
+                    ),
+                    BlockItem::new
+            );
+
+    public static final DeferredBlock<PlankedPlanksBlock> DARKOAK_PLANKED_PLANKS =
+            registerBlockWithItem(
+                    "darkoak_planked_planks",
+                    () -> new PlankedPlanksBlock(
+                            BlockBehaviour.Properties
+                                    .ofFullCopy(Blocks.OAK_PLANKS)
+                                    .noOcclusion()
+                    ),
+                    BlockItem::new
+            );
+
+    public static final DeferredBlock<PlankedPlanksBlock> JUNGLE_PLANKED_PLANKS =
+            registerBlockWithItem(
+                    "jungle_planked_planks",
+                    () -> new PlankedPlanksBlock(
+                            BlockBehaviour.Properties
+                                    .ofFullCopy(Blocks.OAK_PLANKS)
+                                    .noOcclusion()
+                    ),
+                    BlockItem::new
+            );
+
+    public static final DeferredBlock<PlankedPlanksBlock> MANGROVE_PLANKED_PLANKS =
+            registerBlockWithItem(
+                    "mangrove_planked_planks",
+                    () -> new PlankedPlanksBlock(
+                            BlockBehaviour.Properties
+                                    .ofFullCopy(Blocks.OAK_PLANKS)
+                                    .noOcclusion()
+                    ),
+                    BlockItem::new
+            );
+
+    public static final DeferredBlock<PlankedPlanksBlock> OAK_PLANKED_PLANKS =
+            registerBlockWithItem(
+                    "oak_planked_planks",
+                    () -> new PlankedPlanksBlock(
+                            BlockBehaviour.Properties
+                                    .ofFullCopy(Blocks.OAK_PLANKS)
+                                    .noOcclusion()
+                    ),
+                    BlockItem::new
+            );
+
+    public static final DeferredBlock<PlankedPlanksBlock> SPRUCE_PLANKED_PLANKS =
+            registerBlockWithItem(
+                    "spruce_planked_planks",
+                    () -> new PlankedPlanksBlock(
+                            BlockBehaviour.Properties
+                                    .ofFullCopy(Blocks.OAK_PLANKS)
+                                    .noOcclusion()
+                    ),
+                    BlockItem::new
+            );
+
+    public static final DeferredBlock<PlankedPlanksBlock> WARPED_PLANKED_PLANKS =
+            registerBlockWithItem(
+                    "warped_planked_planks",
+                    () -> new PlankedPlanksBlock(
+                            BlockBehaviour.Properties
+                                    .ofFullCopy(Blocks.OAK_PLANKS)
+                                    .noOcclusion()
+
+                    ),
+                    BlockItem::new
+            );
+
 
     private ModBlocks() {
     }
