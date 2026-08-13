@@ -36,6 +36,24 @@ repositories {
         name = "Registrate"
         url = "https://maven.ithundxr.dev/snapshots"
     }
+
+    maven {
+        name = "AzMod"
+        url = "https://maven.azmod.net/releases"
+    }
+
+    exclusiveContent {
+        forRepository {
+            maven {
+                name = "RyanHCode"
+                url = "https://maven.ryanhcode.dev/releases"
+            }
+        }
+        filter {
+            includeGroup("dev.ryanhcode.sable")
+            includeGroup("dev.ryanhcode.sable-companion")
+        }
+    }
 }
 
 base {
@@ -124,6 +142,8 @@ dependencies {
     runtimeOnly("dev.engine-room.flywheel:flywheel-neoforge-${minecraft_version}:${flywheel_version}")
 
     implementation("com.tterrag.registrate:Registrate:${registrate_version}")
+
+    implementation("com.cake.struts:struts:1.2.1")
     // Example optional mod dependency with JEI
     // The JEI API is declared for compile time use, while the full JEI artifact is used at runtime
     // compileOnly "mezz.jei:jei-${mc_version}-common-api:${jei_version}"

@@ -56,6 +56,9 @@ public final class ModModelEvents {
     private static final ResourceLocation VERTICAL_CROSS_ROTATED =
             id("block/riveted_steel/riveted_steel_beam/riveted_steel_beam_vertical_cross_rotated");
 
+    private static final ResourceLocation WOODEN_BEAM_SEGMENT =
+            id("block/wooden_beam/wooden_beam");
+
 
     // Registration
 
@@ -95,6 +98,8 @@ public final class ModModelEvents {
                         VERTICAL_CROSS_ROTATED
                 )
         );
+
+        event.register(ModelResourceLocation.standalone(WOODEN_BEAM_SEGMENT));
     }
 
 

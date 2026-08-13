@@ -11,9 +11,14 @@ import com.aislen.createindustrialdetails.content.block.rivetedsteel.panel.Rivet
 import com.aislen.createindustrialdetails.content.item.rivetedsteel.RivetedSteelPanelItem;
 import com.aislen.createindustrialdetails.content.block.lighting.cagedlamp.RivetedSteelCagedLampBlock;
 import com.aislen.createindustrialdetails.content.block.plankedplanks.PlankedPlanksBlock;
+import com.aislen.createindustrialdetails.content.block.woodenbeam.WoodenBeamBlock;
+import com.cake.struts.content.StrutModelType;
+import com.cake.struts.content.block.StrutBlockItem;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.material.MapColor;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredBlock;
@@ -64,6 +69,32 @@ public final class ModBlocks {
                                     .noOcclusion()
                                     .lightLevel(state -> state.getValue(RivetedSteelCagedLampBlock.LIT) ? 12 : 0)
                     )
+            );
+
+    public static final DeferredBlock<WoodenBeamBlock> OAK_WOODEN_BEAM =
+            registerBlockWithItem(
+                    "oak_wooden_beam",
+                    () -> new WoodenBeamBlock(
+                            BlockBehaviour.Properties.of()
+                                    .mapColor(MapColor.WOOD)
+                                    .instrument(NoteBlockInstrument.BASS)
+                                    .strength(2.0F)
+                                    .sound(SoundType.WOOD)
+                                    .ignitedByLava()
+                                    .noOcclusion(),
+                            new StrutModelType(
+                                    ResourceLocation.fromNamespaceAndPath(
+                                            CreateIndustrialDetails.MOD_ID,
+                                            "block/wooden_beam/wooden_beam"
+                                    ),
+                                    ResourceLocation.withDefaultNamespace(
+                                            "block/oak_log_top"
+                                    ),
+                                    8,
+                                    8
+                            )
+                    ),
+                    StrutBlockItem::new
             );
 
     public static final DeferredBlock<RivetedSteelBeamBlock>
