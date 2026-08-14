@@ -3,7 +3,6 @@ package com.aislen.createindustrialdetails.registry;
 import com.aislen.createindustrialdetails.CreateIndustrialDetails;
 import com.aislen.createindustrialdetails.content.block.lighting.cagedlamp.RivetedSteelCagedLampBlockEntity;
 import com.aislen.createindustrialdetails.content.block.woodenbeam.WoodenBeamBlockEntity;
-import com.cake.struts.content.block.StrutBlockEntity;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.neoforged.bus.api.IEventBus;
@@ -32,13 +31,15 @@ public final class ModBlockEntities {
 
     public static final DeferredHolder<
             BlockEntityType<?>,
-            BlockEntityType<StrutBlockEntity>
+            BlockEntityType<WoodenBeamBlockEntity>
             > WOODEN_BEAM =
             BLOCK_ENTITY_TYPES.register(
                     "wooden_beam",
-                    () -> BlockEntityType.Builder.<StrutBlockEntity>of(
+                    () -> BlockEntityType.Builder.of(
                             WoodenBeamBlockEntity::new,
-                            ModBlocks.OAK_WOODEN_BEAM.get()
+                            ModBlocks.WOODEN_BEAMS.values().stream()
+                                    .map(DeferredHolder::get)
+                                    .toArray(net.minecraft.world.level.block.Block[]::new)
                     ).build(null)
             );
 

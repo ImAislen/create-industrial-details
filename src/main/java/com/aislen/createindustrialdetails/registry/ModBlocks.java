@@ -12,17 +12,23 @@ import com.aislen.createindustrialdetails.content.item.rivetedsteel.RivetedSteel
 import com.aislen.createindustrialdetails.content.block.lighting.cagedlamp.RivetedSteelCagedLampBlock;
 import com.aislen.createindustrialdetails.content.block.plankedplanks.PlankedPlanksBlock;
 import com.aislen.createindustrialdetails.content.block.woodenbeam.WoodenBeamBlock;
+import com.aislen.createindustrialdetails.content.block.woodenbeam.WoodenBeamBlockItem;
+import com.aislen.createindustrialdetails.content.block.woodenbeam.WoodenBeamMaterial;
+import com.aislen.createindustrialdetails.content.block.woodenbeam.structure.WoodenBeamStructureBlock;
 import com.cake.struts.content.StrutModelType;
-import com.cake.struts.content.block.StrutBlockItem;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.material.MapColor;
+import net.minecraft.world.level.material.PushReaction;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredRegister;
+import java.util.Collections;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.function.BiFunction;
 
 import net.minecraft.world.item.BlockItem;
@@ -71,30 +77,26 @@ public final class ModBlocks {
                     )
             );
 
+    public static final Map<String, DeferredBlock<WoodenBeamBlock>> WOODEN_BEAMS = registerWoodenBeams();
+
+    // Preserve the prototype's public holder and registry name for existing worlds.
     public static final DeferredBlock<WoodenBeamBlock> OAK_WOODEN_BEAM =
-            registerBlockWithItem(
-                    "oak_wooden_beam",
-                    () -> new WoodenBeamBlock(
+            WOODEN_BEAMS.get("oak_wooden_beam");
+
+    public static final DeferredBlock<WoodenBeamStructureBlock> WOODEN_BEAM_STRUCTURE =
+            BLOCKS.register(
+                    "wooden_beam_structure",
+                    () -> new WoodenBeamStructureBlock(
                             BlockBehaviour.Properties.of()
+                                    .noLootTable()
+                                    .replaceable()
+                                    .noOcclusion()
+                                    .noCollission()
+                                    .pushReaction(PushReaction.DESTROY)
                                     .mapColor(MapColor.WOOD)
-                                    .instrument(NoteBlockInstrument.BASS)
                                     .strength(2.0F)
                                     .sound(SoundType.WOOD)
-                                    .ignitedByLava()
-                                    .noOcclusion(),
-                            new StrutModelType(
-                                    ResourceLocation.fromNamespaceAndPath(
-                                            CreateIndustrialDetails.MOD_ID,
-                                            "block/wooden_beam/wooden_beam"
-                                    ),
-                                    ResourceLocation.withDefaultNamespace(
-                                            "block/oak_log_top"
-                                    ),
-                                    8,
-                                    8
-                            )
-                    ),
-                    StrutBlockItem::new
+                    )
             );
 
     public static final DeferredBlock<RivetedSteelBeamBlock>
@@ -304,6 +306,42 @@ public final class ModBlocks {
 
 
     private ModBlocks() {
+    }
+
+    private static Map<String, DeferredBlock<WoodenBeamBlock>> registerWoodenBeams() {
+        Map<String, DeferredBlock<WoodenBeamBlock>> registered = new LinkedHashMap<>();
+        for (WoodenBeamMaterial.Variant variant : WoodenBeamMaterial.allVariants()) {
+            DeferredBlock<WoodenBeamBlock> block = registerBlockWithItem(
+                    variant.registryName(),
+                    () -> new WoodenBeamBlock(
+                            woodenBeamProperties(variant),
+                            new StrutModelType(
+                                    ResourceLocation.fromNamespaceAndPath(
+                                            CreateIndustrialDetails.MOD_ID,
+                                            variant.segmentModelPath()
+                                    ),
+                                    variant.capTexture(),
+                                    8,
+                                    8
+                            ),
+                            variant.fireSpreadSpeed(),
+                            variant.flammability()
+                    ),
+                    WoodenBeamBlockItem::new
+            );
+            registered.put(variant.registryName(), block);
+        }
+        return Collections.unmodifiableMap(registered);
+    }
+
+    private static BlockBehaviour.Properties woodenBeamProperties(WoodenBeamMaterial.Variant variant) {
+        BlockBehaviour.Properties properties = BlockBehaviour.Properties.of()
+                .mapColor(variant.mapColor())
+                .instrument(NoteBlockInstrument.BASS)
+                .strength(variant.destroyTime(), variant.explosionResistance())
+                .sound(variant.sound())
+                .noOcclusion();
+        return variant.ignitedByLava() ? properties.ignitedByLava() : properties;
     }
 
 

@@ -1,0 +1,8 @@
+{
+  "parent": "create_industrial_details:block/wooden_beam/wooden_beam",
+  "textures": {
+    "side": "minecraft:block/mangrove_planks",
+    "end": "minecraft:block/mangrove_planks",
+    "particle": "minecraft:block/mangrove_planks"
+  }
+}

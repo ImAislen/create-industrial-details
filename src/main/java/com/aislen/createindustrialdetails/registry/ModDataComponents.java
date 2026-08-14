@@ -7,6 +7,8 @@ import net.minecraft.core.registries.Registries;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
+import com.mojang.serialization.Codec;
+import net.minecraft.network.codec.ByteBufCodecs;
 
 public final class ModDataComponents {
 
@@ -28,6 +30,15 @@ public final class ModDataComponents {
                             .networkSynchronized(
                                     RivetedSteelCagedLampFrequencies.STREAM_CODEC
                             )
+            );
+
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Byte>>
+            WOODEN_BEAM_FROM_SNAP =
+            DATA_COMPONENTS.registerComponentType(
+                    "wooden_beam_from_snap",
+                    builder -> builder
+                            .persistent(Codec.BYTE)
+                            .networkSynchronized(ByteBufCodecs.BYTE)
             );
 
     private ModDataComponents() {

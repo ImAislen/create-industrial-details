@@ -4,6 +4,7 @@ import java.util.Map;
 
 import com.aislen.createindustrialdetails.CreateIndustrialDetails;
 import com.aislen.createindustrialdetails.content.block.rivetedsteel.beam.RivetedSteelBeamBlock;
+import com.aislen.createindustrialdetails.content.block.woodenbeam.WoodenBeamMaterial;
 import com.aislen.createindustrialdetails.registry.ModBlocks;
 import com.simibubi.create.content.decoration.girder.GirderBlock;
 
@@ -56,10 +57,6 @@ public final class ModModelEvents {
     private static final ResourceLocation VERTICAL_CROSS_ROTATED =
             id("block/riveted_steel/riveted_steel_beam/riveted_steel_beam_vertical_cross_rotated");
 
-    private static final ResourceLocation WOODEN_BEAM_SEGMENT =
-            id("block/wooden_beam/wooden_beam");
-
-
     // Registration
 
     @SubscribeEvent
@@ -99,7 +96,9 @@ public final class ModModelEvents {
                 )
         );
 
-        event.register(ModelResourceLocation.standalone(WOODEN_BEAM_SEGMENT));
+        for (WoodenBeamMaterial.Variant variant : WoodenBeamMaterial.allVariants()) {
+            event.register(ModelResourceLocation.standalone(id(variant.segmentModelPath())));
+        }
     }
 
 

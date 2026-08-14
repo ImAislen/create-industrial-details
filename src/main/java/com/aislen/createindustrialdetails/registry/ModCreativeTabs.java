@@ -39,7 +39,9 @@ public final class ModCreativeTabs {
                                 output.accept(ModBlocks.RIVETED_STEEL_HATCH.get());
                                 output.accept(ModBlocks.RIVETED_STEEL_BEAM.get());
                                 output.accept(ModBlocks.RIVETED_STEEL_CAGED_LAMP.get());
-                                output.accept(ModBlocks.OAK_WOODEN_BEAM.get());
+                                ModBlocks.WOODEN_BEAMS.values().forEach(
+                                        beam -> output.accept(beam.get())
+                                );
 
 
                                 output.accept(ModBlocks.ACACIA_PLANKED_PLANKS.get());

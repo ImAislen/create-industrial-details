@@ -1,22 +1,8 @@
 {
-  "parent": "minecraft:block/block",
+  "parent": "create_industrial_details:block/wooden_beam/wooden_beam_attachment",
   "textures": {
     "side": "minecraft:block/oak_log",
     "end": "minecraft:block/oak_log_top",
     "particle": "minecraft:block/oak_log"
-  },
-  "elements": [
-    {
-      "from": [4, -5, 4],
-      "to": [12, 1, 12],
-      "faces": {
-        "north": { "uv": [0, 0, 8, 6], "texture": "#side" },
-        "east": { "uv": [0, 0, 8, 6], "texture": "#side" },
-        "south": { "uv": [0, 0, 8, 6], "texture": "#side" },
-        "west": { "uv": [0, 0, 8, 6], "texture": "#side" },
-        "up": { "uv": [0, 0, 8, 8], "texture": "#end" },
-        "down": { "uv": [0, 0, 8, 8], "texture": "#end" }
-      }
-    }
-  ]
+  }
 }
