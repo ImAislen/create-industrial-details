@@ -95,8 +95,17 @@ public final class WoodenBeamPlacementPreview {
                 fromFace,
                 fromSnapId == null ? WoodenBeamSnapPoint.CENTER : WoodenBeamSnapPoint.byId(fromSnapId)
         );
-        Vec3 fromPoint = WoodenBeamEndpoints.attachment(from.anchorPos(), from.supportFace(), from.snap());
-        Vec3 toPoint = WoodenBeamEndpoints.attachment(to.anchorPos(), to.supportFace(), to.snap());
+        WoodenBeamEndpoints.GeometrySpan geometrySpan = WoodenBeamEndpoints.geometrySpan(
+                level,
+                from.anchorPos(),
+                from.supportFace(),
+                from.snap(),
+                to.anchorPos(),
+                to.supportFace(),
+                to.snap()
+        );
+        Vec3 fromPoint = geometrySpan.from();
+        Vec3 toPoint = geometrySpan.to();
         if (fromPoint.distanceToSqr(toPoint) < 1.0e-6) {
             return;
         }

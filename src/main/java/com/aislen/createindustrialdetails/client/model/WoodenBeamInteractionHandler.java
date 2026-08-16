@@ -57,9 +57,18 @@ public final class WoodenBeamInteractionHandler {
         for (GirderConnectionNode connection : beam.getConnectionsCopy()) {
             BlockPos peer = connection.absoluteFrom(pos);
             WoodenBeamConnectionEndpoints endpoints = beam.getEndpoints(connection);
+            WoodenBeamEndpoints.GeometrySpan geometrySpan = WoodenBeamEndpoints.geometrySpan(
+                    level,
+                    pos,
+                    endpoints.localFace(),
+                    endpoints.localSnap(),
+                    peer,
+                    endpoints.peerFace(),
+                    endpoints.peerSnap()
+            );
             shapes.put(new ConnectionKey(pos, peer), new DefaultStrutConnectionShape(
-                    WoodenBeamEndpoints.attachment(pos, endpoints.localFace(), endpoints.localSnap()),
-                    WoodenBeamEndpoints.attachment(peer, endpoints.peerFace(), endpoints.peerSnap()),
+                    geometrySpan.from(),
+                    geometrySpan.to(),
                     halfWidth,
                     halfHeight,
                     pos,

@@ -15,6 +15,7 @@ import com.aislen.createindustrialdetails.content.block.woodenbeam.WoodenBeamBlo
 import com.aislen.createindustrialdetails.content.block.woodenbeam.WoodenBeamBlockItem;
 import com.aislen.createindustrialdetails.content.block.woodenbeam.WoodenBeamMaterial;
 import com.aislen.createindustrialdetails.content.block.woodenbeam.structure.WoodenBeamStructureBlock;
+import com.aislen.createindustrialdetails.content.block.woodenpost.WoodenPostBlock;
 import com.cake.struts.content.StrutModelType;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
@@ -82,6 +83,11 @@ public final class ModBlocks {
     // Preserve the prototype's public holder and registry name for existing worlds.
     public static final DeferredBlock<WoodenBeamBlock> OAK_WOODEN_BEAM =
             WOODEN_BEAMS.get("oak_wooden_beam");
+
+    public static final Map<String, DeferredBlock<WoodenPostBlock>> WOODEN_POSTS = registerWoodenPosts();
+
+    public static final DeferredBlock<WoodenPostBlock> OAK_WOODEN_POST =
+            WOODEN_POSTS.get("oak_wooden_post");
 
     public static final DeferredBlock<WoodenBeamStructureBlock> WOODEN_BEAM_STRUCTURE =
             BLOCKS.register(
@@ -314,7 +320,7 @@ public final class ModBlocks {
             DeferredBlock<WoodenBeamBlock> block = registerBlockWithItem(
                     variant.registryName(),
                     () -> new WoodenBeamBlock(
-                            woodenBeamProperties(variant),
+                            structuralTimberProperties(variant),
                             new StrutModelType(
                                     ResourceLocation.fromNamespaceAndPath(
                                             CreateIndustrialDetails.MOD_ID,
@@ -334,7 +340,24 @@ public final class ModBlocks {
         return Collections.unmodifiableMap(registered);
     }
 
-    private static BlockBehaviour.Properties woodenBeamProperties(WoodenBeamMaterial.Variant variant) {
+    private static Map<String, DeferredBlock<WoodenPostBlock>> registerWoodenPosts() {
+        Map<String, DeferredBlock<WoodenPostBlock>> registered = new LinkedHashMap<>();
+        for (WoodenBeamMaterial.Variant variant : WoodenBeamMaterial.allVariants()) {
+            String registryName = variant.postRegistryName();
+            DeferredBlock<WoodenPostBlock> block = registerBlockWithItem(
+                    registryName,
+                    () -> new WoodenPostBlock(
+                            structuralTimberProperties(variant),
+                            variant.fireSpreadSpeed(),
+                            variant.flammability()
+                    )
+            );
+            registered.put(registryName, block);
+        }
+        return Collections.unmodifiableMap(registered);
+    }
+
+    private static BlockBehaviour.Properties structuralTimberProperties(WoodenBeamMaterial.Variant variant) {
         BlockBehaviour.Properties properties = BlockBehaviour.Properties.of()
                 .mapColor(variant.mapColor())
                 .instrument(NoteBlockInstrument.BASS)

@@ -1,0 +1,58 @@
+{
+  "variants": {
+    "post_position=north_west,waterlogged=false": {
+      "model": "create_industrial_details:block/wooden_post/warped_wooden_post_north_west"
+    },
+    "post_position=north_west,waterlogged=true": {
+      "model": "create_industrial_details:block/wooden_post/warped_wooden_post_north_west"
+    },
+    "post_position=north,waterlogged=false": {
+      "model": "create_industrial_details:block/wooden_post/warped_wooden_post_north"
+    },
+    "post_position=north,waterlogged=true": {
+      "model": "create_industrial_details:block/wooden_post/warped_wooden_post_north"
+    },
+    "post_position=north_east,waterlogged=false": {
+      "model": "create_industrial_details:block/wooden_post/warped_wooden_post_north_east"
+    },
+    "post_position=north_east,waterlogged=true": {
+      "model": "create_industrial_details:block/wooden_post/warped_wooden_post_north_east"
+    },
+    "post_position=west,waterlogged=false": {
+      "model": "create_industrial_details:block/wooden_post/warped_wooden_post_west"
+    },
+    "post_position=west,waterlogged=true": {
+      "model": "create_industrial_details:block/wooden_post/warped_wooden_post_west"
+    },
+    "post_position=center,waterlogged=false": {
+      "model": "create_industrial_details:block/wooden_post/warped_wooden_post_center"
+    },
+    "post_position=center,waterlogged=true": {
+      "model": "create_industrial_details:block/wooden_post/warped_wooden_post_center"
+    },
+    "post_position=east,waterlogged=false": {
+      "model": "create_industrial_details:block/wooden_post/warped_wooden_post_east"
+    },
+    "post_position=east,waterlogged=true": {
+      "model": "create_industrial_details:block/wooden_post/warped_wooden_post_east"
+    },
+    "post_position=south_west,waterlogged=false": {
+      "model": "create_industrial_details:block/wooden_post/warped_wooden_post_south_west"
+    },
+    "post_position=south_west,waterlogged=true": {
+      "model": "create_industrial_details:block/wooden_post/warped_wooden_post_south_west"
+    },
+    "post_position=south,waterlogged=false": {
+      "model": "create_industrial_details:block/wooden_post/warped_wooden_post_south"
+    },
+    "post_position=south,waterlogged=true": {
+      "model": "create_industrial_details:block/wooden_post/warped_wooden_post_south"
+    },
+    "post_position=south_east,waterlogged=false": {
+      "model": "create_industrial_details:block/wooden_post/warped_wooden_post_south_east"
+    },
+    "post_position=south_east,waterlogged=true": {
+      "model": "create_industrial_details:block/wooden_post/warped_wooden_post_south_east"
+    }
+  }
+}

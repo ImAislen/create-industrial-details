@@ -42,6 +42,9 @@ public final class ModCreativeTabs {
                                 ModBlocks.WOODEN_BEAMS.values().forEach(
                                         beam -> output.accept(beam.get())
                                 );
+                                ModBlocks.WOODEN_POSTS.values().forEach(
+                                        post -> output.accept(post.get())
+                                );
 
 
                                 output.accept(ModBlocks.ACACIA_PLANKED_PLANKS.get());

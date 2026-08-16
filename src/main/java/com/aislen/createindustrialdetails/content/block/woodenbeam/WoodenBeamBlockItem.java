@@ -1,6 +1,7 @@
 package com.aislen.createindustrialdetails.content.block.woodenbeam;
 
 import com.aislen.createindustrialdetails.registry.ModDataComponents;
+import com.aislen.createindustrialdetails.content.block.woodenpost.WoodenPostBlock;
 import com.cake.struts.content.block.StrutBlock;
 import com.cake.struts.registry.StrutDataComponents;
 import net.minecraft.ChatFormatting;
@@ -139,6 +140,15 @@ public final class WoodenBeamBlockItem extends BlockItem {
         }
 
         WoodenBeamSnapPoint snap = WoodenBeamEndpoints.nearest(anchorPos, supportFace, hit.getLocation());
+        BlockPos supportPos = anchorPos.relative(supportFace.getOpposite());
+        BlockState supportState = level.getBlockState(supportPos);
+        if (supportState.getBlock() instanceof WoodenPostBlock) {
+            snap = WoodenBeamEndpoints.alignToPost(
+                    supportFace,
+                    snap,
+                    supportState.getValue(WoodenPostBlock.POST_POSITION)
+            );
+        }
         return new EndpointSelection(anchorPos.immutable(), supportFace, snap);
     }
 

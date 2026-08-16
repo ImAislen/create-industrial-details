@@ -1,0 +1,8 @@
+{
+  "parent": "create_industrial_details:block/wooden_post/wooden_post_south",
+  "textures": {
+    "side": "minecraft:block/stripped_bamboo_block",
+    "end": "minecraft:block/stripped_bamboo_block_top",
+    "particle": "minecraft:block/stripped_bamboo_block"
+  }
+}

@@ -131,6 +131,17 @@ public enum WoodenBeamMaterial {
             int fireSpreadSpeed,
             int flammability
     ) {
+        public String postRegistryName() {
+            if (registryName.endsWith("_wooden_beam")) {
+                return registryName.substring(0, registryName.length() - "_wooden_beam".length()) + "_wooden_post";
+            }
+            return registryName.substring(0, registryName.length() - "_plank_beam".length()) + "_plank_post";
+        }
+
+        public String postDisplayName() {
+            return displayName.substring(0, displayName.length() - "Beam".length()) + "Post";
+        }
+
         public String segmentModelPath() {
             return "block/wooden_beam/" + registryName;
         }

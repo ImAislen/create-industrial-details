@@ -188,12 +188,21 @@ public class WoodenBeamBlockEntity extends StrutBlockEntity {
         if (level == null) {
             return;
         }
+        WoodenBeamEndpoints.GeometrySpan geometrySpan = WoodenBeamEndpoints.geometrySpan(
+                level,
+                getBlockPos(),
+                endpoints.localFace(),
+                endpoints.localSnap(),
+                peerPos,
+                endpoints.peerFace(),
+                endpoints.peerSnap()
+        );
         WoodenBeamStructureShapes.registerConnection(
                 level,
                 getBlockPos(),
-                WoodenBeamEndpoints.attachment(getBlockPos(), endpoints.localFace(), endpoints.localSnap()),
+                geometrySpan.from(),
                 peerPos,
-                WoodenBeamEndpoints.attachment(peerPos, endpoints.peerFace(), endpoints.peerSnap()),
+                geometrySpan.to(),
                 getModelType()
         );
     }
