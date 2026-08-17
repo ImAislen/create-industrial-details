@@ -1,8 +1,11 @@
 package com.aislen.createindustrialdetails.content.block.woodenpost;
 
+import net.minecraft.core.Direction;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import org.jetbrains.annotations.Nullable;
 
 /** The nine discrete X/Z locations available to an 8-pixel-wide Wooden Post. */
 public enum WoodenPostPosition implements StringRepresentable {
@@ -24,6 +27,7 @@ public enum WoodenPostPosition implements StringRepresentable {
     private final int xIndex;
     private final int zIndex;
     private final VoxelShape shape;
+    private final AABB bounds;
 
     WoodenPostPosition(String serializedName, int xIndex, int zIndex) {
         this.serializedName = serializedName;
@@ -34,6 +38,7 @@ public enum WoodenPostPosition implements StringRepresentable {
         double centerZ = 8.0D + zIndex * 4.0D;
         this.shape = Block.box(centerX - 4.0D, 0.0D, centerZ - 4.0D,
                 centerX + 4.0D, 16.0D, centerZ + 4.0D);
+        this.bounds = shape.bounds();
     }
 
     public static WoodenPostPosition nearest(double localX, double localZ) {
@@ -47,17 +52,45 @@ public enum WoodenPostPosition implements StringRepresentable {
         return coordinate > UPPER_SNAP_THRESHOLD ? 1 : 0;
     }
 
+    @Nullable
+    public WoodenPostPosition offsetByPostWidth(Direction direction) {
+        if (!direction.getAxis().isHorizontal()) {
+            return null;
+        }
+        return fromIndicesOrNull(
+                xIndex + direction.getStepX() * 2,
+                zIndex + direction.getStepZ() * 2
+        );
+    }
+
+    public boolean isCompatibleWith(WoodenPostPosition other) {
+        return Math.abs(xIndex - other.xIndex) >= 2 || Math.abs(zIndex - other.zIndex) >= 2;
+    }
+
     private static WoodenPostPosition fromIndices(int xIndex, int zIndex) {
+        WoodenPostPosition position = fromIndicesOrNull(xIndex, zIndex);
+        if (position != null) {
+            return position;
+        }
+        throw new IllegalArgumentException("Invalid Wooden Post grid indices: " + xIndex + ", " + zIndex);
+    }
+
+    @Nullable
+    private static WoodenPostPosition fromIndicesOrNull(int xIndex, int zIndex) {
         for (WoodenPostPosition position : VALUES) {
             if (position.xIndex == xIndex && position.zIndex == zIndex) {
                 return position;
             }
         }
-        throw new IllegalArgumentException("Invalid Wooden Post grid indices: " + xIndex + ", " + zIndex);
+        return null;
     }
 
     public VoxelShape shape() {
         return shape;
+    }
+
+    public AABB bounds() {
+        return bounds;
     }
 
     public int gridX() {

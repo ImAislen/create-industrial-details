@@ -190,7 +190,13 @@ public final class WoodenBeamModelBuilder {
             );
         }
 
-        var postPosition = supportState.getValue(WoodenPostBlock.POST_POSITION);
+        var postPosition = WoodenPostBlock.getSinglePosition(supportState);
+        if (postPosition == null) {
+            return new PlaneSelection(
+                    new EndpointPlane(planePoint, planeNormal),
+                    PlanePath.NORMAL_SUPPORT
+            );
+        }
         AABB postBounds = postPosition
                 .shape()
                 .bounds()

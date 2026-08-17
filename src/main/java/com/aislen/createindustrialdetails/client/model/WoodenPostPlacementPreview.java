@@ -2,6 +2,7 @@ package com.aislen.createindustrialdetails.client.model;
 
 import com.aislen.createindustrialdetails.CreateIndustrialDetails;
 import com.aislen.createindustrialdetails.content.block.woodenpost.WoodenPostBlock;
+import com.aislen.createindustrialdetails.content.block.woodenpost.WoodenPostPosition;
 import com.cake.struts.internal.microliner.Microliner;
 import com.cake.struts.internal.microliner.MicrolinerCoordinateTransform;
 import com.cake.struts.internal.microliner.MicrolinerOutline;
@@ -27,7 +28,7 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.ClientTickEvent;
 
-/** Lightweight held-item outline for the exact Wooden Post state that vanilla placement will use. */
+/** Lightweight held-item outline for the exact Wooden Post member that placement will add. */
 @EventBusSubscriber(modid = CreateIndustrialDetails.MOD_ID, value = Dist.CLIENT)
 public final class WoodenPostPlacementPreview {
     private static final String OUTLINE_ID = "wooden_post_placement_preview";
@@ -44,8 +45,7 @@ public final class WoodenPostPlacementPreview {
         LocalPlayer player = minecraft.player;
         if (minecraft.isPaused() || player == null || minecraft.level == null
                 || !(minecraft.hitResult instanceof BlockHitResult hit)
-                || hit.getType() != HitResult.Type.BLOCK
-                || hit.getDirection().getAxis() != Direction.Axis.Y) {
+                || hit.getType() != HitResult.Type.BLOCK) {
             return;
         }
 
@@ -55,20 +55,49 @@ public final class WoodenPostPlacementPreview {
         }
         ItemStack held = player.getItemInHand(hand);
         BlockPlaceContext context = new BlockPlaceContext(new UseOnContext(player, hand, hit));
-        if (!context.canPlace()
-                || !(held.getItem() instanceof BlockItem blockItem)
+        if (!(held.getItem() instanceof BlockItem blockItem)
                 || !(blockItem.getBlock() instanceof WoodenPostBlock post)) {
             return;
         }
 
-        BlockState placementState = post.getStateForPlacement(context);
-        BlockPos placementPos = context.getClickedPos();
-        if (placementState == null || !placementState.canSurvive(minecraft.level, placementPos)) {
+        if (hit.getDirection().getAxis() != Direction.Axis.Y) {
+            BlockPos targetPos = hit.getBlockPos();
+            BlockState targetState = minecraft.level.getBlockState(targetPos);
+            if (!player.isSecondaryUseActive() || targetState.getBlock() != post) {
+                return;
+            }
+
+            WoodenPostPosition position = WoodenPostBlock.resolveSameBlockInsertion(
+                    targetState,
+                    targetPos,
+                    hit
+            );
+            if (position == null || !player.mayUseItemAt(targetPos, hit.getDirection(), held)) {
+                return;
+            }
+            showOutline(position.bounds().move(targetPos).inflate(OUTLINE_OFFSET));
             return;
         }
 
-        AABB outline = placementState.getShape(minecraft.level, placementPos)
-                .bounds()
+        BlockPos placementPos = context.getClickedPos();
+        WoodenPostPosition position = WoodenPostBlock.placementPosition(context);
+        BlockState existingState = minecraft.level.getBlockState(placementPos);
+        boolean mergesWithExisting = existingState.getBlock() == post
+                && WoodenPostBlock.getArrangement(existingState).canAdd(position);
+        if (!mergesWithExisting) {
+            BlockState placementState = post.getStateForPlacement(context);
+            if (!context.canPlace()
+                    || placementState == null
+                    || !placementState.canSurvive(minecraft.level, placementPos)) {
+                return;
+            }
+        }
+
+        if (!player.mayUseItemAt(placementPos, hit.getDirection(), held)) {
+            return;
+        }
+
+        AABB outline = position.bounds()
                 .move(placementPos)
                 .inflate(OUTLINE_OFFSET);
         showOutline(outline);

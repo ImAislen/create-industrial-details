@@ -16,6 +16,7 @@ import com.aislen.createindustrialdetails.content.block.woodenbeam.WoodenBeamBlo
 import com.aislen.createindustrialdetails.content.block.woodenbeam.WoodenBeamMaterial;
 import com.aislen.createindustrialdetails.content.block.woodenbeam.structure.WoodenBeamStructureBlock;
 import com.aislen.createindustrialdetails.content.block.woodenpost.WoodenPostBlock;
+import com.aislen.createindustrialdetails.content.block.woodenpost.WoodenPostBlockItem;
 import com.cake.struts.content.StrutModelType;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
@@ -261,7 +262,8 @@ public final class ModBlocks {
                             structuralTimberProperties(variant),
                             variant.fireSpreadSpeed(),
                             variant.flammability()
-                    )
+                    ),
+                    WoodenPostBlockItem::new
             );
             registered.put(registryName, block);
         }

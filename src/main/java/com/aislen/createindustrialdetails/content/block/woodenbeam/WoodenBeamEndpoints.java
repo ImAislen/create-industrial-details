@@ -58,10 +58,11 @@ public final class WoodenBeamEndpoints {
             return logicalAttachment;
         }
 
-        AABB postBounds = supportState.getValue(WoodenPostBlock.POST_POSITION)
-                .shape()
-                .bounds()
-                .move(supportPos);
+        WoodenPostPosition postPosition = WoodenPostBlock.getSinglePosition(supportState);
+        if (postPosition == null) {
+            return logicalAttachment;
+        }
+        AABB postBounds = postPosition.shape().bounds().move(supportPos);
         double centreX = (postBounds.minX + postBounds.maxX) * 0.5;
         double centreZ = (postBounds.minZ + postBounds.maxZ) * 0.5;
         if (supportFace.getAxis().isHorizontal()) {

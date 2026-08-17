@@ -1,58 +1,288 @@
 {
-  "variants": {
-    "post_position=north_west,waterlogged=false": {
-      "model": "create_industrial_details:block/wooden_post/stripped_crimson_wooden_post_north_west"
+  "multipart": [
+    {
+      "when": {
+        "OR": [
+          {
+            "post_position": "north_west"
+          },
+          {
+            "post_position": "north_west_north_east"
+          },
+          {
+            "post_position": "north_west_east"
+          },
+          {
+            "post_position": "north_west_south_west"
+          },
+          {
+            "post_position": "north_west_south"
+          },
+          {
+            "post_position": "north_west_south_east"
+          },
+          {
+            "post_position": "north_west_north_east_south_west"
+          },
+          {
+            "post_position": "north_west_north_east_south"
+          },
+          {
+            "post_position": "north_west_north_east_south_east"
+          },
+          {
+            "post_position": "north_west_east_south_west"
+          },
+          {
+            "post_position": "north_west_south_west_south_east"
+          },
+          {
+            "post_position": "north_west_north_east_south_west_south_east"
+          }
+        ]
+      },
+      "apply": {
+        "model": "create_industrial_details:block/wooden_post/stripped_crimson_wooden_post_north_west"
+      }
     },
-    "post_position=north_west,waterlogged=true": {
-      "model": "create_industrial_details:block/wooden_post/stripped_crimson_wooden_post_north_west"
+    {
+      "when": {
+        "OR": [
+          {
+            "post_position": "north"
+          },
+          {
+            "post_position": "north_south_west"
+          },
+          {
+            "post_position": "north_south"
+          },
+          {
+            "post_position": "north_south_east"
+          },
+          {
+            "post_position": "north_south_west_south_east"
+          }
+        ]
+      },
+      "apply": {
+        "model": "create_industrial_details:block/wooden_post/stripped_crimson_wooden_post_north"
+      }
     },
-    "post_position=north,waterlogged=false": {
-      "model": "create_industrial_details:block/wooden_post/stripped_crimson_wooden_post_north"
+    {
+      "when": {
+        "OR": [
+          {
+            "post_position": "north_east"
+          },
+          {
+            "post_position": "north_west_north_east"
+          },
+          {
+            "post_position": "north_east_west"
+          },
+          {
+            "post_position": "north_east_south_west"
+          },
+          {
+            "post_position": "north_east_south"
+          },
+          {
+            "post_position": "north_east_south_east"
+          },
+          {
+            "post_position": "north_west_north_east_south_west"
+          },
+          {
+            "post_position": "north_west_north_east_south"
+          },
+          {
+            "post_position": "north_west_north_east_south_east"
+          },
+          {
+            "post_position": "north_east_west_south_east"
+          },
+          {
+            "post_position": "north_east_south_west_south_east"
+          },
+          {
+            "post_position": "north_west_north_east_south_west_south_east"
+          }
+        ]
+      },
+      "apply": {
+        "model": "create_industrial_details:block/wooden_post/stripped_crimson_wooden_post_north_east"
+      }
     },
-    "post_position=north,waterlogged=true": {
-      "model": "create_industrial_details:block/wooden_post/stripped_crimson_wooden_post_north"
+    {
+      "when": {
+        "OR": [
+          {
+            "post_position": "west"
+          },
+          {
+            "post_position": "north_east_west"
+          },
+          {
+            "post_position": "west_east"
+          },
+          {
+            "post_position": "west_south_east"
+          },
+          {
+            "post_position": "north_east_west_south_east"
+          }
+        ]
+      },
+      "apply": {
+        "model": "create_industrial_details:block/wooden_post/stripped_crimson_wooden_post_west"
+      }
     },
-    "post_position=north_east,waterlogged=false": {
-      "model": "create_industrial_details:block/wooden_post/stripped_crimson_wooden_post_north_east"
+    {
+      "when": {
+        "post_position": "center"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/wooden_post/stripped_crimson_wooden_post_center"
+      }
     },
-    "post_position=north_east,waterlogged=true": {
-      "model": "create_industrial_details:block/wooden_post/stripped_crimson_wooden_post_north_east"
+    {
+      "when": {
+        "OR": [
+          {
+            "post_position": "east"
+          },
+          {
+            "post_position": "north_west_east"
+          },
+          {
+            "post_position": "west_east"
+          },
+          {
+            "post_position": "east_south_west"
+          },
+          {
+            "post_position": "north_west_east_south_west"
+          }
+        ]
+      },
+      "apply": {
+        "model": "create_industrial_details:block/wooden_post/stripped_crimson_wooden_post_east"
+      }
     },
-    "post_position=west,waterlogged=false": {
-      "model": "create_industrial_details:block/wooden_post/stripped_crimson_wooden_post_west"
+    {
+      "when": {
+        "OR": [
+          {
+            "post_position": "south_west"
+          },
+          {
+            "post_position": "north_west_south_west"
+          },
+          {
+            "post_position": "north_south_west"
+          },
+          {
+            "post_position": "north_east_south_west"
+          },
+          {
+            "post_position": "east_south_west"
+          },
+          {
+            "post_position": "south_west_south_east"
+          },
+          {
+            "post_position": "north_west_north_east_south_west"
+          },
+          {
+            "post_position": "north_west_east_south_west"
+          },
+          {
+            "post_position": "north_west_south_west_south_east"
+          },
+          {
+            "post_position": "north_south_west_south_east"
+          },
+          {
+            "post_position": "north_east_south_west_south_east"
+          },
+          {
+            "post_position": "north_west_north_east_south_west_south_east"
+          }
+        ]
+      },
+      "apply": {
+        "model": "create_industrial_details:block/wooden_post/stripped_crimson_wooden_post_south_west"
+      }
     },
-    "post_position=west,waterlogged=true": {
-      "model": "create_industrial_details:block/wooden_post/stripped_crimson_wooden_post_west"
+    {
+      "when": {
+        "OR": [
+          {
+            "post_position": "south"
+          },
+          {
+            "post_position": "north_west_south"
+          },
+          {
+            "post_position": "north_south"
+          },
+          {
+            "post_position": "north_east_south"
+          },
+          {
+            "post_position": "north_west_north_east_south"
+          }
+        ]
+      },
+      "apply": {
+        "model": "create_industrial_details:block/wooden_post/stripped_crimson_wooden_post_south"
+      }
     },
-    "post_position=center,waterlogged=false": {
-      "model": "create_industrial_details:block/wooden_post/stripped_crimson_wooden_post_center"
-    },
-    "post_position=center,waterlogged=true": {
-      "model": "create_industrial_details:block/wooden_post/stripped_crimson_wooden_post_center"
-    },
-    "post_position=east,waterlogged=false": {
-      "model": "create_industrial_details:block/wooden_post/stripped_crimson_wooden_post_east"
-    },
-    "post_position=east,waterlogged=true": {
-      "model": "create_industrial_details:block/wooden_post/stripped_crimson_wooden_post_east"
-    },
-    "post_position=south_west,waterlogged=false": {
-      "model": "create_industrial_details:block/wooden_post/stripped_crimson_wooden_post_south_west"
-    },
-    "post_position=south_west,waterlogged=true": {
-      "model": "create_industrial_details:block/wooden_post/stripped_crimson_wooden_post_south_west"
-    },
-    "post_position=south,waterlogged=false": {
-      "model": "create_industrial_details:block/wooden_post/stripped_crimson_wooden_post_south"
-    },
-    "post_position=south,waterlogged=true": {
-      "model": "create_industrial_details:block/wooden_post/stripped_crimson_wooden_post_south"
-    },
-    "post_position=south_east,waterlogged=false": {
-      "model": "create_industrial_details:block/wooden_post/stripped_crimson_wooden_post_south_east"
-    },
-    "post_position=south_east,waterlogged=true": {
-      "model": "create_industrial_details:block/wooden_post/stripped_crimson_wooden_post_south_east"
+    {
+      "when": {
+        "OR": [
+          {
+            "post_position": "south_east"
+          },
+          {
+            "post_position": "north_west_south_east"
+          },
+          {
+            "post_position": "north_south_east"
+          },
+          {
+            "post_position": "north_east_south_east"
+          },
+          {
+            "post_position": "west_south_east"
+          },
+          {
+            "post_position": "south_west_south_east"
+          },
+          {
+            "post_position": "north_west_north_east_south_east"
+          },
+          {
+            "post_position": "north_west_south_west_south_east"
+          },
+          {
+            "post_position": "north_south_west_south_east"
+          },
+          {
+            "post_position": "north_east_west_south_east"
+          },
+          {
+            "post_position": "north_east_south_west_south_east"
+          },
+          {
+            "post_position": "north_west_north_east_south_west_south_east"
+          }
+        ]
+      },
+      "apply": {
+        "model": "create_industrial_details:block/wooden_post/stripped_crimson_wooden_post_south_east"
+      }
     }
-  }
+  ]
 }

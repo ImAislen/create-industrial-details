@@ -1,6 +1,7 @@
 """Generate the static Wooden Post model family from the proven Beam texture bindings."""
 
 import json
+from itertools import combinations
 from pathlib import Path
 
 
@@ -31,6 +32,31 @@ DISPLAY = {
     "ground": {"translation": [0, 3, 0], "scale": [0.25] * 3},
     "gui": {"rotation": [30, -135, 0], "scale": [0.625] * 3},
 }
+
+
+def compatible(first: tuple[int, int], second: tuple[int, int]) -> bool:
+    return abs(first[0] - second[0]) >= 2 or abs(first[1] - second[1]) >= 2
+
+
+def valid_arrangements() -> list[tuple[str, ...]]:
+    arrangements = []
+    position_names = tuple(POSITIONS)
+    for member_count in range(1, len(position_names) + 1):
+        for members in combinations(position_names, member_count):
+            if all(
+                compatible(POSITIONS[first], POSITIONS[second])
+                for first, second in combinations(members, 2)
+            ):
+                arrangements.append(members)
+
+    counts = {size: sum(len(value) == size for value in arrangements) for size in range(1, 5)}
+    if counts != {1: 9, 2: 16, 3: 8, 4: 1} or len(arrangements) != 34:
+        raise RuntimeError(f"Expected 34 Wooden Post arrangements, found {counts}")
+    return arrangements
+
+
+def arrangement_name(members: tuple[str, ...]) -> str:
+    return "_".join(members)
 
 
 def write_json(path: Path, value: dict) -> None:
@@ -72,7 +98,7 @@ def generate_shared_geometry() -> int:
     return count
 
 
-def generate_material(beam_model: Path) -> int:
+def generate_material(beam_model: Path, arrangements: list[tuple[str, ...]]) -> int:
     beam_name = beam_model.stem
     registry_name = post_name(beam_name)
     textures = json.loads(beam_model.read_text(encoding="utf-8"))["textures"]
@@ -83,12 +109,21 @@ def generate_material(beam_model: Path) -> int:
             "textures": textures,
         })
 
-    variants = {}
+    multipart = []
     for position in POSITIONS:
         model = f"create_industrial_details:block/wooden_post/{registry_name}_{position}"
-        variants[f"post_position={position},waterlogged=false"] = {"model": model}
-        variants[f"post_position={position},waterlogged=true"] = {"model": model}
-    write_json(ASSETS / "blockstates" / f"{registry_name}.json", {"variants": variants})
+        matching_arrangements = [
+            {"post_position": arrangement_name(members)}
+            for members in arrangements
+            if position in members
+        ]
+        multipart.append({
+            "when": matching_arrangements[0]
+            if len(matching_arrangements) == 1
+            else {"OR": matching_arrangements},
+            "apply": {"model": model},
+        })
+    write_json(ASSETS / "blockstates" / f"{registry_name}.json", {"multipart": multipart})
     write_json(ASSETS / "models" / "item" / f"{registry_name}.json", {
         "parent": f"create_industrial_details:block/wooden_post/{registry_name}_center",
     })
@@ -105,8 +140,38 @@ def generate_material(beam_model: Path) -> int:
     return len(POSITIONS) + 3
 
 
+def validate_material(registry_name: str, arrangements: list[tuple[str, ...]]) -> None:
+    blockstate_path = ASSETS / "blockstates" / f"{registry_name}.json"
+    multipart = json.loads(blockstate_path.read_text(encoding="utf-8"))["multipart"]
+    if len(multipart) != len(POSITIONS):
+        raise RuntimeError(f"Expected nine multipart entries in {blockstate_path}")
+
+    expected_names = {arrangement_name(members) for members in arrangements}
+    seen_names = set()
+    for part, position in zip(multipart, POSITIONS, strict=True):
+        when = part["when"]
+        terms = when["OR"] if "OR" in when else [when]
+        actual_names = {term["post_position"] for term in terms}
+        required_names = {
+            arrangement_name(members)
+            for members in arrangements
+            if position in members
+        }
+        if actual_names != required_names:
+            raise RuntimeError(f"Incorrect {position} arrangements in {blockstate_path}")
+        seen_names.update(actual_names)
+
+        model_path = POST_MODELS / f"{registry_name}_{position}.json"
+        if not model_path.is_file():
+            raise RuntimeError(f"Missing generated Wooden Post model: {model_path}")
+
+    if seen_names != expected_names:
+        raise RuntimeError(f"Not all arrangements are represented in {blockstate_path}")
+
+
 def main() -> None:
     count = generate_shared_geometry()
+    arrangements = valid_arrangements()
     beam_models = sorted(
         path for path in BEAM_MODELS.glob("*.json")
         if path.stem != "wooden_beam" and not path.stem.endswith("_attachment")
@@ -114,8 +179,13 @@ def main() -> None:
     if len(beam_models) != 33:
         raise RuntimeError(f"Expected 33 Wooden Beam material models, found {len(beam_models)}")
     for beam_model in beam_models:
-        count += generate_material(beam_model)
-    print(f"Generated {count} Wooden Post JSON resources for {len(beam_models)} material variants.")
+        count += generate_material(beam_model, arrangements)
+    for beam_model in beam_models:
+        validate_material(post_name(beam_model.stem), arrangements)
+    print(
+        f"Generated {count} Wooden Post JSON resources for {len(beam_models)} material variants "
+        f"and {len(arrangements)} legal arrangements."
+    )
 
 
 if __name__ == "__main__":

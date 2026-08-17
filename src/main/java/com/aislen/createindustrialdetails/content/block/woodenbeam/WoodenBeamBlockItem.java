@@ -143,11 +143,10 @@ public final class WoodenBeamBlockItem extends BlockItem {
         BlockPos supportPos = anchorPos.relative(supportFace.getOpposite());
         BlockState supportState = level.getBlockState(supportPos);
         if (supportState.getBlock() instanceof WoodenPostBlock) {
-            snap = WoodenBeamEndpoints.alignToPost(
-                    supportFace,
-                    snap,
-                    supportState.getValue(WoodenPostBlock.POST_POSITION)
-            );
+            var postPosition = WoodenPostBlock.getSinglePosition(supportState);
+            if (postPosition != null) {
+                snap = WoodenBeamEndpoints.alignToPost(supportFace, snap, postPosition);
+            }
         }
         return new EndpointSelection(anchorPos.immutable(), supportFace, snap);
     }
