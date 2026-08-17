@@ -62,6 +62,9 @@ public final class WoodenBeamStructureShapes {
 
     public static void flushRestores(Level level) {
         ShapeRegistry registry = STORAGE.getForLevel(level);
+        if (registry.queuedRestores.isEmpty()) {
+            return;
+        }
         Set<BlockPos> queued = Set.copyOf(registry.queuedRestores);
         registry.queuedRestores.clear();
         for (BlockPos pos : queued) {

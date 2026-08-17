@@ -18,6 +18,7 @@ public enum WoodenPostPosition implements StringRepresentable {
 
     private static final double LOWER_SNAP_THRESHOLD = 0.375D;
     private static final double UPPER_SNAP_THRESHOLD = 0.625D;
+    private static final WoodenPostPosition[] VALUES = values();
 
     private final String serializedName;
     private final int xIndex;
@@ -47,7 +48,7 @@ public enum WoodenPostPosition implements StringRepresentable {
     }
 
     private static WoodenPostPosition fromIndices(int xIndex, int zIndex) {
-        for (WoodenPostPosition position : values()) {
+        for (WoodenPostPosition position : VALUES) {
             if (position.xIndex == xIndex && position.zIndex == zIndex) {
                 return position;
             }

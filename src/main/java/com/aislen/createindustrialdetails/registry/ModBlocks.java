@@ -189,126 +189,37 @@ public final class ModBlocks {
     //Planked Planks
 
     public static final DeferredBlock<PlankedPlanksBlock> ACACIA_PLANKED_PLANKS =
-            registerBlockWithItem(
-                    "acacia_planked_planks",
-                    () -> new PlankedPlanksBlock(
-                            BlockBehaviour.Properties
-                                    .ofFullCopy(Blocks.OAK_PLANKS)
-                                    .noOcclusion()
-                    ),
-                    BlockItem::new
-            );
+            registerPlankedPlanks("acacia_planked_planks");
 
     public static final DeferredBlock<PlankedPlanksBlock> BAMBOO_PLANKED_PLANKS =
-            registerBlockWithItem(
-                    "bamboo_planked_planks",
-                    () -> new PlankedPlanksBlock(
-                            BlockBehaviour.Properties
-                                    .ofFullCopy(Blocks.OAK_PLANKS)
-                                    .noOcclusion()
-                    ),
-                    BlockItem::new
-            );
+            registerPlankedPlanks("bamboo_planked_planks");
 
     public static final DeferredBlock<PlankedPlanksBlock> BIRCH_PLANKED_PLANKS =
-            registerBlockWithItem(
-                    "birch_planked_planks",
-                    () -> new PlankedPlanksBlock(
-                            BlockBehaviour.Properties
-                                    .ofFullCopy(Blocks.OAK_PLANKS)
-                                    .noOcclusion()
-                    ),
-                    BlockItem::new
-            );
+            registerPlankedPlanks("birch_planked_planks");
 
     public static final DeferredBlock<PlankedPlanksBlock> CHERRY_PLANKED_PLANKS =
-            registerBlockWithItem(
-                    "cherry_planked_planks",
-                    () -> new PlankedPlanksBlock(
-                            BlockBehaviour.Properties
-                                    .ofFullCopy(Blocks.OAK_PLANKS)
-                                    .noOcclusion()
-                    ),
-                    BlockItem::new
-            );
+            registerPlankedPlanks("cherry_planked_planks");
 
     public static final DeferredBlock<PlankedPlanksBlock> CRIMSON_PLANKED_PLANKS =
-            registerBlockWithItem(
-                    "crimson_planked_planks",
-                    () -> new PlankedPlanksBlock(
-                            BlockBehaviour.Properties
-                                    .ofFullCopy(Blocks.OAK_PLANKS)
-                                    .noOcclusion()
-                    ),
-                    BlockItem::new
-            );
+            registerPlankedPlanks("crimson_planked_planks");
 
     public static final DeferredBlock<PlankedPlanksBlock> DARKOAK_PLANKED_PLANKS =
-            registerBlockWithItem(
-                    "darkoak_planked_planks",
-                    () -> new PlankedPlanksBlock(
-                            BlockBehaviour.Properties
-                                    .ofFullCopy(Blocks.OAK_PLANKS)
-                                    .noOcclusion()
-                    ),
-                    BlockItem::new
-            );
+            registerPlankedPlanks("darkoak_planked_planks");
 
     public static final DeferredBlock<PlankedPlanksBlock> JUNGLE_PLANKED_PLANKS =
-            registerBlockWithItem(
-                    "jungle_planked_planks",
-                    () -> new PlankedPlanksBlock(
-                            BlockBehaviour.Properties
-                                    .ofFullCopy(Blocks.OAK_PLANKS)
-                                    .noOcclusion()
-                    ),
-                    BlockItem::new
-            );
+            registerPlankedPlanks("jungle_planked_planks");
 
     public static final DeferredBlock<PlankedPlanksBlock> MANGROVE_PLANKED_PLANKS =
-            registerBlockWithItem(
-                    "mangrove_planked_planks",
-                    () -> new PlankedPlanksBlock(
-                            BlockBehaviour.Properties
-                                    .ofFullCopy(Blocks.OAK_PLANKS)
-                                    .noOcclusion()
-                    ),
-                    BlockItem::new
-            );
+            registerPlankedPlanks("mangrove_planked_planks");
 
     public static final DeferredBlock<PlankedPlanksBlock> OAK_PLANKED_PLANKS =
-            registerBlockWithItem(
-                    "oak_planked_planks",
-                    () -> new PlankedPlanksBlock(
-                            BlockBehaviour.Properties
-                                    .ofFullCopy(Blocks.OAK_PLANKS)
-                                    .noOcclusion()
-                    ),
-                    BlockItem::new
-            );
+            registerPlankedPlanks("oak_planked_planks");
 
     public static final DeferredBlock<PlankedPlanksBlock> SPRUCE_PLANKED_PLANKS =
-            registerBlockWithItem(
-                    "spruce_planked_planks",
-                    () -> new PlankedPlanksBlock(
-                            BlockBehaviour.Properties
-                                    .ofFullCopy(Blocks.OAK_PLANKS)
-                                    .noOcclusion()
-                    ),
-                    BlockItem::new
-            );
+            registerPlankedPlanks("spruce_planked_planks");
 
     public static final DeferredBlock<PlankedPlanksBlock> WARPED_PLANKED_PLANKS =
-            registerBlockWithItem(
-                    "warped_planked_planks",
-                    () -> new PlankedPlanksBlock(
-                            BlockBehaviour.Properties
-                                    .ofFullCopy(Blocks.OAK_PLANKS)
-                                    .noOcclusion()
-
-                    ),
-                    BlockItem::new
-            );
+            registerPlankedPlanks("warped_planked_planks");
 
 
     private ModBlocks() {
@@ -365,6 +276,17 @@ public final class ModBlocks {
                 .sound(variant.sound())
                 .noOcclusion();
         return variant.ignitedByLava() ? properties.ignitedByLava() : properties;
+    }
+
+    private static DeferredBlock<PlankedPlanksBlock> registerPlankedPlanks(String name) {
+        return registerBlockWithItem(
+                name,
+                () -> new PlankedPlanksBlock(
+                        BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS)
+                                .noOcclusion()
+                ),
+                BlockItem::new
+        );
     }
 
 

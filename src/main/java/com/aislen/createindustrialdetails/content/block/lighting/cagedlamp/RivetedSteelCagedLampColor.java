@@ -22,6 +22,8 @@ public enum RivetedSteelCagedLampColor implements StringRepresentable {
     RED("red", DyeColor.RED),
     BLACK("black", DyeColor.BLACK);
 
+    private static final RivetedSteelCagedLampColor[] VALUES = values();
+
     private final String name;
     private final DyeColor dyeColor;
 
@@ -37,7 +39,7 @@ public enum RivetedSteelCagedLampColor implements StringRepresentable {
     }
 
     public static RivetedSteelCagedLampColor fromDye(DyeColor dyeColor) {
-        for (RivetedSteelCagedLampColor color : values()) {
+        for (RivetedSteelCagedLampColor color : VALUES) {
             if (color.dyeColor == dyeColor) {
                 return color;
             }

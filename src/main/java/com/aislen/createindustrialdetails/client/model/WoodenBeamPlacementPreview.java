@@ -29,11 +29,23 @@ import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.ClientTickEvent;
-import org.joml.Vector3f;
 
 /** Endpoint-aware counterpart to Struts' stock centered placement outline. */
 @EventBusSubscriber(modid = CreateIndustrialDetails.MOD_ID, value = Dist.CLIENT)
 public final class WoodenBeamPlacementPreview {
+
+    private static final MicrolinerParams AVAILABLE_ENDPOINT_STYLE =
+            new MicrolinerParams(1 / 16f, .45f, .8f, .65f, .7f, 2);
+    private static final MicrolinerParams VALID_CONNECTION_STYLE =
+            new MicrolinerParams(1 / 16f, .35f, .85f, .55f, 1f, 2);
+    private static final MicrolinerParams VALID_ENDPOINT_STYLE =
+            new MicrolinerParams(1 / 16f, .35f, .85f, .55f, .7f, 2);
+    private static final MicrolinerParams INVALID_CONNECTION_STYLE =
+            new MicrolinerParams(1 / 16f, .85f, .35f, .55f, 1f, 2);
+    private static final MicrolinerParams INVALID_ENDPOINT_STYLE =
+            new MicrolinerParams(1 / 16f, .85f, .35f, .55f, .7f, 2);
+    private static final int VALID_COLOR = packColor(.35f, .85f, .55f);
+    private static final int INVALID_COLOR = packColor(.85f, .35f, .55f);
 
     private WoodenBeamPlacementPreview() {
     }
@@ -52,11 +64,13 @@ public final class WoodenBeamPlacementPreview {
     }
 
     private static ItemStack heldBeam(LocalPlayer player) {
-        if (player.getMainHandItem().getItem() instanceof WoodenBeamBlockItem) {
-            return player.getMainHandItem();
+        ItemStack mainHand = player.getMainHandItem();
+        if (mainHand.getItem() instanceof WoodenBeamBlockItem) {
+            return mainHand;
         }
-        if (player.getOffhandItem().getItem() instanceof WoodenBeamBlockItem) {
-            return player.getOffhandItem();
+        ItemStack offhand = player.getOffhandItem();
+        if (offhand.getItem() instanceof WoodenBeamBlockItem) {
+            return offhand;
         }
         return null;
     }
@@ -85,7 +99,7 @@ public final class WoodenBeamPlacementPreview {
                     to,
                     halfWidth,
                     halfHeight,
-                    new Vector3f(.45f, .8f, .65f),
+                    AVAILABLE_ENDPOINT_STYLE,
                     MicrolinerCoordinateTransform.IDENTITY
             );
             return;
@@ -111,7 +125,8 @@ public final class WoodenBeamPlacementPreview {
         }
 
         boolean valid = WoodenBeamBlockItem.isValidConnection(level, from, to);
-        Vector3f color = valid ? new Vector3f(.35f, .85f, .55f) : new Vector3f(.85f, .35f, .55f);
+        MicrolinerParams connectionStyle = valid ? VALID_CONNECTION_STYLE : INVALID_CONNECTION_STYLE;
+        MicrolinerParams endpointStyle = valid ? VALID_ENDPOINT_STYLE : INVALID_ENDPOINT_STYLE;
         StrutConnectionShape shape = new DefaultStrutConnectionShape(
                 fromPoint,
                 toPoint,
@@ -127,7 +142,7 @@ public final class WoodenBeamPlacementPreview {
                 from.anchorPos(),
                 to.anchorPos()
         );
-        int packedColor = packColor(color.x, color.y, color.z);
+        int packedColor = valid ? VALID_COLOR : INVALID_COLOR;
         Microliner.get().showOutline(
                 "wooden_beam_preview_shape",
                 (poseStack, buffer, camera, transform, params) -> {
@@ -135,14 +150,14 @@ public final class WoodenBeamPlacementPreview {
                     shape.drawOutline(poseStack, consumer, camera, packedColor, transform);
                 },
                 transforms.connection(),
-                new MicrolinerParams(1 / 16f, color.x, color.y, color.z, 1f, 2)
+                connectionStyle
         );
         showEndpointMarker(
                 "wooden_beam_preview_from",
                 from,
                 halfWidth,
                 halfHeight,
-                color,
+                endpointStyle,
                 transforms.from()
         );
         showEndpointMarker(
@@ -150,7 +165,7 @@ public final class WoodenBeamPlacementPreview {
                 to,
                 halfWidth,
                 halfHeight,
-                color,
+                endpointStyle,
                 transforms.to()
         );
     }
@@ -160,7 +175,7 @@ public final class WoodenBeamPlacementPreview {
             WoodenBeamBlockItem.EndpointSelection endpoint,
             double halfWidth,
             double halfHeight,
-            Vector3f color,
+            MicrolinerParams style,
             MicrolinerCoordinateTransform coordinateTransform
     ) {
         WoodenBeamEndpoints.FaceBasis basis = WoodenBeamEndpoints.basis(endpoint.supportFace());
@@ -198,7 +213,7 @@ public final class WoodenBeamPlacementPreview {
                     }
                 },
                 coordinateTransform,
-                new MicrolinerParams(1 / 16f, color.x, color.y, color.z, .7f, 2)
+                style
         );
     }
 

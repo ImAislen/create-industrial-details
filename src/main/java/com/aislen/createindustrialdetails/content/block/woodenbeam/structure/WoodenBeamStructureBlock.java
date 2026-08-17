@@ -22,8 +22,6 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Set;
-
 import static net.minecraft.world.level.block.state.properties.BlockStateProperties.WATERLOGGED;
 
 /** Invisible cached-collision carrier used only between Wooden Beam anchors. */
@@ -95,7 +93,7 @@ public final class WoodenBeamStructureBlock extends Block implements SimpleWater
     @Override
     protected void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean isMoving) {
         if (!state.is(newState.getBlock()) && newState.isAir()) {
-            for (ConnectionKey key : Set.copyOf(WoodenBeamStructureShapes.getConnectionsAt(level, pos))) {
+            for (ConnectionKey key : WoodenBeamStructureShapes.getConnectionsAt(level, pos)) {
                 WoodenBeamStructureShapes.unregisterConnection(level, key.a(), key.b());
                 removeFromAnchor(level, key.a(), key.b());
                 removeFromAnchor(level, key.b(), key.a());

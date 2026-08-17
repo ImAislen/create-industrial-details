@@ -17,9 +17,6 @@ import net.minecraft.world.item.component.BlockItemStateProperties;
 )
 public final class RivetedSteelCagedLampColors {
 
-    private static final int OFF_COLOR = 0xFFB9B39F;
-    private static final int LIT_COLOR = 0xFFFFFFFF;
-
     @SubscribeEvent
     public static void registerBlockColors(RegisterColorHandlersEvent.Block event) {
         event.register(

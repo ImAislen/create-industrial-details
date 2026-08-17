@@ -110,32 +110,34 @@ public final class RivetedSteelBeamPlacementHelper implements IPlacementHelper {
                         ray.getLocation(),
                         direction -> canExtendToward(state, direction)
                 );
+        if (directions.isEmpty()) {
+            return PlacementOffset.fail();
+        }
+        int range =
+                AllConfigs.server()
+                        .equipment
+                        .placementAssistRange
+                        .get();
+
+        if (player != null) {
+            AttributeInstance reach =
+                    player.getAttribute(
+                            Attributes.BLOCK_INTERACTION_RANGE
+                    );
+
+            if (
+                    reach != null
+                            && reach.hasModifier(
+                            ExtendoGripItem
+                                    .singleRangeAttributeModifier
+                                    .id()
+                    )
+            ) {
+                range += 4;
+            }
+        }
 
         for (Direction direction : directions) {
-            int range =
-                    AllConfigs.server()
-                            .equipment
-                            .placementAssistRange
-                            .get();
-
-            if (player != null) {
-                AttributeInstance reach =
-                        player.getAttribute(
-                                Attributes.BLOCK_INTERACTION_RANGE
-                        );
-
-                if (
-                        reach != null
-                                && reach.hasModifier(
-                                ExtendoGripItem
-                                        .singleRangeAttributeModifier
-                                        .id()
-                        )
-                ) {
-                    range += 4;
-                }
-            }
-
             int beams =
                     attachedBeams(level, pos, direction);
 

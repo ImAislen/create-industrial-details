@@ -44,10 +44,13 @@ public final class WoodenPostPlacementHelper implements IPlacementHelper {
                 ray.getLocation(),
                 direction -> direction.getAxis() == Direction.Axis.Y
         );
+        if (directions.isEmpty()) {
+            return PlacementOffset.fail();
+        }
         WoodenPostPosition position = state.getValue(WoodenPostBlock.POST_POSITION);
+        int range = placementAssistRange(player);
 
         for (Direction direction : directions) {
-            int range = placementAssistRange(player);
             int attached = attachedPosts(level, pos, direction, position);
             if (attached >= range) {
                 continue;

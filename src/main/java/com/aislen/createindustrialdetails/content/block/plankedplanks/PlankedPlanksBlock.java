@@ -43,9 +43,7 @@ public class PlankedPlanksBlock extends Block {
             BlockPos pos,
             CollisionContext context
     ) {
-        return state.getValue(HALF) == Half.TOP
-                ? TOP_SHAPE
-                : BOTTOM_SHAPE;
+        return shapeForState(state);
     }
 
     @Override
@@ -55,6 +53,10 @@ public class PlankedPlanksBlock extends Block {
             BlockPos pos,
             CollisionContext context
     ) {
+        return shapeForState(state);
+    }
+
+    private static VoxelShape shapeForState(BlockState state) {
         return state.getValue(HALF) == Half.TOP
                 ? TOP_SHAPE
                 : BOTTOM_SHAPE;
