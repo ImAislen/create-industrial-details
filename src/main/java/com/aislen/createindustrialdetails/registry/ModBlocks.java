@@ -3,6 +3,7 @@ package com.aislen.createindustrialdetails.registry;
 import com.aislen.createindustrialdetails.CreateIndustrialDetails;
 import net.minecraft.world.level.block.Blocks;
 import com.aislen.createindustrialdetails.content.block.MooringBollardBlock;
+import com.aislen.createindustrialdetails.content.block.airduct.AirDuctBlock;
 import com.aislen.createindustrialdetails.content.block.rivetedsteel.RivetedSteelGrateBlock;
 import com.aislen.createindustrialdetails.content.block.rivetedsteel.RivetedSteelHatchBlock;
 import com.aislen.createindustrialdetails.content.block.rivetedsteel.beam.RivetedSteelBeamBlock;
@@ -173,8 +174,7 @@ public final class ModBlocks {
                     ),
                     RivetedSteelPanelItem::new
             );
-    public static final DeferredBlock<RivetedSteelPanelShaftPenetrationBlock>
-            RIVETED_STEEL_PANEL_SHAFT_PENETRATION =
+    public static final DeferredBlock<RivetedSteelPanelShaftPenetrationBlock> RIVETED_STEEL_PANEL_SHAFT_PENETRATION =
             BLOCKS.register(
                     "riveted_steel_panel_shaft_penetration",
                     () -> new RivetedSteelPanelShaftPenetrationBlock(
@@ -184,6 +184,25 @@ public final class ModBlocks {
                                     .noOcclusion()
                     )
             );
+
+
+
+
+
+    //Air Ducts
+    public static final DeferredBlock<AirDuctBlock> AIR_DUCT =
+            registerBlockWithItem(
+                    "air_duct",
+                    () -> new AirDuctBlock(
+                            BlockBehaviour.Properties.of()
+                                    .strength(3.5F, 6.0F)
+                                    .sound(SoundType.NETHERITE_BLOCK)
+                                    .requiresCorrectToolForDrops()
+                                    .noOcclusion()
+                    ),
+                    BlockItem::new
+            );
+
 
 
 
