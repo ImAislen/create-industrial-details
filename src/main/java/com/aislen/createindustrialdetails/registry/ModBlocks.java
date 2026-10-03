@@ -12,6 +12,8 @@ import com.aislen.createindustrialdetails.content.block.rivetedsteel.panel.Rivet
 import com.aislen.createindustrialdetails.content.item.rivetedsteel.RivetedSteelPanelItem;
 import com.aislen.createindustrialdetails.content.block.lighting.cagedlamp.RivetedSteelCagedLampBlock;
 import com.aislen.createindustrialdetails.content.block.plankedplanks.PlankedPlanksBlock;
+import com.aislen.createindustrialdetails.content.block.singleplank.SinglePlankBlock;
+import com.aislen.createindustrialdetails.content.block.singleplank.SinglePlankBlockItem;
 import com.aislen.createindustrialdetails.content.block.woodenbeam.WoodenBeamBlock;
 import com.aislen.createindustrialdetails.content.block.woodenbeam.WoodenBeamBlockItem;
 import com.aislen.createindustrialdetails.content.block.woodenbeam.WoodenBeamMaterial;
@@ -241,6 +243,41 @@ public final class ModBlocks {
     public static final DeferredBlock<PlankedPlanksBlock> WARPED_PLANKED_PLANKS =
             registerPlankedPlanks("warped_planked_planks");
 
+    //Single Plank
+
+    public static final DeferredBlock<SinglePlankBlock> ACACIA_SINGLE_PLANK =
+            registerSinglePlank("acacia_single_plank");
+
+    public static final DeferredBlock<SinglePlankBlock> BAMBOO_SINGLE_PLANK =
+            registerSinglePlank("bamboo_single_plank");
+
+    public static final DeferredBlock<SinglePlankBlock> BIRCH_SINGLE_PLANK =
+            registerSinglePlank("birch_single_plank");
+
+    public static final DeferredBlock<SinglePlankBlock> CHERRY_SINGLE_PLANK =
+            registerSinglePlank("cherry_single_plank");
+
+    public static final DeferredBlock<SinglePlankBlock> CRIMSON_SINGLE_PLANK =
+            registerSinglePlank("crimson_single_plank");
+
+    public static final DeferredBlock<SinglePlankBlock> DARKOAK_SINGLE_PLANK =
+            registerSinglePlank("darkoak_single_plank");
+
+    public static final DeferredBlock<SinglePlankBlock> JUNGLE_SINGLE_PLANK =
+            registerSinglePlank("jungle_single_plank");
+
+    public static final DeferredBlock<SinglePlankBlock> MANGROVE_SINGLE_PLANK =
+            registerSinglePlank("mangrove_single_plank");
+
+    public static final DeferredBlock<SinglePlankBlock> OAK_SINGLE_PLANK =
+            registerSinglePlank("oak_single_plank");
+
+    public static final DeferredBlock<SinglePlankBlock> SPRUCE_SINGLE_PLANK =
+            registerSinglePlank("spruce_single_plank");
+
+    public static final DeferredBlock<SinglePlankBlock> WARPED_SINGLE_PLANK =
+            registerSinglePlank("warped_single_plank");
+
 
     private ModBlocks() {
     }
@@ -310,6 +347,17 @@ public final class ModBlocks {
         );
     }
 
+
+    private static DeferredBlock<SinglePlankBlock> registerSinglePlank(String name) {
+        return registerBlockWithItem(
+                name,
+                () -> new SinglePlankBlock(
+                        BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS)
+                                .noOcclusion()
+                ),
+                SinglePlankBlockItem::new
+        );
+    }
 
     private static <T extends Block> DeferredBlock<T> registerBlockWithItem(
             String name,

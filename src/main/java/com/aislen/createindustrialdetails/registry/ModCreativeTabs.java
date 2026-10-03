@@ -61,6 +61,18 @@ public final class ModCreativeTabs {
                                 output.accept(ModBlocks.SPRUCE_PLANKED_PLANKS.get());
                                 output.accept(ModBlocks.WARPED_PLANKED_PLANKS.get());
 
+                                output.accept(ModBlocks.ACACIA_SINGLE_PLANK.get());
+                                output.accept(ModBlocks.BAMBOO_SINGLE_PLANK.get());
+                                output.accept(ModBlocks.BIRCH_SINGLE_PLANK.get());
+                                output.accept(ModBlocks.CHERRY_SINGLE_PLANK.get());
+                                output.accept(ModBlocks.CRIMSON_SINGLE_PLANK.get());
+                                output.accept(ModBlocks.DARKOAK_SINGLE_PLANK.get());
+                                output.accept(ModBlocks.JUNGLE_SINGLE_PLANK.get());
+                                output.accept(ModBlocks.MANGROVE_SINGLE_PLANK.get());
+                                output.accept(ModBlocks.OAK_SINGLE_PLANK.get());
+                                output.accept(ModBlocks.SPRUCE_SINGLE_PLANK.get());
+                                output.accept(ModBlocks.WARPED_SINGLE_PLANK.get());
+
 
                             })
                             .build()

@@ -1,0 +1,7 @@
+{
+  "parent": "create_industrial_details:block/single_plank/single_plank_center",
+  "textures": {
+    "wood": "minecraft:block/warped_planks",
+    "particle": "minecraft:block/warped_planks"
+  }
+}

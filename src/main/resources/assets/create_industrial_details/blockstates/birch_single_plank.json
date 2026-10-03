@@ -1,0 +1,28 @@
+{
+  "multipart": [
+    {
+      "when": {
+        "left": "true"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/single_plank/birch_single_plank_left"
+      }
+    },
+    {
+      "when": {
+        "center": "true"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/single_plank/birch_single_plank_center"
+      }
+    },
+    {
+      "when": {
+        "right": "true"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/single_plank/birch_single_plank_right"
+      }
+    }
+  ]
+}

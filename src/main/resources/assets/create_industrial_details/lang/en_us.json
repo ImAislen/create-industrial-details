@@ -90,6 +90,18 @@
   "block.create_industrial_details.spruce_planked_planks": "Spruce Planked Planks",
   "block.create_industrial_details.warped_planked_planks": "Warped Planked Planks",
 
+  "block.create_industrial_details.acacia_single_plank": "Acacia Single Plank",
+  "block.create_industrial_details.bamboo_single_plank": "Bamboo Single Plank",
+  "block.create_industrial_details.birch_single_plank": "Birch Single Plank",
+  "block.create_industrial_details.cherry_single_plank": "Cherry Single Plank",
+  "block.create_industrial_details.crimson_single_plank": "Crimson Single Plank",
+  "block.create_industrial_details.darkoak_single_plank": "Dark Oak Single Plank",
+  "block.create_industrial_details.jungle_single_plank": "Jungle Single Plank",
+  "block.create_industrial_details.mangrove_single_plank": "Mangrove Single Plank",
+  "block.create_industrial_details.oak_single_plank": "Oak Single Plank",
+  "block.create_industrial_details.spruce_single_plank": "Spruce Single Plank",
+  "block.create_industrial_details.warped_single_plank": "Warped Single Plank",
+
 
 
   "menu.create_industrial_details.riveted_steel_caged_lamp": "Caged Lamp Configuration",

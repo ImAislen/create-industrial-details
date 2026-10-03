@@ -1,0 +1,7 @@
+{
+  "parent": "create_industrial_details:block/single_plank/single_plank_right",
+  "textures": {
+    "wood": "minecraft:block/spruce_planks",
+    "particle": "minecraft:block/spruce_planks"
+  }
+}
