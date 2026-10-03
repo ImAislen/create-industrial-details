@@ -1,0 +1,16 @@
+{
+  "replace": false,
+  "values": [
+    "create_industrial_details:acacia_planked_dirt_path",
+    "create_industrial_details:bamboo_planked_dirt_path",
+    "create_industrial_details:birch_planked_dirt_path",
+    "create_industrial_details:cherry_planked_dirt_path",
+    "create_industrial_details:crimson_planked_dirt_path",
+    "create_industrial_details:darkoak_planked_dirt_path",
+    "create_industrial_details:jungle_planked_dirt_path",
+    "create_industrial_details:mangrove_planked_dirt_path",
+    "create_industrial_details:oak_planked_dirt_path",
+    "create_industrial_details:spruce_planked_dirt_path",
+    "create_industrial_details:warped_planked_dirt_path"
+  ]
+}

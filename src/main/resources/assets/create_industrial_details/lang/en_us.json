@@ -121,6 +121,16 @@
 
   "block.create_industrial_details.riveted_steel_grate.tooltip.summary": "Can be _waterlogged_.",
   "block.create_industrial_details.riveted_steel_grate.tooltip.condition1": "Encased Fan",
-  "block.create_industrial_details.riveted_steel_grate.tooltip.behaviour1": "Airflow passes through the grate."
-
+  "block.create_industrial_details.riveted_steel_grate.tooltip.behaviour1": "Airflow passes through the grate.",
+  "block.create_industrial_details.acacia_planked_dirt_path": "Acacia Planked Dirt Path",
+  "block.create_industrial_details.bamboo_planked_dirt_path": "Bamboo Planked Dirt Path",
+  "block.create_industrial_details.birch_planked_dirt_path": "Birch Planked Dirt Path",
+  "block.create_industrial_details.cherry_planked_dirt_path": "Cherry Planked Dirt Path",
+  "block.create_industrial_details.crimson_planked_dirt_path": "Crimson Planked Dirt Path",
+  "block.create_industrial_details.darkoak_planked_dirt_path": "Dark Oak Planked Dirt Path",
+  "block.create_industrial_details.jungle_planked_dirt_path": "Jungle Planked Dirt Path",
+  "block.create_industrial_details.mangrove_planked_dirt_path": "Mangrove Planked Dirt Path",
+  "block.create_industrial_details.oak_planked_dirt_path": "Oak Planked Dirt Path",
+  "block.create_industrial_details.spruce_planked_dirt_path": "Spruce Planked Dirt Path",
+  "block.create_industrial_details.warped_planked_dirt_path": "Warped Planked Dirt Path"
 }

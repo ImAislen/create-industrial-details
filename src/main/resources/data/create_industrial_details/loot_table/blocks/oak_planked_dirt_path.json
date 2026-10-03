@@ -1,0 +1,78 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:loot_table",
+          "value": "minecraft:blocks/dirt_path"
+        }
+      ]
+    },
+    {
+      "rolls": 1,
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "create_industrial_details:oak_planked_dirt_path",
+          "properties": {
+            "left": "true"
+          }
+        },
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "create_industrial_details:oak_single_plank"
+        }
+      ]
+    },
+    {
+      "rolls": 1,
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "create_industrial_details:oak_planked_dirt_path",
+          "properties": {
+            "center": "true"
+          }
+        },
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "create_industrial_details:oak_single_plank"
+        }
+      ]
+    },
+    {
+      "rolls": 1,
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "create_industrial_details:oak_planked_dirt_path",
+          "properties": {
+            "right": "true"
+          }
+        },
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "create_industrial_details:oak_single_plank"
+        }
+      ]
+    }
+  ],
+  "random_sequence": "create_industrial_details:blocks/oak_planked_dirt_path"
+}

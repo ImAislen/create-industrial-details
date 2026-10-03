@@ -12,6 +12,7 @@ import com.aislen.createindustrialdetails.content.block.rivetedsteel.panel.Rivet
 import com.aislen.createindustrialdetails.content.item.rivetedsteel.RivetedSteelPanelItem;
 import com.aislen.createindustrialdetails.content.block.lighting.cagedlamp.RivetedSteelCagedLampBlock;
 import com.aislen.createindustrialdetails.content.block.plankedplanks.PlankedPlanksBlock;
+import com.aislen.createindustrialdetails.content.block.plankeddirtpath.PlankedDirtPathBlock;
 import com.aislen.createindustrialdetails.content.block.singleplank.SinglePlankBlock;
 import com.aislen.createindustrialdetails.content.block.singleplank.SinglePlankBlockItem;
 import com.aislen.createindustrialdetails.content.block.woodenbeam.WoodenBeamBlock;
@@ -246,37 +247,71 @@ public final class ModBlocks {
     //Single Plank
 
     public static final DeferredBlock<SinglePlankBlock> ACACIA_SINGLE_PLANK =
-            registerSinglePlank("acacia_single_plank");
+            registerSinglePlank("acacia_single_plank", () -> ModBlocks.ACACIA_PLANKED_DIRT_PATH.get());
 
     public static final DeferredBlock<SinglePlankBlock> BAMBOO_SINGLE_PLANK =
-            registerSinglePlank("bamboo_single_plank");
+            registerSinglePlank("bamboo_single_plank", () -> ModBlocks.BAMBOO_PLANKED_DIRT_PATH.get());
 
     public static final DeferredBlock<SinglePlankBlock> BIRCH_SINGLE_PLANK =
-            registerSinglePlank("birch_single_plank");
+            registerSinglePlank("birch_single_plank", () -> ModBlocks.BIRCH_PLANKED_DIRT_PATH.get());
 
     public static final DeferredBlock<SinglePlankBlock> CHERRY_SINGLE_PLANK =
-            registerSinglePlank("cherry_single_plank");
+            registerSinglePlank("cherry_single_plank", () -> ModBlocks.CHERRY_PLANKED_DIRT_PATH.get());
 
     public static final DeferredBlock<SinglePlankBlock> CRIMSON_SINGLE_PLANK =
-            registerSinglePlank("crimson_single_plank");
+            registerSinglePlank("crimson_single_plank", () -> ModBlocks.CRIMSON_PLANKED_DIRT_PATH.get());
 
     public static final DeferredBlock<SinglePlankBlock> DARKOAK_SINGLE_PLANK =
-            registerSinglePlank("darkoak_single_plank");
+            registerSinglePlank("darkoak_single_plank", () -> ModBlocks.DARKOAK_PLANKED_DIRT_PATH.get());
 
     public static final DeferredBlock<SinglePlankBlock> JUNGLE_SINGLE_PLANK =
-            registerSinglePlank("jungle_single_plank");
+            registerSinglePlank("jungle_single_plank", () -> ModBlocks.JUNGLE_PLANKED_DIRT_PATH.get());
 
     public static final DeferredBlock<SinglePlankBlock> MANGROVE_SINGLE_PLANK =
-            registerSinglePlank("mangrove_single_plank");
+            registerSinglePlank("mangrove_single_plank", () -> ModBlocks.MANGROVE_PLANKED_DIRT_PATH.get());
 
     public static final DeferredBlock<SinglePlankBlock> OAK_SINGLE_PLANK =
-            registerSinglePlank("oak_single_plank");
+            registerSinglePlank("oak_single_plank", () -> ModBlocks.OAK_PLANKED_DIRT_PATH.get());
 
     public static final DeferredBlock<SinglePlankBlock> SPRUCE_SINGLE_PLANK =
-            registerSinglePlank("spruce_single_plank");
+            registerSinglePlank("spruce_single_plank", () -> ModBlocks.SPRUCE_PLANKED_DIRT_PATH.get());
 
     public static final DeferredBlock<SinglePlankBlock> WARPED_SINGLE_PLANK =
-            registerSinglePlank("warped_single_plank");
+            registerSinglePlank("warped_single_plank", () -> ModBlocks.WARPED_PLANKED_DIRT_PATH.get());
+
+    // World-only composites: the normal Single Plank item creates these in an existing path.
+    public static final DeferredBlock<PlankedDirtPathBlock> ACACIA_PLANKED_DIRT_PATH =
+            registerPlankedDirtPath("acacia_planked_dirt_path", ACACIA_SINGLE_PLANK);
+
+    public static final DeferredBlock<PlankedDirtPathBlock> BAMBOO_PLANKED_DIRT_PATH =
+            registerPlankedDirtPath("bamboo_planked_dirt_path", BAMBOO_SINGLE_PLANK);
+
+    public static final DeferredBlock<PlankedDirtPathBlock> BIRCH_PLANKED_DIRT_PATH =
+            registerPlankedDirtPath("birch_planked_dirt_path", BIRCH_SINGLE_PLANK);
+
+    public static final DeferredBlock<PlankedDirtPathBlock> CHERRY_PLANKED_DIRT_PATH =
+            registerPlankedDirtPath("cherry_planked_dirt_path", CHERRY_SINGLE_PLANK);
+
+    public static final DeferredBlock<PlankedDirtPathBlock> CRIMSON_PLANKED_DIRT_PATH =
+            registerPlankedDirtPath("crimson_planked_dirt_path", CRIMSON_SINGLE_PLANK);
+
+    public static final DeferredBlock<PlankedDirtPathBlock> DARKOAK_PLANKED_DIRT_PATH =
+            registerPlankedDirtPath("darkoak_planked_dirt_path", DARKOAK_SINGLE_PLANK);
+
+    public static final DeferredBlock<PlankedDirtPathBlock> JUNGLE_PLANKED_DIRT_PATH =
+            registerPlankedDirtPath("jungle_planked_dirt_path", JUNGLE_SINGLE_PLANK);
+
+    public static final DeferredBlock<PlankedDirtPathBlock> MANGROVE_PLANKED_DIRT_PATH =
+            registerPlankedDirtPath("mangrove_planked_dirt_path", MANGROVE_SINGLE_PLANK);
+
+    public static final DeferredBlock<PlankedDirtPathBlock> OAK_PLANKED_DIRT_PATH =
+            registerPlankedDirtPath("oak_planked_dirt_path", OAK_SINGLE_PLANK);
+
+    public static final DeferredBlock<PlankedDirtPathBlock> SPRUCE_PLANKED_DIRT_PATH =
+            registerPlankedDirtPath("spruce_planked_dirt_path", SPRUCE_SINGLE_PLANK);
+
+    public static final DeferredBlock<PlankedDirtPathBlock> WARPED_PLANKED_DIRT_PATH =
+            registerPlankedDirtPath("warped_planked_dirt_path", WARPED_SINGLE_PLANK);
 
 
     private ModBlocks() {
@@ -348,15 +383,22 @@ public final class ModBlocks {
     }
 
 
-    private static DeferredBlock<SinglePlankBlock> registerSinglePlank(String name) {
+    private static DeferredBlock<SinglePlankBlock> registerSinglePlank(String name, Supplier<PlankedDirtPathBlock> path) {
         return registerBlockWithItem(
                 name,
                 () -> new SinglePlankBlock(
                         BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS)
                                 .noOcclusion()
                 ),
-                SinglePlankBlockItem::new
+                (block, properties) -> new SinglePlankBlockItem(block, properties, path)
         );
+    }
+
+    private static DeferredBlock<PlankedDirtPathBlock> registerPlankedDirtPath(
+            String name, Supplier<SinglePlankBlock> plank
+    ) {
+        return BLOCKS.register(name, () -> new PlankedDirtPathBlock(plank.get(),
+                BlockBehaviour.Properties.ofFullCopy(Blocks.DIRT_PATH).noOcclusion()));
     }
 
     private static <T extends Block> DeferredBlock<T> registerBlockWithItem(

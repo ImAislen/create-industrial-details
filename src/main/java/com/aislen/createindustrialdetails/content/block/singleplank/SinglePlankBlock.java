@@ -14,6 +14,8 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.Mirror;
+import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
@@ -92,15 +94,18 @@ public class SinglePlankBlock extends Block {
                 bounds.maxZ, bounds.maxY, bounds.maxX);
     }
 
-    private static VoxelShape shapeForMask(BlockState state, int mask) {
-        return SHAPES[state.getValue(AXIS) == Direction.Axis.X ? 0 : 1][mask];
+    public static VoxelShape shapeForMask(Direction.Axis axis, int mask) {
+        return SHAPES[axis == Direction.Axis.X ? 0 : 1][mask];
+    }
+
+    public static int occupancyMask(BlockState state) {
+        return (state.getValue(LEFT) ? 1 : 0)
+                | (state.getValue(CENTER) ? 2 : 0)
+                | (state.getValue(RIGHT) ? 4 : 0);
     }
 
     private static VoxelShape shapeForState(BlockState state) {
-        int mask = (state.getValue(LEFT) ? 1 : 0)
-                | (state.getValue(CENTER) ? 2 : 0)
-                | (state.getValue(RIGHT) ? 4 : 0);
-        return shapeForMask(state, mask);
+        return shapeForMask(state.getValue(AXIS), occupancyMask(state));
     }
 
     @Override
@@ -128,6 +133,39 @@ public class SinglePlankBlock extends Block {
         builder.add(AXIS, LEFT, CENTER, RIGHT);
     }
 
+    @Override
+    public BlockState rotate(BlockState state, Rotation rotation) {
+        return rotatePlanks(state, rotation);
+    }
+
+    @Override
+    public BlockState mirror(BlockState state, Mirror mirror) {
+        return mirrorPlanks(state, mirror);
+    }
+
+    public static BlockState rotatePlanks(BlockState state, Rotation rotation) {
+        return transformLanes(state, rotation.rotate(lateralDirection(state)));
+    }
+
+    public static BlockState mirrorPlanks(BlockState state, Mirror mirror) {
+        return transformLanes(state, mirror.mirror(lateralDirection(state)));
+    }
+
+    private static Direction lateralDirection(BlockState state) {
+        // RIGHT is the positive lateral lane: +Z for X planks, +X for Z planks.
+        return state.getValue(AXIS) == Direction.Axis.X ? Direction.SOUTH : Direction.EAST;
+    }
+
+    private static BlockState transformLanes(BlockState state, Direction lateral) {
+        BlockState transformed = state.setValue(AXIS,
+                lateral.getAxis() == Direction.Axis.Z ? Direction.Axis.X : Direction.Axis.Z);
+        if (lateral.getAxisDirection() == Direction.AxisDirection.NEGATIVE) {
+            transformed = transformed.setValue(LEFT, state.getValue(RIGHT))
+                    .setValue(RIGHT, state.getValue(LEFT));
+        }
+        return transformed;
+    }
+
     private static double lateralPosition(BlockState state, Vec3 hitLocation, BlockPos pos) {
         return state.getValue(AXIS) == Direction.Axis.X
                 ? hitLocation.z - pos.getZ()
@@ -142,6 +180,15 @@ public class SinglePlankBlock extends Block {
             return RIGHT;
         }
         return CENTER;
+    }
+
+    public static BooleanProperty slotFromHit(BlockState state, Vec3 hitLocation, BlockPos pos) {
+        return getPreferredSlot(lateralPosition(state, hitLocation, pos));
+    }
+
+    @Nullable
+    public static BooleanProperty availableSlotFromHit(BlockState state, Vec3 hitLocation, BlockPos pos) {
+        return getAvailableSlot(state, lateralPosition(state, hitLocation, pos));
     }
 
     @Nullable
@@ -204,7 +251,7 @@ public class SinglePlankBlock extends Block {
             return ItemInteractionResult.FAIL;
         }
 
-        BooleanProperty slot = getAvailableSlot(state, lateralPosition(state, hitLocation, pos));
+        BooleanProperty slot = availableSlotFromHit(state, hitLocation, pos);
         if (slot == null) {
             // Consume the interaction, not the item, so BlockItem cannot place a fourth plank beside it.
             return ItemInteractionResult.CONSUME;
@@ -235,11 +282,11 @@ public class SinglePlankBlock extends Block {
         if (!player.isShiftKeyDown() || !player.getMainHandItem().isEmpty()) {
             return InteractionResult.PASS;
         }
-        BooleanProperty slot = getPreferredSlot(lateralPosition(state, hitResult.getLocation(), pos));
+        BooleanProperty slot = slotFromHit(state, hitResult.getLocation(), pos);
         if (!state.getValue(slot)) {
             return InteractionResult.PASS;
         }
-        VoxelShape clickedShape = shapeForMask(state, slot == LEFT ? 1 : slot == CENTER ? 2 : 4);
+        VoxelShape clickedShape = shapeForMask(state.getValue(AXIS), slot == LEFT ? 1 : slot == CENTER ? 2 : 4);
         // Include the surface itself while rejecting clicks in the gaps around an occupied lane.
         if (!clickedShape.bounds().inflate(1.0E-7).contains(
                 hitResult.getLocation().subtract(pos.getX(), pos.getY(), pos.getZ()))) {

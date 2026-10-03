@@ -1,0 +1,7 @@
+{
+  "parent": "create_industrial_details:block/planked_dirt_path/plank_right",
+  "textures": {
+    "wood": "minecraft:block/spruce_planks",
+    "particle": "minecraft:block/dirt"
+  }
+}

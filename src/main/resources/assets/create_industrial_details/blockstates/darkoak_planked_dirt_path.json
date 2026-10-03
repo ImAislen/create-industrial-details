@@ -1,0 +1,66 @@
+{
+  "multipart": [
+    {
+      "apply": {
+        "model": "minecraft:block/dirt_path"
+      }
+    },
+    {
+      "when": {
+        "axis": "x",
+        "left": "true"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/planked_dirt_path/darkoak_planked_dirt_path_left"
+      }
+    },
+    {
+      "when": {
+        "axis": "x",
+        "center": "true"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/planked_dirt_path/darkoak_planked_dirt_path_center"
+      }
+    },
+    {
+      "when": {
+        "axis": "x",
+        "right": "true"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/planked_dirt_path/darkoak_planked_dirt_path_right"
+      }
+    },
+    {
+      "when": {
+        "axis": "z",
+        "left": "true"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/planked_dirt_path/darkoak_planked_dirt_path_left",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "axis": "z",
+        "center": "true"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/planked_dirt_path/darkoak_planked_dirt_path_center",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "axis": "z",
+        "right": "true"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/planked_dirt_path/darkoak_planked_dirt_path_right",
+        "y": 270
+      }
+    }
+  ]
+}
