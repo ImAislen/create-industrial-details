@@ -2,6 +2,7 @@
   "multipart": [
     {
       "when": {
+        "axis": "x",
         "left": "true"
       },
       "apply": {
@@ -10,6 +11,7 @@
     },
     {
       "when": {
+        "axis": "x",
         "center": "true"
       },
       "apply": {
@@ -18,10 +20,41 @@
     },
     {
       "when": {
+        "axis": "x",
         "right": "true"
       },
       "apply": {
         "model": "create_industrial_details:block/single_plank/birch_single_plank_right"
+      }
+    },
+    {
+      "when": {
+        "axis": "z",
+        "left": "true"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/single_plank/birch_single_plank_left",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "axis": "z",
+        "center": "true"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/single_plank/birch_single_plank_center",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "axis": "z",
+        "right": "true"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/single_plank/birch_single_plank_right",
+        "y": 270
       }
     }
   ]

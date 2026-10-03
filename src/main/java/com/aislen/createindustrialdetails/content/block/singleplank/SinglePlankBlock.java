@@ -18,15 +18,21 @@ import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 
 public class SinglePlankBlock extends Block {
+
+    public static final EnumProperty<Direction.Axis> AXIS = BlockStateProperties.HORIZONTAL_AXIS;
 
     public static final BooleanProperty LEFT = BooleanProperty.create("left");
     public static final BooleanProperty CENTER = BooleanProperty.create("center");
@@ -47,40 +53,54 @@ public class SinglePlankBlock extends Block {
             16, 1, 15.5
     );
 
-    private static final VoxelShape[] SHAPES = createShapes();
+    private static final VoxelShape[][] SHAPES = createShapes();
 
     public SinglePlankBlock(BlockBehaviour.Properties properties) {
         super(properties);
         registerDefaultState(defaultBlockState()
+                .setValue(AXIS, Direction.Axis.X)
                 .setValue(LEFT, false)
                 .setValue(CENTER, true)
                 .setValue(RIGHT, false));
     }
 
-    private static VoxelShape[] createShapes() {
-        VoxelShape[] shapes = new VoxelShape[8];
-        // Bits 0, 1, and 2 represent left, center, and right. Unions are built only once.
-        for (int mask = 0; mask < shapes.length; mask++) {
-            VoxelShape shape = Shapes.empty();
-            if ((mask & 1) != 0) {
-                shape = Shapes.or(shape, LEFT_SHAPE);
+    private static VoxelShape[][] createShapes() {
+        VoxelShape[][] slots = {
+                {LEFT_SHAPE, CENTER_SHAPE, RIGHT_SHAPE},
+                {rotateToZ(LEFT_SHAPE), rotateToZ(CENTER_SHAPE), rotateToZ(RIGHT_SHAPE)}
+        };
+        VoxelShape[][] shapes = new VoxelShape[2][8];
+        // X/Z rows share the same left/center/right mask. Build all 16 unions only once.
+        for (int axis = 0; axis < shapes.length; axis++) {
+            for (int mask = 0; mask < shapes[axis].length; mask++) {
+                VoxelShape shape = Shapes.empty();
+                for (int slot = 0; slot < slots[axis].length; slot++) {
+                    if ((mask & (1 << slot)) != 0) {
+                        shape = Shapes.or(shape, slots[axis][slot]);
+                    }
+                }
+                shapes[axis][mask] = shape;
             }
-            if ((mask & 2) != 0) {
-                shape = Shapes.or(shape, CENTER_SHAPE);
-            }
-            if ((mask & 4) != 0) {
-                shape = Shapes.or(shape, RIGHT_SHAPE);
-            }
-            shapes[mask] = shape;
         }
         return shapes;
+    }
+
+    private static VoxelShape rotateToZ(VoxelShape shape) {
+        AABB bounds = shape.bounds();
+        // Matches model y=270: low Z becomes low X, and each plank still spans the full length.
+        return Shapes.box(bounds.minZ, bounds.minY, bounds.minX,
+                bounds.maxZ, bounds.maxY, bounds.maxX);
+    }
+
+    private static VoxelShape shapeForMask(BlockState state, int mask) {
+        return SHAPES[state.getValue(AXIS) == Direction.Axis.X ? 0 : 1][mask];
     }
 
     private static VoxelShape shapeForState(BlockState state) {
         int mask = (state.getValue(LEFT) ? 1 : 0)
                 | (state.getValue(CENTER) ? 2 : 0)
                 | (state.getValue(RIGHT) ? 4 : 0);
-        return SHAPES[mask];
+        return shapeForMask(state, mask);
     }
 
     @Override
@@ -105,22 +125,28 @@ public class SinglePlankBlock extends Block {
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(LEFT, CENTER, RIGHT);
+        builder.add(AXIS, LEFT, CENTER, RIGHT);
     }
 
-    private static BooleanProperty getPreferredSlot(double localZ) {
-        if (localZ < 1.0 / 3.0) {
+    private static double lateralPosition(BlockState state, Vec3 hitLocation, BlockPos pos) {
+        return state.getValue(AXIS) == Direction.Axis.X
+                ? hitLocation.z - pos.getZ()
+                : hitLocation.x - pos.getX();
+    }
+
+    private static BooleanProperty getPreferredSlot(double localPosition) {
+        if (localPosition < 1.0 / 3.0) {
             return LEFT;
         }
-        if (localZ > 2.0 / 3.0) {
+        if (localPosition > 2.0 / 3.0) {
             return RIGHT;
         }
         return CENTER;
     }
 
     @Nullable
-    private static BooleanProperty getAvailableSlot(BlockState state, double localZ) {
-        BooleanProperty preferred = getPreferredSlot(localZ);
+    private static BooleanProperty getAvailableSlot(BlockState state, double localPosition) {
+        BooleanProperty preferred = getPreferredSlot(localPosition);
         if (!state.getValue(preferred)) {
             return preferred;
         }
@@ -128,7 +154,7 @@ public class SinglePlankBlock extends Block {
         if (!state.getValue(CENTER)) {
             return CENTER;
         }
-        BooleanProperty side = localZ < 0.5 ? LEFT : RIGHT;
+        BooleanProperty side = localPosition < 0.5 ? LEFT : RIGHT;
         if (!state.getValue(side)) {
             return side;
         }
@@ -138,13 +164,14 @@ public class SinglePlankBlock extends Block {
 
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext context) {
-        double hitZ = context.getClickLocation().z;
-        double localZ = hitZ - Math.floor(hitZ);
-        return defaultBlockState()
+        BlockState state = defaultBlockState()
+                .setValue(AXIS, context.getHorizontalDirection().getAxis())
                 .setValue(LEFT, false)
                 .setValue(CENTER, false)
-                .setValue(RIGHT, false)
-                .setValue(getPreferredSlot(localZ), true);
+                .setValue(RIGHT, false);
+        Vec3 hitLocation = context.getClickLocation();
+        double localPosition = lateralPosition(state, hitLocation, BlockPos.containing(hitLocation));
+        return state.setValue(getPreferredSlot(localPosition), true);
     }
 
     @Override
@@ -158,7 +185,7 @@ public class SinglePlankBlock extends Block {
             BlockHitResult hitResult
     ) {
         return tryAddPlank(stack, state, level, pos, player, hitResult.getDirection(),
-                hitResult.getLocation().z - pos.getZ());
+                hitResult.getLocation());
     }
 
     ItemInteractionResult tryAddPlank(
@@ -168,7 +195,7 @@ public class SinglePlankBlock extends Block {
             BlockPos pos,
             Player player,
             Direction clickedFace,
-            double localZ
+            Vec3 hitLocation
     ) {
         if (!state.is(this) || !(stack.getItem() instanceof BlockItem blockItem) || blockItem.getBlock() != this) {
             return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
@@ -177,7 +204,7 @@ public class SinglePlankBlock extends Block {
             return ItemInteractionResult.FAIL;
         }
 
-        BooleanProperty slot = getAvailableSlot(state, localZ);
+        BooleanProperty slot = getAvailableSlot(state, lateralPosition(state, hitLocation, pos));
         if (slot == null) {
             // Consume the interaction, not the item, so BlockItem cannot place a fourth plank beside it.
             return ItemInteractionResult.CONSUME;
@@ -208,11 +235,11 @@ public class SinglePlankBlock extends Block {
         if (!player.isShiftKeyDown() || !player.getMainHandItem().isEmpty()) {
             return InteractionResult.PASS;
         }
-        BooleanProperty slot = getPreferredSlot(hitResult.getLocation().z - pos.getZ());
+        BooleanProperty slot = getPreferredSlot(lateralPosition(state, hitResult.getLocation(), pos));
         if (!state.getValue(slot)) {
             return InteractionResult.PASS;
         }
-        VoxelShape clickedShape = slot == LEFT ? LEFT_SHAPE : slot == CENTER ? CENTER_SHAPE : RIGHT_SHAPE;
+        VoxelShape clickedShape = shapeForMask(state, slot == LEFT ? 1 : slot == CENTER ? 2 : 4);
         // Include the surface itself while rejecting clicks in the gaps around an occupied lane.
         if (!clickedShape.bounds().inflate(1.0E-7).contains(
                 hitResult.getLocation().subtract(pos.getX(), pos.getY(), pos.getZ()))) {

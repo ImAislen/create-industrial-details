@@ -44,6 +44,6 @@ public final class SinglePlankBlockItem extends BlockItem {
             }
         }
         return block.tryAddPlank(context.getItemInHand(), state, context.getLevel(), pos, player,
-                context.getClickedFace(), context.getClickLocation().z - pos.getZ()).result();
+                context.getClickedFace(), context.getClickLocation()).result();
     }
 }
