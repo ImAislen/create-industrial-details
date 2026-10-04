@@ -15,6 +15,9 @@ public final class ModParticles {
     public static final DeferredHolder<ParticleType<?>, SimpleParticleType> VENT_AIRFLOW =
             PARTICLES.register("vent_airflow", () -> new SimpleParticleType(false));
 
+    public static final DeferredHolder<ParticleType<?>, SimpleParticleType> INTAKE_AIRFLOW =
+            PARTICLES.register("intake_airflow", () -> new SimpleParticleType(false));
+
     private ModParticles() {
     }
 

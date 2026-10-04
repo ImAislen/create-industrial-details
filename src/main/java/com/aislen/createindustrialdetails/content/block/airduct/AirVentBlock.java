@@ -6,6 +6,7 @@ import com.simibubi.create.content.equipment.wrench.IWrenchable;
 import com.simibubi.create.infrastructure.config.AllConfigs;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.context.BlockPlaceContext;
@@ -51,7 +52,7 @@ public class AirVentBlock extends Block implements IWrenchable {
     }
 
     @Override
-    public MapCodec<AirVentBlock> codec() {
+    public MapCodec<? extends AirVentBlock> codec() {
         return CODEC;
     }
 
@@ -87,10 +88,14 @@ public class AirVentBlock extends Block implements IWrenchable {
         double z = pos.getZ() + .5 + facing.getStepZ() * offset;
         for (int i = 0; i < PARTICLE_ATTEMPTS; i++) {
             if (random.nextFloat() < density) {
-                level.addParticle(ModParticles.VENT_AIRFLOW.get(), x, y, z,
+                level.addParticle(airflowParticle(), x, y, z,
                         facing.getStepX(), facing.getStepY(), facing.getStepZ());
             }
         }
+    }
+
+    protected SimpleParticleType airflowParticle() {
+        return ModParticles.VENT_AIRFLOW.get();
     }
 
     @Override

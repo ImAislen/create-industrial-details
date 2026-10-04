@@ -19,22 +19,33 @@ import net.neoforged.neoforge.client.event.RegisterParticleProvidersEvent;
 @EventBusSubscriber(modid = CreateIndustrialDetails.MOD_ID, value = Dist.CLIENT)
 public class VentAirflowParticle extends AirFlowParticle {
     private final Direction direction;
+    private final boolean inward;
     private final double originX;
     private final double originY;
     private final double originZ;
     private final float maxDistance;
 
     private VentAirflowParticle(ClientLevel level, double x, double y, double z,
-                               Direction direction, SpriteSet sprites) {
+                               Direction direction, boolean inward, SpriteSet sprites) {
         // Inherit Create's appearance and spread; our tick needs no fan block entity or air current.
         super(level, null, x, y, z, sprites);
         this.direction = direction;
+        this.inward = inward;
         originX = x;
         originY = y;
         originZ = z;
         var kinetics = AllConfigs.server().kinetics;
         float factor = Math.min(16.0f / kinetics.fanRotationArgmax.get(), 1);
-        maxDistance = Mth.lerp(factor, 3, kinetics.fanPushDistance.get());
+        maxDistance = Mth.lerp(factor, 3,
+                inward ? kinetics.fanPullDistance.get() : kinetics.fanPushDistance.get());
+        if (inward) {
+            setPos(this.x + direction.getStepX() * maxDistance,
+                    this.y + direction.getStepY() * maxDistance,
+                    this.z + direction.getStepZ() * maxDistance);
+            xo = this.x;
+            yo = this.y;
+            zo = this.z;
+        }
     }
 
     @Override
@@ -45,12 +56,16 @@ public class VentAirflowParticle extends AirFlowParticle {
         double distance = (x - originX) * direction.getStepX()
                 + (y - originY) * direction.getStepY()
                 + (z - originZ) * direction.getStepZ();
-        if (age++ >= lifetime || distance < -.25 || distance > maxDistance + .25) {
+        if (age++ >= lifetime || distance < -.25 || distance > maxDistance + .25
+                || (inward && distance <= 0)) {
             remove();
             return;
         }
         setSprite(sprites.get((int) Mth.clamp(distance / maxDistance * 8 + random.nextInt(4), 0, 7), 8));
         double speed = (maxDistance - distance + 1) / 16;
+        if (inward) {
+            speed = -Math.min(speed, distance);
+        }
         xd = direction.getStepX() * speed;
         yd = direction.getStepY() * speed;
         zd = direction.getStepZ() * speed;
@@ -59,15 +74,16 @@ public class VentAirflowParticle extends AirFlowParticle {
 
     @SubscribeEvent
     public static void registerParticles(RegisterParticleProvidersEvent event) {
-        event.registerSpriteSet(ModParticles.VENT_AIRFLOW.get(), Factory::new);
+        event.registerSpriteSet(ModParticles.VENT_AIRFLOW.get(), sprites -> new Factory(sprites, false));
+        event.registerSpriteSet(ModParticles.INTAKE_AIRFLOW.get(), sprites -> new Factory(sprites, true));
     }
 
-    private record Factory(SpriteSet sprites) implements ParticleProvider<SimpleParticleType> {
+    private record Factory(SpriteSet sprites, boolean inward) implements ParticleProvider<SimpleParticleType> {
         @Override
         public Particle createParticle(SimpleParticleType type, ClientLevel level, double x, double y, double z,
                                        double xSpeed, double ySpeed, double zSpeed) {
             return new VentAirflowParticle(level, x, y, z,
-                    Direction.getNearest(xSpeed, ySpeed, zSpeed), sprites);
+                    Direction.getNearest(xSpeed, ySpeed, zSpeed), inward, sprites);
         }
     }
 }
