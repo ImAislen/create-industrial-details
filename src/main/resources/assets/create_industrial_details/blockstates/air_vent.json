@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "facing=north": { "model": "create_industrial_details:block/air_duct/air_vent_mounted" },
+    "facing=south": { "model": "create_industrial_details:block/air_duct/air_vent_mounted", "y": 180 },
+    "facing=east": { "model": "create_industrial_details:block/air_duct/air_vent_mounted", "y": 90 },
+    "facing=west": { "model": "create_industrial_details:block/air_duct/air_vent_mounted", "y": 270 },
+    "facing=up": { "model": "create_industrial_details:block/air_duct/air_vent_mounted", "x": 270 },
+    "facing=down": { "model": "create_industrial_details:block/air_duct/air_vent_mounted", "x": 90 }
+  }
+}

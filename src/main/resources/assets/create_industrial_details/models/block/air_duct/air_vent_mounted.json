@@ -1,0 +1,6 @@
+{
+  "parent": "create_industrial_details:block/air_duct/air_vent",
+  "transform": {
+    "translation": [0, 0, 0.8125]
+  }
+}

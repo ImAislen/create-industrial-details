@@ -47,6 +47,7 @@ public final class ModCreativeTabs {
                                 );
 
                                 output.accept(ModBlocks.AIR_DUCT.get());
+                                output.accept(ModBlocks.AIR_VENT.get());
 
 
                                 output.accept(ModBlocks.ACACIA_PLANKED_PLANKS.get());

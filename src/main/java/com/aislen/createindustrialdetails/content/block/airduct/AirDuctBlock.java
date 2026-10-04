@@ -1,17 +1,20 @@
 package com.aislen.createindustrialdetails.content.block.airduct;
 
 import com.mojang.serialization.MapCodec;
+import com.simibubi.create.content.equipment.wrench.IWrenchable;
 import net.createmod.catnip.placement.IPlacementHelper;
 import net.createmod.catnip.placement.PlacementHelpers;
 import net.createmod.catnip.placement.PlacementOffset;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
@@ -24,7 +27,7 @@ import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.Nullable;
 
-public class AirDuctBlock extends PipeBlock {
+public class AirDuctBlock extends PipeBlock implements IWrenchable {
 
     public static final MapCodec<AirDuctBlock> CODEC = simpleCodec(AirDuctBlock::new);
 
@@ -65,6 +68,11 @@ public class AirDuctBlock extends PipeBlock {
     }
 
     @Override
+    public InteractionResult onWrenched(BlockState state, UseOnContext context) {
+        return InteractionResult.PASS;
+    }
+
+    @Override
     protected ItemInteractionResult useItemOn(
             ItemStack stack,
             BlockState state,
@@ -101,7 +109,7 @@ public class AirDuctBlock extends PipeBlock {
 
             state = state.setValue(
                     PROPERTY_BY_DIRECTION.get(direction),
-                    canConnectTo(neighbour)
+                    canConnectTo(neighbour, direction)
             );
         }
 
@@ -119,7 +127,7 @@ public class AirDuctBlock extends PipeBlock {
     ) {
         BooleanProperty property = PROPERTY_BY_DIRECTION.get(direction);
 
-        return state.setValue(property, canConnectTo(neighbourState));
+        return state.setValue(property, canConnectTo(neighbourState, direction));
     }
 
     @Nullable
@@ -147,7 +155,8 @@ public class AirDuctBlock extends PipeBlock {
                 : connectedDirection.getAxis();
     }
 
-    private boolean canConnectTo(BlockState state) {
-        return state.getBlock() instanceof AirDuctBlock;
+    private boolean canConnectTo(BlockState state, Direction direction) {
+        return state.getBlock() instanceof AirDuctBlock
+                || (state.getBlock() instanceof AirVentBlock && state.getValue(AirVentBlock.FACING) == direction);
     }
 }

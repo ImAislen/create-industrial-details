@@ -4,6 +4,7 @@ import com.aislen.createindustrialdetails.CreateIndustrialDetails;
 import net.minecraft.world.level.block.Blocks;
 import com.aislen.createindustrialdetails.content.block.MooringBollardBlock;
 import com.aislen.createindustrialdetails.content.block.airduct.AirDuctBlock;
+import com.aislen.createindustrialdetails.content.block.airduct.AirVentBlock;
 import com.aislen.createindustrialdetails.content.block.rivetedsteel.RivetedSteelGrateBlock;
 import com.aislen.createindustrialdetails.content.block.rivetedsteel.RivetedSteelHatchBlock;
 import com.aislen.createindustrialdetails.content.block.rivetedsteel.beam.RivetedSteelBeamBlock;
@@ -208,6 +209,13 @@ public final class ModBlocks {
 
 
 
+
+    public static final DeferredBlock<AirVentBlock> AIR_VENT =
+            registerBlockWithItem(
+                    "air_vent",
+                    () -> new AirVentBlock(BlockBehaviour.Properties.ofFullCopy(AIR_DUCT.get())),
+                    BlockItem::new
+            );
 
     //Planked Planks
 
