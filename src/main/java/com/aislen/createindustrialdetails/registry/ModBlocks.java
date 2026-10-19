@@ -15,6 +15,7 @@ import com.aislen.createindustrialdetails.content.block.supports.SmallSteelWallB
 import com.aislen.createindustrialdetails.content.block.supports.SmallSteelWallBracketBlockItem;
 import com.aislen.createindustrialdetails.content.block.supports.SteelWallBracketBlock;
 import com.aislen.createindustrialdetails.content.block.supports.SteelWallBracketBlockItem;
+import com.aislen.createindustrialdetails.content.block.supports.SteelWallCornerBracketBlock;
 import com.aislen.createindustrialdetails.content.item.rivetedsteel.RivetedSteelPanelItem;
 import com.aislen.createindustrialdetails.content.block.lighting.cagedlamp.RivetedSteelCagedLampBlock;
 import com.aislen.createindustrialdetails.content.block.plankedplanks.PlankedPlanksBlock;
@@ -153,6 +154,18 @@ public final class ModBlocks {
                                     .noOcclusion()
                     ),
                     SteelWallBracketBlockItem::new
+            );
+
+    public static final DeferredBlock<SteelWallCornerBracketBlock> STEEL_WALL_CORNER_BRACKET =
+            registerBlockWithItem(
+                    "steel_wall_corner_bracket",
+                    () -> new SteelWallCornerBracketBlock(
+                            BlockBehaviour.Properties.of()
+                                    .strength(3.5F, 6.0F)
+                                    .sound(SoundType.METAL)
+                                    .requiresCorrectToolForDrops()
+                                    .noOcclusion()
+                    )
             );
 
     public static final DeferredBlock<RivetedSteelHatchBlock>

@@ -1,0 +1,12 @@
+{
+  "variants": {
+    "facing=south,half=top": {"model": "create_industrial_details:block/supports/steel_wall_corner_bracket"},
+    "facing=west,half=top": {"model": "create_industrial_details:block/supports/steel_wall_corner_bracket", "y": 90},
+    "facing=north,half=top": {"model": "create_industrial_details:block/supports/steel_wall_corner_bracket", "y": 180},
+    "facing=east,half=top": {"model": "create_industrial_details:block/supports/steel_wall_corner_bracket", "y": 270},
+    "facing=south,half=bottom": {"model": "create_industrial_details:block/supports/steel_wall_corner_bracket_bottom"},
+    "facing=west,half=bottom": {"model": "create_industrial_details:block/supports/steel_wall_corner_bracket_bottom", "y": 90},
+    "facing=north,half=bottom": {"model": "create_industrial_details:block/supports/steel_wall_corner_bracket_bottom", "y": 180},
+    "facing=east,half=bottom": {"model": "create_industrial_details:block/supports/steel_wall_corner_bracket_bottom", "y": 270}
+  }
+}

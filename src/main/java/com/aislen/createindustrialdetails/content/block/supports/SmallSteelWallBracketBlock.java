@@ -11,10 +11,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
@@ -73,7 +70,7 @@ public final class SmallSteelWallBracketBlock extends HorizontalDirectionalBlock
                 .setValue(ATTACH_FACE, floor ? AttachFace.FLOOR : AttachFace.WALL)
                 .setValue(HALF, !floor && context.getClickLocation().y - context.getClickedPos().getY() >= 0.5
                         ? Half.TOP : Half.BOTTOM);
-        return state.canSurvive(context.getLevel(), context.getClickedPos()) ? state : null;
+        return state;
     }
 
     @Override
@@ -113,26 +110,6 @@ public final class SmallSteelWallBracketBlock extends HorizontalDirectionalBlock
     }
 
     @Override
-    protected boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
-        if (state.getValue(ATTACH_FACE) == AttachFace.CEILING) {
-            return false;
-        }
-        BlockPos supportPos = pos.relative(supportDirection(state));
-        BlockState support = level.getBlockState(supportPos);
-        // Partial structural blocks can support the bracket without a full sturdy face.
-        return !support.canBeReplaced() && !support.getCollisionShape(level, supportPos).isEmpty();
-    }
-
-    @Override
-    protected BlockState updateShape(BlockState state, Direction direction, BlockState neighborState,
-                                     LevelAccessor level, BlockPos pos, BlockPos neighborPos) {
-        if (direction == supportDirection(state) && !state.canSurvive(level, pos)) {
-            return Blocks.AIR.defaultBlockState();
-        }
-        return super.updateShape(state, direction, neighborState, level, pos, neighborPos);
-    }
-
-    @Override
     protected VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
         int layout = state.getValue(ATTACH_FACE) == AttachFace.FLOOR ? 2 : state.getValue(HALF) == Half.TOP ? 0 : 1;
         return SHAPES[layout][state.getValue(QUANTITY) - 1][state.getValue(FACING).get2DDataValue()];
@@ -141,10 +118,6 @@ public final class SmallSteelWallBracketBlock extends HorizontalDirectionalBlock
     @Override
     protected VoxelShape getCollisionShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
         return getShape(state, level, pos, context);
-    }
-
-    private static Direction supportDirection(BlockState state) {
-        return state.getValue(ATTACH_FACE) == AttachFace.FLOOR ? Direction.DOWN : state.getValue(FACING).getOpposite();
     }
 
     private static VoxelShape[][][] createShapes() {

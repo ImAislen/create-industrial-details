@@ -40,6 +40,7 @@ public final class ModCreativeTabs {
                                 output.accept(ModBlocks.RIVETED_STEEL_BEAM.get());
                                 output.accept(ModBlocks.SMALL_STEEL_WALL_BRACKET.get());
                                 output.accept(ModBlocks.STEEL_WALL_BRACKET.get());
+                                output.accept(ModBlocks.STEEL_WALL_CORNER_BRACKET.get());
                                 output.accept(ModBlocks.RIVETED_STEEL_CAGED_LAMP.get());
                                 ModBlocks.WOODEN_BEAMS.values().forEach(
                                         beam -> output.accept(beam.get())
