@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "rolls": 1,
+      "conditions": [{ "condition": "minecraft:survives_explosion" }],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "create_industrial_details:steel_wall_bracket",
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": 2,
+              "conditions": [
+                {
+                  "condition": "minecraft:block_state_property",
+                  "block": "create_industrial_details:steel_wall_bracket",
+                  "properties": { "quantity": "2" }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

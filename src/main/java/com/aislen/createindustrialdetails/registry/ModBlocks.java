@@ -11,6 +11,10 @@ import com.aislen.createindustrialdetails.content.block.rivetedsteel.RivetedStee
 import com.aislen.createindustrialdetails.content.block.rivetedsteel.beam.RivetedSteelBeamBlock;
 import com.aislen.createindustrialdetails.content.block.rivetedsteel.panel.RivetedSteelPanelBlock;
 import com.aislen.createindustrialdetails.content.block.rivetedsteel.panel.RivetedSteelPanelShaftPenetrationBlock;
+import com.aislen.createindustrialdetails.content.block.supports.SmallSteelWallBracketBlock;
+import com.aislen.createindustrialdetails.content.block.supports.SmallSteelWallBracketBlockItem;
+import com.aislen.createindustrialdetails.content.block.supports.SteelWallBracketBlock;
+import com.aislen.createindustrialdetails.content.block.supports.SteelWallBracketBlockItem;
 import com.aislen.createindustrialdetails.content.item.rivetedsteel.RivetedSteelPanelItem;
 import com.aislen.createindustrialdetails.content.block.lighting.cagedlamp.RivetedSteelCagedLampBlock;
 import com.aislen.createindustrialdetails.content.block.plankedplanks.PlankedPlanksBlock;
@@ -123,6 +127,32 @@ public final class ModBlocks {
                                     .requiresCorrectToolForDrops()
                                     .noOcclusion()
                     )
+            );
+
+    public static final DeferredBlock<SmallSteelWallBracketBlock> SMALL_STEEL_WALL_BRACKET =
+            registerBlockWithItem(
+                    "small_steel_wall_bracket",
+                    () -> new SmallSteelWallBracketBlock(
+                            BlockBehaviour.Properties.of()
+                                    .strength(3.5F, 6.0F)
+                                    .sound(SoundType.METAL)
+                                    .requiresCorrectToolForDrops()
+                                    .noOcclusion()
+                    ),
+                    SmallSteelWallBracketBlockItem::new
+            );
+
+    public static final DeferredBlock<SteelWallBracketBlock> STEEL_WALL_BRACKET =
+            registerBlockWithItem(
+                    "steel_wall_bracket",
+                    () -> new SteelWallBracketBlock(
+                            BlockBehaviour.Properties.of()
+                                    .strength(3.5F, 6.0F)
+                                    .sound(SoundType.METAL)
+                                    .requiresCorrectToolForDrops()
+                                    .noOcclusion()
+                    ),
+                    SteelWallBracketBlockItem::new
             );
 
     public static final DeferredBlock<RivetedSteelHatchBlock>

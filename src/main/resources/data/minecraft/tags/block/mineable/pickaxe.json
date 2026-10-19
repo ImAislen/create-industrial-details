@@ -1,4 +1,4 @@
 {
   "replace": false,
-  "values": ["create_industrial_details:air_vent", "create_industrial_details:air_intake"]
+  "values": ["create_industrial_details:air_vent", "create_industrial_details:air_intake", "create_industrial_details:small_steel_wall_bracket", "create_industrial_details:steel_wall_bracket"]
 }
