@@ -21,16 +21,12 @@ public final class RivetedSteelHatchBlock extends TrapDoorBlock {
 
 
     private static final VoxelShape TOP_FRAME = Shapes.or(
-            // North edge
             Block.box(0, 13, 0, 16, 16, 2),
 
-            // South edge
             Block.box(0, 13, 14, 16, 16, 16),
 
-            // West edge
             Block.box(0, 13, 2, 2, 16, 14),
 
-            // East edge
             Block.box(14, 13, 2, 16, 16, 14)
     );
 

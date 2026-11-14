@@ -1,0 +1,4 @@
+{
+  "parent": "create:block/fluid_pipe/window",
+  "render_type": "minecraft:cutout_mipped"
+}

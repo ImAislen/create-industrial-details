@@ -1,0 +1,6 @@
+{
+  "variants": {
+    "axis=z": { "model": "create_industrial_details:block/cable_tray/cable_tray" },
+    "axis=x": { "model": "create_industrial_details:block/cable_tray/cable_tray", "y": 90 }
+  }
+}

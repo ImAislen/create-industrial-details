@@ -50,17 +50,6 @@ public final class RivetedSteelPanelBlock extends Block {
     public static final BooleanProperty CONNECTED_LEFT =
         BooleanProperty.create("connected_left");
 
-    /*
-     * These are TRUE only for concave/interior corners:
-     *
-     * - both adjoining side-neighbours exist
-     * - but the diagonal panel that would fill the 2x2 junction does not
-     *
-     * Example for INNER_TOP_RIGHT:
-     *
-     *     [ current ][ top ]
-     *     [ right   ][ EMPTY ]  <- missing diagonal creates inner corner
-     */
     public static final BooleanProperty INNER_TOP_LEFT =
         BooleanProperty.create("inner_top_left");
     public static final BooleanProperty INNER_TOP_RIGHT =
@@ -80,14 +69,6 @@ public final class RivetedSteelPanelBlock extends Block {
     private static final int INNER_BOTTOM_LEFT_BIT = 4;
     private static final int INNER_BOTTOM_RIGHT_BIT = 8;
 
-    /*
-     * 6 facings x 16 cardinal-connection masks x 16 inner-corner masks.
-     *
-     * Most theoretical combinations can never occur naturally, but caching
-     * the small table keeps getShape/getCollisionShape to simple array access.
-     * Shape construction happens once when this class loads; never per tick,
-     * render frame, selection check, or entity collision.
-     */
     private static final VoxelShape[][][] SHAPES = buildShapeCache();
 
     public RivetedSteelPanelBlock(Properties properties) {
@@ -138,14 +119,6 @@ public final class RivetedSteelPanelBlock extends Block {
     }
 
 
-    /**
-     * Inverse shaft-penetration interaction:
-     *
-     * Right-click an already placed Riveted Steel Panel with a standard
-     * Create Shaft. The panel's blockspace becomes the real Create shaft,
-     * while the visual panel-with-hole is transferred into the shaft's
-     * existing bracket slot.
-     */
     @Override
     protected ItemInteractionResult useItemOn(
         ItemStack stack,
@@ -169,13 +142,6 @@ public final class RivetedSteelPanelBlock extends Block {
         BlockState originalPanelState = state;
         int originalStackCount = stack.getCount();
 
-        /*
-         * Remove the panel temporarily, then let Create's actual Shaft BlockItem
-         * perform a genuine placement into this exact block position.
-         *
-         * This preserves Create/Minecraft's normal placement lifecycle instead
-         * of manually creating the shaft with Level#setBlock.
-         */
         level.removeBlock(pos, false);
 
         DirectionalPlaceContext placementContext =
@@ -197,8 +163,6 @@ public final class RivetedSteelPanelBlock extends Block {
 
             level.setBlock(pos, originalPanelState, Block.UPDATE_ALL);
 
-            // BlockItem#place may have modified the stack before a later
-            // validation failed; restore exactly what the player started with.
             if (!player.isCreative()) {
                 stack.setCount(originalStackCount);
             }
@@ -206,11 +170,6 @@ public final class RivetedSteelPanelBlock extends Block {
             return ItemInteractionResult.FAIL;
         }
 
-        /*
-         * Force the shaft to pass perpendicular to the panel. Create's normal
-         * placement heuristics can prefer a nearby kinetic axis; for a panel
-         * penetration the panel normal must win.
-         */
         Direction.Axis desiredAxis = panelFacing.getAxis();
 
         if (placedState.getValue(RotatedPillarKineticBlock.AXIS) != desiredAxis) {
@@ -245,11 +204,6 @@ public final class RivetedSteelPanelBlock extends Block {
             return ItemInteractionResult.FAIL;
         }
 
-        /*
-         * This path began with an already-placed panel, so retain its exact
-         * facing. That leaves the penetration on the same edge of the
-         * blockspace where the original panel was.
-         */
         BlockState penetration =
             ModBlocks.RIVETED_STEEL_PANEL_SHAFT_PENETRATION
                 .get()
@@ -275,14 +229,6 @@ public final class RivetedSteelPanelBlock extends Block {
         BlockPos pos,
         BlockPos neighborPos
     ) {
-        /*
-         * Re-evaluate all four edges and diagonals whenever a direct neighbour
-         * changes. A diagonal panel is itself adjacent to one of the cardinal
-         * panels around a concave corner, so its placement/removal causes that
-         * cardinal panel to update, which in turn notifies this panel.
-         *
-         * This remains entirely neighbour-event-driven; there is no ticking.
-         */
         return updateAllConnections(state, level, pos);
     }
 
@@ -312,10 +258,6 @@ public final class RivetedSteelPanelBlock extends Block {
         boolean diagonalBottomRight =
             sameFacingPanel(level, pos.relative(bottomDir).relative(rightDir), facing);
 
-        /*
-         * A concave corner exists only when BOTH side panels are present but
-         * the panel diagonally across their junction is absent.
-         */
         boolean innerTopLeft = top && left && !diagonalTopLeft;
         boolean innerTopRight = top && right && !diagonalTopRight;
         boolean innerBottomLeft = bottom && left && !diagonalBottomLeft;
@@ -478,22 +420,13 @@ public final class RivetedSteelPanelBlock extends Block {
 
         List<BoxDef> boxes = new ArrayList<>(9);
 
-        // Recessed centre is always one pixel deep.
         boxes.add(new BoxDef(2, 2, 15, 14, 14, 16));
 
-        // Edge middle sections.
         boxes.add(depthBox(2, 14, 14, 16, top));
         boxes.add(depthBox(14, 2, 16, 14, right));
         boxes.add(depthBox(2, 0, 14, 2, bottom));
         boxes.add(depthBox(0, 2, 2, 14, left));
 
-        /*
-         * Corners are flat only when:
-         * - both adjoining edges connect, AND
-         * - there is no concave/interior corner there.
-         *
-         * Otherwise the 2x2 corner remains at full two-pixel depth.
-         */
         boolean flatTopLeft = top && left && !innerTopLeft;
         boolean flatTopRight = top && right && !innerTopRight;
         boolean flatBottomLeft = bottom && left && !innerBottomLeft;
@@ -525,12 +458,6 @@ public final class RivetedSteelPanelBlock extends Block {
         return shape;
     }
 
-    /*
-     * Defines a rectangle on the north-authored panel plane.
-     *
-     * flat=true  -> Z 15..16, same depth as recessed sheet
-     * flat=false -> Z 14..16, same depth as raised frame
-     */
     private static BoxDef depthBox(
         double x1,
         double y1,
@@ -548,16 +475,6 @@ public final class RivetedSteelPanelBlock extends Block {
         );
     }
 
-    /*
-     * Same mapping already confirmed working in-game:
-     *
-     * NORTH = none
-     * EAST  = Y 270
-     * SOUTH = Y 180
-     * WEST  = Y 90
-     * UP    = X 270
-     * DOWN  = X 90
-     */
     private static BoxDef transform(BoxDef box, Direction facing) {
         Point a = transformPoint(box.x1, box.y1, box.z1, facing);
         Point b = transformPoint(box.x2, box.y2, box.z2, facing);

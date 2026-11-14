@@ -33,7 +33,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Supplier;
 
-/** Supplies endpoint-aware selection shapes to Struts' existing breaking flow. */
 @EventBusSubscriber(modid = CreateIndustrialDetails.MOD_ID, value = Dist.CLIENT)
 public final class WoodenBeamInteractionHandler {
 

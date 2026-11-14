@@ -40,6 +40,12 @@ public final class CreateIndustrialDetails {
         LOGGER.info("Create: Industrial Details initialized.");
     }
     private static void commonSetup(FMLCommonSetupEvent event) {
-        event.enqueueWork(ModTooltips::register);
+        event.enqueueWork(() -> {
+            ModTooltips.register();
+            com.simibubi.create.content.decoration.encasing.EncasingRegistry.addVariant(
+                    com.simibubi.create.AllBlocks.FLUID_PIPE.get(), ModBlocks.SERVICE_TRENCH_PIPE.get());
+            com.simibubi.create.content.decoration.encasing.EncasingRegistry.addVariant(
+                    com.simibubi.create.AllBlocks.SHAFT.get(), ModBlocks.SERVICE_TRENCH_SHAFT.get());
+        });
     }
 }

@@ -5,7 +5,6 @@ import com.cake.struts.compat.flywheel.StrutFlywheelVisual;
 import dev.engine_room.flywheel.api.visualization.VisualizationContext;
 import org.jetbrains.annotations.NotNull;
 
-/** Reuses Struts' Flywheel visual with the same endpoint-aware quad cache. */
 public final class WoodenBeamFlywheelVisual extends StrutFlywheelVisual {
 
     public WoodenBeamFlywheelVisual(

@@ -29,10 +29,8 @@ public class AirVentBlock extends Block implements IWrenchable {
     public static final MapCodec<AirVentBlock> CODEC = simpleCodec(AirVentBlock::new);
     public static final EnumProperty<Direction> FACING = BlockStateProperties.FACING;
     public static final BooleanProperty AIRFLOW = BooleanProperty.create("airflow");
-    // Nearby random display sampling averages about one call per six client ticks.
     private static final int PARTICLE_ATTEMPTS = 6;
 
-    // FACING points out through the grille; the connector touches the opposite block boundary.
     private static final VoxelShape NORTH_SHAPE = Shapes.or(
             Block.box(1, 1, 13, 15, 15, 14.5), Block.box(2, 2, 14.5, 14, 14, 16));
     private static final VoxelShape SOUTH_SHAPE = Shapes.or(
@@ -81,7 +79,6 @@ public class AirVentBlock extends Block implements IWrenchable {
             return;
         }
         Direction facing = state.getValue(FACING);
-        // The grille lies three pixels inward from the rear mounting boundary.
         double offset = -5.0 / 16.0 + 1.0 / 64.0;
         double x = pos.getX() + .5 + facing.getStepX() * offset;
         double y = pos.getY() + .5 + facing.getStepY() * offset;

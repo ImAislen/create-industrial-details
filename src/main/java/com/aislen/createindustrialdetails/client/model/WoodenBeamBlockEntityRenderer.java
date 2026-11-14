@@ -8,7 +8,6 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import org.jetbrains.annotations.NotNull;
 
-/** Reuses Struts' renderer after supplying the endpoint-aware cached quad list. */
 public final class WoodenBeamBlockEntityRenderer extends StrutBlockEntityRenderer {
 
     public WoodenBeamBlockEntityRenderer(BlockEntityRendererProvider.Context context) {

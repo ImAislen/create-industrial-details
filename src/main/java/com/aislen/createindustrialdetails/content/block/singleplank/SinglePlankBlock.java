@@ -72,7 +72,6 @@ public class SinglePlankBlock extends Block {
                 {rotateToZ(LEFT_SHAPE), rotateToZ(CENTER_SHAPE), rotateToZ(RIGHT_SHAPE)}
         };
         VoxelShape[][] shapes = new VoxelShape[2][8];
-        // X/Z rows share the same left/center/right mask. Build all 16 unions only once.
         for (int axis = 0; axis < shapes.length; axis++) {
             for (int mask = 0; mask < shapes[axis].length; mask++) {
                 VoxelShape shape = Shapes.empty();
@@ -89,7 +88,6 @@ public class SinglePlankBlock extends Block {
 
     private static VoxelShape rotateToZ(VoxelShape shape) {
         AABB bounds = shape.bounds();
-        // Matches model y=270: low Z becomes low X, and each plank still spans the full length.
         return Shapes.box(bounds.minZ, bounds.minY, bounds.minX,
                 bounds.maxZ, bounds.maxY, bounds.maxX);
     }
@@ -152,7 +150,6 @@ public class SinglePlankBlock extends Block {
     }
 
     private static Direction lateralDirection(BlockState state) {
-        // RIGHT is the positive lateral lane: +Z for X planks, +X for Z planks.
         return state.getValue(AXIS) == Direction.Axis.X ? Direction.SOUTH : Direction.EAST;
     }
 
@@ -197,7 +194,6 @@ public class SinglePlankBlock extends Block {
         if (!state.getValue(preferred)) {
             return preferred;
         }
-        // Center is the nearest alternative to either outer lane.
         if (!state.getValue(CENTER)) {
             return CENTER;
         }
@@ -253,7 +249,6 @@ public class SinglePlankBlock extends Block {
 
         BooleanProperty slot = availableSlotFromHit(state, hitLocation, pos);
         if (slot == null) {
-            // Consume the interaction, not the item, so BlockItem cannot place a fourth plank beside it.
             return ItemInteractionResult.CONSUME;
         }
 
@@ -287,7 +282,6 @@ public class SinglePlankBlock extends Block {
             return InteractionResult.PASS;
         }
         VoxelShape clickedShape = shapeForMask(state.getValue(AXIS), slot == LEFT ? 1 : slot == CENTER ? 2 : 4);
-        // Include the surface itself while rejecting clicks in the gaps around an occupied lane.
         if (!clickedShape.bounds().inflate(1.0E-7).contains(
                 hitResult.getLocation().subtract(pos.getX(), pos.getY(), pos.getZ()))) {
             return InteractionResult.PASS;

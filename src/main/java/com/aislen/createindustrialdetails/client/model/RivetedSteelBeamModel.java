@@ -21,7 +21,6 @@ import net.neoforged.neoforge.client.model.data.ModelProperty;
 public final class RivetedSteelBeamModel
         extends BakedModelWrapper<BakedModel> {
 
-    // Visual State
 
     private static final ModelProperty<Integer> VISUAL_MASK =
             new ModelProperty<>();
@@ -32,7 +31,6 @@ public final class RivetedSteelBeamModel
     private static final int TOP_Z = 1 << 3;
 
 
-    // Models
 
     private final Direction.Axis axis;
 
@@ -42,7 +40,6 @@ public final class RivetedSteelBeamModel
     private final BakedModel topZ;
 
 
-    // Setup
 
     public RivetedSteelBeamModel(
             BakedModel originalModel,
@@ -62,7 +59,6 @@ public final class RivetedSteelBeamModel
     }
 
 
-    // Model Data
 
     @Override
     public ModelData getModelData(
@@ -149,7 +145,6 @@ public final class RivetedSteelBeamModel
     }
 
 
-    // Quads
 
     @Override
     public List<BakedQuad> getQuads(

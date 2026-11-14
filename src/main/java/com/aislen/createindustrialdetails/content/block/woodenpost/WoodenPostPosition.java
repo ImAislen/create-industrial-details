@@ -7,7 +7,6 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 
-/** The nine discrete X/Z locations available to an 8-pixel-wide Wooden Post. */
 public enum WoodenPostPosition implements StringRepresentable {
     NORTH_WEST("north_west", -1, -1),
     NORTH("north", 0, -1),

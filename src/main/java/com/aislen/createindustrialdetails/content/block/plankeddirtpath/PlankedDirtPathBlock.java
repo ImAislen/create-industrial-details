@@ -109,7 +109,6 @@ public class PlankedDirtPathBlock extends DirtPathBlock {
         if (player == null || context.getClickedFace() != Direction.UP || !level.getBlockState(pos).is(Blocks.DIRT_PATH)) {
             return InteractionResult.PASS;
         }
-        // Copy the standalone placement convention, including its facing axis and click thirds.
         BlockState state = withPropertiesOf(plank.getStateForPlacement(new BlockPlaceContext(context)));
         if (!state.canSurvive(level, pos)) {
             return InteractionResult.FAIL;
@@ -198,7 +197,6 @@ public class PlankedDirtPathBlock extends DirtPathBlock {
         if (!level.getBlockState(pos).is(this)) {
             return;
         }
-        // DirtPathBlock schedules this once on obstruction; it is not a repeating or random tick.
         int count = Integer.bitCount(SinglePlankBlock.occupancyMask(state));
         if (count > 0) {
             Block.popResource(level, pos, new ItemStack(plank, count));

@@ -49,8 +49,6 @@ public class WoodenBeamBlockEntity extends StrutBlockEntity {
         super.addConnection(peerPos, peerFace);
 
         if (level != null && !level.isClientSide) {
-            // super.addConnection has no opt-out for its centered shape registration.
-            // Replace that cached shape immediately with the endpoint-aware one.
             GirderStrutStructureShapes.unregisterConnection(level, getBlockPos(), peerPos);
             registerEndpointAwareShape(peerPos, endpointsByPeer.get(relative));
         }
@@ -168,8 +166,6 @@ public class WoodenBeamBlockEntity extends StrutBlockEntity {
             }
         }
 
-        // Prototype saves contain only stock Connections. They remain intact and
-        // acquire deterministic center metadata on their next save.
         for (GirderConnectionNode connection : getConnectionsCopy()) {
             endpointsByPeer.putIfAbsent(connection.relativeOffset(), legacyEndpoints(connection.peerFacing()));
         }

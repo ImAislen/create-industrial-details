@@ -24,7 +24,6 @@ import org.jetbrains.annotations.Nullable;
 
 import static net.minecraft.world.level.block.state.properties.BlockStateProperties.WATERLOGGED;
 
-/** Invisible cached-collision carrier used only between Wooden Beam anchors. */
 public final class WoodenBeamStructureBlock extends Block implements SimpleWaterloggedBlock {
 
     public WoodenBeamStructureBlock(Properties properties) {

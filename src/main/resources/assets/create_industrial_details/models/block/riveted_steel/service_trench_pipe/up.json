@@ -1,0 +1,32 @@
+{
+  "textures": {
+    "0": "create:block/pipes",
+    "particle": "create:block/pipes"
+  },
+  "elements": [
+    {
+      "from": [
+        4,
+        12,
+        4
+      ],
+      "to": [
+        12,
+        16,
+        12
+      ],
+      "faces": {
+        "up": {
+          "uv": [
+            11.5,
+            11.5,
+            15.5,
+            15.5
+          ],
+          "rotation": 90,
+          "texture": "#0"
+        }
+      }
+    }
+  ]
+}

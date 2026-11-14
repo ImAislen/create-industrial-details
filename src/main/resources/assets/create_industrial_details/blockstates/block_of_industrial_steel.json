@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "create_industrial_details:block/riveted_steel/block_of_industrial_steel"
+    }
+  }
+}

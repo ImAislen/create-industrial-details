@@ -1,0 +1,6 @@
+ {
+  "parent": "create_industrial_details:block/riveted_steel/service_trench",
+  "textures": {
+    "particle": "create_industrial_details:block/riveted_steel/service_trench"
+  }
+}

@@ -11,27 +11,12 @@ import net.minecraft.world.level.block.state.BlockState;
 
 import java.util.Optional;
 
-/**
- * Hidden block stored inside Create's existing bracket slot.
- *
- * It is never placed directly in the world and has no BlockItem.
- */
 public final class RivetedSteelPanelShaftPenetrationBlock extends BracketBlock {
 
     public RivetedSteelPanelShaftPenetrationBlock(Properties properties) {
         super(properties);
     }
 
-    /**
-     * Unlike Create's normal decorative brackets, our "bracket" represents
-     * a panel pierced by the shaft, so it is valid when the clicked face IS
-     * one of the shaft's end faces.
-     *
-     * Important:
-     * The panel's FACING convention points OUTWARD from its supporting face.
-     * A panel physically occupying the clicked end of the shaft therefore
-     * needs the OPPOSITE stored facing.
-     */
     @Override
     public Optional<BlockState> getSuitableBracket(
         BlockState targetState,

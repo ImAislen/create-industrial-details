@@ -38,7 +38,6 @@ public class RivetedSteelCagedLampBlock
         extends Block
         implements EntityBlock, IWrenchable {
 
-    // Properties
 
     public static final DirectionProperty FACING = BlockStateProperties.FACING;
     public static final BooleanProperty PERPENDICULAR = BooleanProperty.create("perpendicular");
@@ -47,7 +46,6 @@ public class RivetedSteelCagedLampBlock
     public static final EnumProperty<RivetedSteelCagedLampColor> COLOR =
             EnumProperty.create("color", RivetedSteelCagedLampColor.class);
 
-    // Shapes
 
     private static final VoxelShape WALL_HANGING_SOUTH = combine(
             box(2.5, 2.5, 0, 13.5, 13.5, 1.75),
@@ -112,7 +110,6 @@ public class RivetedSteelCagedLampBlock
         return new RivetedSteelCagedLampBlockEntity(pos, state);
     }
 
-    // State
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
@@ -142,7 +139,6 @@ public class RivetedSteelCagedLampBlock
                 : null;
     }
 
-    // Redstone
 
     @Override
     protected void neighborChanged(
@@ -194,7 +190,6 @@ public class RivetedSteelCagedLampBlock
         return powered ^ inverted;
     }
 
-    // Wrench
 
     @Override
     public InteractionResult onWrenched(BlockState state, UseOnContext context) {
@@ -214,7 +209,6 @@ public class RivetedSteelCagedLampBlock
         return InteractionResult.SUCCESS;
     }
 
-    // Interaction
 
     @Override
     protected InteractionResult useWithoutItem(
@@ -241,7 +235,6 @@ public class RivetedSteelCagedLampBlock
         return InteractionResult.sidedSuccess(level.isClientSide);
     }
 
-    // Dye
 
     @Override
     protected ItemInteractionResult useItemOn(
@@ -279,7 +272,6 @@ public class RivetedSteelCagedLampBlock
         return ItemInteractionResult.SKIP_DEFAULT_BLOCK_INTERACTION;
     }
 
-    // Support
 
     @Override
     public boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
@@ -305,7 +297,6 @@ public class RivetedSteelCagedLampBlock
         return super.updateShape(state, direction, neighborState, level, pos, neighborPos);
     }
 
-    // Shape
 
     @Override
     public VoxelShape getShape(
@@ -355,7 +346,6 @@ public class RivetedSteelCagedLampBlock
         };
     }
 
-    // Transform
 
     @Override
     public BlockState rotate(BlockState state, Rotation rotation) {

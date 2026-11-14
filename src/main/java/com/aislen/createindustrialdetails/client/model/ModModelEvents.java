@@ -25,7 +25,6 @@ import net.neoforged.neoforge.client.event.ModelEvent;
 )
 public final class ModModelEvents {
 
-    // Models
 
     private static final ResourceLocation END_A =
             id("block/riveted_steel/riveted_steel_beam/riveted_steel_beam_end_a");
@@ -57,7 +56,6 @@ public final class ModModelEvents {
     private static final ResourceLocation VERTICAL_CROSS_ROTATED =
             id("block/riveted_steel/riveted_steel_beam/riveted_steel_beam_vertical_cross_rotated");
 
-    // Registration
 
     @SubscribeEvent
     public static void registerAdditional(
@@ -102,7 +100,6 @@ public final class ModModelEvents {
     }
 
 
-    // Baking
 
     @SubscribeEvent
     public static void modifyBakingResult(
@@ -110,6 +107,16 @@ public final class ModModelEvents {
     ) {
         Map<ModelResourceLocation, BakedModel> models =
                 event.getModels();
+
+        for (BlockState state : ModBlocks.SERVICE_TRENCH_GLASS_PIPE.get().getStateDefinition().getPossibleStates()) {
+            models.computeIfPresent(BlockModelShaper.stateToModelLocation(state),
+                    (key, original) -> com.simibubi.create.content.fluids.PipeAttachmentModel.withAO(original));
+        }
+
+        for (BlockState state : ModBlocks.SERVICE_TRENCH_PIPE.get().getStateDefinition().getPossibleStates()) {
+            models.computeIfPresent(BlockModelShaper.stateToModelLocation(state),
+                    (key, original) -> new ServiceTrenchPipeModel(original));
+        }
 
         BakedModel endA =
                 getModel(models, END_A);
@@ -201,7 +208,6 @@ public final class ModModelEvents {
     }
 
 
-    // Helpers
 
     private static BakedModel getModel(
             Map<ModelResourceLocation, BakedModel> models,

@@ -23,7 +23,6 @@ public final class SinglePlankBlockItem extends BlockItem {
 
     @Override
     public InteractionResult onItemUseFirst(ItemStack stack, UseOnContext context) {
-        // Handle compatible merges before an interactive support block can consume the click.
         return tryAddPlank(context);
     }
 

@@ -108,8 +108,6 @@ public class RivetedSteelCagedLampMenu extends AbstractContainerMenu {
         if (!stillValid(player))
             return false;
 
-        // The client only requests one of the known actions. The authoritative
-        // carried stack lookup and mutation happen when it reaches the server.
         if (player.level().isClientSide)
             return true;
 

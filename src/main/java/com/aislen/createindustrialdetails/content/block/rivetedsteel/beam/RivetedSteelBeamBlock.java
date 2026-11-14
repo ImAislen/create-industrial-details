@@ -26,19 +26,16 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 
 public final class RivetedSteelBeamBlock extends GirderBlock {
 
-    // Properties
 
     public static final BooleanProperty VERTICAL_ROTATED =
             BooleanProperty.create("vertical_rotated");
 
 
-    // Placement
 
     private static final int PLACEMENT_HELPER_ID =
             PlacementHelpers.register(new RivetedSteelBeamPlacementHelper());
 
 
-    // Shapes
 
     private static final VoxelShape SHAPE_Z = Shapes.or(
             Block.box(1.5, 0, 0, 14.5, 3, 16),
@@ -65,7 +62,6 @@ public final class RivetedSteelBeamBlock extends GirderBlock {
     );
 
 
-    // Setup
 
     public RivetedSteelBeamBlock(Properties properties) {
         super(properties);
@@ -85,7 +81,6 @@ public final class RivetedSteelBeamBlock extends GirderBlock {
     }
 
 
-    // Placement Assistance
 
     @Override
     protected ItemInteractionResult useItemOn(
@@ -140,7 +135,6 @@ public final class RivetedSteelBeamBlock extends GirderBlock {
     }
 
 
-    // Placement
 
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext context) {
@@ -162,7 +156,6 @@ public final class RivetedSteelBeamBlock extends GirderBlock {
     }
 
 
-    // Shapes
 
     @Override
     public VoxelShape getShape(
@@ -195,7 +188,6 @@ public final class RivetedSteelBeamBlock extends GirderBlock {
     }
 
 
-    // Rotation
 
     @Override
     public BlockState rotate(

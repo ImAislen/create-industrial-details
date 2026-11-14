@@ -1,4 +1,16 @@
 {
   "replace": false,
-  "values": ["create_industrial_details:air_vent", "create_industrial_details:air_intake", "create_industrial_details:small_steel_wall_bracket", "create_industrial_details:steel_wall_bracket", "create_industrial_details:steel_wall_corner_bracket"]
+  "values": [
+    "create_industrial_details:air_vent",
+    "create_industrial_details:air_intake",
+    "create_industrial_details:small_steel_wall_bracket",
+    "create_industrial_details:steel_wall_bracket",
+    "create_industrial_details:steel_wall_corner_bracket",
+    "create_industrial_details:cable_tray",
+    "create_industrial_details:service_trench",
+    "create_industrial_details:service_trench_pipe",
+    "create_industrial_details:service_trench_shaft",
+    "create_industrial_details:service_trench_glass_pipe",
+    "create_industrial_details:block_of_industrial_steel"
+  ]
 }

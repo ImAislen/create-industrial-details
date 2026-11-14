@@ -13,13 +13,10 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
 
-/** Authoritative conversion between face-local snap data and world geometry. */
 public final class WoodenBeamEndpoints {
 
     public static final double SNAP_SPACING = 4.0 / 16.0;
 
-    // Matches Struts' established attachment depth. The generated segment is then
-    // clipped two pixels into the supporting block, preventing an exposed seam.
     private static final double ATTACHMENT_DEPTH = (6.0 / 16.0) + 1.0e-3;
     private static final double CLIP_EXTRA_DEPTH = 4.0 / 16.0;
     private static final double MARKER_SURFACE_OFFSET = 1.0 / 256.0;
@@ -36,11 +33,6 @@ public final class WoodenBeamEndpoints {
                 .add(Vec3.atLowerCornerOf(basis.v()).scale(snap.gridV() * SNAP_SPACING));
     }
 
-    /**
-     * Resolves the endpoint used by visible and physical Beam geometry without
-     * changing the saved Struts anchor metadata. Ordinary supports retain the
-     * original attachment exactly; Posts target their actual member centreline.
-     */
     public static Vec3 physicalAttachment(
             @Nullable BlockGetter level,
             BlockPos anchorPos,
@@ -69,19 +61,12 @@ public final class WoodenBeamEndpoints {
             return new Vec3(centreX, logicalAttachment.y, centreZ);
         }
 
-        // supportPos is opposite the outward Struts supportFace: UP therefore
-        // means the anchor is above the Post, while DOWN means it is below.
         double targetY = supportFace == Direction.UP
                 ? postBounds.maxY - BEAM_HALF_SIZE
                 : postBounds.minY + BEAM_HALF_SIZE;
         return new Vec3(centreX, targetY, centreZ);
     }
 
-    /**
-     * Resolves the common span used by rendering, previews, collision, and
-     * selection. Horizontal spans may target a Post's physical centreline;
-     * sloped spans deliberately retain the proven Struts attachment geometry.
-     */
     public static GeometrySpan geometrySpan(
             @Nullable BlockGetter level,
             BlockPos fromPos,
@@ -108,7 +93,6 @@ public final class WoodenBeamEndpoints {
         return attachment(anchorPos, supportFace, snap).relative(supportFace, -CLIP_EXTRA_DEPTH);
     }
 
-    /** The selected point on the support face, nudged outward only for client preview rendering. */
     public static Vec3 markerPoint(BlockPos anchorPos, Direction supportFace, WoodenBeamSnapPoint snap) {
         FaceBasis basis = basis(supportFace);
         return Vec3.atCenterOf(anchorPos)
@@ -125,7 +109,6 @@ public final class WoodenBeamEndpoints {
         return WoodenBeamSnapPoint.fromGrid(nearestGrid(localU), nearestGrid(localV));
     }
 
-    /** Constrains a Post-supported endpoint to the Post's physical centreline. */
     public static WoodenBeamSnapPoint alignToPost(
             Direction supportFace,
             WoodenBeamSnapPoint selected,
@@ -179,7 +162,6 @@ public final class WoodenBeamEndpoints {
         return mirror.mirror(rotation.rotate(face));
     }
 
-    /** U points right and V points up when looking directly at the outward support face. */
     public static FaceBasis basis(Direction face) {
         return switch (face) {
             case UP -> new FaceBasis(new Vec3i(1, 0, 0), new Vec3i(0, 0, -1));

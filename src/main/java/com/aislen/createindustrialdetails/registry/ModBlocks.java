@@ -1,11 +1,13 @@
 package com.aislen.createindustrialdetails.registry;
 
 import com.aislen.createindustrialdetails.CreateIndustrialDetails;
+import com.aislen.createindustrialdetails.content.block.rivetedsteel.trench.*;
 import net.minecraft.world.level.block.Blocks;
 import com.aislen.createindustrialdetails.content.block.MooringBollardBlock;
 import com.aislen.createindustrialdetails.content.block.airduct.AirDuctBlock;
 import com.aislen.createindustrialdetails.content.block.airduct.AirIntakeBlock;
 import com.aislen.createindustrialdetails.content.block.airduct.AirVentBlock;
+import com.aislen.createindustrialdetails.content.block.cable.CableTrayBlock;
 import com.aislen.createindustrialdetails.content.block.rivetedsteel.RivetedSteelGrateBlock;
 import com.aislen.createindustrialdetails.content.block.rivetedsteel.RivetedSteelHatchBlock;
 import com.aislen.createindustrialdetails.content.block.rivetedsteel.beam.RivetedSteelBeamBlock;
@@ -65,6 +67,27 @@ public final class ModBlocks {
     }
 
 
+    public static final DeferredBlock<ServiceTrenchBlock> SERVICE_TRENCH =
+            registerBlockWithItem("service_trench", () -> new ServiceTrenchBlock(serviceTrenchProperties()), ServiceTrenchBlockItem::new);
+    public static final DeferredBlock<ServiceTrenchPipeBlock> SERVICE_TRENCH_PIPE =
+            BLOCKS.register("service_trench_pipe", () -> new ServiceTrenchPipeBlock(serviceTrenchProperties()));
+    public static final DeferredBlock<ServiceTrenchShaftBlock> SERVICE_TRENCH_SHAFT =
+            BLOCKS.register("service_trench_shaft", () -> new ServiceTrenchShaftBlock(serviceTrenchProperties()));
+
+    public static final DeferredBlock<ServiceTrenchGlassPipeBlock> SERVICE_TRENCH_GLASS_PIPE =
+            BLOCKS.register("service_trench_glass_pipe", () -> new ServiceTrenchGlassPipeBlock(serviceTrenchProperties()));
+
+    private static BlockBehaviour.Properties serviceTrenchProperties() {
+        return BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_GRAY).strength(3.0F, 6.0F)
+                .requiresCorrectToolForDrops().sound(SoundType.NETHERITE_BLOCK).noOcclusion();
+    }
+
+    public static final DeferredBlock<Block> BLOCK_OF_INDUSTRIAL_STEEL =
+            registerBlockWithItem("block_of_industrial_steel", () -> new Block(
+                    BlockBehaviour.Properties.ofFullCopy(Blocks.GOLD_BLOCK)
+                            .mapColor(MapColor.COLOR_GRAY).sound(SoundType.NETHERITE_BLOCK).requiresCorrectToolForDrops()
+            ));
+
     public static final DeferredBlock<Block> CAST_IRON_BLOCK =
             registerBlockWithItem(
                     "cast_iron_block",
@@ -92,7 +115,6 @@ public final class ModBlocks {
 
     public static final Map<String, DeferredBlock<WoodenBeamBlock>> WOODEN_BEAMS = registerWoodenBeams();
 
-    // Preserve the prototype's public holder and registry name for existing worlds.
     public static final DeferredBlock<WoodenBeamBlock> OAK_WOODEN_BEAM =
             WOODEN_BEAMS.get("oak_wooden_beam");
 
@@ -237,7 +259,6 @@ public final class ModBlocks {
 
 
 
-    //Air Ducts
     public static final DeferredBlock<AirDuctBlock> AIR_DUCT =
             registerBlockWithItem(
                     "air_duct",
@@ -268,7 +289,19 @@ public final class ModBlocks {
                     BlockItem::new
             );
 
-    //Planked Planks
+    public static final DeferredBlock<CableTrayBlock> CABLE_TRAY =
+            registerBlockWithItem(
+                    "cable_tray",
+                    () -> new CableTrayBlock(
+                            BlockBehaviour.Properties.of()
+                                    .mapColor(MapColor.METAL)
+                                    .strength(3.5F, 6.0F)
+                                    .sound(SoundType.METAL)
+                                    .requiresCorrectToolForDrops()
+                                    .noOcclusion()
+                    )
+            );
+
 
     public static final DeferredBlock<PlankedPlanksBlock> ACACIA_PLANKED_PLANKS =
             registerPlankedPlanks("acacia_planked_planks");
@@ -303,7 +336,6 @@ public final class ModBlocks {
     public static final DeferredBlock<PlankedPlanksBlock> WARPED_PLANKED_PLANKS =
             registerPlankedPlanks("warped_planked_planks");
 
-    //Single Plank
 
     public static final DeferredBlock<SinglePlankBlock> ACACIA_SINGLE_PLANK =
             registerSinglePlank("acacia_single_plank", () -> ModBlocks.ACACIA_PLANKED_DIRT_PATH.get());
@@ -338,7 +370,6 @@ public final class ModBlocks {
     public static final DeferredBlock<SinglePlankBlock> WARPED_SINGLE_PLANK =
             registerSinglePlank("warped_single_plank", () -> ModBlocks.WARPED_PLANKED_DIRT_PATH.get());
 
-    // World-only composites: the normal Single Plank item creates these in an existing path.
     public static final DeferredBlock<PlankedDirtPathBlock> ACACIA_PLANKED_DIRT_PATH =
             registerPlankedDirtPath("acacia_planked_dirt_path", ACACIA_SINGLE_PLANK);
 

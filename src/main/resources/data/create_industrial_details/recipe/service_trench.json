@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "pattern": [
+    " B ",
+    "I I",
+    "III"
+  ],
+  "key": {
+    "B": {
+      "item": "minecraft:iron_bars"
+    },
+    "I": {
+      "item": "create:industrial_iron_block"
+    }
+  },
+  "result": {
+    "id": "create_industrial_details:service_trench",
+    "count": 4
+  }
+}

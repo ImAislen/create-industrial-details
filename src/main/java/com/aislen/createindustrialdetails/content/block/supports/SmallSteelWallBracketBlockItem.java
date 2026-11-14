@@ -14,7 +14,6 @@ public final class SmallSteelWallBracketBlockItem extends BlockItem {
     public InteractionResult useOn(UseOnContext context) {
         BlockState state = context.getLevel().getBlockState(context.getClickedPos());
         if (state.is(getBlock()) && state.getValue(SmallSteelWallBracketBlock.QUANTITY) == 2) {
-            // Stop BlockItem from placing an adjacent block when the clicked pair is already full.
             return InteractionResult.FAIL;
         }
         return super.useOn(context);

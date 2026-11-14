@@ -96,7 +96,6 @@ public final class SmallSteelWallBracketBlock extends HorizontalDirectionalBlock
         if (!level.setBlock(pos, state.setValue(QUANTITY, 1), Block.UPDATE_ALL)) {
             return InteractionResult.FAIL;
         }
-        // Partial pickup returns one physical bracket without invoking the double state's loot.
         if (player != null && !player.isCreative()) {
             player.getInventory().placeItemBackInInventory(new ItemStack(this));
         }
@@ -121,7 +120,6 @@ public final class SmallSteelWallBracketBlock extends HorizontalDirectionalBlock
     }
 
     private static VoxelShape[][][] createShapes() {
-        // South-facing wall top, wall bottom, and floor layouts; the diagonal remains visual only.
         VoxelShape[] singles = {
                 Shapes.or(Block.box(7, 8, 0, 9, 16, 1), Block.box(7, 15, 1, 9, 16, 8)),
                 Shapes.or(Block.box(7, 0, 0, 9, 8, 1), Block.box(7, 0, 1, 9, 1, 8)),
@@ -132,7 +130,6 @@ public final class SmallSteelWallBracketBlock extends HorizontalDirectionalBlock
             for (int quantity = 1; quantity <= 2; quantity++) {
                 VoxelShape shape = quantity == 1 ? singles[layout]
                         : Shapes.or(singles[layout].move(-1.0 / 6.0, 0, 0), singles[layout].move(1.0 / 6.0, 0, 0));
-                // Direction's horizontal indices run south, west, north, east, matching model Y rotations.
                 for (int facing = 0; facing < 4; facing++) {
                     shapes[layout][quantity - 1][facing] = shape;
                     shape = rotateClockwise(shape);

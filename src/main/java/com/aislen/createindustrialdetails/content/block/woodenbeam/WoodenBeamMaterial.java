@@ -7,7 +7,6 @@ import net.minecraft.world.level.material.MapColor;
 import java.util.Arrays;
 import java.util.List;
 
-/** Central material definitions for the shared Wooden Beam implementation. */
 public enum WoodenBeamMaterial {
     OAK("oak", "Oak", MapColor.WOOD, SoundType.WOOD, SoundType.WOOD,
             "oak_log", "oak_log_top", "stripped_oak_log", "stripped_oak_log_top", "oak_planks", true),

@@ -4,10 +4,6 @@ import net.minecraft.core.Direction;
 import net.minecraft.world.level.block.Mirror;
 import net.minecraft.world.level.block.Rotation;
 
-/**
- * One of the nine discrete attachment points on a Wooden Beam support face.
- * Grid coordinates are stored as -1, 0, or 1 and map to 4, 8, or 12 pixels.
- */
 public enum WoodenBeamSnapPoint {
     BOTTOM_LEFT(0, -1, -1),
     BOTTOM_CENTER(1, 0, -1),

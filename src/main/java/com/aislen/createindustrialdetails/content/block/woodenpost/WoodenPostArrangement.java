@@ -8,7 +8,6 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 import java.util.StringJoiner;
 
-/** One of the 34 non-overlapping sets of 8x8 Wooden Post members. */
 public enum WoodenPostArrangement implements StringRepresentable {
     NORTH_WEST(WoodenPostPosition.NORTH_WEST),
     NORTH(WoodenPostPosition.NORTH),

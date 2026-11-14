@@ -19,7 +19,6 @@ import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Set;
 
-/** Cached collision registry rebuilt only when Wooden Beam connections change. */
 public final class WoodenBeamStructureShapes {
 
     private static final LevelSafeStorage<ShapeRegistry> STORAGE = new LevelSafeStorage<>(ShapeRegistry::new);

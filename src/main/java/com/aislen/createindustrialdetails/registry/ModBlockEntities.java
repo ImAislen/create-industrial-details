@@ -1,6 +1,7 @@
 package com.aislen.createindustrialdetails.registry;
 
 import com.aislen.createindustrialdetails.CreateIndustrialDetails;
+import com.aislen.createindustrialdetails.content.block.rivetedsteel.trench.*;
 import com.aislen.createindustrialdetails.content.block.lighting.cagedlamp.RivetedSteelCagedLampBlockEntity;
 import com.aislen.createindustrialdetails.content.block.woodenbeam.WoodenBeamBlockEntity;
 import net.minecraft.core.registries.Registries;
@@ -42,6 +43,17 @@ public final class ModBlockEntities {
                                     .toArray(net.minecraft.world.level.block.Block[]::new)
                     ).build(null)
             );
+
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<ServiceTrenchPipeBlockEntity>> SERVICE_TRENCH_PIPE =
+            BLOCK_ENTITY_TYPES.register("service_trench_pipe", () -> BlockEntityType.Builder.of(
+                    ServiceTrenchPipeBlockEntity::new, ModBlocks.SERVICE_TRENCH_PIPE.get()).build(null));
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<ServiceTrenchShaftBlockEntity>> SERVICE_TRENCH_SHAFT =
+            BLOCK_ENTITY_TYPES.register("service_trench_shaft", () -> BlockEntityType.Builder.of(
+                    ServiceTrenchShaftBlockEntity::new, ModBlocks.SERVICE_TRENCH_SHAFT.get()).build(null));
+
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<ServiceTrenchGlassPipeBlockEntity>> SERVICE_TRENCH_GLASS_PIPE =
+            BLOCK_ENTITY_TYPES.register("service_trench_glass_pipe", () -> BlockEntityType.Builder.of(
+                    ServiceTrenchGlassPipeBlockEntity::new, ModBlocks.SERVICE_TRENCH_GLASS_PIPE.get()).build(null));
 
     private ModBlockEntities() {
     }

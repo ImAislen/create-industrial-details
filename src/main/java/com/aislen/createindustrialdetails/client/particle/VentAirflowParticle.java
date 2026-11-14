@@ -27,7 +27,6 @@ public class VentAirflowParticle extends AirFlowParticle {
 
     private VentAirflowParticle(ClientLevel level, double x, double y, double z,
                                Direction direction, boolean inward, SpriteSet sprites) {
-        // Inherit Create's appearance and spread; our tick needs no fan block entity or air current.
         super(level, null, x, y, z, sprites);
         this.direction = direction;
         this.inward = inward;

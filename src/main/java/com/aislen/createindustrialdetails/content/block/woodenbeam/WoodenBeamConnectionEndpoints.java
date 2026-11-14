@@ -4,7 +4,6 @@ import net.minecraft.core.Direction;
 import net.minecraft.world.level.block.Mirror;
 import net.minecraft.world.level.block.Rotation;
 
-/** Compact endpoint metadata stored beside one stock Struts peer connection. */
 public record WoodenBeamConnectionEndpoints(
         Direction localFace,
         WoodenBeamSnapPoint localSnap,

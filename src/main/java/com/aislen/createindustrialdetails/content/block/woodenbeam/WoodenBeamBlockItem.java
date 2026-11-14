@@ -128,7 +128,6 @@ public final class WoodenBeamBlockItem extends BlockItem {
         Direction supportFace;
         if (clickedState.getBlock().equals(woodenBeamBlock)) {
             anchorPos = clickedPos;
-            // Clicking an existing anchor directly selects the physical face hit.
             supportFace = clickedFace.getOpposite();
         } else {
             anchorPos = clickedPos.relative(clickedFace);

@@ -18,7 +18,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.BlockHitResult;
 
-/** Routes occupied-block Post merges before vanilla BlockItem placement rejects the target. */
 public final class WoodenPostBlockItem extends BlockItem {
     public WoodenPostBlockItem(WoodenPostBlock block, Properties properties) {
         super(block, properties);

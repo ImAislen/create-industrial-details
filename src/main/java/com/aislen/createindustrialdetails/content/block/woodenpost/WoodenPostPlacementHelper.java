@@ -22,7 +22,6 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 import java.util.function.Predicate;
 
-/** Create placement assistance for extending one aligned Wooden Post member vertically. */
 public final class WoodenPostPlacementHelper implements IPlacementHelper {
     @Override
     public Predicate<ItemStack> getItemPredicate() {

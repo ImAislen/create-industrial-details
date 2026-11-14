@@ -33,11 +33,13 @@ public final class ModCreativeTabs {
                             )
                             .displayItems((parameters, output) -> {
                                 output.accept(ModBlocks.CAST_IRON_BLOCK.get());
+                                output.accept(ModBlocks.BLOCK_OF_INDUSTRIAL_STEEL.get());
                                 output.accept(ModBlocks.MOORING_BOLLARD.get());
                                 output.accept(ModBlocks.RIVETED_STEEL_PANEL.get());
                                 output.accept(ModBlocks.RIVETED_STEEL_GRATE.get());
                                 output.accept(ModBlocks.RIVETED_STEEL_HATCH.get());
                                 output.accept(ModBlocks.RIVETED_STEEL_BEAM.get());
+                                output.accept(ModBlocks.SERVICE_TRENCH.get());
                                 output.accept(ModBlocks.SMALL_STEEL_WALL_BRACKET.get());
                                 output.accept(ModBlocks.STEEL_WALL_BRACKET.get());
                                 output.accept(ModBlocks.STEEL_WALL_CORNER_BRACKET.get());
@@ -52,6 +54,7 @@ public final class ModCreativeTabs {
                                 output.accept(ModBlocks.AIR_DUCT.get());
                                 output.accept(ModBlocks.AIR_VENT.get());
                                 output.accept(ModBlocks.AIR_INTAKE.get());
+                                output.accept(ModBlocks.CABLE_TRAY.get());
 
 
                                 output.accept(ModBlocks.ACACIA_PLANKED_PLANKS.get());

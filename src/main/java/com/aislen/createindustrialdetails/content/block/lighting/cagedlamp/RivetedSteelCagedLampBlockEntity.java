@@ -32,8 +32,6 @@ public class RivetedSteelCagedLampBlockEntity
 
     private ItemStack frequencyFirst = ItemStack.EMPTY;
     private ItemStack frequencySecond = ItemStack.EMPTY;
-    // The sentinel forces a newly loaded receiver to reconcile a saved LIT state,
-    // even when the current network strength is zero.
     private int wirelessPower = -1;
     private boolean networkRegistered;
 
@@ -197,8 +195,6 @@ public class RivetedSteelCagedLampBlockEntity
         networkRegistered = true;
         Create.REDSTONE_LINK_NETWORK_HANDLER.addToNetwork(level, this);
 
-        // Create 6.0.10 immediately refreshes newly added LinkBehaviour actors,
-        // but not other direct IRedstoneLinkable implementations.
         refreshWirelessPower();
     }
 

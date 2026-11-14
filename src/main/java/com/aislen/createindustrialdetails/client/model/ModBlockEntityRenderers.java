@@ -27,6 +27,10 @@ public final class ModBlockEntityRenderers {
     public static void registerRenderers(
             EntityRenderersEvent.RegisterRenderers event
     ) {
+        event.registerBlockEntityRenderer(ModBlockEntities.SERVICE_TRENCH_SHAFT.get(),
+                com.simibubi.create.content.kinetics.base.ShaftRenderer::new);
+        event.registerBlockEntityRenderer(ModBlockEntities.SERVICE_TRENCH_GLASS_PIPE.get(),
+                com.simibubi.create.content.fluids.pipes.TransparentStraightPipeRenderer::new);
         WoodenBeamBlockEntity.CLIENT_ENDPOINT_UPDATE_LISTENER = WoodenBeamInteractionHandler::update;
         WoodenBeamBlockEntity.CLIENT_ENDPOINT_REMOVE_LISTENER = WoodenBeamInteractionHandler::remove;
         event.registerBlockEntityRenderer(
@@ -38,6 +42,12 @@ public final class ModBlockEntityRenderers {
     @SubscribeEvent
     public static void registerFlywheelVisual(FMLClientSetupEvent event) {
         event.enqueueWork(() -> {
+            SimpleBlockEntityVisualizer.builder(ModBlockEntities.SERVICE_TRENCH_SHAFT.get())
+                    .factory(com.simibubi.create.content.kinetics.base.ShaftVisual::new)
+                    .apply();
+            SimpleBlockEntityVisualizer.builder(ModBlockEntities.SERVICE_TRENCH_GLASS_PIPE.get())
+                    .factory(com.simibubi.create.content.fluids.pipes.GlassPipeVisual::new)
+                    .apply();
             StrutsFlywheelCompatLoader.init();
             SimpleBlockEntityVisualizer.builder(ModBlockEntities.WOODEN_BEAM.get())
                     .factory(WoodenBeamFlywheelVisual::new)

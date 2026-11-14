@@ -28,7 +28,6 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.ClientTickEvent;
 
-/** Lightweight held-item outline for the exact Wooden Post member that placement will add. */
 @EventBusSubscriber(modid = CreateIndustrialDetails.MOD_ID, value = Dist.CLIENT)
 public final class WoodenPostPlacementPreview {
     private static final String OUTLINE_ID = "wooden_post_placement_preview";
