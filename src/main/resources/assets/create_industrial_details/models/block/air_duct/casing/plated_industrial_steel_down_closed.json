@@ -1,0 +1,37 @@
+{
+  "textures": {
+    "north": "create_industrial_details:block/riveted_steel/block_of_plated_industrial_steel/north",
+    "east": "create_industrial_details:block/riveted_steel/block_of_plated_industrial_steel/east",
+    "south": "create_industrial_details:block/riveted_steel/block_of_plated_industrial_steel/south",
+    "west": "create_industrial_details:block/riveted_steel/block_of_plated_industrial_steel/west",
+    "up": "create_industrial_details:block/riveted_steel/block_of_plated_industrial_steel/up",
+    "down": "create_industrial_details:block/riveted_steel/block_of_plated_industrial_steel/down",
+    "particle": "create_industrial_details:block/riveted_steel/block_of_plated_industrial_steel/north"
+  },
+  "elements": [
+    {
+      "from": [
+        0,
+        0,
+        0
+      ],
+      "to": [
+        16,
+        0,
+        16
+      ],
+      "faces": {
+        "down": {
+          "uv": [
+            0.0,
+            0.0,
+            16.0,
+            16.0
+          ],
+          "texture": "#down",
+          "cullface": "down"
+        }
+      }
+    }
+  ]
+}

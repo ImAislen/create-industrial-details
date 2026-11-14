@@ -33,7 +33,7 @@ public class ServiceTrenchGameTests {
         var player = helper.makeMockPlayer(net.minecraft.world.level.GameType.SURVIVAL);
         var state = ModBlocks.SERVICE_TRENCH.get().defaultBlockState();
         level.setBlockAndUpdate(pos, state);
-        helper.assertTrue(state.getCollisionShape(level, pos).equals(net.minecraft.world.phys.shapes.Shapes.block()), "Full collision");
+        helper.assertTrue(!state.isCollisionShapeFullBlock(level, pos), "Empty trench collision is hollow");
         for (int i = 0; i < 2; i++) {
             ((IWrenchable) state.getBlock()).onWrenched(level.getBlockState(pos), context(player, pos));
         }
@@ -438,6 +438,110 @@ public class ServiceTrenchGameTests {
                 }
             }
         }
+        helper.succeed();
+    }
+
+    @GameTest(template = "empty", timeoutTicks = 60)
+    public static void crawlingThroughEmptyTrenches(GameTestHelper helper) {
+        var level = helper.getLevel();
+        var start = helper.absolutePos(new BlockPos(2, 2, 2));
+        var player = helper.makeMockPlayer(net.minecraft.world.level.GameType.SURVIVAL);
+        for (Direction facing : new Direction[]{Direction.NORTH, Direction.SOUTH, Direction.EAST, Direction.WEST}) {
+            boolean alongX = facing.getAxis() == Direction.Axis.X;
+            var forward = alongX ? Direction.EAST : Direction.SOUTH;
+            var state = ModBlocks.SERVICE_TRENCH.get().defaultBlockState().setValue(ServiceTrenchBlock.FACING, facing);
+            for (int i = 0; i < 3; i++) level.setBlockAndUpdate(start.relative(forward, i), state);
+            var shape = state.getCollisionShape(level, start);
+            helper.assertTrue(shape == state.getCollisionShape(level, start), "Collision shape is cached");
+            helper.assertTrue(!state.isSuffocating(level, start) && !state.canOcclude(), "Hollow trench does not suffocate or occlude");
+            player.setPose(net.minecraft.world.entity.Pose.SWIMMING);
+            player.refreshDimensions();
+            helper.assertTrue(player.getBoundingBox().getYsize() <= 14.0 / 16, "Vanilla crawling dimensions fit interior");
+            player.setPos(start.getX() + (alongX ? -0.5 : 0.5), start.getY() + 1.0 / 16,
+                    start.getZ() + (alongX ? 0.5 : -0.5));
+            for (int step = 0; step < 40; step++)
+                player.move(net.minecraft.world.entity.MoverType.SELF, new Vec3(alongX ? 0.1 : 0, 0, alongX ? 0 : 0.1));
+            double traveled = alongX ? player.getX() - start.getX() : player.getZ() - start.getZ();
+            helper.assertTrue(traveled > 3.4, "Crawling player enters, traverses and exits three trenches");
+            player.setPos(start.getX() + 0.5, start.getY() + 1.0 / 16, start.getZ() + 0.5);
+            player.move(net.minecraft.world.entity.MoverType.SELF, new Vec3(alongX ? 0 : 2, 0, alongX ? 2 : 0));
+            double lateral = alongX ? player.getZ() - start.getZ() : player.getX() - start.getX();
+            helper.assertTrue(lateral < 0.65, "Side wall stops crawling player");
+            player.setPos(start.getX() + 0.5, start.getY() + 0.5, start.getZ() + 0.5);
+            player.move(net.minecraft.world.entity.MoverType.SELF, new Vec3(0, -1, 0));
+            helper.assertTrue(Math.abs(player.getY() - start.getY() - 1.0 / 16) < 0.0001, "Floor supports crawling player");
+            player.setPose(net.minecraft.world.entity.Pose.STANDING);
+            player.refreshDimensions();
+            player.setPos(start.getX() + 0.5, start.getY() + 1.1, start.getZ() + 0.5);
+            player.move(net.minecraft.world.entity.MoverType.SELF, new Vec3(0, -0.5, 0));
+            helper.assertTrue(Math.abs(player.getY() - start.getY() - 1) < 0.0001, "Grille roof supports standing player");
+            for (int step = 0; step < 20; step++) {
+                player.move(net.minecraft.world.entity.MoverType.SELF, new Vec3(alongX ? 0.1 : 0, -0.05, alongX ? 0 : 0.1));
+                helper.assertTrue(Math.abs(player.getY() - start.getY() - 1) < 0.0001, "Player walks continuously across grille gaps");
+            }
+            var saved = net.minecraft.nbt.NbtUtils.writeBlockState(state);
+            var loaded = net.minecraft.nbt.NbtUtils.readBlockState(level.holderLookup(net.minecraft.core.registries.Registries.BLOCK), saved);
+            helper.assertTrue(loaded.getCollisionShape(level, start) == shape, "Reload retains oriented collision");
+            for (int i = 0; i < 3; i++) level.setBlockAndUpdate(start.relative(forward, i), net.minecraft.world.level.block.Blocks.AIR.defaultBlockState());
+        }
+        for (var block : List.of(ModBlocks.SERVICE_TRENCH_PIPE.get(), ModBlocks.SERVICE_TRENCH_GLASS_PIPE.get(), ModBlocks.SERVICE_TRENCH_SHAFT.get())) {
+            var state = block.defaultBlockState();
+            helper.assertTrue(state.isCollisionShapeFullBlock(level, start), "Encased utility collision stays full");
+        }
+        helper.succeed();
+    }
+
+    @GameTest(template = "empty", timeoutTicks = 60)
+    public static void platedSteelConnections(GameTestHelper helper) {
+        var level = helper.getLevel();
+        var pos = helper.absolutePos(new BlockPos(3, 3, 3));
+        var state = ModBlocks.BLOCK_OF_PLATED_INDUSTRIAL_STEEL.get().defaultBlockState();
+        var behavior = new com.aislen.createindustrialdetails.client.model.PlatedIndustrialSteelCTBehaviour();
+        var type = com.simibubi.create.foundation.block.connected.AllCTTypes.OMNIDIRECTIONAL;
+        level.setBlockAndUpdate(pos, state);
+        for (Direction face : Direction.values()) {
+            var empty = behavior.buildContext(level, pos, state, face, type.getContextRequirement());
+            helper.assertTrue(type.getTextureIndex(empty) == 0, "Isolated plated face uses exact original tile");
+            var normal = face.getAxis() == Direction.Axis.Y ? Direction.NORTH : Direction.UP;
+            var neighbor = pos.relative(normal);
+            level.setBlockAndUpdate(neighbor, ModBlocks.BLOCK_OF_INDUSTRIAL_STEEL.get().defaultBlockState());
+            helper.assertTrue(type.getTextureIndex(behavior.buildContext(level, pos, state, face, type.getContextRequirement())) == 0,
+                    "Regular steel never connects to plated steel");
+            level.setBlockAndUpdate(neighbor, state);
+            helper.assertTrue(type.getTextureIndex(behavior.buildContext(level, pos, state, face, type.getContextRequirement())) != 0,
+                    "Each face connects to plated neighbors");
+            level.setBlockAndUpdate(neighbor, net.minecraft.world.level.block.Blocks.AIR.defaultBlockState());
+            helper.assertTrue(type.getTextureIndex(behavior.buildContext(level, pos, state, face, type.getContextRequirement())) == 0,
+                    "Neighbor removal restores border");
+        }
+        for (Direction face : Direction.values()) {
+            var vertical = face.getAxis() == Direction.Axis.Y ? Direction.NORTH : Direction.UP;
+            var horizontal = face.getAxis() == Direction.Axis.X ? Direction.SOUTH : Direction.WEST;
+            for (int x = -1; x <= 1; x++) for (int y = -1; y <= 1; y++)
+                level.setBlockAndUpdate(pos.relative(horizontal, x).relative(vertical, y), state);
+            var full = behavior.buildContext(level, pos, state, face, type.getContextRequirement());
+            helper.assertTrue(full.up && full.down && full.left && full.right && full.topLeft && full.topRight
+                    && full.bottomLeft && full.bottomRight, "Complete wall/floor sheet connects in all directions");
+            level.setBlockAndUpdate(pos.relative(horizontal).relative(vertical), net.minecraft.world.level.block.Blocks.AIR.defaultBlockState());
+            helper.assertTrue(type.getTextureIndex(behavior.buildContext(level, pos, state, face, type.getContextRequirement()))
+                    != type.getTextureIndex(full), "Concave corner selects distinct border tile");
+            for (int x = -1; x <= 1; x++) for (int y = -1; y <= 1; y++) {
+                if (x != 0 || y != 0) level.setBlockAndUpdate(pos.relative(horizontal, x).relative(vertical, y),
+                        net.minecraft.world.level.block.Blocks.AIR.defaultBlockState());
+            }
+        }
+        var boundary = new BlockPos((pos.getX() & ~15) + 15, pos.getY() + 10, pos.getZ());
+        level.setBlockAndUpdate(boundary, state);
+        level.setBlockAndUpdate(boundary.east(), state);
+        helper.assertTrue(type.getTextureIndex(behavior.buildContext(level, boundary, state, Direction.SOUTH,
+                type.getContextRequirement())) != 0, "Connection crosses chunk boundary");
+        level.setBlockAndUpdate(boundary, net.minecraft.world.level.block.Blocks.AIR.defaultBlockState());
+        level.setBlockAndUpdate(boundary.east(), net.minecraft.world.level.block.Blocks.AIR.defaultBlockState());
+        helper.assertTrue(state.isCollisionShapeFullBlock(level, pos) && !state.hasBlockEntity(), "Static solid decorative block");
+        helper.assertTrue(state.is(net.minecraft.tags.BlockTags.MINEABLE_WITH_PICKAXE)
+                && state.is(net.minecraft.tags.BlockTags.NEEDS_IRON_TOOL), "Matching mining requirements");
+        var drops = Block.getDrops(state, level, pos, null);
+        helper.assertTrue(drops.size() == 1 && drops.getFirst().is(ModBlocks.BLOCK_OF_PLATED_INDUSTRIAL_STEEL.get().asItem()), "Plated block drops itself");
         helper.succeed();
     }
 

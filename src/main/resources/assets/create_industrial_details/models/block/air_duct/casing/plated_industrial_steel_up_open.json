@@ -1,0 +1,201 @@
+{
+  "textures": {
+    "north": "create_industrial_details:block/riveted_steel/block_of_plated_industrial_steel/north",
+    "east": "create_industrial_details:block/riveted_steel/block_of_plated_industrial_steel/east",
+    "south": "create_industrial_details:block/riveted_steel/block_of_plated_industrial_steel/south",
+    "west": "create_industrial_details:block/riveted_steel/block_of_plated_industrial_steel/west",
+    "up": "create_industrial_details:block/riveted_steel/block_of_plated_industrial_steel/up",
+    "down": "create_industrial_details:block/riveted_steel/block_of_plated_industrial_steel/down",
+    "particle": "create_industrial_details:block/riveted_steel/block_of_plated_industrial_steel/north"
+  },
+  "elements": [
+    {
+      "from": [
+        0,
+        16,
+        0
+      ],
+      "to": [
+        1.5,
+        16,
+        16
+      ],
+      "faces": {
+        "up": {
+          "uv": [
+            0.0,
+            0.0,
+            1.5,
+            16.0
+          ],
+          "texture": "#up",
+          "cullface": "up"
+        }
+      }
+    },
+    {
+      "from": [
+        14.5,
+        16,
+        0
+      ],
+      "to": [
+        16,
+        16,
+        16
+      ],
+      "faces": {
+        "up": {
+          "uv": [
+            14.5,
+            0.0,
+            16.0,
+            16.0
+          ],
+          "texture": "#up",
+          "cullface": "up"
+        }
+      }
+    },
+    {
+      "from": [
+        1.5,
+        16,
+        0
+      ],
+      "to": [
+        14.5,
+        16,
+        1.5
+      ],
+      "faces": {
+        "up": {
+          "uv": [
+            1.5,
+            0.0,
+            14.5,
+            1.5
+          ],
+          "texture": "#up",
+          "cullface": "up"
+        }
+      }
+    },
+    {
+      "from": [
+        1.5,
+        16,
+        14.5
+      ],
+      "to": [
+        14.5,
+        16,
+        16
+      ],
+      "faces": {
+        "up": {
+          "uv": [
+            1.5,
+            14.5,
+            14.5,
+            16.0
+          ],
+          "texture": "#up",
+          "cullface": "up"
+        }
+      }
+    },
+    {
+      "from": [
+        1.5,
+        14,
+        1.5
+      ],
+      "to": [
+        1.5,
+        15.25,
+        14.5
+      ],
+      "faces": {
+        "east": {
+          "uv": [
+            1.5,
+            0.75,
+            14.5,
+            2.0
+          ],
+          "texture": "#east"
+        }
+      }
+    },
+    {
+      "from": [
+        14.5,
+        14,
+        1.5
+      ],
+      "to": [
+        14.5,
+        15.25,
+        14.5
+      ],
+      "faces": {
+        "west": {
+          "uv": [
+            1.5,
+            0.75,
+            14.5,
+            2.0
+          ],
+          "texture": "#west"
+        }
+      }
+    },
+    {
+      "from": [
+        1.5,
+        14,
+        1.5
+      ],
+      "to": [
+        14.5,
+        15.25,
+        1.5
+      ],
+      "faces": {
+        "south": {
+          "uv": [
+            1.5,
+            0.75,
+            14.5,
+            2.0
+          ],
+          "texture": "#south"
+        }
+      }
+    },
+    {
+      "from": [
+        1.5,
+        14,
+        14.5
+      ],
+      "to": [
+        14.5,
+        15.25,
+        14.5
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            1.5,
+            0.75,
+            14.5,
+            2.0
+          ],
+          "texture": "#north"
+        }
+      }
+    }
+  ]
+}

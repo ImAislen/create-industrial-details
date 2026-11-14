@@ -2,6 +2,7 @@
   "replace": false,
   "values": [
     "create_industrial_details:steel_wall_corner_bracket",
-    "create_industrial_details:block_of_industrial_steel"
+    "create_industrial_details:block_of_industrial_steel",
+    "create_industrial_details:block_of_plated_industrial_steel"
   ]
 }

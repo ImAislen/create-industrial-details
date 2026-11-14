@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
+    "create_industrial_details:copycat_diagonal_byte",
     "create_industrial_details:air_vent",
     "create_industrial_details:air_intake",
     "create_industrial_details:small_steel_wall_bracket",
@@ -11,6 +12,7 @@
     "create_industrial_details:service_trench_pipe",
     "create_industrial_details:service_trench_shaft",
     "create_industrial_details:service_trench_glass_pipe",
-    "create_industrial_details:block_of_industrial_steel"
+    "create_industrial_details:block_of_industrial_steel",
+    "create_industrial_details:block_of_plated_industrial_steel"
   ]
 }

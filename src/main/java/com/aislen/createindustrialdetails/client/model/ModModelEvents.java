@@ -18,12 +18,16 @@ import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.ModelEvent;
+import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
 
 @EventBusSubscriber(
         modid = CreateIndustrialDetails.MOD_ID,
         value = Dist.CLIENT
 )
 public final class ModModelEvents {
+    private static final PlatedIndustrialSteelCTBehaviour PLATED_STEEL_CT = new PlatedIndustrialSteelCTBehaviour();
+    private static final AirDuctCasingCTBehaviour AIR_DUCT_CT = new AirDuctCasingCTBehaviour(
+            com.simibubi.create.CreateClient.CASING_CONNECTIVITY);
 
 
     private static final ResourceLocation END_A =
@@ -56,6 +60,12 @@ public final class ModModelEvents {
     private static final ResourceLocation VERTICAL_CROSS_ROTATED =
             id("block/riveted_steel/riveted_steel_beam/riveted_steel_beam_vertical_cross_rotated");
 
+
+    @SubscribeEvent
+    public static void registerCopycatColors(RegisterColorHandlersEvent.Block event) {
+        event.register(com.simibubi.create.content.decoration.copycat.CopycatBlock.wrappedColor(),
+                ModBlocks.COPYCAT_DIAGONAL_BYTE.get());
+    }
 
     @SubscribeEvent
     public static void registerAdditional(
@@ -108,6 +118,11 @@ public final class ModModelEvents {
         Map<ModelResourceLocation, BakedModel> models =
                 event.getModels();
 
+        for (BlockState state : ModBlocks.COPYCAT_DIAGONAL_BYTE.get().getStateDefinition().getPossibleStates()) {
+            models.computeIfPresent(BlockModelShaper.stateToModelLocation(state),
+                    (key, original) -> new CopycatDiagonalByteModel(original));
+        }
+
         for (BlockState state : ModBlocks.SERVICE_TRENCH_GLASS_PIPE.get().getStateDefinition().getPossibleStates()) {
             models.computeIfPresent(BlockModelShaper.stateToModelLocation(state),
                     (key, original) -> com.simibubi.create.content.fluids.PipeAttachmentModel.withAO(original));
@@ -116,6 +131,17 @@ public final class ModModelEvents {
         for (BlockState state : ModBlocks.SERVICE_TRENCH_PIPE.get().getStateDefinition().getPossibleStates()) {
             models.computeIfPresent(BlockModelShaper.stateToModelLocation(state),
                     (key, original) -> new ServiceTrenchPipeModel(original));
+        }
+
+        var platedState = ModBlocks.BLOCK_OF_PLATED_INDUSTRIAL_STEEL.get().defaultBlockState();
+        models.computeIfPresent(BlockModelShaper.stateToModelLocation(platedState),
+                (key, original) -> new com.simibubi.create.foundation.block.connected.CTModel(
+                        original, PLATED_STEEL_CT));
+
+        for (BlockState state : ModBlocks.AIR_DUCT.get().getStateDefinition().getPossibleStates()) {
+            if (!state.getValue(com.aislen.createindustrialdetails.content.block.airduct.AirDuctBlock.CASING).isConnectedTexture()) continue;
+            models.computeIfPresent(BlockModelShaper.stateToModelLocation(state),
+                    (key, original) -> new AirDuctCasingModel(original, AIR_DUCT_CT));
         }
 
         BakedModel endA =

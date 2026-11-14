@@ -10,9 +10,36 @@ import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.*;
 import net.minecraft.world.level.block.state.properties.*;
 import net.minecraft.world.level.material.*;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.Shapes;
+import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class ServiceTrenchBlock extends HorizontalDirectionalBlock implements SimpleWaterloggedBlock, IWrenchable {
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
+
+    private static final VoxelShape Z_SHAPE = createCollisionShape(false);
+    private static final VoxelShape X_SHAPE = createCollisionShape(true);
+
+    private static VoxelShape createCollisionShape(boolean alongX) {
+        double[][] boxes = {
+                {0, 0, 0, 16, 1, 16},
+                {0, 1, 0, 1, 15, 16},
+                {15, 1, 0, 16, 15, 16},
+                {0, 15, 0, 3, 16, 16},
+                {13, 15, 0, 16, 16, 16},
+                {3, 15, 0, 13, 16, 2},
+                {3, 15, 4.75, 13, 16, 6.75},
+                {3, 15, 9.25, 13, 16, 11.25},
+                {3, 15, 14, 13, 16, 16}
+        };
+        VoxelShape shape = Shapes.empty();
+        for (double[] box : boxes) {
+            shape = Shapes.or(shape, alongX
+                    ? Block.box(box[2], box[1], box[0], box[5], box[4], box[3])
+                    : Block.box(box[0], box[1], box[2], box[3], box[4], box[5]));
+        }
+        return shape.optimize();
+    }
 
     public ServiceTrenchBlock(Properties properties) {
         super(properties);
@@ -48,6 +75,16 @@ public class ServiceTrenchBlock extends HorizontalDirectionalBlock implements Si
     @Override
     protected BlockState mirror(BlockState state, Mirror mirror) {
         return rotate(state, mirror.getRotation(state.getValue(FACING)));
+    }
+
+    @Override
+    protected VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
+        return state.getValue(FACING).getAxis() == Direction.Axis.X ? X_SHAPE : Z_SHAPE;
+    }
+
+    @Override
+    protected VoxelShape getCollisionShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
+        return getShape(state, level, pos, context);
     }
 
     @Override

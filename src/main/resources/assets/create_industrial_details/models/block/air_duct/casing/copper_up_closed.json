@@ -1,0 +1,37 @@
+{
+  "textures": {
+    "down": "create:block/copper_casing",
+    "up": "create:block/copper_casing",
+    "north": "create:block/copper_casing",
+    "south": "create:block/copper_casing",
+    "west": "create:block/copper_casing",
+    "east": "create:block/copper_casing",
+    "particle": "create:block/copper_casing"
+  },
+  "elements": [
+    {
+      "from": [
+        0,
+        16,
+        0
+      ],
+      "to": [
+        16,
+        16,
+        16
+      ],
+      "faces": {
+        "up": {
+          "uv": [
+            0.0,
+            0.0,
+            16.0,
+            16.0
+          ],
+          "texture": "#up",
+          "cullface": "up"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,201 @@
+{
+  "textures": {
+    "down": "create:block/industrial_iron_block_top",
+    "up": "create:block/industrial_iron_block_top",
+    "north": "create:block/industrial_iron_block",
+    "south": "create:block/industrial_iron_block",
+    "west": "create:block/industrial_iron_block",
+    "east": "create:block/industrial_iron_block",
+    "particle": "create:block/industrial_iron_block"
+  },
+  "elements": [
+    {
+      "from": [
+        0,
+        0,
+        0
+      ],
+      "to": [
+        1.5,
+        0,
+        16
+      ],
+      "faces": {
+        "down": {
+          "uv": [
+            0.0,
+            0.0,
+            1.5,
+            16.0
+          ],
+          "texture": "#down",
+          "cullface": "down"
+        }
+      }
+    },
+    {
+      "from": [
+        14.5,
+        0,
+        0
+      ],
+      "to": [
+        16,
+        0,
+        16
+      ],
+      "faces": {
+        "down": {
+          "uv": [
+            14.5,
+            0.0,
+            16.0,
+            16.0
+          ],
+          "texture": "#down",
+          "cullface": "down"
+        }
+      }
+    },
+    {
+      "from": [
+        1.5,
+        0,
+        14.5
+      ],
+      "to": [
+        14.5,
+        0,
+        16
+      ],
+      "faces": {
+        "down": {
+          "uv": [
+            1.5,
+            0.0,
+            14.5,
+            1.5
+          ],
+          "texture": "#down",
+          "cullface": "down"
+        }
+      }
+    },
+    {
+      "from": [
+        1.5,
+        0,
+        0
+      ],
+      "to": [
+        14.5,
+        0,
+        1.5
+      ],
+      "faces": {
+        "down": {
+          "uv": [
+            1.5,
+            14.5,
+            14.5,
+            16.0
+          ],
+          "texture": "#down",
+          "cullface": "down"
+        }
+      }
+    },
+    {
+      "from": [
+        1.5,
+        0.75,
+        1.5
+      ],
+      "to": [
+        1.5,
+        2,
+        14.5
+      ],
+      "faces": {
+        "east": {
+          "uv": [
+            1.5,
+            14.0,
+            14.5,
+            15.25
+          ],
+          "texture": "#east"
+        }
+      }
+    },
+    {
+      "from": [
+        14.5,
+        0.75,
+        1.5
+      ],
+      "to": [
+        14.5,
+        2,
+        14.5
+      ],
+      "faces": {
+        "west": {
+          "uv": [
+            1.5,
+            14.0,
+            14.5,
+            15.25
+          ],
+          "texture": "#west"
+        }
+      }
+    },
+    {
+      "from": [
+        1.5,
+        0.75,
+        14.5
+      ],
+      "to": [
+        14.5,
+        2,
+        14.5
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            1.5,
+            14.0,
+            14.5,
+            15.25
+          ],
+          "texture": "#north"
+        }
+      }
+    },
+    {
+      "from": [
+        1.5,
+        0.75,
+        1.5
+      ],
+      "to": [
+        14.5,
+        2,
+        1.5
+      ],
+      "faces": {
+        "south": {
+          "uv": [
+            1.5,
+            14.0,
+            14.5,
+            15.25
+          ],
+          "texture": "#south"
+        }
+      }
+    }
+  ]
+}

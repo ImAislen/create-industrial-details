@@ -1,0 +1,37 @@
+{
+  "textures": {
+    "down": "create:block/railway_casing",
+    "up": "create:block/railway_casing",
+    "north": "create:block/railway_casing_side",
+    "south": "create:block/railway_casing_side",
+    "west": "create:block/railway_casing_side",
+    "east": "create:block/railway_casing_side",
+    "particle": "create:block/railway_casing_side"
+  },
+  "elements": [
+    {
+      "from": [
+        0,
+        16,
+        0
+      ],
+      "to": [
+        16,
+        16,
+        16
+      ],
+      "faces": {
+        "up": {
+          "uv": [
+            0.0,
+            0.0,
+            16.0,
+            16.0
+          ],
+          "texture": "#up",
+          "cullface": "up"
+        }
+      }
+    }
+  ]
+}

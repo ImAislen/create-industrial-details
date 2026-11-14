@@ -5,96 +5,112 @@
         "model": "create_industrial_details:block/air_duct/air_duct_core"
       }
     },
-
     {
-      "when": { "north": "true" },
+      "when": {
+        "north": "true"
+      },
       "apply": {
         "model": "create_industrial_details:block/air_duct/air_duct_extension"
       }
     },
     {
-      "when": { "north": "true" },
+      "when": {
+        "north": "true"
+      },
       "apply": {
         "model": "create_industrial_details:block/air_duct/air_duct_flange"
       }
     },
-
     {
-      "when": { "east": "true" },
+      "when": {
+        "east": "true"
+      },
       "apply": {
         "model": "create_industrial_details:block/air_duct/air_duct_extension",
         "y": 90
       }
     },
     {
-      "when": { "east": "true" },
+      "when": {
+        "east": "true"
+      },
       "apply": {
         "model": "create_industrial_details:block/air_duct/air_duct_flange",
         "y": 90
       }
     },
-
     {
-      "when": { "south": "true" },
+      "when": {
+        "south": "true"
+      },
       "apply": {
         "model": "create_industrial_details:block/air_duct/air_duct_extension",
         "y": 180
       }
     },
     {
-      "when": { "south": "true" },
+      "when": {
+        "south": "true"
+      },
       "apply": {
         "model": "create_industrial_details:block/air_duct/air_duct_flange",
         "y": 180
       }
     },
-
     {
-      "when": { "west": "true" },
+      "when": {
+        "west": "true"
+      },
       "apply": {
         "model": "create_industrial_details:block/air_duct/air_duct_extension",
         "y": 270
       }
     },
     {
-      "when": { "west": "true" },
+      "when": {
+        "west": "true"
+      },
       "apply": {
         "model": "create_industrial_details:block/air_duct/air_duct_flange",
         "y": 270
       }
     },
-
     {
-      "when": { "up": "true" },
+      "when": {
+        "up": "true"
+      },
       "apply": {
         "model": "create_industrial_details:block/air_duct/air_duct_extension",
         "x": 270
       }
     },
     {
-      "when": { "up": "true" },
+      "when": {
+        "up": "true"
+      },
       "apply": {
         "model": "create_industrial_details:block/air_duct/air_duct_flange",
         "x": 270
       }
     },
-
     {
-      "when": { "down": "true" },
+      "when": {
+        "down": "true"
+      },
       "apply": {
         "model": "create_industrial_details:block/air_duct/air_duct_extension",
         "x": 90
       }
     },
     {
-      "when": { "down": "true" },
+      "when": {
+        "down": "true"
+      },
       "apply": {
         "model": "create_industrial_details:block/air_duct/air_duct_flange",
         "x": 90
       }
     },
-
-
     {
       "when": {
         "axis": "z",
@@ -153,7 +169,6 @@
         "y": 180
       }
     },
-
     {
       "when": {
         "axis": "x",
@@ -214,7 +229,6 @@
         "y": 270
       }
     },
-
     {
       "when": {
         "axis": "y",
@@ -275,8 +289,6 @@
         "x": 90
       }
     },
-
-
     {
       "when": {
         "north": "true",
@@ -305,7 +317,6 @@
         "y": 180
       }
     },
-
     {
       "when": {
         "north": "false",
@@ -332,7 +343,6 @@
         "model": "create_industrial_details:block/air_duct/air_duct_flange"
       }
     },
-
     {
       "when": {
         "north": "false",
@@ -361,7 +371,6 @@
         "y": 270
       }
     },
-
     {
       "when": {
         "north": "false",
@@ -390,7 +399,6 @@
         "y": 90
       }
     },
-
     {
       "when": {
         "north": "false",
@@ -419,7 +427,6 @@
         "x": 90
       }
     },
-
     {
       "when": {
         "north": "false",
@@ -446,6 +453,4290 @@
       "apply": {
         "model": "create_industrial_details:block/air_duct/air_duct_flange",
         "x": 270
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {
+            "casing": "andesite"
+          },
+          {
+            "AND": [
+              {
+                "north": "false"
+              },
+              {
+                "OR": [
+                  {
+                    "axis": "x|y"
+                  },
+                  {
+                    "north": "true"
+                  },
+                  {
+                    "east": "true"
+                  },
+                  {
+                    "south": "true"
+                  },
+                  {
+                    "west": "true"
+                  },
+                  {
+                    "up": "true"
+                  },
+                  {
+                    "down": "true"
+                  }
+                ]
+              },
+              {
+                "OR": [
+                  {
+                    "south": "false"
+                  },
+                  {
+                    "north": "true"
+                  },
+                  {
+                    "east": "true"
+                  },
+                  {
+                    "west": "true"
+                  },
+                  {
+                    "up": "true"
+                  },
+                  {
+                    "down": "true"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "apply": {
+        "model": "create_industrial_details:block/air_duct/casing/andesite_north_closed"
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {
+            "casing": "andesite"
+          },
+          {
+            "OR": [
+              {
+                "north": "true"
+              },
+              {
+                "axis": "z",
+                "north": "false",
+                "east": "false",
+                "south": "false",
+                "west": "false",
+                "up": "false",
+                "down": "false"
+              },
+              {
+                "north": "false",
+                "east": "false",
+                "south": "true",
+                "west": "false",
+                "up": "false",
+                "down": "false"
+              }
+            ]
+          }
+        ]
+      },
+      "apply": {
+        "model": "create_industrial_details:block/air_duct/casing/andesite_north_open"
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {
+            "casing": "andesite"
+          },
+          {
+            "AND": [
+              {
+                "east": "false"
+              },
+              {
+                "OR": [
+                  {
+                    "axis": "y|z"
+                  },
+                  {
+                    "north": "true"
+                  },
+                  {
+                    "east": "true"
+                  },
+                  {
+                    "south": "true"
+                  },
+                  {
+                    "west": "true"
+                  },
+                  {
+                    "up": "true"
+                  },
+                  {
+                    "down": "true"
+                  }
+                ]
+              },
+              {
+                "OR": [
+                  {
+                    "west": "false"
+                  },
+                  {
+                    "north": "true"
+                  },
+                  {
+                    "east": "true"
+                  },
+                  {
+                    "south": "true"
+                  },
+                  {
+                    "up": "true"
+                  },
+                  {
+                    "down": "true"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "apply": {
+        "model": "create_industrial_details:block/air_duct/casing/andesite_east_closed"
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {
+            "casing": "andesite"
+          },
+          {
+            "OR": [
+              {
+                "east": "true"
+              },
+              {
+                "axis": "x",
+                "north": "false",
+                "east": "false",
+                "south": "false",
+                "west": "false",
+                "up": "false",
+                "down": "false"
+              },
+              {
+                "north": "false",
+                "east": "false",
+                "south": "false",
+                "west": "true",
+                "up": "false",
+                "down": "false"
+              }
+            ]
+          }
+        ]
+      },
+      "apply": {
+        "model": "create_industrial_details:block/air_duct/casing/andesite_east_open"
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {
+            "casing": "andesite"
+          },
+          {
+            "AND": [
+              {
+                "south": "false"
+              },
+              {
+                "OR": [
+                  {
+                    "axis": "x|y"
+                  },
+                  {
+                    "north": "true"
+                  },
+                  {
+                    "east": "true"
+                  },
+                  {
+                    "south": "true"
+                  },
+                  {
+                    "west": "true"
+                  },
+                  {
+                    "up": "true"
+                  },
+                  {
+                    "down": "true"
+                  }
+                ]
+              },
+              {
+                "OR": [
+                  {
+                    "north": "false"
+                  },
+                  {
+                    "east": "true"
+                  },
+                  {
+                    "south": "true"
+                  },
+                  {
+                    "west": "true"
+                  },
+                  {
+                    "up": "true"
+                  },
+                  {
+                    "down": "true"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "apply": {
+        "model": "create_industrial_details:block/air_duct/casing/andesite_south_closed"
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {
+            "casing": "andesite"
+          },
+          {
+            "OR": [
+              {
+                "south": "true"
+              },
+              {
+                "axis": "z",
+                "north": "false",
+                "east": "false",
+                "south": "false",
+                "west": "false",
+                "up": "false",
+                "down": "false"
+              },
+              {
+                "north": "true",
+                "east": "false",
+                "south": "false",
+                "west": "false",
+                "up": "false",
+                "down": "false"
+              }
+            ]
+          }
+        ]
+      },
+      "apply": {
+        "model": "create_industrial_details:block/air_duct/casing/andesite_south_open"
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {
+            "casing": "andesite"
+          },
+          {
+            "AND": [
+              {
+                "west": "false"
+              },
+              {
+                "OR": [
+                  {
+                    "axis": "y|z"
+                  },
+                  {
+                    "north": "true"
+                  },
+                  {
+                    "east": "true"
+                  },
+                  {
+                    "south": "true"
+                  },
+                  {
+                    "west": "true"
+                  },
+                  {
+                    "up": "true"
+                  },
+                  {
+                    "down": "true"
+                  }
+                ]
+              },
+              {
+                "OR": [
+                  {
+                    "east": "false"
+                  },
+                  {
+                    "north": "true"
+                  },
+                  {
+                    "south": "true"
+                  },
+                  {
+                    "west": "true"
+                  },
+                  {
+                    "up": "true"
+                  },
+                  {
+                    "down": "true"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "apply": {
+        "model": "create_industrial_details:block/air_duct/casing/andesite_west_closed"
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {
+            "casing": "andesite"
+          },
+          {
+            "OR": [
+              {
+                "west": "true"
+              },
+              {
+                "axis": "x",
+                "north": "false",
+                "east": "false",
+                "south": "false",
+                "west": "false",
+                "up": "false",
+                "down": "false"
+              },
+              {
+                "north": "false",
+                "east": "true",
+                "south": "false",
+                "west": "false",
+                "up": "false",
+                "down": "false"
+              }
+            ]
+          }
+        ]
+      },
+      "apply": {
+        "model": "create_industrial_details:block/air_duct/casing/andesite_west_open"
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {
+            "casing": "andesite"
+          },
+          {
+            "AND": [
+              {
+                "up": "false"
+              },
+              {
+                "OR": [
+                  {
+                    "axis": "x|z"
+                  },
+                  {
+                    "north": "true"
+                  },
+                  {
+                    "east": "true"
+                  },
+                  {
+                    "south": "true"
+                  },
+                  {
+                    "west": "true"
+                  },
+                  {
+                    "up": "true"
+                  },
+                  {
+                    "down": "true"
+                  }
+                ]
+              },
+              {
+                "OR": [
+                  {
+                    "down": "false"
+                  },
+                  {
+                    "north": "true"
+                  },
+                  {
+                    "east": "true"
+                  },
+                  {
+                    "south": "true"
+                  },
+                  {
+                    "west": "true"
+                  },
+                  {
+                    "up": "true"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "apply": {
+        "model": "create_industrial_details:block/air_duct/casing/andesite_up_closed"
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {
+            "casing": "andesite"
+          },
+          {
+            "OR": [
+              {
+                "up": "true"
+              },
+              {
+                "axis": "y",
+                "north": "false",
+                "east": "false",
+                "south": "false",
+                "west": "false",
+                "up": "false",
+                "down": "false"
+              },
+              {
+                "north": "false",
+                "east": "false",
+                "south": "false",
+                "west": "false",
+                "up": "false",
+                "down": "true"
+              }
+            ]
+          }
+        ]
+      },
+      "apply": {
+        "model": "create_industrial_details:block/air_duct/casing/andesite_up_open"
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {
+            "casing": "andesite"
+          },
+          {
+            "AND": [
+              {
+                "down": "false"
+              },
+              {
+                "OR": [
+                  {
+                    "axis": "x|z"
+                  },
+                  {
+                    "north": "true"
+                  },
+                  {
+                    "east": "true"
+                  },
+                  {
+                    "south": "true"
+                  },
+                  {
+                    "west": "true"
+                  },
+                  {
+                    "up": "true"
+                  },
+                  {
+                    "down": "true"
+                  }
+                ]
+              },
+              {
+                "OR": [
+                  {
+                    "up": "false"
+                  },
+                  {
+                    "north": "true"
+                  },
+                  {
+                    "east": "true"
+                  },
+                  {
+                    "south": "true"
+                  },
+                  {
+                    "west": "true"
+                  },
+                  {
+                    "down": "true"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "apply": {
+        "model": "create_industrial_details:block/air_duct/casing/andesite_down_closed"
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {
+            "casing": "andesite"
+          },
+          {
+            "OR": [
+              {
+                "down": "true"
+              },
+              {
+                "axis": "y",
+                "north": "false",
+                "east": "false",
+                "south": "false",
+                "west": "false",
+                "up": "false",
+                "down": "false"
+              },
+              {
+                "north": "false",
+                "east": "false",
+                "south": "false",
+                "west": "false",
+                "up": "true",
+                "down": "false"
+              }
+            ]
+          }
+        ]
+      },
+      "apply": {
+        "model": "create_industrial_details:block/air_duct/casing/andesite_down_open"
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {
+            "casing": "brass"
+          },
+          {
+            "AND": [
+              {
+                "north": "false"
+              },
+              {
+                "OR": [
+                  {
+                    "axis": "x|y"
+                  },
+                  {
+                    "north": "true"
+                  },
+                  {
+                    "east": "true"
+                  },
+                  {
+                    "south": "true"
+                  },
+                  {
+                    "west": "true"
+                  },
+                  {
+                    "up": "true"
+                  },
+                  {
+                    "down": "true"
+                  }
+                ]
+              },
+              {
+                "OR": [
+                  {
+                    "south": "false"
+                  },
+                  {
+                    "north": "true"
+                  },
+                  {
+                    "east": "true"
+                  },
+                  {
+                    "west": "true"
+                  },
+                  {
+                    "up": "true"
+                  },
+                  {
+                    "down": "true"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "apply": {
+        "model": "create_industrial_details:block/air_duct/casing/brass_north_closed"
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {
+            "casing": "brass"
+          },
+          {
+            "OR": [
+              {
+                "north": "true"
+              },
+              {
+                "axis": "z",
+                "north": "false",
+                "east": "false",
+                "south": "false",
+                "west": "false",
+                "up": "false",
+                "down": "false"
+              },
+              {
+                "north": "false",
+                "east": "false",
+                "south": "true",
+                "west": "false",
+                "up": "false",
+                "down": "false"
+              }
+            ]
+          }
+        ]
+      },
+      "apply": {
+        "model": "create_industrial_details:block/air_duct/casing/brass_north_open"
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {
+            "casing": "brass"
+          },
+          {
+            "AND": [
+              {
+                "east": "false"
+              },
+              {
+                "OR": [
+                  {
+                    "axis": "y|z"
+                  },
+                  {
+                    "north": "true"
+                  },
+                  {
+                    "east": "true"
+                  },
+                  {
+                    "south": "true"
+                  },
+                  {
+                    "west": "true"
+                  },
+                  {
+                    "up": "true"
+                  },
+                  {
+                    "down": "true"
+                  }
+                ]
+              },
+              {
+                "OR": [
+                  {
+                    "west": "false"
+                  },
+                  {
+                    "north": "true"
+                  },
+                  {
+                    "east": "true"
+                  },
+                  {
+                    "south": "true"
+                  },
+                  {
+                    "up": "true"
+                  },
+                  {
+                    "down": "true"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "apply": {
+        "model": "create_industrial_details:block/air_duct/casing/brass_east_closed"
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {
+            "casing": "brass"
+          },
+          {
+            "OR": [
+              {
+                "east": "true"
+              },
+              {
+                "axis": "x",
+                "north": "false",
+                "east": "false",
+                "south": "false",
+                "west": "false",
+                "up": "false",
+                "down": "false"
+              },
+              {
+                "north": "false",
+                "east": "false",
+                "south": "false",
+                "west": "true",
+                "up": "false",
+                "down": "false"
+              }
+            ]
+          }
+        ]
+      },
+      "apply": {
+        "model": "create_industrial_details:block/air_duct/casing/brass_east_open"
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {
+            "casing": "brass"
+          },
+          {
+            "AND": [
+              {
+                "south": "false"
+              },
+              {
+                "OR": [
+                  {
+                    "axis": "x|y"
+                  },
+                  {
+                    "north": "true"
+                  },
+                  {
+                    "east": "true"
+                  },
+                  {
+                    "south": "true"
+                  },
+                  {
+                    "west": "true"
+                  },
+                  {
+                    "up": "true"
+                  },
+                  {
+                    "down": "true"
+                  }
+                ]
+              },
+              {
+                "OR": [
+                  {
+                    "north": "false"
+                  },
+                  {
+                    "east": "true"
+                  },
+                  {
+                    "south": "true"
+                  },
+                  {
+                    "west": "true"
+                  },
+                  {
+                    "up": "true"
+                  },
+                  {
+                    "down": "true"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "apply": {
+        "model": "create_industrial_details:block/air_duct/casing/brass_south_closed"
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {
+            "casing": "brass"
+          },
+          {
+            "OR": [
+              {
+                "south": "true"
+              },
+              {
+                "axis": "z",
+                "north": "false",
+                "east": "false",
+                "south": "false",
+                "west": "false",
+                "up": "false",
+                "down": "false"
+              },
+              {
+                "north": "true",
+                "east": "false",
+                "south": "false",
+                "west": "false",
+                "up": "false",
+                "down": "false"
+              }
+            ]
+          }
+        ]
+      },
+      "apply": {
+        "model": "create_industrial_details:block/air_duct/casing/brass_south_open"
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {
+            "casing": "brass"
+          },
+          {
+            "AND": [
+              {
+                "west": "false"
+              },
+              {
+                "OR": [
+                  {
+                    "axis": "y|z"
+                  },
+                  {
+                    "north": "true"
+                  },
+                  {
+                    "east": "true"
+                  },
+                  {
+                    "south": "true"
+                  },
+                  {
+                    "west": "true"
+                  },
+                  {
+                    "up": "true"
+                  },
+                  {
+                    "down": "true"
+                  }
+                ]
+              },
+              {
+                "OR": [
+                  {
+                    "east": "false"
+                  },
+                  {
+                    "north": "true"
+                  },
+                  {
+                    "south": "true"
+                  },
+                  {
+                    "west": "true"
+                  },
+                  {
+                    "up": "true"
+                  },
+                  {
+                    "down": "true"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "apply": {
+        "model": "create_industrial_details:block/air_duct/casing/brass_west_closed"
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {
+            "casing": "brass"
+          },
+          {
+            "OR": [
+              {
+                "west": "true"
+              },
+              {
+                "axis": "x",
+                "north": "false",
+                "east": "false",
+                "south": "false",
+                "west": "false",
+                "up": "false",
+                "down": "false"
+              },
+              {
+                "north": "false",
+                "east": "true",
+                "south": "false",
+                "west": "false",
+                "up": "false",
+                "down": "false"
+              }
+            ]
+          }
+        ]
+      },
+      "apply": {
+        "model": "create_industrial_details:block/air_duct/casing/brass_west_open"
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {
+            "casing": "brass"
+          },
+          {
+            "AND": [
+              {
+                "up": "false"
+              },
+              {
+                "OR": [
+                  {
+                    "axis": "x|z"
+                  },
+                  {
+                    "north": "true"
+                  },
+                  {
+                    "east": "true"
+                  },
+                  {
+                    "south": "true"
+                  },
+                  {
+                    "west": "true"
+                  },
+                  {
+                    "up": "true"
+                  },
+                  {
+                    "down": "true"
+                  }
+                ]
+              },
+              {
+                "OR": [
+                  {
+                    "down": "false"
+                  },
+                  {
+                    "north": "true"
+                  },
+                  {
+                    "east": "true"
+                  },
+                  {
+                    "south": "true"
+                  },
+                  {
+                    "west": "true"
+                  },
+                  {
+                    "up": "true"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "apply": {
+        "model": "create_industrial_details:block/air_duct/casing/brass_up_closed"
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {
+            "casing": "brass"
+          },
+          {
+            "OR": [
+              {
+                "up": "true"
+              },
+              {
+                "axis": "y",
+                "north": "false",
+                "east": "false",
+                "south": "false",
+                "west": "false",
+                "up": "false",
+                "down": "false"
+              },
+              {
+                "north": "false",
+                "east": "false",
+                "south": "false",
+                "west": "false",
+                "up": "false",
+                "down": "true"
+              }
+            ]
+          }
+        ]
+      },
+      "apply": {
+        "model": "create_industrial_details:block/air_duct/casing/brass_up_open"
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {
+            "casing": "brass"
+          },
+          {
+            "AND": [
+              {
+                "down": "false"
+              },
+              {
+                "OR": [
+                  {
+                    "axis": "x|z"
+                  },
+                  {
+                    "north": "true"
+                  },
+                  {
+                    "east": "true"
+                  },
+                  {
+                    "south": "true"
+                  },
+                  {
+                    "west": "true"
+                  },
+                  {
+                    "up": "true"
+                  },
+                  {
+                    "down": "true"
+                  }
+                ]
+              },
+              {
+                "OR": [
+                  {
+                    "up": "false"
+                  },
+                  {
+                    "north": "true"
+                  },
+                  {
+                    "east": "true"
+                  },
+                  {
+                    "south": "true"
+                  },
+                  {
+                    "west": "true"
+                  },
+                  {
+                    "down": "true"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "apply": {
+        "model": "create_industrial_details:block/air_duct/casing/brass_down_closed"
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {
+            "casing": "brass"
+          },
+          {
+            "OR": [
+              {
+                "down": "true"
+              },
+              {
+                "axis": "y",
+                "north": "false",
+                "east": "false",
+                "south": "false",
+                "west": "false",
+                "up": "false",
+                "down": "false"
+              },
+              {
+                "north": "false",
+                "east": "false",
+                "south": "false",
+                "west": "false",
+                "up": "true",
+                "down": "false"
+              }
+            ]
+          }
+        ]
+      },
+      "apply": {
+        "model": "create_industrial_details:block/air_duct/casing/brass_down_open"
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {
+            "casing": "copper"
+          },
+          {
+            "AND": [
+              {
+                "north": "false"
+              },
+              {
+                "OR": [
+                  {
+                    "axis": "x|y"
+                  },
+                  {
+                    "north": "true"
+                  },
+                  {
+                    "east": "true"
+                  },
+                  {
+                    "south": "true"
+                  },
+                  {
+                    "west": "true"
+                  },
+                  {
+                    "up": "true"
+                  },
+                  {
+                    "down": "true"
+                  }
+                ]
+              },
+              {
+                "OR": [
+                  {
+                    "south": "false"
+                  },
+                  {
+                    "north": "true"
+                  },
+                  {
+                    "east": "true"
+                  },
+                  {
+                    "west": "true"
+                  },
+                  {
+                    "up": "true"
+                  },
+                  {
+                    "down": "true"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "apply": {
+        "model": "create_industrial_details:block/air_duct/casing/copper_north_closed"
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {
+            "casing": "copper"
+          },
+          {
+            "OR": [
+              {
+                "north": "true"
+              },
+              {
+                "axis": "z",
+                "north": "false",
+                "east": "false",
+                "south": "false",
+                "west": "false",
+                "up": "false",
+                "down": "false"
+              },
+              {
+                "north": "false",
+                "east": "false",
+                "south": "true",
+                "west": "false",
+                "up": "false",
+                "down": "false"
+              }
+            ]
+          }
+        ]
+      },
+      "apply": {
+        "model": "create_industrial_details:block/air_duct/casing/copper_north_open"
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {
+            "casing": "copper"
+          },
+          {
+            "AND": [
+              {
+                "east": "false"
+              },
+              {
+                "OR": [
+                  {
+                    "axis": "y|z"
+                  },
+                  {
+                    "north": "true"
+                  },
+                  {
+                    "east": "true"
+                  },
+                  {
+                    "south": "true"
+                  },
+                  {
+                    "west": "true"
+                  },
+                  {
+                    "up": "true"
+                  },
+                  {
+                    "down": "true"
+                  }
+                ]
+              },
+              {
+                "OR": [
+                  {
+                    "west": "false"
+                  },
+                  {
+                    "north": "true"
+                  },
+                  {
+                    "east": "true"
+                  },
+                  {
+                    "south": "true"
+                  },
+                  {
+                    "up": "true"
+                  },
+                  {
+                    "down": "true"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "apply": {
+        "model": "create_industrial_details:block/air_duct/casing/copper_east_closed"
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {
+            "casing": "copper"
+          },
+          {
+            "OR": [
+              {
+                "east": "true"
+              },
+              {
+                "axis": "x",
+                "north": "false",
+                "east": "false",
+                "south": "false",
+                "west": "false",
+                "up": "false",
+                "down": "false"
+              },
+              {
+                "north": "false",
+                "east": "false",
+                "south": "false",
+                "west": "true",
+                "up": "false",
+                "down": "false"
+              }
+            ]
+          }
+        ]
+      },
+      "apply": {
+        "model": "create_industrial_details:block/air_duct/casing/copper_east_open"
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {
+            "casing": "copper"
+          },
+          {
+            "AND": [
+              {
+                "south": "false"
+              },
+              {
+                "OR": [
+                  {
+                    "axis": "x|y"
+                  },
+                  {
+                    "north": "true"
+                  },
+                  {
+                    "east": "true"
+                  },
+                  {
+                    "south": "true"
+                  },
+                  {
+                    "west": "true"
+                  },
+                  {
+                    "up": "true"
+                  },
+                  {
+                    "down": "true"
+                  }
+                ]
+              },
+              {
+                "OR": [
+                  {
+                    "north": "false"
+                  },
+                  {
+                    "east": "true"
+                  },
+                  {
+                    "south": "true"
+                  },
+                  {
+                    "west": "true"
+                  },
+                  {
+                    "up": "true"
+                  },
+                  {
+                    "down": "true"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "apply": {
+        "model": "create_industrial_details:block/air_duct/casing/copper_south_closed"
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {
+            "casing": "copper"
+          },
+          {
+            "OR": [
+              {
+                "south": "true"
+              },
+              {
+                "axis": "z",
+                "north": "false",
+                "east": "false",
+                "south": "false",
+                "west": "false",
+                "up": "false",
+                "down": "false"
+              },
+              {
+                "north": "true",
+                "east": "false",
+                "south": "false",
+                "west": "false",
+                "up": "false",
+                "down": "false"
+              }
+            ]
+          }
+        ]
+      },
+      "apply": {
+        "model": "create_industrial_details:block/air_duct/casing/copper_south_open"
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {
+            "casing": "copper"
+          },
+          {
+            "AND": [
+              {
+                "west": "false"
+              },
+              {
+                "OR": [
+                  {
+                    "axis": "y|z"
+                  },
+                  {
+                    "north": "true"
+                  },
+                  {
+                    "east": "true"
+                  },
+                  {
+                    "south": "true"
+                  },
+                  {
+                    "west": "true"
+                  },
+                  {
+                    "up": "true"
+                  },
+                  {
+                    "down": "true"
+                  }
+                ]
+              },
+              {
+                "OR": [
+                  {
+                    "east": "false"
+                  },
+                  {
+                    "north": "true"
+                  },
+                  {
+                    "south": "true"
+                  },
+                  {
+                    "west": "true"
+                  },
+                  {
+                    "up": "true"
+                  },
+                  {
+                    "down": "true"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "apply": {
+        "model": "create_industrial_details:block/air_duct/casing/copper_west_closed"
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {
+            "casing": "copper"
+          },
+          {
+            "OR": [
+              {
+                "west": "true"
+              },
+              {
+                "axis": "x",
+                "north": "false",
+                "east": "false",
+                "south": "false",
+                "west": "false",
+                "up": "false",
+                "down": "false"
+              },
+              {
+                "north": "false",
+                "east": "true",
+                "south": "false",
+                "west": "false",
+                "up": "false",
+                "down": "false"
+              }
+            ]
+          }
+        ]
+      },
+      "apply": {
+        "model": "create_industrial_details:block/air_duct/casing/copper_west_open"
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {
+            "casing": "copper"
+          },
+          {
+            "AND": [
+              {
+                "up": "false"
+              },
+              {
+                "OR": [
+                  {
+                    "axis": "x|z"
+                  },
+                  {
+                    "north": "true"
+                  },
+                  {
+                    "east": "true"
+                  },
+                  {
+                    "south": "true"
+                  },
+                  {
+                    "west": "true"
+                  },
+                  {
+                    "up": "true"
+                  },
+                  {
+                    "down": "true"
+                  }
+                ]
+              },
+              {
+                "OR": [
+                  {
+                    "down": "false"
+                  },
+                  {
+                    "north": "true"
+                  },
+                  {
+                    "east": "true"
+                  },
+                  {
+                    "south": "true"
+                  },
+                  {
+                    "west": "true"
+                  },
+                  {
+                    "up": "true"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "apply": {
+        "model": "create_industrial_details:block/air_duct/casing/copper_up_closed"
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {
+            "casing": "copper"
+          },
+          {
+            "OR": [
+              {
+                "up": "true"
+              },
+              {
+                "axis": "y",
+                "north": "false",
+                "east": "false",
+                "south": "false",
+                "west": "false",
+                "up": "false",
+                "down": "false"
+              },
+              {
+                "north": "false",
+                "east": "false",
+                "south": "false",
+                "west": "false",
+                "up": "false",
+                "down": "true"
+              }
+            ]
+          }
+        ]
+      },
+      "apply": {
+        "model": "create_industrial_details:block/air_duct/casing/copper_up_open"
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {
+            "casing": "copper"
+          },
+          {
+            "AND": [
+              {
+                "down": "false"
+              },
+              {
+                "OR": [
+                  {
+                    "axis": "x|z"
+                  },
+                  {
+                    "north": "true"
+                  },
+                  {
+                    "east": "true"
+                  },
+                  {
+                    "south": "true"
+                  },
+                  {
+                    "west": "true"
+                  },
+                  {
+                    "up": "true"
+                  },
+                  {
+                    "down": "true"
+                  }
+                ]
+              },
+              {
+                "OR": [
+                  {
+                    "up": "false"
+                  },
+                  {
+                    "north": "true"
+                  },
+                  {
+                    "east": "true"
+                  },
+                  {
+                    "south": "true"
+                  },
+                  {
+                    "west": "true"
+                  },
+                  {
+                    "down": "true"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "apply": {
+        "model": "create_industrial_details:block/air_duct/casing/copper_down_closed"
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {
+            "casing": "copper"
+          },
+          {
+            "OR": [
+              {
+                "down": "true"
+              },
+              {
+                "axis": "y",
+                "north": "false",
+                "east": "false",
+                "south": "false",
+                "west": "false",
+                "up": "false",
+                "down": "false"
+              },
+              {
+                "north": "false",
+                "east": "false",
+                "south": "false",
+                "west": "false",
+                "up": "true",
+                "down": "false"
+              }
+            ]
+          }
+        ]
+      },
+      "apply": {
+        "model": "create_industrial_details:block/air_duct/casing/copper_down_open"
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {
+            "casing": "railway"
+          },
+          {
+            "AND": [
+              {
+                "north": "false"
+              },
+              {
+                "OR": [
+                  {
+                    "axis": "x|y"
+                  },
+                  {
+                    "north": "true"
+                  },
+                  {
+                    "east": "true"
+                  },
+                  {
+                    "south": "true"
+                  },
+                  {
+                    "west": "true"
+                  },
+                  {
+                    "up": "true"
+                  },
+                  {
+                    "down": "true"
+                  }
+                ]
+              },
+              {
+                "OR": [
+                  {
+                    "south": "false"
+                  },
+                  {
+                    "north": "true"
+                  },
+                  {
+                    "east": "true"
+                  },
+                  {
+                    "west": "true"
+                  },
+                  {
+                    "up": "true"
+                  },
+                  {
+                    "down": "true"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "apply": {
+        "model": "create_industrial_details:block/air_duct/casing/railway_north_closed"
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {
+            "casing": "railway"
+          },
+          {
+            "OR": [
+              {
+                "north": "true"
+              },
+              {
+                "axis": "z",
+                "north": "false",
+                "east": "false",
+                "south": "false",
+                "west": "false",
+                "up": "false",
+                "down": "false"
+              },
+              {
+                "north": "false",
+                "east": "false",
+                "south": "true",
+                "west": "false",
+                "up": "false",
+                "down": "false"
+              }
+            ]
+          }
+        ]
+      },
+      "apply": {
+        "model": "create_industrial_details:block/air_duct/casing/railway_north_open"
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {
+            "casing": "railway"
+          },
+          {
+            "AND": [
+              {
+                "east": "false"
+              },
+              {
+                "OR": [
+                  {
+                    "axis": "y|z"
+                  },
+                  {
+                    "north": "true"
+                  },
+                  {
+                    "east": "true"
+                  },
+                  {
+                    "south": "true"
+                  },
+                  {
+                    "west": "true"
+                  },
+                  {
+                    "up": "true"
+                  },
+                  {
+                    "down": "true"
+                  }
+                ]
+              },
+              {
+                "OR": [
+                  {
+                    "west": "false"
+                  },
+                  {
+                    "north": "true"
+                  },
+                  {
+                    "east": "true"
+                  },
+                  {
+                    "south": "true"
+                  },
+                  {
+                    "up": "true"
+                  },
+                  {
+                    "down": "true"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "apply": {
+        "model": "create_industrial_details:block/air_duct/casing/railway_east_closed"
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {
+            "casing": "railway"
+          },
+          {
+            "OR": [
+              {
+                "east": "true"
+              },
+              {
+                "axis": "x",
+                "north": "false",
+                "east": "false",
+                "south": "false",
+                "west": "false",
+                "up": "false",
+                "down": "false"
+              },
+              {
+                "north": "false",
+                "east": "false",
+                "south": "false",
+                "west": "true",
+                "up": "false",
+                "down": "false"
+              }
+            ]
+          }
+        ]
+      },
+      "apply": {
+        "model": "create_industrial_details:block/air_duct/casing/railway_east_open"
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {
+            "casing": "railway"
+          },
+          {
+            "AND": [
+              {
+                "south": "false"
+              },
+              {
+                "OR": [
+                  {
+                    "axis": "x|y"
+                  },
+                  {
+                    "north": "true"
+                  },
+                  {
+                    "east": "true"
+                  },
+                  {
+                    "south": "true"
+                  },
+                  {
+                    "west": "true"
+                  },
+                  {
+                    "up": "true"
+                  },
+                  {
+                    "down": "true"
+                  }
+                ]
+              },
+              {
+                "OR": [
+                  {
+                    "north": "false"
+                  },
+                  {
+                    "east": "true"
+                  },
+                  {
+                    "south": "true"
+                  },
+                  {
+                    "west": "true"
+                  },
+                  {
+                    "up": "true"
+                  },
+                  {
+                    "down": "true"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "apply": {
+        "model": "create_industrial_details:block/air_duct/casing/railway_south_closed"
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {
+            "casing": "railway"
+          },
+          {
+            "OR": [
+              {
+                "south": "true"
+              },
+              {
+                "axis": "z",
+                "north": "false",
+                "east": "false",
+                "south": "false",
+                "west": "false",
+                "up": "false",
+                "down": "false"
+              },
+              {
+                "north": "true",
+                "east": "false",
+                "south": "false",
+                "west": "false",
+                "up": "false",
+                "down": "false"
+              }
+            ]
+          }
+        ]
+      },
+      "apply": {
+        "model": "create_industrial_details:block/air_duct/casing/railway_south_open"
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {
+            "casing": "railway"
+          },
+          {
+            "AND": [
+              {
+                "west": "false"
+              },
+              {
+                "OR": [
+                  {
+                    "axis": "y|z"
+                  },
+                  {
+                    "north": "true"
+                  },
+                  {
+                    "east": "true"
+                  },
+                  {
+                    "south": "true"
+                  },
+                  {
+                    "west": "true"
+                  },
+                  {
+                    "up": "true"
+                  },
+                  {
+                    "down": "true"
+                  }
+                ]
+              },
+              {
+                "OR": [
+                  {
+                    "east": "false"
+                  },
+                  {
+                    "north": "true"
+                  },
+                  {
+                    "south": "true"
+                  },
+                  {
+                    "west": "true"
+                  },
+                  {
+                    "up": "true"
+                  },
+                  {
+                    "down": "true"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "apply": {
+        "model": "create_industrial_details:block/air_duct/casing/railway_west_closed"
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {
+            "casing": "railway"
+          },
+          {
+            "OR": [
+              {
+                "west": "true"
+              },
+              {
+                "axis": "x",
+                "north": "false",
+                "east": "false",
+                "south": "false",
+                "west": "false",
+                "up": "false",
+                "down": "false"
+              },
+              {
+                "north": "false",
+                "east": "true",
+                "south": "false",
+                "west": "false",
+                "up": "false",
+                "down": "false"
+              }
+            ]
+          }
+        ]
+      },
+      "apply": {
+        "model": "create_industrial_details:block/air_duct/casing/railway_west_open"
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {
+            "casing": "railway"
+          },
+          {
+            "AND": [
+              {
+                "up": "false"
+              },
+              {
+                "OR": [
+                  {
+                    "axis": "x|z"
+                  },
+                  {
+                    "north": "true"
+                  },
+                  {
+                    "east": "true"
+                  },
+                  {
+                    "south": "true"
+                  },
+                  {
+                    "west": "true"
+                  },
+                  {
+                    "up": "true"
+                  },
+                  {
+                    "down": "true"
+                  }
+                ]
+              },
+              {
+                "OR": [
+                  {
+                    "down": "false"
+                  },
+                  {
+                    "north": "true"
+                  },
+                  {
+                    "east": "true"
+                  },
+                  {
+                    "south": "true"
+                  },
+                  {
+                    "west": "true"
+                  },
+                  {
+                    "up": "true"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "apply": {
+        "model": "create_industrial_details:block/air_duct/casing/railway_up_closed"
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {
+            "casing": "railway"
+          },
+          {
+            "OR": [
+              {
+                "up": "true"
+              },
+              {
+                "axis": "y",
+                "north": "false",
+                "east": "false",
+                "south": "false",
+                "west": "false",
+                "up": "false",
+                "down": "false"
+              },
+              {
+                "north": "false",
+                "east": "false",
+                "south": "false",
+                "west": "false",
+                "up": "false",
+                "down": "true"
+              }
+            ]
+          }
+        ]
+      },
+      "apply": {
+        "model": "create_industrial_details:block/air_duct/casing/railway_up_open"
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {
+            "casing": "railway"
+          },
+          {
+            "AND": [
+              {
+                "down": "false"
+              },
+              {
+                "OR": [
+                  {
+                    "axis": "x|z"
+                  },
+                  {
+                    "north": "true"
+                  },
+                  {
+                    "east": "true"
+                  },
+                  {
+                    "south": "true"
+                  },
+                  {
+                    "west": "true"
+                  },
+                  {
+                    "up": "true"
+                  },
+                  {
+                    "down": "true"
+                  }
+                ]
+              },
+              {
+                "OR": [
+                  {
+                    "up": "false"
+                  },
+                  {
+                    "north": "true"
+                  },
+                  {
+                    "east": "true"
+                  },
+                  {
+                    "south": "true"
+                  },
+                  {
+                    "west": "true"
+                  },
+                  {
+                    "down": "true"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "apply": {
+        "model": "create_industrial_details:block/air_duct/casing/railway_down_closed"
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {
+            "casing": "railway"
+          },
+          {
+            "OR": [
+              {
+                "down": "true"
+              },
+              {
+                "axis": "y",
+                "north": "false",
+                "east": "false",
+                "south": "false",
+                "west": "false",
+                "up": "false",
+                "down": "false"
+              },
+              {
+                "north": "false",
+                "east": "false",
+                "south": "false",
+                "west": "false",
+                "up": "true",
+                "down": "false"
+              }
+            ]
+          }
+        ]
+      },
+      "apply": {
+        "model": "create_industrial_details:block/air_duct/casing/railway_down_open"
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {
+            "casing": "industrial_iron"
+          },
+          {
+            "AND": [
+              {
+                "north": "false"
+              },
+              {
+                "OR": [
+                  {
+                    "axis": "x|y"
+                  },
+                  {
+                    "north": "true"
+                  },
+                  {
+                    "east": "true"
+                  },
+                  {
+                    "south": "true"
+                  },
+                  {
+                    "west": "true"
+                  },
+                  {
+                    "up": "true"
+                  },
+                  {
+                    "down": "true"
+                  }
+                ]
+              },
+              {
+                "OR": [
+                  {
+                    "south": "false"
+                  },
+                  {
+                    "north": "true"
+                  },
+                  {
+                    "east": "true"
+                  },
+                  {
+                    "west": "true"
+                  },
+                  {
+                    "up": "true"
+                  },
+                  {
+                    "down": "true"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "apply": {
+        "model": "create_industrial_details:block/air_duct/casing/industrial_iron_north_closed"
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {
+            "casing": "industrial_iron"
+          },
+          {
+            "OR": [
+              {
+                "north": "true"
+              },
+              {
+                "axis": "z",
+                "north": "false",
+                "east": "false",
+                "south": "false",
+                "west": "false",
+                "up": "false",
+                "down": "false"
+              },
+              {
+                "north": "false",
+                "east": "false",
+                "south": "true",
+                "west": "false",
+                "up": "false",
+                "down": "false"
+              }
+            ]
+          }
+        ]
+      },
+      "apply": {
+        "model": "create_industrial_details:block/air_duct/casing/industrial_iron_north_open"
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {
+            "casing": "industrial_iron"
+          },
+          {
+            "AND": [
+              {
+                "east": "false"
+              },
+              {
+                "OR": [
+                  {
+                    "axis": "y|z"
+                  },
+                  {
+                    "north": "true"
+                  },
+                  {
+                    "east": "true"
+                  },
+                  {
+                    "south": "true"
+                  },
+                  {
+                    "west": "true"
+                  },
+                  {
+                    "up": "true"
+                  },
+                  {
+                    "down": "true"
+                  }
+                ]
+              },
+              {
+                "OR": [
+                  {
+                    "west": "false"
+                  },
+                  {
+                    "north": "true"
+                  },
+                  {
+                    "east": "true"
+                  },
+                  {
+                    "south": "true"
+                  },
+                  {
+                    "up": "true"
+                  },
+                  {
+                    "down": "true"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "apply": {
+        "model": "create_industrial_details:block/air_duct/casing/industrial_iron_east_closed"
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {
+            "casing": "industrial_iron"
+          },
+          {
+            "OR": [
+              {
+                "east": "true"
+              },
+              {
+                "axis": "x",
+                "north": "false",
+                "east": "false",
+                "south": "false",
+                "west": "false",
+                "up": "false",
+                "down": "false"
+              },
+              {
+                "north": "false",
+                "east": "false",
+                "south": "false",
+                "west": "true",
+                "up": "false",
+                "down": "false"
+              }
+            ]
+          }
+        ]
+      },
+      "apply": {
+        "model": "create_industrial_details:block/air_duct/casing/industrial_iron_east_open"
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {
+            "casing": "industrial_iron"
+          },
+          {
+            "AND": [
+              {
+                "south": "false"
+              },
+              {
+                "OR": [
+                  {
+                    "axis": "x|y"
+                  },
+                  {
+                    "north": "true"
+                  },
+                  {
+                    "east": "true"
+                  },
+                  {
+                    "south": "true"
+                  },
+                  {
+                    "west": "true"
+                  },
+                  {
+                    "up": "true"
+                  },
+                  {
+                    "down": "true"
+                  }
+                ]
+              },
+              {
+                "OR": [
+                  {
+                    "north": "false"
+                  },
+                  {
+                    "east": "true"
+                  },
+                  {
+                    "south": "true"
+                  },
+                  {
+                    "west": "true"
+                  },
+                  {
+                    "up": "true"
+                  },
+                  {
+                    "down": "true"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "apply": {
+        "model": "create_industrial_details:block/air_duct/casing/industrial_iron_south_closed"
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {
+            "casing": "industrial_iron"
+          },
+          {
+            "OR": [
+              {
+                "south": "true"
+              },
+              {
+                "axis": "z",
+                "north": "false",
+                "east": "false",
+                "south": "false",
+                "west": "false",
+                "up": "false",
+                "down": "false"
+              },
+              {
+                "north": "true",
+                "east": "false",
+                "south": "false",
+                "west": "false",
+                "up": "false",
+                "down": "false"
+              }
+            ]
+          }
+        ]
+      },
+      "apply": {
+        "model": "create_industrial_details:block/air_duct/casing/industrial_iron_south_open"
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {
+            "casing": "industrial_iron"
+          },
+          {
+            "AND": [
+              {
+                "west": "false"
+              },
+              {
+                "OR": [
+                  {
+                    "axis": "y|z"
+                  },
+                  {
+                    "north": "true"
+                  },
+                  {
+                    "east": "true"
+                  },
+                  {
+                    "south": "true"
+                  },
+                  {
+                    "west": "true"
+                  },
+                  {
+                    "up": "true"
+                  },
+                  {
+                    "down": "true"
+                  }
+                ]
+              },
+              {
+                "OR": [
+                  {
+                    "east": "false"
+                  },
+                  {
+                    "north": "true"
+                  },
+                  {
+                    "south": "true"
+                  },
+                  {
+                    "west": "true"
+                  },
+                  {
+                    "up": "true"
+                  },
+                  {
+                    "down": "true"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "apply": {
+        "model": "create_industrial_details:block/air_duct/casing/industrial_iron_west_closed"
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {
+            "casing": "industrial_iron"
+          },
+          {
+            "OR": [
+              {
+                "west": "true"
+              },
+              {
+                "axis": "x",
+                "north": "false",
+                "east": "false",
+                "south": "false",
+                "west": "false",
+                "up": "false",
+                "down": "false"
+              },
+              {
+                "north": "false",
+                "east": "true",
+                "south": "false",
+                "west": "false",
+                "up": "false",
+                "down": "false"
+              }
+            ]
+          }
+        ]
+      },
+      "apply": {
+        "model": "create_industrial_details:block/air_duct/casing/industrial_iron_west_open"
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {
+            "casing": "industrial_iron"
+          },
+          {
+            "AND": [
+              {
+                "up": "false"
+              },
+              {
+                "OR": [
+                  {
+                    "axis": "x|z"
+                  },
+                  {
+                    "north": "true"
+                  },
+                  {
+                    "east": "true"
+                  },
+                  {
+                    "south": "true"
+                  },
+                  {
+                    "west": "true"
+                  },
+                  {
+                    "up": "true"
+                  },
+                  {
+                    "down": "true"
+                  }
+                ]
+              },
+              {
+                "OR": [
+                  {
+                    "down": "false"
+                  },
+                  {
+                    "north": "true"
+                  },
+                  {
+                    "east": "true"
+                  },
+                  {
+                    "south": "true"
+                  },
+                  {
+                    "west": "true"
+                  },
+                  {
+                    "up": "true"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "apply": {
+        "model": "create_industrial_details:block/air_duct/casing/industrial_iron_up_closed"
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {
+            "casing": "industrial_iron"
+          },
+          {
+            "OR": [
+              {
+                "up": "true"
+              },
+              {
+                "axis": "y",
+                "north": "false",
+                "east": "false",
+                "south": "false",
+                "west": "false",
+                "up": "false",
+                "down": "false"
+              },
+              {
+                "north": "false",
+                "east": "false",
+                "south": "false",
+                "west": "false",
+                "up": "false",
+                "down": "true"
+              }
+            ]
+          }
+        ]
+      },
+      "apply": {
+        "model": "create_industrial_details:block/air_duct/casing/industrial_iron_up_open"
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {
+            "casing": "industrial_iron"
+          },
+          {
+            "AND": [
+              {
+                "down": "false"
+              },
+              {
+                "OR": [
+                  {
+                    "axis": "x|z"
+                  },
+                  {
+                    "north": "true"
+                  },
+                  {
+                    "east": "true"
+                  },
+                  {
+                    "south": "true"
+                  },
+                  {
+                    "west": "true"
+                  },
+                  {
+                    "up": "true"
+                  },
+                  {
+                    "down": "true"
+                  }
+                ]
+              },
+              {
+                "OR": [
+                  {
+                    "up": "false"
+                  },
+                  {
+                    "north": "true"
+                  },
+                  {
+                    "east": "true"
+                  },
+                  {
+                    "south": "true"
+                  },
+                  {
+                    "west": "true"
+                  },
+                  {
+                    "down": "true"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "apply": {
+        "model": "create_industrial_details:block/air_duct/casing/industrial_iron_down_closed"
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {
+            "casing": "industrial_iron"
+          },
+          {
+            "OR": [
+              {
+                "down": "true"
+              },
+              {
+                "axis": "y",
+                "north": "false",
+                "east": "false",
+                "south": "false",
+                "west": "false",
+                "up": "false",
+                "down": "false"
+              },
+              {
+                "north": "false",
+                "east": "false",
+                "south": "false",
+                "west": "false",
+                "up": "true",
+                "down": "false"
+              }
+            ]
+          }
+        ]
+      },
+      "apply": {
+        "model": "create_industrial_details:block/air_duct/casing/industrial_iron_down_open"
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {
+            "casing": "industrial_steel"
+          },
+          {
+            "AND": [
+              {
+                "north": "false"
+              },
+              {
+                "OR": [
+                  {
+                    "axis": "x|y"
+                  },
+                  {
+                    "north": "true"
+                  },
+                  {
+                    "east": "true"
+                  },
+                  {
+                    "south": "true"
+                  },
+                  {
+                    "west": "true"
+                  },
+                  {
+                    "up": "true"
+                  },
+                  {
+                    "down": "true"
+                  }
+                ]
+              },
+              {
+                "OR": [
+                  {
+                    "south": "false"
+                  },
+                  {
+                    "north": "true"
+                  },
+                  {
+                    "east": "true"
+                  },
+                  {
+                    "west": "true"
+                  },
+                  {
+                    "up": "true"
+                  },
+                  {
+                    "down": "true"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "apply": {
+        "model": "create_industrial_details:block/air_duct/casing/industrial_steel_north_closed"
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {
+            "casing": "industrial_steel"
+          },
+          {
+            "OR": [
+              {
+                "north": "true"
+              },
+              {
+                "axis": "z",
+                "north": "false",
+                "east": "false",
+                "south": "false",
+                "west": "false",
+                "up": "false",
+                "down": "false"
+              },
+              {
+                "north": "false",
+                "east": "false",
+                "south": "true",
+                "west": "false",
+                "up": "false",
+                "down": "false"
+              }
+            ]
+          }
+        ]
+      },
+      "apply": {
+        "model": "create_industrial_details:block/air_duct/casing/industrial_steel_north_open"
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {
+            "casing": "industrial_steel"
+          },
+          {
+            "AND": [
+              {
+                "east": "false"
+              },
+              {
+                "OR": [
+                  {
+                    "axis": "y|z"
+                  },
+                  {
+                    "north": "true"
+                  },
+                  {
+                    "east": "true"
+                  },
+                  {
+                    "south": "true"
+                  },
+                  {
+                    "west": "true"
+                  },
+                  {
+                    "up": "true"
+                  },
+                  {
+                    "down": "true"
+                  }
+                ]
+              },
+              {
+                "OR": [
+                  {
+                    "west": "false"
+                  },
+                  {
+                    "north": "true"
+                  },
+                  {
+                    "east": "true"
+                  },
+                  {
+                    "south": "true"
+                  },
+                  {
+                    "up": "true"
+                  },
+                  {
+                    "down": "true"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "apply": {
+        "model": "create_industrial_details:block/air_duct/casing/industrial_steel_east_closed"
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {
+            "casing": "industrial_steel"
+          },
+          {
+            "OR": [
+              {
+                "east": "true"
+              },
+              {
+                "axis": "x",
+                "north": "false",
+                "east": "false",
+                "south": "false",
+                "west": "false",
+                "up": "false",
+                "down": "false"
+              },
+              {
+                "north": "false",
+                "east": "false",
+                "south": "false",
+                "west": "true",
+                "up": "false",
+                "down": "false"
+              }
+            ]
+          }
+        ]
+      },
+      "apply": {
+        "model": "create_industrial_details:block/air_duct/casing/industrial_steel_east_open"
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {
+            "casing": "industrial_steel"
+          },
+          {
+            "AND": [
+              {
+                "south": "false"
+              },
+              {
+                "OR": [
+                  {
+                    "axis": "x|y"
+                  },
+                  {
+                    "north": "true"
+                  },
+                  {
+                    "east": "true"
+                  },
+                  {
+                    "south": "true"
+                  },
+                  {
+                    "west": "true"
+                  },
+                  {
+                    "up": "true"
+                  },
+                  {
+                    "down": "true"
+                  }
+                ]
+              },
+              {
+                "OR": [
+                  {
+                    "north": "false"
+                  },
+                  {
+                    "east": "true"
+                  },
+                  {
+                    "south": "true"
+                  },
+                  {
+                    "west": "true"
+                  },
+                  {
+                    "up": "true"
+                  },
+                  {
+                    "down": "true"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "apply": {
+        "model": "create_industrial_details:block/air_duct/casing/industrial_steel_south_closed"
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {
+            "casing": "industrial_steel"
+          },
+          {
+            "OR": [
+              {
+                "south": "true"
+              },
+              {
+                "axis": "z",
+                "north": "false",
+                "east": "false",
+                "south": "false",
+                "west": "false",
+                "up": "false",
+                "down": "false"
+              },
+              {
+                "north": "true",
+                "east": "false",
+                "south": "false",
+                "west": "false",
+                "up": "false",
+                "down": "false"
+              }
+            ]
+          }
+        ]
+      },
+      "apply": {
+        "model": "create_industrial_details:block/air_duct/casing/industrial_steel_south_open"
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {
+            "casing": "industrial_steel"
+          },
+          {
+            "AND": [
+              {
+                "west": "false"
+              },
+              {
+                "OR": [
+                  {
+                    "axis": "y|z"
+                  },
+                  {
+                    "north": "true"
+                  },
+                  {
+                    "east": "true"
+                  },
+                  {
+                    "south": "true"
+                  },
+                  {
+                    "west": "true"
+                  },
+                  {
+                    "up": "true"
+                  },
+                  {
+                    "down": "true"
+                  }
+                ]
+              },
+              {
+                "OR": [
+                  {
+                    "east": "false"
+                  },
+                  {
+                    "north": "true"
+                  },
+                  {
+                    "south": "true"
+                  },
+                  {
+                    "west": "true"
+                  },
+                  {
+                    "up": "true"
+                  },
+                  {
+                    "down": "true"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "apply": {
+        "model": "create_industrial_details:block/air_duct/casing/industrial_steel_west_closed"
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {
+            "casing": "industrial_steel"
+          },
+          {
+            "OR": [
+              {
+                "west": "true"
+              },
+              {
+                "axis": "x",
+                "north": "false",
+                "east": "false",
+                "south": "false",
+                "west": "false",
+                "up": "false",
+                "down": "false"
+              },
+              {
+                "north": "false",
+                "east": "true",
+                "south": "false",
+                "west": "false",
+                "up": "false",
+                "down": "false"
+              }
+            ]
+          }
+        ]
+      },
+      "apply": {
+        "model": "create_industrial_details:block/air_duct/casing/industrial_steel_west_open"
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {
+            "casing": "industrial_steel"
+          },
+          {
+            "AND": [
+              {
+                "up": "false"
+              },
+              {
+                "OR": [
+                  {
+                    "axis": "x|z"
+                  },
+                  {
+                    "north": "true"
+                  },
+                  {
+                    "east": "true"
+                  },
+                  {
+                    "south": "true"
+                  },
+                  {
+                    "west": "true"
+                  },
+                  {
+                    "up": "true"
+                  },
+                  {
+                    "down": "true"
+                  }
+                ]
+              },
+              {
+                "OR": [
+                  {
+                    "down": "false"
+                  },
+                  {
+                    "north": "true"
+                  },
+                  {
+                    "east": "true"
+                  },
+                  {
+                    "south": "true"
+                  },
+                  {
+                    "west": "true"
+                  },
+                  {
+                    "up": "true"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "apply": {
+        "model": "create_industrial_details:block/air_duct/casing/industrial_steel_up_closed"
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {
+            "casing": "industrial_steel"
+          },
+          {
+            "OR": [
+              {
+                "up": "true"
+              },
+              {
+                "axis": "y",
+                "north": "false",
+                "east": "false",
+                "south": "false",
+                "west": "false",
+                "up": "false",
+                "down": "false"
+              },
+              {
+                "north": "false",
+                "east": "false",
+                "south": "false",
+                "west": "false",
+                "up": "false",
+                "down": "true"
+              }
+            ]
+          }
+        ]
+      },
+      "apply": {
+        "model": "create_industrial_details:block/air_duct/casing/industrial_steel_up_open"
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {
+            "casing": "industrial_steel"
+          },
+          {
+            "AND": [
+              {
+                "down": "false"
+              },
+              {
+                "OR": [
+                  {
+                    "axis": "x|z"
+                  },
+                  {
+                    "north": "true"
+                  },
+                  {
+                    "east": "true"
+                  },
+                  {
+                    "south": "true"
+                  },
+                  {
+                    "west": "true"
+                  },
+                  {
+                    "up": "true"
+                  },
+                  {
+                    "down": "true"
+                  }
+                ]
+              },
+              {
+                "OR": [
+                  {
+                    "up": "false"
+                  },
+                  {
+                    "north": "true"
+                  },
+                  {
+                    "east": "true"
+                  },
+                  {
+                    "south": "true"
+                  },
+                  {
+                    "west": "true"
+                  },
+                  {
+                    "down": "true"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "apply": {
+        "model": "create_industrial_details:block/air_duct/casing/industrial_steel_down_closed"
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {
+            "casing": "industrial_steel"
+          },
+          {
+            "OR": [
+              {
+                "down": "true"
+              },
+              {
+                "axis": "y",
+                "north": "false",
+                "east": "false",
+                "south": "false",
+                "west": "false",
+                "up": "false",
+                "down": "false"
+              },
+              {
+                "north": "false",
+                "east": "false",
+                "south": "false",
+                "west": "false",
+                "up": "true",
+                "down": "false"
+              }
+            ]
+          }
+        ]
+      },
+      "apply": {
+        "model": "create_industrial_details:block/air_duct/casing/industrial_steel_down_open"
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {
+            "casing": "plated_industrial_steel"
+          },
+          {
+            "AND": [
+              {
+                "north": "false"
+              },
+              {
+                "OR": [
+                  {
+                    "axis": "x|y"
+                  },
+                  {
+                    "north": "true"
+                  },
+                  {
+                    "east": "true"
+                  },
+                  {
+                    "south": "true"
+                  },
+                  {
+                    "west": "true"
+                  },
+                  {
+                    "up": "true"
+                  },
+                  {
+                    "down": "true"
+                  }
+                ]
+              },
+              {
+                "OR": [
+                  {
+                    "south": "false"
+                  },
+                  {
+                    "north": "true"
+                  },
+                  {
+                    "east": "true"
+                  },
+                  {
+                    "west": "true"
+                  },
+                  {
+                    "up": "true"
+                  },
+                  {
+                    "down": "true"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "apply": {
+        "model": "create_industrial_details:block/air_duct/casing/plated_industrial_steel_north_closed"
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {
+            "casing": "plated_industrial_steel"
+          },
+          {
+            "OR": [
+              {
+                "north": "true"
+              },
+              {
+                "axis": "z",
+                "north": "false",
+                "east": "false",
+                "south": "false",
+                "west": "false",
+                "up": "false",
+                "down": "false"
+              },
+              {
+                "north": "false",
+                "east": "false",
+                "south": "true",
+                "west": "false",
+                "up": "false",
+                "down": "false"
+              }
+            ]
+          }
+        ]
+      },
+      "apply": {
+        "model": "create_industrial_details:block/air_duct/casing/plated_industrial_steel_north_open"
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {
+            "casing": "plated_industrial_steel"
+          },
+          {
+            "AND": [
+              {
+                "east": "false"
+              },
+              {
+                "OR": [
+                  {
+                    "axis": "y|z"
+                  },
+                  {
+                    "north": "true"
+                  },
+                  {
+                    "east": "true"
+                  },
+                  {
+                    "south": "true"
+                  },
+                  {
+                    "west": "true"
+                  },
+                  {
+                    "up": "true"
+                  },
+                  {
+                    "down": "true"
+                  }
+                ]
+              },
+              {
+                "OR": [
+                  {
+                    "west": "false"
+                  },
+                  {
+                    "north": "true"
+                  },
+                  {
+                    "east": "true"
+                  },
+                  {
+                    "south": "true"
+                  },
+                  {
+                    "up": "true"
+                  },
+                  {
+                    "down": "true"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "apply": {
+        "model": "create_industrial_details:block/air_duct/casing/plated_industrial_steel_east_closed"
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {
+            "casing": "plated_industrial_steel"
+          },
+          {
+            "OR": [
+              {
+                "east": "true"
+              },
+              {
+                "axis": "x",
+                "north": "false",
+                "east": "false",
+                "south": "false",
+                "west": "false",
+                "up": "false",
+                "down": "false"
+              },
+              {
+                "north": "false",
+                "east": "false",
+                "south": "false",
+                "west": "true",
+                "up": "false",
+                "down": "false"
+              }
+            ]
+          }
+        ]
+      },
+      "apply": {
+        "model": "create_industrial_details:block/air_duct/casing/plated_industrial_steel_east_open"
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {
+            "casing": "plated_industrial_steel"
+          },
+          {
+            "AND": [
+              {
+                "south": "false"
+              },
+              {
+                "OR": [
+                  {
+                    "axis": "x|y"
+                  },
+                  {
+                    "north": "true"
+                  },
+                  {
+                    "east": "true"
+                  },
+                  {
+                    "south": "true"
+                  },
+                  {
+                    "west": "true"
+                  },
+                  {
+                    "up": "true"
+                  },
+                  {
+                    "down": "true"
+                  }
+                ]
+              },
+              {
+                "OR": [
+                  {
+                    "north": "false"
+                  },
+                  {
+                    "east": "true"
+                  },
+                  {
+                    "south": "true"
+                  },
+                  {
+                    "west": "true"
+                  },
+                  {
+                    "up": "true"
+                  },
+                  {
+                    "down": "true"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "apply": {
+        "model": "create_industrial_details:block/air_duct/casing/plated_industrial_steel_south_closed"
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {
+            "casing": "plated_industrial_steel"
+          },
+          {
+            "OR": [
+              {
+                "south": "true"
+              },
+              {
+                "axis": "z",
+                "north": "false",
+                "east": "false",
+                "south": "false",
+                "west": "false",
+                "up": "false",
+                "down": "false"
+              },
+              {
+                "north": "true",
+                "east": "false",
+                "south": "false",
+                "west": "false",
+                "up": "false",
+                "down": "false"
+              }
+            ]
+          }
+        ]
+      },
+      "apply": {
+        "model": "create_industrial_details:block/air_duct/casing/plated_industrial_steel_south_open"
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {
+            "casing": "plated_industrial_steel"
+          },
+          {
+            "AND": [
+              {
+                "west": "false"
+              },
+              {
+                "OR": [
+                  {
+                    "axis": "y|z"
+                  },
+                  {
+                    "north": "true"
+                  },
+                  {
+                    "east": "true"
+                  },
+                  {
+                    "south": "true"
+                  },
+                  {
+                    "west": "true"
+                  },
+                  {
+                    "up": "true"
+                  },
+                  {
+                    "down": "true"
+                  }
+                ]
+              },
+              {
+                "OR": [
+                  {
+                    "east": "false"
+                  },
+                  {
+                    "north": "true"
+                  },
+                  {
+                    "south": "true"
+                  },
+                  {
+                    "west": "true"
+                  },
+                  {
+                    "up": "true"
+                  },
+                  {
+                    "down": "true"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "apply": {
+        "model": "create_industrial_details:block/air_duct/casing/plated_industrial_steel_west_closed"
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {
+            "casing": "plated_industrial_steel"
+          },
+          {
+            "OR": [
+              {
+                "west": "true"
+              },
+              {
+                "axis": "x",
+                "north": "false",
+                "east": "false",
+                "south": "false",
+                "west": "false",
+                "up": "false",
+                "down": "false"
+              },
+              {
+                "north": "false",
+                "east": "true",
+                "south": "false",
+                "west": "false",
+                "up": "false",
+                "down": "false"
+              }
+            ]
+          }
+        ]
+      },
+      "apply": {
+        "model": "create_industrial_details:block/air_duct/casing/plated_industrial_steel_west_open"
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {
+            "casing": "plated_industrial_steel"
+          },
+          {
+            "AND": [
+              {
+                "up": "false"
+              },
+              {
+                "OR": [
+                  {
+                    "axis": "x|z"
+                  },
+                  {
+                    "north": "true"
+                  },
+                  {
+                    "east": "true"
+                  },
+                  {
+                    "south": "true"
+                  },
+                  {
+                    "west": "true"
+                  },
+                  {
+                    "up": "true"
+                  },
+                  {
+                    "down": "true"
+                  }
+                ]
+              },
+              {
+                "OR": [
+                  {
+                    "down": "false"
+                  },
+                  {
+                    "north": "true"
+                  },
+                  {
+                    "east": "true"
+                  },
+                  {
+                    "south": "true"
+                  },
+                  {
+                    "west": "true"
+                  },
+                  {
+                    "up": "true"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "apply": {
+        "model": "create_industrial_details:block/air_duct/casing/plated_industrial_steel_up_closed"
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {
+            "casing": "plated_industrial_steel"
+          },
+          {
+            "OR": [
+              {
+                "up": "true"
+              },
+              {
+                "axis": "y",
+                "north": "false",
+                "east": "false",
+                "south": "false",
+                "west": "false",
+                "up": "false",
+                "down": "false"
+              },
+              {
+                "north": "false",
+                "east": "false",
+                "south": "false",
+                "west": "false",
+                "up": "false",
+                "down": "true"
+              }
+            ]
+          }
+        ]
+      },
+      "apply": {
+        "model": "create_industrial_details:block/air_duct/casing/plated_industrial_steel_up_open"
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {
+            "casing": "plated_industrial_steel"
+          },
+          {
+            "AND": [
+              {
+                "down": "false"
+              },
+              {
+                "OR": [
+                  {
+                    "axis": "x|z"
+                  },
+                  {
+                    "north": "true"
+                  },
+                  {
+                    "east": "true"
+                  },
+                  {
+                    "south": "true"
+                  },
+                  {
+                    "west": "true"
+                  },
+                  {
+                    "up": "true"
+                  },
+                  {
+                    "down": "true"
+                  }
+                ]
+              },
+              {
+                "OR": [
+                  {
+                    "up": "false"
+                  },
+                  {
+                    "north": "true"
+                  },
+                  {
+                    "east": "true"
+                  },
+                  {
+                    "south": "true"
+                  },
+                  {
+                    "west": "true"
+                  },
+                  {
+                    "down": "true"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "apply": {
+        "model": "create_industrial_details:block/air_duct/casing/plated_industrial_steel_down_closed"
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {
+            "casing": "plated_industrial_steel"
+          },
+          {
+            "OR": [
+              {
+                "down": "true"
+              },
+              {
+                "axis": "y",
+                "north": "false",
+                "east": "false",
+                "south": "false",
+                "west": "false",
+                "up": "false",
+                "down": "false"
+              },
+              {
+                "north": "false",
+                "east": "false",
+                "south": "false",
+                "west": "false",
+                "up": "true",
+                "down": "false"
+              }
+            ]
+          }
+        ]
+      },
+      "apply": {
+        "model": "create_industrial_details:block/air_duct/casing/plated_industrial_steel_down_open"
       }
     }
   ]

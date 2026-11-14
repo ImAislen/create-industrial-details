@@ -1,0 +1,37 @@
+{
+  "textures": {
+    "down": "create:block/industrial_iron_block_top",
+    "up": "create:block/industrial_iron_block_top",
+    "north": "create:block/industrial_iron_block",
+    "south": "create:block/industrial_iron_block",
+    "west": "create:block/industrial_iron_block",
+    "east": "create:block/industrial_iron_block",
+    "particle": "create:block/industrial_iron_block"
+  },
+  "elements": [
+    {
+      "from": [
+        0,
+        16,
+        0
+      ],
+      "to": [
+        16,
+        16,
+        16
+      ],
+      "faces": {
+        "up": {
+          "uv": [
+            0.0,
+            0.0,
+            16.0,
+            16.0
+          ],
+          "texture": "#up",
+          "cullface": "up"
+        }
+      }
+    }
+  ]
+}

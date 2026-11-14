@@ -156,6 +156,18 @@ publishing {
 
 tasks.named('test', Test).configure {
     exclude '**/*GameTests.class'
+    exclude '**/CopycatDiagonalByteModelChecks*.class'
+}
+
+tasks.register('verifyCopycatGeometry', JavaExec) {
+    dependsOn tasks.named('testClasses')
+    classpath = sourceSets.test.runtimeClasspath
+    mainClass = 'com.aislen.createindustrialdetails.client.model.CopycatDiagonalByteModelChecks'
+    workingDir = layout.buildDirectory.get().asFile
+}
+
+tasks.named('check').configure {
+    dependsOn tasks.named('verifyCopycatGeometry')
 }
 
 tasks.withType(JavaCompile).configureEach {

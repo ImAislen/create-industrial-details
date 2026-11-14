@@ -34,8 +34,10 @@ public final class ModCreativeTabs {
                             .displayItems((parameters, output) -> {
                                 output.accept(ModBlocks.CAST_IRON_BLOCK.get());
                                 output.accept(ModBlocks.BLOCK_OF_INDUSTRIAL_STEEL.get());
+                                output.accept(ModBlocks.BLOCK_OF_PLATED_INDUSTRIAL_STEEL.get());
                                 output.accept(ModBlocks.MOORING_BOLLARD.get());
                                 output.accept(ModBlocks.RIVETED_STEEL_PANEL.get());
+                                output.accept(ModBlocks.COPYCAT_DIAGONAL_BYTE.get());
                                 output.accept(ModBlocks.RIVETED_STEEL_GRATE.get());
                                 output.accept(ModBlocks.RIVETED_STEEL_HATCH.get());
                                 output.accept(ModBlocks.RIVETED_STEEL_BEAM.get());

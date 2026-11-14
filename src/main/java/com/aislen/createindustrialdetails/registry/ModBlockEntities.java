@@ -1,6 +1,7 @@
 package com.aislen.createindustrialdetails.registry;
 
 import com.aislen.createindustrialdetails.CreateIndustrialDetails;
+import com.simibubi.create.content.decoration.copycat.CopycatBlockEntity;
 import com.aislen.createindustrialdetails.content.block.rivetedsteel.trench.*;
 import com.aislen.createindustrialdetails.content.block.lighting.cagedlamp.RivetedSteelCagedLampBlockEntity;
 import com.aislen.createindustrialdetails.content.block.woodenbeam.WoodenBeamBlockEntity;
@@ -54,6 +55,11 @@ public final class ModBlockEntities {
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<ServiceTrenchGlassPipeBlockEntity>> SERVICE_TRENCH_GLASS_PIPE =
             BLOCK_ENTITY_TYPES.register("service_trench_glass_pipe", () -> BlockEntityType.Builder.of(
                     ServiceTrenchGlassPipeBlockEntity::new, ModBlocks.SERVICE_TRENCH_GLASS_PIPE.get()).build(null));
+
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<CopycatBlockEntity>> COPYCAT_DIAGONAL_BYTE =
+            BLOCK_ENTITY_TYPES.register("copycat_diagonal_byte", () -> BlockEntityType.Builder.of(
+                    (pos, state) -> new CopycatBlockEntity(ModBlockEntities.COPYCAT_DIAGONAL_BYTE.get(), pos, state),
+                    ModBlocks.COPYCAT_DIAGONAL_BYTE.get()).build(null));
 
     private ModBlockEntities() {
     }

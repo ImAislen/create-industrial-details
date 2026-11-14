@@ -1,5 +1,6 @@
 {
   "itemGroup.create_industrial_details": "Create: Industrial Details",
+  "block.create_industrial_details.copycat_diagonal_byte": "Copycat Diagonal Byte",
   "block.create_industrial_details.cast_iron_block": "Cast Iron Block",
   "block.create_industrial_details.mooring_bollard": "Mooring Bollard",
   "block.create_industrial_details.riveted_steel_panel": "Riveted Steel Panel",
@@ -146,5 +147,6 @@
   "create_industrial_details.goggles.fluid": "Fluid: %s",
   "create_industrial_details.goggles.none": "None detected",
   "block.create_industrial_details.service_trench_glass_pipe": "Service Trench",
-  "block.create_industrial_details.block_of_industrial_steel": "Block of Industrial Steel"
+  "block.create_industrial_details.block_of_industrial_steel": "Block of Industrial Steel",
+  "block.create_industrial_details.block_of_plated_industrial_steel": "Block of Plated Industrial Steel"
 }

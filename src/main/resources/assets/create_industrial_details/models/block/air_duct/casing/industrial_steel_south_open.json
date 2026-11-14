@@ -1,0 +1,201 @@
+{
+  "textures": {
+    "north": "create_industrial_details:block/riveted_steel/block_of_industrial_steel",
+    "east": "create_industrial_details:block/riveted_steel/block_of_industrial_steel",
+    "south": "create_industrial_details:block/riveted_steel/block_of_industrial_steel",
+    "west": "create_industrial_details:block/riveted_steel/block_of_industrial_steel",
+    "up": "create_industrial_details:block/riveted_steel/block_of_industrial_steel",
+    "down": "create_industrial_details:block/riveted_steel/block_of_industrial_steel",
+    "particle": "create_industrial_details:block/riveted_steel/block_of_industrial_steel"
+  },
+  "elements": [
+    {
+      "from": [
+        14.5,
+        0,
+        16
+      ],
+      "to": [
+        16,
+        16,
+        16
+      ],
+      "faces": {
+        "south": {
+          "uv": [
+            15.625,
+            4.0,
+            16.0,
+            8.0
+          ],
+          "texture": "#south",
+          "cullface": "south"
+        }
+      }
+    },
+    {
+      "from": [
+        0,
+        0,
+        16
+      ],
+      "to": [
+        1.5,
+        16,
+        16
+      ],
+      "faces": {
+        "south": {
+          "uv": [
+            12.0,
+            4.0,
+            12.375,
+            8.0
+          ],
+          "texture": "#south",
+          "cullface": "south"
+        }
+      }
+    },
+    {
+      "from": [
+        1.5,
+        0,
+        16
+      ],
+      "to": [
+        14.5,
+        1.5,
+        16
+      ],
+      "faces": {
+        "south": {
+          "uv": [
+            12.375,
+            7.625,
+            15.625,
+            8.0
+          ],
+          "texture": "#south",
+          "cullface": "south"
+        }
+      }
+    },
+    {
+      "from": [
+        1.5,
+        14.5,
+        16
+      ],
+      "to": [
+        14.5,
+        16,
+        16
+      ],
+      "faces": {
+        "south": {
+          "uv": [
+            12.375,
+            4.0,
+            15.625,
+            4.375
+          ],
+          "texture": "#south",
+          "cullface": "south"
+        }
+      }
+    },
+    {
+      "from": [
+        14.5,
+        1.5,
+        14
+      ],
+      "to": [
+        14.5,
+        14.5,
+        15.25
+      ],
+      "faces": {
+        "west": {
+          "uv": [
+            11.5,
+            4.375,
+            11.8125,
+            7.625
+          ],
+          "texture": "#west"
+        }
+      }
+    },
+    {
+      "from": [
+        1.5,
+        1.5,
+        14
+      ],
+      "to": [
+        1.5,
+        14.5,
+        15.25
+      ],
+      "faces": {
+        "east": {
+          "uv": [
+            0.1875,
+            4.375,
+            0.5,
+            7.625
+          ],
+          "texture": "#east"
+        }
+      }
+    },
+    {
+      "from": [
+        1.5,
+        1.5,
+        14
+      ],
+      "to": [
+        14.5,
+        1.5,
+        15.25
+      ],
+      "faces": {
+        "up": {
+          "uv": [
+            7.625,
+            0.5,
+            4.375,
+            0.1875
+          ],
+          "texture": "#up"
+        }
+      }
+    },
+    {
+      "from": [
+        1.5,
+        14.5,
+        14
+      ],
+      "to": [
+        14.5,
+        14.5,
+        15.25
+      ],
+      "faces": {
+        "down": {
+          "uv": [
+            11.625,
+            0.1875,
+            8.375,
+            0.5
+          ],
+          "texture": "#down"
+        }
+      }
+    }
+  ]
+}

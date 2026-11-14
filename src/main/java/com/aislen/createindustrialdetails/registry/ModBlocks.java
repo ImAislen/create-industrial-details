@@ -8,6 +8,7 @@ import com.aislen.createindustrialdetails.content.block.airduct.AirDuctBlock;
 import com.aislen.createindustrialdetails.content.block.airduct.AirIntakeBlock;
 import com.aislen.createindustrialdetails.content.block.airduct.AirVentBlock;
 import com.aislen.createindustrialdetails.content.block.cable.CableTrayBlock;
+import com.aislen.createindustrialdetails.content.block.copycat.CopycatDiagonalByteBlock;
 import com.aislen.createindustrialdetails.content.block.rivetedsteel.RivetedSteelGrateBlock;
 import com.aislen.createindustrialdetails.content.block.rivetedsteel.RivetedSteelHatchBlock;
 import com.aislen.createindustrialdetails.content.block.rivetedsteel.beam.RivetedSteelBeamBlock;
@@ -67,6 +68,11 @@ public final class ModBlocks {
     }
 
 
+    public static final DeferredBlock<CopycatDiagonalByteBlock> COPYCAT_DIAGONAL_BYTE =
+            registerBlockWithItem("copycat_diagonal_byte", () -> new CopycatDiagonalByteBlock(
+                    BlockBehaviour.Properties.ofFullCopy(Blocks.GOLD_BLOCK).noOcclusion().mapColor(MapColor.NONE)
+                            .isValidSpawn((state, level, pos, type) -> false)));
+
     public static final DeferredBlock<ServiceTrenchBlock> SERVICE_TRENCH =
             registerBlockWithItem("service_trench", () -> new ServiceTrenchBlock(serviceTrenchProperties()), ServiceTrenchBlockItem::new);
     public static final DeferredBlock<ServiceTrenchPipeBlock> SERVICE_TRENCH_PIPE =
@@ -86,6 +92,11 @@ public final class ModBlocks {
             registerBlockWithItem("block_of_industrial_steel", () -> new Block(
                     BlockBehaviour.Properties.ofFullCopy(Blocks.GOLD_BLOCK)
                             .mapColor(MapColor.COLOR_GRAY).sound(SoundType.NETHERITE_BLOCK).requiresCorrectToolForDrops()
+            ));
+
+    public static final DeferredBlock<Block> BLOCK_OF_PLATED_INDUSTRIAL_STEEL =
+            registerBlockWithItem("block_of_plated_industrial_steel", () -> new Block(
+                    BlockBehaviour.Properties.ofFullCopy(BLOCK_OF_INDUSTRIAL_STEEL.get())
             ));
 
     public static final DeferredBlock<Block> CAST_IRON_BLOCK =
@@ -267,7 +278,6 @@ public final class ModBlocks {
                                     .strength(3.5F, 6.0F)
                                     .sound(SoundType.NETHERITE_BLOCK)
                                     .requiresCorrectToolForDrops()
-                                    .noOcclusion()
                     ),
                     BlockItem::new
             );
@@ -278,14 +288,14 @@ public final class ModBlocks {
     public static final DeferredBlock<AirVentBlock> AIR_VENT =
             registerBlockWithItem(
                     "air_vent",
-                    () -> new AirVentBlock(BlockBehaviour.Properties.ofFullCopy(AIR_DUCT.get())),
+                    () -> new AirVentBlock(BlockBehaviour.Properties.ofFullCopy(AIR_DUCT.get()).noOcclusion()),
                     BlockItem::new
             );
 
     public static final DeferredBlock<AirIntakeBlock> AIR_INTAKE =
             registerBlockWithItem(
                     "air_intake",
-                    () -> new AirIntakeBlock(BlockBehaviour.Properties.ofFullCopy(AIR_DUCT.get())),
+                    () -> new AirIntakeBlock(BlockBehaviour.Properties.ofFullCopy(AIR_DUCT.get()).noOcclusion()),
                     BlockItem::new
             );
 

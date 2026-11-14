@@ -1,0 +1,37 @@
+{
+  "textures": {
+    "down": "create:block/brass_casing",
+    "up": "create:block/brass_casing",
+    "north": "create:block/brass_casing",
+    "south": "create:block/brass_casing",
+    "west": "create:block/brass_casing",
+    "east": "create:block/brass_casing",
+    "particle": "create:block/brass_casing"
+  },
+  "elements": [
+    {
+      "from": [
+        0,
+        0,
+        16
+      ],
+      "to": [
+        16,
+        16,
+        16
+      ],
+      "faces": {
+        "south": {
+          "uv": [
+            0.0,
+            0.0,
+            16.0,
+            16.0
+          ],
+          "texture": "#south",
+          "cullface": "south"
+        }
+      }
+    }
+  ]
+}

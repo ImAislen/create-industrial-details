@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "create_industrial_details:block/copycat/copycat_diagonal_byte"
+    }
+  }
+}

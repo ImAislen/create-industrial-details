@@ -1,0 +1,37 @@
+{
+  "textures": {
+    "down": "create:block/andesite_casing",
+    "up": "create:block/andesite_casing",
+    "north": "create:block/andesite_casing",
+    "south": "create:block/andesite_casing",
+    "west": "create:block/andesite_casing",
+    "east": "create:block/andesite_casing",
+    "particle": "create:block/andesite_casing"
+  },
+  "elements": [
+    {
+      "from": [
+        0,
+        0,
+        0
+      ],
+      "to": [
+        0,
+        16,
+        16
+      ],
+      "faces": {
+        "west": {
+          "uv": [
+            0.0,
+            0.0,
+            16.0,
+            16.0
+          ],
+          "texture": "#west",
+          "cullface": "west"
+        }
+      }
+    }
+  ]
+}
