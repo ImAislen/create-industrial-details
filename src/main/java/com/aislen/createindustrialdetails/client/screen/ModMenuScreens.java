@@ -19,8 +19,8 @@ public final class ModMenuScreens {
     @SubscribeEvent
     public static void registerMenuScreens(RegisterMenuScreensEvent event) {
         event.register(
-                ModMenus.RIVETED_STEEL_CAGED_LAMP.get(),
-                RivetedSteelCagedLampScreen::new
+                ModMenus.INDUSTRIAL_STEEL_CAGED_LAMP.get(),
+                IndustrialSteelCagedLampScreen::new
         );
     }
 }

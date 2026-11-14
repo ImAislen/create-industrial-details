@@ -13,7 +13,7 @@ public final class ModTooltips {
 
     public static void register() {
         Item grateItem =
-                ModBlocks.RIVETED_STEEL_GRATE.get().asItem();
+                ModBlocks.INDUSTRIAL_STEEL_GRATE.get().asItem();
 
         TooltipModifier.REGISTRY.register(
                 grateItem,

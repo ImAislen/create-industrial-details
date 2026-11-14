@@ -1,7 +1,7 @@
 package com.aislen.createindustrialdetails.registry;
 
 import com.aislen.createindustrialdetails.CreateIndustrialDetails;
-import com.aislen.createindustrialdetails.content.block.lighting.cagedlamp.RivetedSteelCagedLampMenu;
+import com.aislen.createindustrialdetails.content.block.industrialsteel.lighting.cagedlamp.IndustrialSteelCagedLampMenu;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.inventory.MenuType;
 import net.neoforged.bus.api.IEventBus;
@@ -19,12 +19,12 @@ public final class ModMenus {
 
     public static final DeferredHolder<
             MenuType<?>,
-            MenuType<RivetedSteelCagedLampMenu>
-            > RIVETED_STEEL_CAGED_LAMP =
+            MenuType<IndustrialSteelCagedLampMenu>
+            > INDUSTRIAL_STEEL_CAGED_LAMP =
             MENUS.register(
-                    "riveted_steel_caged_lamp",
+                    "industrial_steel_caged_lamp",
                     () -> IMenuTypeExtension.create(
-                            RivetedSteelCagedLampMenu::new
+                            IndustrialSteelCagedLampMenu::new
                     )
             );
 

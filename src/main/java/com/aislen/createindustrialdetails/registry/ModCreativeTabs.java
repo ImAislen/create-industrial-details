@@ -36,16 +36,16 @@ public final class ModCreativeTabs {
                                 output.accept(ModBlocks.BLOCK_OF_INDUSTRIAL_STEEL.get());
                                 output.accept(ModBlocks.BLOCK_OF_PLATED_INDUSTRIAL_STEEL.get());
                                 output.accept(ModBlocks.MOORING_BOLLARD.get());
-                                output.accept(ModBlocks.RIVETED_STEEL_PANEL.get());
+                                output.accept(ModBlocks.INDUSTRIAL_STEEL_PANEL.get());
                                 output.accept(ModBlocks.COPYCAT_DIAGONAL_BYTE.get());
-                                output.accept(ModBlocks.RIVETED_STEEL_GRATE.get());
-                                output.accept(ModBlocks.RIVETED_STEEL_HATCH.get());
-                                output.accept(ModBlocks.RIVETED_STEEL_BEAM.get());
+                                output.accept(ModBlocks.INDUSTRIAL_STEEL_GRATE.get());
+                                output.accept(ModBlocks.INDUSTRIAL_STEEL_HATCH.get());
+                                output.accept(ModBlocks.INDUSTRIAL_STEEL_BEAM.get());
                                 output.accept(ModBlocks.SERVICE_TRENCH.get());
                                 output.accept(ModBlocks.SMALL_STEEL_WALL_BRACKET.get());
                                 output.accept(ModBlocks.STEEL_WALL_BRACKET.get());
                                 output.accept(ModBlocks.STEEL_WALL_CORNER_BRACKET.get());
-                                output.accept(ModBlocks.RIVETED_STEEL_CAGED_LAMP.get());
+                                output.accept(ModBlocks.INDUSTRIAL_STEEL_CAGED_LAMP.get());
                                 ModBlocks.WOODEN_BEAMS.values().forEach(
                                         beam -> output.accept(beam.get())
                                 );

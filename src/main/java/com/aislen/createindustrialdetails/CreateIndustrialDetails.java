@@ -1,6 +1,7 @@
 package com.aislen.createindustrialdetails;
 
 import com.aislen.createindustrialdetails.registry.ModBlocks;
+import com.aislen.createindustrialdetails.registry.IndustrialSteelAliases;
 import com.aislen.createindustrialdetails.registry.ModBlockEntities;
 import com.aislen.createindustrialdetails.registry.ModCreativeTabs;
 import com.aislen.createindustrialdetails.registry.ModDataComponents;
@@ -26,6 +27,7 @@ public final class CreateIndustrialDetails {
             IEventBus modEventBus,
             ModContainer modContainer
     ) {
+        IndustrialSteelAliases.register();
         ModDataComponents.register(modEventBus);
         ModBlocks.register(modEventBus);
         ModBlockEntities.register(modEventBus);

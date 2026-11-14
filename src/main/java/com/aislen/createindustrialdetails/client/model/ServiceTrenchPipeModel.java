@@ -1,6 +1,6 @@
 package com.aislen.createindustrialdetails.client.model;
 
-import com.aislen.createindustrialdetails.content.block.rivetedsteel.trench.ServiceTrenchPipeFlanges;
+import com.aislen.createindustrialdetails.content.block.industrialsteel.trench.ServiceTrenchPipeFlanges;
 import com.simibubi.create.AllPartialModels;
 import com.simibubi.create.content.fluids.FluidTransportBehaviour.AttachmentTypes.ComponentPartials;
 import com.simibubi.create.foundation.model.BakedModelWrapperWithData;

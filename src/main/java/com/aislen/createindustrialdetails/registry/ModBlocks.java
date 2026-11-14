@@ -1,7 +1,7 @@
 package com.aislen.createindustrialdetails.registry;
 
 import com.aislen.createindustrialdetails.CreateIndustrialDetails;
-import com.aislen.createindustrialdetails.content.block.rivetedsteel.trench.*;
+import com.aislen.createindustrialdetails.content.block.industrialsteel.trench.*;
 import net.minecraft.world.level.block.Blocks;
 import com.aislen.createindustrialdetails.content.block.MooringBollardBlock;
 import com.aislen.createindustrialdetails.content.block.airduct.AirDuctBlock;
@@ -9,18 +9,18 @@ import com.aislen.createindustrialdetails.content.block.airduct.AirIntakeBlock;
 import com.aislen.createindustrialdetails.content.block.airduct.AirVentBlock;
 import com.aislen.createindustrialdetails.content.block.cable.CableTrayBlock;
 import com.aislen.createindustrialdetails.content.block.copycat.CopycatDiagonalByteBlock;
-import com.aislen.createindustrialdetails.content.block.rivetedsteel.RivetedSteelGrateBlock;
-import com.aislen.createindustrialdetails.content.block.rivetedsteel.RivetedSteelHatchBlock;
-import com.aislen.createindustrialdetails.content.block.rivetedsteel.beam.RivetedSteelBeamBlock;
-import com.aislen.createindustrialdetails.content.block.rivetedsteel.panel.RivetedSteelPanelBlock;
-import com.aislen.createindustrialdetails.content.block.rivetedsteel.panel.RivetedSteelPanelShaftPenetrationBlock;
+import com.aislen.createindustrialdetails.content.block.industrialsteel.IndustrialSteelGrateBlock;
+import com.aislen.createindustrialdetails.content.block.industrialsteel.IndustrialSteelHatchBlock;
+import com.aislen.createindustrialdetails.content.block.industrialsteel.beam.IndustrialSteelBeamBlock;
+import com.aislen.createindustrialdetails.content.block.industrialsteel.panel.IndustrialSteelPanelBlock;
+import com.aislen.createindustrialdetails.content.block.industrialsteel.panel.IndustrialSteelPanelShaftPenetrationBlock;
 import com.aislen.createindustrialdetails.content.block.supports.SmallSteelWallBracketBlock;
 import com.aislen.createindustrialdetails.content.block.supports.SmallSteelWallBracketBlockItem;
 import com.aislen.createindustrialdetails.content.block.supports.SteelWallBracketBlock;
 import com.aislen.createindustrialdetails.content.block.supports.SteelWallBracketBlockItem;
 import com.aislen.createindustrialdetails.content.block.supports.SteelWallCornerBracketBlock;
-import com.aislen.createindustrialdetails.content.item.rivetedsteel.RivetedSteelPanelItem;
-import com.aislen.createindustrialdetails.content.block.lighting.cagedlamp.RivetedSteelCagedLampBlock;
+import com.aislen.createindustrialdetails.content.item.industrialsteel.IndustrialSteelPanelItem;
+import com.aislen.createindustrialdetails.content.block.industrialsteel.lighting.cagedlamp.IndustrialSteelCagedLampBlock;
 import com.aislen.createindustrialdetails.content.block.plankedplanks.PlankedPlanksBlock;
 import com.aislen.createindustrialdetails.content.block.plankeddirtpath.PlankedDirtPathBlock;
 import com.aislen.createindustrialdetails.content.block.singleplank.SinglePlankBlock;
@@ -112,15 +112,15 @@ public final class ModBlocks {
             );
 
 
-    public static final DeferredBlock<RivetedSteelCagedLampBlock> RIVETED_STEEL_CAGED_LAMP =
+    public static final DeferredBlock<IndustrialSteelCagedLampBlock> INDUSTRIAL_STEEL_CAGED_LAMP =
             registerBlockWithItem(
-                    "riveted_steel_caged_lamp",
-                    () -> new RivetedSteelCagedLampBlock(
+                    "industrial_steel_caged_lamp",
+                    () -> new IndustrialSteelCagedLampBlock(
                             BlockBehaviour.Properties.of()
                                     .strength(1.5F, 6.0F)
                                     .sound(SoundType.NETHERITE_BLOCK)
                                     .noOcclusion()
-                                    .lightLevel(state -> state.getValue(RivetedSteelCagedLampBlock.LIT) ? 12 : 0)
+                                    .lightLevel(state -> state.getValue(IndustrialSteelCagedLampBlock.LIT) ? 12 : 0)
                     )
             );
 
@@ -150,11 +150,11 @@ public final class ModBlocks {
                     )
             );
 
-    public static final DeferredBlock<RivetedSteelBeamBlock>
-            RIVETED_STEEL_BEAM =
+    public static final DeferredBlock<IndustrialSteelBeamBlock>
+            INDUSTRIAL_STEEL_BEAM =
             registerBlockWithItem(
-                    "riveted_steel_beam",
-                    () -> new RivetedSteelBeamBlock(
+                    "industrial_steel_beam",
+                    () -> new IndustrialSteelBeamBlock(
                             BlockBehaviour.Properties.of()
                                     .strength(3.5F, 6.0F)
                                     .sound(SoundType.NETHERITE_BLOCK)
@@ -201,11 +201,11 @@ public final class ModBlocks {
                     )
             );
 
-    public static final DeferredBlock<RivetedSteelHatchBlock>
-            RIVETED_STEEL_HATCH =
+    public static final DeferredBlock<IndustrialSteelHatchBlock>
+            INDUSTRIAL_STEEL_HATCH =
             registerBlockWithItem(
-                    "riveted_steel_hatch",
-                    () -> new RivetedSteelHatchBlock(
+                    "industrial_steel_hatch",
+                    () -> new IndustrialSteelHatchBlock(
                             BlockBehaviour.Properties.of()
                                     .strength(3.5F, 6.0F)
                                     .sound(SoundType.NETHERITE_BLOCK)
@@ -214,11 +214,11 @@ public final class ModBlocks {
                     )
             );
 
-    public static final DeferredBlock<RivetedSteelGrateBlock>
-            RIVETED_STEEL_GRATE =
+    public static final DeferredBlock<IndustrialSteelGrateBlock>
+            INDUSTRIAL_STEEL_GRATE =
             registerBlockWithItem(
-                    "riveted_steel_grate",
-                    () -> new RivetedSteelGrateBlock(
+                    "industrial_steel_grate",
+                    () -> new IndustrialSteelGrateBlock(
                             BlockBehaviour.Properties.of()
                                     .strength(3.5F, 6.0F)
                                     .sound(SoundType.NETHERITE_BLOCK)
@@ -243,22 +243,22 @@ public final class ModBlocks {
                     )
             );
 
-    public static final DeferredBlock<RivetedSteelPanelBlock> RIVETED_STEEL_PANEL =
+    public static final DeferredBlock<IndustrialSteelPanelBlock> INDUSTRIAL_STEEL_PANEL =
             registerBlockWithItem(
-                    "riveted_steel_panel",
-                    () -> new RivetedSteelPanelBlock(
+                    "industrial_steel_panel",
+                    () -> new IndustrialSteelPanelBlock(
                             BlockBehaviour.Properties.of()
                                     .strength(3.5F, 6.0F)
                                     .sound(SoundType.METAL)
                                     .requiresCorrectToolForDrops()
                                     .noOcclusion()
                     ),
-                    RivetedSteelPanelItem::new
+                    IndustrialSteelPanelItem::new
             );
-    public static final DeferredBlock<RivetedSteelPanelShaftPenetrationBlock> RIVETED_STEEL_PANEL_SHAFT_PENETRATION =
+    public static final DeferredBlock<IndustrialSteelPanelShaftPenetrationBlock> INDUSTRIAL_STEEL_PANEL_SHAFT_PENETRATION =
             BLOCKS.register(
-                    "riveted_steel_panel_shaft_penetration",
-                    () -> new RivetedSteelPanelShaftPenetrationBlock(
+                    "industrial_steel_panel_shaft_penetration",
+                    () -> new IndustrialSteelPanelShaftPenetrationBlock(
                             BlockBehaviour.Properties.of()
                                     .strength(3.5F, 6.0F)
                                     .sound(SoundType.METAL)

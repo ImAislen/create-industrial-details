@@ -1,0 +1,306 @@
+{
+  "multipart": [
+    {
+      "when": {
+        "facing": "south",
+        "perpendicular": "false"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/industrial_steel/industrial_steel_caged_lamp/wall_body"
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "perpendicular": "false"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/industrial_steel/industrial_steel_caged_lamp/wall_body",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "perpendicular": "false"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/industrial_steel/industrial_steel_caged_lamp/wall_body",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "perpendicular": "false"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/industrial_steel/industrial_steel_caged_lamp/wall_body",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "perpendicular": "true"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/industrial_steel/industrial_steel_caged_lamp/wall_perpendicular_body"
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "perpendicular": "true"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/industrial_steel/industrial_steel_caged_lamp/wall_perpendicular_body",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "perpendicular": "true"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/industrial_steel/industrial_steel_caged_lamp/wall_perpendicular_body",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "perpendicular": "true"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/industrial_steel/industrial_steel_caged_lamp/wall_perpendicular_body",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "up"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/industrial_steel/industrial_steel_caged_lamp/floor_body"
+      }
+    },
+    {
+      "when": {
+        "facing": "down"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/industrial_steel/industrial_steel_caged_lamp/ceiling_body"
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "perpendicular": "false",
+        "lit": "false"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/industrial_steel/industrial_steel_caged_lamp/wall_bulb"
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "perpendicular": "false",
+        "lit": "false"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/industrial_steel/industrial_steel_caged_lamp/wall_bulb",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "perpendicular": "false",
+        "lit": "false"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/industrial_steel/industrial_steel_caged_lamp/wall_bulb",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "perpendicular": "false",
+        "lit": "false"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/industrial_steel/industrial_steel_caged_lamp/wall_bulb",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "perpendicular": "true",
+        "lit": "false"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/industrial_steel/industrial_steel_caged_lamp/wall_perpendicular_bulb"
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "perpendicular": "true",
+        "lit": "false"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/industrial_steel/industrial_steel_caged_lamp/wall_perpendicular_bulb",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "perpendicular": "true",
+        "lit": "false"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/industrial_steel/industrial_steel_caged_lamp/wall_perpendicular_bulb",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "perpendicular": "true",
+        "lit": "false"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/industrial_steel/industrial_steel_caged_lamp/wall_perpendicular_bulb",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "up",
+        "lit": "false"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/industrial_steel/industrial_steel_caged_lamp/floor_bulb"
+      }
+    },
+    {
+      "when": {
+        "facing": "down",
+        "lit": "false"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/industrial_steel/industrial_steel_caged_lamp/ceiling_bulb"
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "perpendicular": "false",
+        "lit": "true"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/industrial_steel/industrial_steel_caged_lamp/wall_bulb_lit"
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "perpendicular": "false",
+        "lit": "true"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/industrial_steel/industrial_steel_caged_lamp/wall_bulb_lit",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "perpendicular": "false",
+        "lit": "true"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/industrial_steel/industrial_steel_caged_lamp/wall_bulb_lit",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "perpendicular": "false",
+        "lit": "true"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/industrial_steel/industrial_steel_caged_lamp/wall_bulb_lit",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "perpendicular": "true",
+        "lit": "true"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/industrial_steel/industrial_steel_caged_lamp/wall_perpendicular_bulb_lit"
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "perpendicular": "true",
+        "lit": "true"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/industrial_steel/industrial_steel_caged_lamp/wall_perpendicular_bulb_lit",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "perpendicular": "true",
+        "lit": "true"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/industrial_steel/industrial_steel_caged_lamp/wall_perpendicular_bulb_lit",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "perpendicular": "true",
+        "lit": "true"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/industrial_steel/industrial_steel_caged_lamp/wall_perpendicular_bulb_lit",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "up",
+        "lit": "true"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/industrial_steel/industrial_steel_caged_lamp/floor_bulb_lit"
+      }
+    },
+    {
+      "when": {
+        "facing": "down",
+        "lit": "true"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/industrial_steel/industrial_steel_caged_lamp/ceiling_bulb_lit"
+      }
+    }
+  ]
+}

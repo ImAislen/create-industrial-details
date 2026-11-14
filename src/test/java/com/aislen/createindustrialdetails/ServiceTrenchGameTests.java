@@ -1,7 +1,7 @@
 package com.aislen.createindustrialdetails;
 
 import com.aislen.createindustrialdetails.registry.*;
-import com.aislen.createindustrialdetails.content.block.rivetedsteel.trench.*;
+import com.aislen.createindustrialdetails.content.block.industrialsteel.trench.*;
 import com.simibubi.create.AllBlocks;
 import com.simibubi.create.content.decoration.encasing.EncasableBlock;
 import com.simibubi.create.content.fluids.FluidTransportBehaviour;

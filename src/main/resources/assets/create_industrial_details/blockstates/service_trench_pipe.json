@@ -5,7 +5,7 @@
         "facing": "north"
       },
       "apply": {
-        "model": "create_industrial_details:block/riveted_steel/service_trench_casing",
+        "model": "create_industrial_details:block/industrial_steel/service_trench_casing",
         "y": 0
       }
     },
@@ -14,7 +14,7 @@
         "facing": "east"
       },
       "apply": {
-        "model": "create_industrial_details:block/riveted_steel/service_trench_casing",
+        "model": "create_industrial_details:block/industrial_steel/service_trench_casing",
         "y": 90
       }
     },
@@ -23,7 +23,7 @@
         "facing": "south"
       },
       "apply": {
-        "model": "create_industrial_details:block/riveted_steel/service_trench_casing",
+        "model": "create_industrial_details:block/industrial_steel/service_trench_casing",
         "y": 180
       }
     },
@@ -32,7 +32,7 @@
         "facing": "west"
       },
       "apply": {
-        "model": "create_industrial_details:block/riveted_steel/service_trench_casing",
+        "model": "create_industrial_details:block/industrial_steel/service_trench_casing",
         "y": 270
       }
     },
@@ -374,7 +374,7 @@
         "north": "false"
       },
       "apply": {
-        "model": "create_industrial_details:block/riveted_steel/service_trench_pipe/end_x"
+        "model": "create_industrial_details:block/industrial_steel/service_trench_pipe/end_x"
       }
     },
     {
@@ -440,7 +440,7 @@
         "west": "false"
       },
       "apply": {
-        "model": "create_industrial_details:block/riveted_steel/service_trench_pipe/end_y"
+        "model": "create_industrial_details:block/industrial_steel/service_trench_pipe/end_y"
       }
     },
     {
@@ -506,7 +506,7 @@
         "west": "false"
       },
       "apply": {
-        "model": "create_industrial_details:block/riveted_steel/service_trench_pipe/end_z"
+        "model": "create_industrial_details:block/industrial_steel/service_trench_pipe/end_z"
       }
     },
     {
@@ -577,7 +577,7 @@
         "north": "true"
       },
       "apply": {
-        "model": "create_industrial_details:block/riveted_steel/service_trench_pipe/north"
+        "model": "create_industrial_details:block/industrial_steel/service_trench_pipe/north"
       }
     },
     {
@@ -593,7 +593,7 @@
         "south": "true"
       },
       "apply": {
-        "model": "create_industrial_details:block/riveted_steel/service_trench_pipe/south"
+        "model": "create_industrial_details:block/industrial_steel/service_trench_pipe/south"
       }
     },
     {
@@ -609,7 +609,7 @@
         "east": "true"
       },
       "apply": {
-        "model": "create_industrial_details:block/riveted_steel/service_trench_pipe/east"
+        "model": "create_industrial_details:block/industrial_steel/service_trench_pipe/east"
       }
     },
     {
@@ -625,7 +625,7 @@
         "west": "true"
       },
       "apply": {
-        "model": "create_industrial_details:block/riveted_steel/service_trench_pipe/west"
+        "model": "create_industrial_details:block/industrial_steel/service_trench_pipe/west"
       }
     },
     {
@@ -641,7 +641,7 @@
         "up": "true"
       },
       "apply": {
-        "model": "create_industrial_details:block/riveted_steel/service_trench_pipe/up"
+        "model": "create_industrial_details:block/industrial_steel/service_trench_pipe/up"
       }
     },
     {
@@ -657,7 +657,7 @@
         "down": "true"
       },
       "apply": {
-        "model": "create_industrial_details:block/riveted_steel/service_trench_pipe/down"
+        "model": "create_industrial_details:block/industrial_steel/service_trench_pipe/down"
       }
     }
   ]

@@ -3,7 +3,7 @@ package com.aislen.createindustrialdetails.client.model;
 import java.util.Map;
 
 import com.aislen.createindustrialdetails.CreateIndustrialDetails;
-import com.aislen.createindustrialdetails.content.block.rivetedsteel.beam.RivetedSteelBeamBlock;
+import com.aislen.createindustrialdetails.content.block.industrialsteel.beam.IndustrialSteelBeamBlock;
 import com.aislen.createindustrialdetails.content.block.woodenbeam.WoodenBeamMaterial;
 import com.aislen.createindustrialdetails.registry.ModBlocks;
 import com.simibubi.create.content.decoration.girder.GirderBlock;
@@ -31,34 +31,34 @@ public final class ModModelEvents {
 
 
     private static final ResourceLocation END_A =
-            id("block/riveted_steel/riveted_steel_beam/riveted_steel_beam_end_a");
+            id("block/industrial_steel/industrial_steel_beam/industrial_steel_beam_end_a");
 
     private static final ResourceLocation END_B =
-            id("block/riveted_steel/riveted_steel_beam/riveted_steel_beam_end_b");
+            id("block/industrial_steel/industrial_steel_beam/industrial_steel_beam_end_b");
 
     private static final ResourceLocation END_A_X =
-            id("block/riveted_steel/riveted_steel_beam/riveted_steel_beam_end_a_x");
+            id("block/industrial_steel/industrial_steel_beam/industrial_steel_beam_end_a_x");
 
     private static final ResourceLocation END_B_X =
-            id("block/riveted_steel/riveted_steel_beam/riveted_steel_beam_end_b_x");
+            id("block/industrial_steel/industrial_steel_beam/industrial_steel_beam_end_b_x");
 
     private static final ResourceLocation END_A_Y =
-            id("block/riveted_steel/riveted_steel_beam/riveted_steel_beam_end_a_y");
+            id("block/industrial_steel/industrial_steel_beam/industrial_steel_beam_end_a_y");
 
     private static final ResourceLocation END_B_Y =
-            id("block/riveted_steel/riveted_steel_beam/riveted_steel_beam_end_b_y");
+            id("block/industrial_steel/industrial_steel_beam/industrial_steel_beam_end_b_y");
 
     private static final ResourceLocation END_A_Y_ROTATED =
-            id("block/riveted_steel/riveted_steel_beam/riveted_steel_beam_end_a_y_rotated");
+            id("block/industrial_steel/industrial_steel_beam/industrial_steel_beam_end_a_y_rotated");
 
     private static final ResourceLocation END_B_Y_ROTATED =
-            id("block/riveted_steel/riveted_steel_beam/riveted_steel_beam_end_b_y_rotated");
+            id("block/industrial_steel/industrial_steel_beam/industrial_steel_beam_end_b_y_rotated");
 
     private static final ResourceLocation VERTICAL_CROSS =
-            id("block/riveted_steel/riveted_steel_beam/riveted_steel_beam_vertical_cross");
+            id("block/industrial_steel/industrial_steel_beam/industrial_steel_beam_vertical_cross");
 
     private static final ResourceLocation VERTICAL_CROSS_ROTATED =
-            id("block/riveted_steel/riveted_steel_beam/riveted_steel_beam_vertical_cross_rotated");
+            id("block/industrial_steel/industrial_steel_beam/industrial_steel_beam_vertical_cross_rotated");
 
 
     @SubscribeEvent
@@ -175,7 +175,7 @@ public final class ModModelEvents {
                 getModel(models, VERTICAL_CROSS_ROTATED);
 
         for (BlockState state :
-                ModBlocks.RIVETED_STEEL_BEAM
+                ModBlocks.INDUSTRIAL_STEEL_BEAM
                         .get()
                         .getStateDefinition()
                         .getPossibleStates()) {
@@ -185,7 +185,7 @@ public final class ModModelEvents {
 
             boolean verticalRotated =
                     state.getValue(
-                            RivetedSteelBeamBlock.VERTICAL_ROTATED
+                            IndustrialSteelBeamBlock.VERTICAL_ROTATED
                     );
 
             BakedModel negativeEnd;
@@ -221,7 +221,7 @@ public final class ModModelEvents {
             models.computeIfPresent(
                     location,
                     (key, original) ->
-                            new RivetedSteelBeamModel(
+                            new IndustrialSteelBeamModel(
                                     original,
                                     axis,
                                     negativeEnd,

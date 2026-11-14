@@ -1,0 +1,9 @@
+{
+  "parent": "create_industrial_details:block/industrial_steel/industrial_steel_beam/industrial_steel_beam_end_b",
+  "transform": {
+    "rotation": {
+      "y": 90
+    },
+    "origin": "center"
+  }
+}

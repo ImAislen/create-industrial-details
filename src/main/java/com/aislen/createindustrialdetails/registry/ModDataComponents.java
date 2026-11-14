@@ -1,7 +1,7 @@
 package com.aislen.createindustrialdetails.registry;
 
 import com.aislen.createindustrialdetails.CreateIndustrialDetails;
-import com.aislen.createindustrialdetails.content.block.lighting.cagedlamp.RivetedSteelCagedLampFrequencies;
+import com.aislen.createindustrialdetails.content.block.industrialsteel.lighting.cagedlamp.IndustrialSteelCagedLampFrequencies;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.registries.Registries;
 import net.neoforged.bus.api.IEventBus;
@@ -20,15 +20,15 @@ public final class ModDataComponents {
 
     public static final DeferredHolder<
             DataComponentType<?>,
-            DataComponentType<RivetedSteelCagedLampFrequencies>
+            DataComponentType<IndustrialSteelCagedLampFrequencies>
             >
-            RIVETED_STEEL_CAGED_LAMP_FREQUENCIES =
+            INDUSTRIAL_STEEL_CAGED_LAMP_FREQUENCIES =
             DATA_COMPONENTS.registerComponentType(
-                    "riveted_steel_caged_lamp_frequencies",
+                    "industrial_steel_caged_lamp_frequencies",
                     builder -> builder
-                            .persistent(RivetedSteelCagedLampFrequencies.CODEC)
+                            .persistent(IndustrialSteelCagedLampFrequencies.CODEC)
                             .networkSynchronized(
-                                    RivetedSteelCagedLampFrequencies.STREAM_CODEC
+                                    IndustrialSteelCagedLampFrequencies.STREAM_CODEC
                             )
             );
 
