@@ -1,3 +1,9 @@
 {
-  "parent": "create_industrial_details:block/supports/small_steel_wall_bracket"
+  "parent": "create_industrial_details:block/supports/small_steel_wall_bracket",
+  "overrides": [
+    {
+      "predicate": { "create_industrial_details:small_steel_wall_bracket_straight": 1 },
+      "model": "create_industrial_details:item/small_steel_wall_bracket_straight"
+    }
+  ]
 }

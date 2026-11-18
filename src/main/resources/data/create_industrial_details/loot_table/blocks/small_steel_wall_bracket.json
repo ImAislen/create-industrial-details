@@ -19,6 +19,17 @@
                   "properties": { "quantity": "2" }
                 }
               ]
+            },
+            {
+              "function": "minecraft:set_components",
+              "components": { "create_industrial_details:item_variant": "straight" },
+              "conditions": [
+                {
+                  "condition": "minecraft:block_state_property",
+                  "block": "create_industrial_details:small_steel_wall_bracket",
+                  "properties": { "style": "straight" }
+                }
+              ]
             }
           ]
         }

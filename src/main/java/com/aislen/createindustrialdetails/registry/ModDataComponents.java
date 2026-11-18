@@ -54,6 +54,10 @@ public final class ModDataComponents {
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<Integer>> CABLE_FROM_ROUTE =
             DATA_COMPONENTS.registerComponentType("cable_from_route", b -> b.persistent(Codec.INT).networkSynchronized(ByteBufCodecs.VAR_INT));
 
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<String>> ITEM_VARIANT =
+            DATA_COMPONENTS.registerComponentType("item_variant", builder -> builder
+                    .persistent(Codec.sizeLimitedString(64)).networkSynchronized(ByteBufCodecs.stringUtf8(64)));
+
     private ModDataComponents() {
     }
 

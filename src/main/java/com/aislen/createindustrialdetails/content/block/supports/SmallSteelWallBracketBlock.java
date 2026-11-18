@@ -33,7 +33,19 @@ public final class SmallSteelWallBracketBlock extends HorizontalDirectionalBlock
     public static final EnumProperty<Half> HALF = BlockStateProperties.HALF;
     public static final IntegerProperty QUANTITY = IntegerProperty.create("quantity", 1, 2);
 
-    private static final VoxelShape[][][] SHAPES = createShapes();
+    public static final EnumProperty<SmallSteelWallBracketStyle> STYLE =
+            EnumProperty.create("style", SmallSteelWallBracketStyle.class);
+
+    private static final VoxelShape[][][] STANDARD_SHAPES = createShapes(
+            Shapes.or(box(7, 8, 0, 9, 16, 1), box(7, 15, 1, 9, 16, 8)),
+            Shapes.or(box(7, 0, 0, 9, 8, 1), box(7, 0, 1, 9, 1, 8)),
+            Shapes.or(box(7, 0, 0, 9, 1, 8), box(7, 1, 0, 9, 8, 1))
+    );
+    private static final VoxelShape[][][] STRAIGHT_SHAPES = createShapes(
+            Shapes.or(box(7, 13.5, 0, 9, 16, 0.5), box(7.5, 14, 0, 8.5, 16, 7)),
+            Shapes.or(box(7, 0, 0, 9, 2.5, 0.5), box(7.5, 0, 0, 8.5, 2, 7)),
+            Shapes.or(box(7, 0, 0, 9, 0.5, 2.5), box(7.5, 0, 0, 8.5, 7, 2))
+    );
 
     public SmallSteelWallBracketBlock(Properties properties) {
         super(properties);
@@ -41,7 +53,8 @@ public final class SmallSteelWallBracketBlock extends HorizontalDirectionalBlock
                 .setValue(FACING, Direction.SOUTH)
                 .setValue(ATTACH_FACE, AttachFace.WALL)
                 .setValue(HALF, Half.TOP)
-                .setValue(QUANTITY, 1));
+                .setValue(QUANTITY, 1)
+                .setValue(STYLE, SmallSteelWallBracketStyle.STANDARD));
     }
 
     @Override
@@ -51,14 +64,14 @@ public final class SmallSteelWallBracketBlock extends HorizontalDirectionalBlock
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(FACING, ATTACH_FACE, HALF, QUANTITY);
+        builder.add(FACING, ATTACH_FACE, HALF, QUANTITY, STYLE);
     }
 
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext context) {
         BlockState existing = context.getLevel().getBlockState(context.getClickedPos());
         if (existing.is(this)) {
-            return existing.getValue(QUANTITY) == 1 ? existing.setValue(QUANTITY, 2) : null;
+            return canBeReplaced(existing, context) ? existing.setValue(QUANTITY, 2) : null;
         }
         Direction clickedFace = context.getClickedFace();
         if (clickedFace == Direction.DOWN) {
@@ -68,6 +81,7 @@ public final class SmallSteelWallBracketBlock extends HorizontalDirectionalBlock
         BlockState state = defaultBlockState()
                 .setValue(FACING, floor ? context.getHorizontalDirection().getOpposite() : clickedFace)
                 .setValue(ATTACH_FACE, floor ? AttachFace.FLOOR : AttachFace.WALL)
+                .setValue(STYLE, SmallSteelWallBracketBlockItem.style(context.getItemInHand()))
                 .setValue(HALF, !floor && context.getClickLocation().y - context.getClickedPos().getY() >= 0.5
                         ? Half.TOP : Half.BOTTOM);
         return state;
@@ -93,11 +107,13 @@ public final class SmallSteelWallBracketBlock extends HorizontalDirectionalBlock
         if (event.isCanceled()) {
             return InteractionResult.SUCCESS;
         }
-        if (!level.setBlock(pos, state.setValue(QUANTITY, 1), Block.UPDATE_ALL)) {
+        if (level.getBlockState(pos) != state || !level.setBlock(pos, state.setValue(QUANTITY, 1), Block.UPDATE_ALL)) {
             return InteractionResult.FAIL;
         }
         if (player != null && !player.isCreative()) {
-            player.getInventory().placeItemBackInInventory(new ItemStack(this));
+            ItemStack removed = new ItemStack(this);
+            ((SmallSteelWallBracketBlockItem) removed.getItem()).selectVariant(removed, state.getValue(STYLE).getSerializedName());
+            player.getInventory().placeItemBackInInventory(removed);
         }
         IWrenchable.playRemoveSound(level, pos);
         return InteractionResult.SUCCESS;
@@ -105,13 +121,20 @@ public final class SmallSteelWallBracketBlock extends HorizontalDirectionalBlock
 
     @Override
     protected boolean canBeReplaced(BlockState state, BlockPlaceContext context) {
-        return state.getValue(QUANTITY) == 1 && context.getItemInHand().is(asItem());
+        return canAddBracket(state, context.getItemInHand());
+    }
+
+    boolean canAddBracket(BlockState state, ItemStack stack) {
+        return state.getValue(QUANTITY) == 1 && stack.is(asItem())
+                && state.getValue(STYLE) == SmallSteelWallBracketBlockItem.style(stack);
     }
 
     @Override
     protected VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
         int layout = state.getValue(ATTACH_FACE) == AttachFace.FLOOR ? 2 : state.getValue(HALF) == Half.TOP ? 0 : 1;
-        return SHAPES[layout][state.getValue(QUANTITY) - 1][state.getValue(FACING).get2DDataValue()];
+        VoxelShape[][][] shapes = state.getValue(STYLE) == SmallSteelWallBracketStyle.STRAIGHT
+                ? STRAIGHT_SHAPES : STANDARD_SHAPES;
+        return shapes[layout][state.getValue(QUANTITY) - 1][state.getValue(FACING).get2DDataValue()];
     }
 
     @Override
@@ -119,12 +142,7 @@ public final class SmallSteelWallBracketBlock extends HorizontalDirectionalBlock
         return getShape(state, level, pos, context);
     }
 
-    private static VoxelShape[][][] createShapes() {
-        VoxelShape[] singles = {
-                Shapes.or(Block.box(7, 8, 0, 9, 16, 1), Block.box(7, 15, 1, 9, 16, 8)),
-                Shapes.or(Block.box(7, 0, 0, 9, 8, 1), Block.box(7, 0, 1, 9, 1, 8)),
-                Shapes.or(Block.box(7, 0, 0, 9, 1, 8), Block.box(7, 1, 0, 9, 8, 1))
-        };
+    private static VoxelShape[][][] createShapes(VoxelShape... singles) {
         VoxelShape[][][] shapes = new VoxelShape[3][2][4];
         for (int layout = 0; layout < singles.length; layout++) {
             for (int quantity = 1; quantity <= 2; quantity++) {
