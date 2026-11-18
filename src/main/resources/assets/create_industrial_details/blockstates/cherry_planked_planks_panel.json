@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "create_industrial_details:block/planked_planks/cherry_planked_planks_panel",
+      "y": 180
+    },
+    "facing=east": {
+      "model": "create_industrial_details:block/planked_planks/cherry_planked_planks_panel",
+      "y": 270
+    },
+    "facing=south": {
+      "model": "create_industrial_details:block/planked_planks/cherry_planked_planks_panel"
+    },
+    "facing=west": {
+      "model": "create_industrial_details:block/planked_planks/cherry_planked_planks_panel",
+      "y": 90
+    }
+  }
+}

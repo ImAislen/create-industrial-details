@@ -1,5 +1,6 @@
 .gradle
 build/
+docs/
 !gradle/wrapper/gradle-wrapper.jar
 !**/src/**/build/
 
@@ -33,3 +34,4 @@ run/
 **/src/generated/**/.cache/
 repo/
 !**/src/**/repo/
+

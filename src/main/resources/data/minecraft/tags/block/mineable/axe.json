@@ -1,6 +1,17 @@
 {
   "replace": false,
   "values": [
-    "create_industrial_details:copycat_diagonal_byte"
+    "create_industrial_details:copycat_diagonal_byte",
+    "create_industrial_details:acacia_planked_planks_panel",
+    "create_industrial_details:bamboo_planked_planks_panel",
+    "create_industrial_details:birch_planked_planks_panel",
+    "create_industrial_details:cherry_planked_planks_panel",
+    "create_industrial_details:crimson_planked_planks_panel",
+    "create_industrial_details:darkoak_planked_planks_panel",
+    "create_industrial_details:jungle_planked_planks_panel",
+    "create_industrial_details:mangrove_planked_planks_panel",
+    "create_industrial_details:oak_planked_planks_panel",
+    "create_industrial_details:spruce_planked_planks_panel",
+    "create_industrial_details:warped_planked_planks_panel"
   ]
 }

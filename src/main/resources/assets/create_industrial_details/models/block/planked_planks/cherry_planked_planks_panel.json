@@ -1,0 +1,7 @@
+{
+  "parent": "create_industrial_details:block/planked_planks/planked_planks_panel",
+  "textures": {
+    "wood": "minecraft:block/cherry_planks",
+    "particle": "#wood"
+  }
+}

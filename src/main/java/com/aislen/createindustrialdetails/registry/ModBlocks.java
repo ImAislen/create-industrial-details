@@ -24,6 +24,7 @@ import com.aislen.createindustrialdetails.content.block.supports.SteelWallCorner
 import com.aislen.createindustrialdetails.content.item.industrialsteel.IndustrialSteelPanelItem;
 import com.aislen.createindustrialdetails.content.block.industrialsteel.lighting.cagedlamp.IndustrialSteelCagedLampBlock;
 import com.aislen.createindustrialdetails.content.block.plankedplanks.PlankedPlanksBlock;
+import com.aislen.createindustrialdetails.content.block.plankedplanks.PlankedPlanksPanelBlock;
 import com.aislen.createindustrialdetails.content.block.plankeddirtpath.PlankedDirtPathBlock;
 import com.aislen.createindustrialdetails.content.block.singleplank.SinglePlankBlock;
 import com.aislen.createindustrialdetails.content.block.singleplank.SinglePlankBlockItem;
@@ -357,6 +358,39 @@ public final class ModBlocks {
     public static final DeferredBlock<PlankedPlanksBlock> WARPED_PLANKED_PLANKS =
             registerPlankedPlanks("warped_planked_planks");
 
+    public static final DeferredBlock<PlankedPlanksPanelBlock> ACACIA_PLANKED_PLANKS_PANEL =
+            registerPlankedPlanksPanel(ACACIA_PLANKED_PLANKS);
+
+    public static final DeferredBlock<PlankedPlanksPanelBlock> BAMBOO_PLANKED_PLANKS_PANEL =
+            registerPlankedPlanksPanel(BAMBOO_PLANKED_PLANKS);
+
+    public static final DeferredBlock<PlankedPlanksPanelBlock> BIRCH_PLANKED_PLANKS_PANEL =
+            registerPlankedPlanksPanel(BIRCH_PLANKED_PLANKS);
+
+    public static final DeferredBlock<PlankedPlanksPanelBlock> CHERRY_PLANKED_PLANKS_PANEL =
+            registerPlankedPlanksPanel(CHERRY_PLANKED_PLANKS);
+
+    public static final DeferredBlock<PlankedPlanksPanelBlock> CRIMSON_PLANKED_PLANKS_PANEL =
+            registerPlankedPlanksPanel(CRIMSON_PLANKED_PLANKS);
+
+    public static final DeferredBlock<PlankedPlanksPanelBlock> DARKOAK_PLANKED_PLANKS_PANEL =
+            registerPlankedPlanksPanel(DARKOAK_PLANKED_PLANKS);
+
+    public static final DeferredBlock<PlankedPlanksPanelBlock> JUNGLE_PLANKED_PLANKS_PANEL =
+            registerPlankedPlanksPanel(JUNGLE_PLANKED_PLANKS);
+
+    public static final DeferredBlock<PlankedPlanksPanelBlock> MANGROVE_PLANKED_PLANKS_PANEL =
+            registerPlankedPlanksPanel(MANGROVE_PLANKED_PLANKS);
+
+    public static final DeferredBlock<PlankedPlanksPanelBlock> OAK_PLANKED_PLANKS_PANEL =
+            registerPlankedPlanksPanel(OAK_PLANKED_PLANKS);
+
+    public static final DeferredBlock<PlankedPlanksPanelBlock> SPRUCE_PLANKED_PLANKS_PANEL =
+            registerPlankedPlanksPanel(SPRUCE_PLANKED_PLANKS);
+
+    public static final DeferredBlock<PlankedPlanksPanelBlock> WARPED_PLANKED_PLANKS_PANEL =
+            registerPlankedPlanksPanel(WARPED_PLANKED_PLANKS);
+
 
     public static final DeferredBlock<SinglePlankBlock> ACACIA_SINGLE_PLANK =
             registerSinglePlank("acacia_single_plank", () -> ModBlocks.ACACIA_PLANKED_DIRT_PATH.get());
@@ -483,14 +517,18 @@ public final class ModBlocks {
     }
 
     private static DeferredBlock<PlankedPlanksBlock> registerPlankedPlanks(String name) {
-        return registerBlockWithItem(
-                name,
-                () -> new PlankedPlanksBlock(
-                        BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS)
-                                .noOcclusion()
-                ),
-                BlockItem::new
-        );
+        return registerBlockWithItem(name, () -> new PlankedPlanksBlock(plankedPlanksProperties()), BlockItem::new);
+    }
+
+    private static DeferredBlock<PlankedPlanksPanelBlock> registerPlankedPlanksPanel(
+            DeferredBlock<PlankedPlanksBlock> plankedPlanks
+    ) {
+        String name = plankedPlanks.getId().getPath() + "_panel";
+        return registerBlockWithItem(name, () -> new PlankedPlanksPanelBlock(plankedPlanksProperties()));
+    }
+
+    private static BlockBehaviour.Properties plankedPlanksProperties() {
+        return BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).noOcclusion();
     }
 
 
