@@ -22,19 +22,21 @@ import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.block.entity.*;
 import net.minecraft.world.level.block.state.*;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.*;
 import net.minecraft.world.phys.shapes.*;
 
 public final class ServiceTrenchGlassPipeBlock extends GlassFluidPipeBlock {
     public ServiceTrenchGlassPipeBlock(Properties properties) {
         super(properties);
-        registerDefaultState(defaultBlockState().setValue(ServiceTrenchBlock.FACING, Direction.NORTH));
+        registerDefaultState(ServiceTrenchHousing.defaults(defaultBlockState()).setValue(ServiceTrenchBlock.FACING, Direction.NORTH));
     }
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         super.createBlockStateDefinition(builder);
         builder.add(ServiceTrenchBlock.FACING);
+        ServiceTrenchHousing.addProperties(builder);
     }
 
     public void encase(BlockState state, Level level, BlockPos pos, Player player, ItemStack stack) {
@@ -53,13 +55,44 @@ public final class ServiceTrenchGlassPipeBlock extends GlassFluidPipeBlock {
     }
 
     @Override
+    public void onBlockStateChange(LevelReader level, BlockPos pos, BlockState oldState, BlockState newState) {
+        ServiceTrenchHousing.stateChanged(level, pos, oldState, newState);
+    }
+
+    @Override
+    protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player,
+                                               BlockHitResult hit) {
+        return ServiceTrenchHousing.toggle(state, level, pos, player);
+    }
+
+    @Override
+    protected boolean propagatesSkylightDown(BlockState state, BlockGetter level, BlockPos pos) {
+        return ServiceTrenchHousing.passesSkylight(state);
+    }
+
+    @Override
+    protected float getShadeBrightness(BlockState state, BlockGetter level, BlockPos pos) {
+        return 1.0F;
+    }
+
+    @Override
+    public void onPlace(BlockState state, Level level, BlockPos pos, BlockState oldState, boolean moved) {
+        if (!ServiceTrenchHousing.sameUtility(oldState, state)) super.onPlace(state, level, pos, oldState, moved);
+    }
+
+    @Override
+    public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean moved) {
+        if (!ServiceTrenchHousing.sameUtility(state, newState)) super.onRemove(state, level, pos, newState, moved);
+    }
+
+    @Override
     public BlockEntityType<? extends StraightPipeBlockEntity> getBlockEntityType() {
         return ModBlockEntities.SERVICE_TRENCH_GLASS_PIPE.get();
     }
 
     @Override
     public InteractionResult onWrenched(BlockState state, UseOnContext context) {
-        return ServiceTrenchWrench.rotate(state, context);
+        return ServiceTrenchWrench.wrenchPipe(state, context);
     }
 
     @Override
@@ -88,22 +121,31 @@ public final class ServiceTrenchGlassPipeBlock extends GlassFluidPipeBlock {
 
     @Override
     public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
-        return Shapes.block();
+        return ServiceTrenchShapes.occupied(state);
     }
 
     @Override
     public VoxelShape getCollisionShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
-        return Shapes.block();
+        return ServiceTrenchShapes.occupied(state);
+    }
+
+    @Override
+    public BlockState updateShape(BlockState state, Direction direction, BlockState neighbor, LevelAccessor level,
+                                  BlockPos pos, BlockPos neighborPos) {
+        if (state.getValue(BlockStateProperties.WATERLOGGED))
+            level.scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
+        return ServiceTrenchHousing.updateEnd(super.updateShape(state, direction, neighbor, level, pos, neighborPos),
+                direction, neighbor);
     }
 
     @Override
     public BlockState rotate(BlockState state, Rotation rotation) {
-        return super.rotate(state, rotation).setValue(ServiceTrenchBlock.FACING,
+        return ServiceTrenchHousing.orient(super.rotate(state, rotation),
                 rotation.rotate(state.getValue(ServiceTrenchBlock.FACING)));
     }
 
     @Override
     public BlockState mirror(BlockState state, Mirror mirror) {
-        return state.setValue(ServiceTrenchBlock.FACING, mirror.mirror(state.getValue(ServiceTrenchBlock.FACING)));
+        return ServiceTrenchHousing.orient(state, mirror.mirror(state.getValue(ServiceTrenchBlock.FACING)));
     }
 }

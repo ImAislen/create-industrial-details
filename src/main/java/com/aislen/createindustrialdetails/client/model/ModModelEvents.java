@@ -134,14 +134,17 @@ public final class ModModelEvents {
                     (key, original) -> new CopycatDiagonalByteModel(original));
         }
 
+        var glassTrenchModels = new java.util.IdentityHashMap<BakedModel, BakedModel>();
         for (BlockState state : ModBlocks.SERVICE_TRENCH_GLASS_PIPE.get().getStateDefinition().getPossibleStates()) {
             models.computeIfPresent(BlockModelShaper.stateToModelLocation(state),
-                    (key, original) -> com.simibubi.create.content.fluids.PipeAttachmentModel.withAO(original));
+                    (key, original) -> glassTrenchModels.computeIfAbsent(original,
+                            com.simibubi.create.content.fluids.PipeAttachmentModel::withAO));
         }
 
+        var copperTrenchModels = new java.util.IdentityHashMap<BakedModel, BakedModel>();
         for (BlockState state : ModBlocks.SERVICE_TRENCH_PIPE.get().getStateDefinition().getPossibleStates()) {
             models.computeIfPresent(BlockModelShaper.stateToModelLocation(state),
-                    (key, original) -> new ServiceTrenchPipeModel(original));
+                    (key, original) -> copperTrenchModels.computeIfAbsent(original, ServiceTrenchPipeModel::new));
         }
 
         var platedState = ModBlocks.BLOCK_OF_PLATED_INDUSTRIAL_STEEL.get().defaultBlockState();

@@ -152,6 +152,7 @@
   "block.create_industrial_details.oak_planked_dirt_path": "Oak Planked Dirt Path",
   "block.create_industrial_details.spruce_planked_dirt_path": "Spruce Planked Dirt Path",
   "block.create_industrial_details.warped_planked_dirt_path": "Warped Planked Dirt Path",
+  "create_industrial_details.service_trench.utility_in_use": "Stop fluid flow and remove any bracket before replacing this pipe.",
   "block.create_industrial_details.service_trench": "Service Trench",
   "block.create_industrial_details.service_trench_pipe": "Service Trench",
   "block.create_industrial_details.service_trench_shaft": "Service Trench",

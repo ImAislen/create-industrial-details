@@ -2,7 +2,8 @@
   "multipart": [
     {
       "when": {
-        "facing": "north"
+        "facing": "north",
+        "open": "false"
       },
       "apply": {
         "model": "create_industrial_details:block/industrial_steel/service_trench_casing",
@@ -11,7 +12,8 @@
     },
     {
       "when": {
-        "facing": "east"
+        "facing": "east",
+        "open": "false"
       },
       "apply": {
         "model": "create_industrial_details:block/industrial_steel/service_trench_casing",
@@ -20,7 +22,8 @@
     },
     {
       "when": {
-        "facing": "south"
+        "facing": "south",
+        "open": "false"
       },
       "apply": {
         "model": "create_industrial_details:block/industrial_steel/service_trench_casing",
@@ -29,10 +32,51 @@
     },
     {
       "when": {
-        "facing": "west"
+        "facing": "west",
+        "open": "false"
       },
       "apply": {
         "model": "create_industrial_details:block/industrial_steel/service_trench_casing",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "open": "true"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/industrial_steel/service_trench_open",
+        "y": 0
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "open": "true"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/industrial_steel/service_trench_open",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "open": "true"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/industrial_steel/service_trench_open",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "open": "true"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/industrial_steel/service_trench_open",
         "y": 270
       }
     }

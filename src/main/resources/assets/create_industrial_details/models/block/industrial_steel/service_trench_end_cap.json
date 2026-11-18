@@ -1,0 +1,76 @@
+{
+  "textures": {
+    "1": "create_industrial_details:block/industrial_steel/service_trench",
+    "particle": "#1"
+  },
+  "elements": [
+    {
+      "from": [
+        1,
+        1,
+        0
+      ],
+      "to": [
+        15,
+        15,
+        1
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            4.25,
+            3.5,
+            7.75,
+            7
+          ],
+          "texture": "#1"
+        },
+        "south": {
+          "uv": [
+            4.25,
+            0,
+            7.75,
+            3.5
+          ],
+          "texture": "#1"
+        },
+        "up": {
+          "uv": [
+            8.75,
+            8,
+            9,
+            12
+          ],
+          "texture": "#1"
+        },
+        "down": {
+          "uv": [
+            9,
+            8,
+            9.25,
+            12
+          ],
+          "texture": "#1"
+        },
+        "east": {
+          "uv": [
+            9.75,
+            0.25,
+            10,
+            3.75
+          ],
+          "texture": "#1"
+        },
+        "west": {
+          "uv": [
+            9.5,
+            9.75,
+            9.75,
+            13.25
+          ],
+          "texture": "#1"
+        }
+      }
+    }
+  ]
+}

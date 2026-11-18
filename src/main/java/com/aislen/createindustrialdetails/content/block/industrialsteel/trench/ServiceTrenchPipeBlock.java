@@ -23,13 +23,40 @@ import static com.aislen.createindustrialdetails.content.block.industrialsteel.t
 public final class ServiceTrenchPipeBlock extends EncasedPipeBlock implements SimpleWaterloggedBlock {
     public ServiceTrenchPipeBlock(Properties properties) {
         super(properties, () -> ModBlocks.SERVICE_TRENCH.get());
-        registerDefaultState(defaultBlockState().setValue(FACING, Direction.NORTH).setValue(WATERLOGGED, false));
+        registerDefaultState(ServiceTrenchHousing.defaults(defaultBlockState()).setValue(FACING, Direction.NORTH).setValue(WATERLOGGED, false));
     }
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         super.createBlockStateDefinition(builder);
         builder.add(FACING, WATERLOGGED);
+        ServiceTrenchHousing.addProperties(builder);
+    }
+
+    @Override
+    public void onBlockStateChange(LevelReader level, BlockPos pos, BlockState oldState, BlockState newState) {
+        ServiceTrenchHousing.stateChanged(level, pos, oldState, newState);
+    }
+
+    @Override
+    protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player,
+                                               BlockHitResult hit) {
+        return ServiceTrenchHousing.toggle(state, level, pos, player);
+    }
+
+    @Override
+    protected boolean propagatesSkylightDown(BlockState state, BlockGetter level, BlockPos pos) {
+        return ServiceTrenchHousing.passesSkylight(state);
+    }
+
+    @Override
+    protected float getShadeBrightness(BlockState state, BlockGetter level, BlockPos pos) {
+        return 1.0F;
+    }
+
+    @Override
+    public void onPlace(BlockState state, Level level, BlockPos pos, BlockState oldState, boolean moved) {
+        if (!ServiceTrenchHousing.sameUtility(oldState, state)) super.onPlace(state, level, pos, oldState, moved);
     }
 
     @Override
@@ -55,7 +82,7 @@ public final class ServiceTrenchPipeBlock extends EncasedPipeBlock implements Si
 
     @Override
     public InteractionResult onWrenched(BlockState state, UseOnContext context) {
-        return ServiceTrenchWrench.rotate(state, context);
+        return ServiceTrenchWrench.wrenchPipe(state, context);
     }
 
     @Override
@@ -77,12 +104,12 @@ public final class ServiceTrenchPipeBlock extends EncasedPipeBlock implements Si
 
     @Override
     public BlockState rotate(BlockState state, Rotation rotation) {
-        return super.rotate(state, rotation).setValue(FACING, rotation.rotate(state.getValue(FACING)));
+        return ServiceTrenchHousing.orient(super.rotate(state, rotation), rotation.rotate(state.getValue(FACING)));
     }
 
     @Override
     public BlockState mirror(BlockState state, Mirror mirror) {
-        return super.mirror(state, mirror).setValue(FACING, mirror.mirror(state.getValue(FACING)));
+        return ServiceTrenchHousing.orient(super.mirror(state, mirror), mirror.mirror(state.getValue(FACING)));
     }
 
     @Override
@@ -90,7 +117,7 @@ public final class ServiceTrenchPipeBlock extends EncasedPipeBlock implements Si
         Direction facing = state.getValue(FACING);
         if (transform.mirror != null) facing = transform.mirror.mirror(facing);
         facing = transform.rotateFacing(facing);
-        return super.transform(state, transform).setValue(FACING,
+        return ServiceTrenchHousing.orient(super.transform(state, transform),
                 facing.getAxis().isHorizontal() ? facing : state.getValue(FACING));
     }
 
@@ -100,9 +127,16 @@ public final class ServiceTrenchPipeBlock extends EncasedPipeBlock implements Si
     }
 
     @Override
+    protected net.minecraft.world.phys.shapes.VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos,
+                                                                 net.minecraft.world.phys.shapes.CollisionContext context) {
+        return ServiceTrenchShapes.occupied(state);
+    }
+
+    @Override
     public BlockState updateShape(BlockState state, Direction direction, BlockState neighbor, LevelAccessor level,
                                   BlockPos pos, BlockPos neighborPos) {
         if (state.getValue(WATERLOGGED)) level.scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
-        return super.updateShape(state, direction, neighbor, level, pos, neighborPos);
+        return ServiceTrenchHousing.updateEnd(super.updateShape(state, direction, neighbor, level, pos, neighborPos),
+                direction, neighbor);
     }
 }

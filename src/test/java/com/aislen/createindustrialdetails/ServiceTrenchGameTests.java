@@ -3,6 +3,7 @@ package com.aislen.createindustrialdetails;
 import com.aislen.createindustrialdetails.registry.*;
 import com.aislen.createindustrialdetails.content.block.industrialsteel.trench.*;
 import com.simibubi.create.AllBlocks;
+import com.simibubi.create.AllItems;
 import com.simibubi.create.content.decoration.encasing.EncasableBlock;
 import com.simibubi.create.content.fluids.FluidTransportBehaviour;
 import com.simibubi.create.content.kinetics.base.KineticBlockEntity;
@@ -19,6 +20,10 @@ import net.minecraft.world.level.block.state.*;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.phys.*;
 import net.neoforged.neoforge.gametest.*;
+import net.neoforged.neoforge.common.NeoForge;
+import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
+
+import static com.aislen.createindustrialdetails.content.block.industrialsteel.trench.ServiceTrenchBlock.*;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.minecraft.world.level.material.Fluids;
 import java.util.*;
@@ -142,12 +147,27 @@ public class ServiceTrenchGameTests {
         }).thenIdle(5).thenExecute(() -> {
             helper.assertTrue(((KineticBlockEntity) level.getBlockEntity(pos)).getSpeed() == 16, "Encased shaft powered");
             helper.assertTrue(((KineticBlockEntity) level.getBlockEntity(end)).getSpeed() == 16, "Downstream power retained");
+            var entity = level.getBlockEntity(pos);
+            helper.assertTrue(!level.getBlockState(pos).getValue(CAP_NEGATIVE)
+                    && !level.getBlockState(pos).getValue(CAP_POSITIVE), "Driven shaft connections keep both ends open");
+            helper.assertTrue(level.getBlockState(pos).useWithoutItem(level, player, hit(pos)).consumesAction(),
+                    "Open the grille on the powered shaft");
+            helper.assertTrue(level.getBlockEntity(pos) == entity, "Cover state retains the powered shaft block entity");
             ModBlocks.SERVICE_TRENCH_SHAFT.get().onWrenched(level.getBlockState(pos), context(player, pos));
         }).thenIdle(5).thenExecute(() -> {
-            helper.assertTrue(((KineticBlockEntity) level.getBlockEntity(end)).getSpeed() == 16, "Casing rotation retains power");
-            ModBlocks.SERVICE_TRENCH_SHAFT.get().onSneakWrenched(level.getBlockState(pos), context(player, pos));
-        }).thenIdle(5).thenExecute(() -> {
-            helper.assertTrue(((KineticBlockEntity) level.getBlockEntity(end)).getSpeed() == 16, "Decased shaft retains power");
+            helper.assertTrue(((KineticBlockEntity) level.getBlockEntity(end)).getSpeed() == 16, "Open grille and rotation retain power");
+            helper.assertTrue(wrench(player, hit(pos), true).consumesAction() && level.getBlockEntity(pos) == null
+                    && level.getBlockState(pos).is(ModBlocks.SERVICE_TRENCH.get())
+                    && level.getBlockState(pos).getValue(OPEN), "Open Shift-wrench removes the powered shaft only");
+        }).thenWaitUntil(() -> {
+            helper.assertTrue(((KineticBlockEntity) level.getBlockEntity(end)).getSpeed() == 0, "Removing the shaft detaches power");
+        }).thenExecute(() -> {
+            var housing = level.getBlockState(pos);
+            ModBlocks.SERVICE_TRENCH.get().onWrenched(housing, context(player, pos));
+            var shaftStack = AllBlocks.SHAFT.asStack();
+            helper.assertTrue(clickUtility(player, shaftStack, hit(pos)).consumesAction(), "Reinstall shaft into the open housing");
+        }).thenWaitUntil(() -> {
+            helper.assertTrue(((KineticBlockEntity) level.getBlockEntity(end)).getSpeed() == 16, "Reinstalled shaft transmits power");
         }).thenSucceed();
     }
 
@@ -182,10 +202,52 @@ public class ServiceTrenchGameTests {
                     new ItemStack(ModBlocks.SERVICE_TRENCH.get()), player, InteractionHand.MAIN_HAND, hit(pos));
         }).thenIdle(10).thenExecute(() -> {
             helper.assertTrue(output.getTankInventory().getFluidAmount() > before[0], "Trench continues transferring fluid");
+            var entity = level.getBlockEntity(pos);
+            var state = level.getBlockState(pos);
+            helper.assertTrue(!state.getValue(CAP_NEGATIVE) && !state.getValue(CAP_POSITIVE), "Connected pump and tank keep both ends open");
+            state.useWithoutItem(level, player, hit(pos));
+            helper.assertTrue(level.getBlockState(pos).getValue(OPEN) && level.getBlockEntity(pos) == entity,
+                    "Opening regular pipe housing retains its block entity");
+            var stack = AllBlocks.SHAFT.asStack();
+            player.setShiftKeyDown(true);
+            helper.assertTrue(clickUtility(player, stack, hit(pos)) == InteractionResult.FAIL
+                    && stack.getCount() == 1 && level.getBlockEntity(pos) == entity,
+                    "A pressurized pipe rejects replacement without consuming the shaft");
+            player.setItemInHand(InteractionHand.MAIN_HAND, ItemStack.EMPTY);
+            player.setShiftKeyDown(false);
             before[0] = output.getTankInventory().getFluidAmount();
+        }).thenIdle(10).thenExecute(() -> {
+            helper.assertTrue(output.getTankInventory().getFluidAmount() > before[0], "Open regular pipe still transfers fluid");
+            var flows = com.simibubi.create.content.fluids.FluidPropagator.getPipe(level, pos).interfaces;
+            helper.assertTrue(wrench(player, hit(pos), false).consumesAction()
+                    && level.getBlockState(pos).is(ModBlocks.SERVICE_TRENCH_GLASS_PIPE.get())
+                    && com.simibubi.create.content.fluids.FluidPropagator.getPipe(level, pos).interfaces == flows,
+                    "Wrenching an active open pipe fits glass and retains its flow data");
+            before[0] = output.getTankInventory().getFluidAmount();
+        }).thenIdle(10).thenExecute(() -> {
+            helper.assertTrue(output.getTankInventory().getFluidAmount() > before[0], "Glass conversion retains fluid transfer");
+            helper.assertTrue(wrench(player, hit(pos), false).consumesAction()
+                    && level.getBlockState(pos).is(ModBlocks.SERVICE_TRENCH_PIPE.get()), "Wrench converts the open glass pipe back");
+            before[0] = output.getTankInventory().getFluidAmount();
+        }).thenIdle(10).thenExecute(() -> {
+            helper.assertTrue(output.getTankInventory().getFluidAmount() > before[0], "Copper conversion retains fluid transfer");
+            before[0] = output.getTankInventory().getFluidAmount();
+            level.getBlockState(pos).useWithoutItem(level, player, hit(pos));
             ModBlocks.SERVICE_TRENCH_PIPE.get().onSneakWrenched(level.getBlockState(pos), context(player, pos));
         }).thenIdle(10).thenExecute(() -> {
             helper.assertTrue(output.getTankInventory().getFluidAmount() > before[0], "Decased pipe continues transferring fluid");
+            ((EncasableBlock) pipe.getBlock()).tryEncase(level.getBlockState(pos), level, pos,
+                    new ItemStack(ModBlocks.SERVICE_TRENCH.get()), player, InteractionHand.MAIN_HAND, hit(pos));
+            player.getInventory().selected = 1;
+            helper.assertTrue(level.getBlockState(pos).useWithoutItem(level, player, hit(pos)).consumesAction(),
+                    "Reopen the housing before maintenance");
+            helper.assertTrue(wrench(player, hit(pos), true).consumesAction()
+                    && level.getBlockState(pos).is(ModBlocks.SERVICE_TRENCH.get())
+                    && level.getBlockEntity(pos) == null, "Open Shift-wrench removes the active pipe and keeps the housing");
+            before[0] = output.getTankInventory().getFluidAmount();
+        }).thenIdle(10).thenExecute(() -> {
+            helper.assertTrue(output.getTankInventory().getFluidAmount() == before[0],
+                    "Removing the pipe stops transfer to the formerly connected tank");
         }).thenSucceed();
     }
 
@@ -294,7 +356,15 @@ public class ServiceTrenchGameTests {
             stack.getItem().useOn(new UseOnContext(level, player, InteractionHand.MAIN_HAND, stack, hit(pos)));
         }).thenIdle(10).thenExecute(() -> {
             helper.assertTrue(output.getTankInventory().getFluidAmount() > before[0], "Trench continues transferring fluid");
+            var entity = level.getBlockEntity(pos);
+            level.getBlockState(pos).useWithoutItem(level, player, hit(pos));
+            helper.assertTrue(level.getBlockState(pos).getValue(OPEN) && level.getBlockEntity(pos) == entity,
+                    "Opening glass pipe housing retains its block entity");
             before[0] = output.getTankInventory().getFluidAmount();
+        }).thenIdle(10).thenExecute(() -> {
+            helper.assertTrue(output.getTankInventory().getFluidAmount() > before[0], "Open glass pipe still transfers fluid");
+            before[0] = output.getTankInventory().getFluidAmount();
+            level.getBlockState(pos).useWithoutItem(level, player, hit(pos));
             ModBlocks.SERVICE_TRENCH_GLASS_PIPE.get().onSneakWrenched(level.getBlockState(pos), context(player, pos));
         }).thenIdle(10).thenExecute(() -> {
             helper.assertTrue(output.getTankInventory().getFluidAmount() > before[0], "Decased pipe continues transferring fluid");
@@ -424,15 +494,22 @@ public class ServiceTrenchGameTests {
             for (Direction initial : new Direction[]{Direction.NORTH, Direction.EAST, Direction.SOUTH, Direction.WEST}) {
                 var state = sample.setValue(ServiceTrenchBlock.FACING, initial).setValue(BlockStateProperties.WATERLOGGED, true);
                 var saved = net.minecraft.nbt.NbtUtils.writeBlockState(state);
+                var properties = saved.getCompound("Properties");
+                properties.remove("open");
+                properties.remove("cap_negative");
+                properties.remove("cap_positive");
                 var loaded = net.minecraft.nbt.NbtUtils.readBlockState(level.holderLookup(net.minecraft.core.registries.Registries.BLOCK), saved);
-                helper.assertTrue(loaded == state, "Existing facing values round-trip without migration");
+                helper.assertTrue(loaded == state, "Old housing defaults to closed and capped while retaining utility properties");
                 level.setBlockAndUpdate(pos, loaded);
                 var entity = level.getBlockEntity(pos);
                 Direction expected = initial.getAxis() == Direction.Axis.X ? Direction.NORTH : Direction.EAST;
                 for (int click = 0; click < 4; click++) {
                     ((IWrenchable)state.getBlock()).onWrenched(level.getBlockState(pos), context(player, pos));
-                    helper.assertTrue(level.getBlockState(pos) == state.setValue(ServiceTrenchBlock.FACING, expected),
-                            "Wrench changes only casing facing to the other axis");
+                    var rotated = level.getBlockState(pos);
+                    helper.assertTrue(rotated.setValue(CAP_NEGATIVE, state.getValue(CAP_NEGATIVE))
+                                    .setValue(CAP_POSITIVE, state.getValue(CAP_POSITIVE))
+                                    == state.setValue(ServiceTrenchBlock.FACING, expected),
+                            "Wrench switches the casing axis while retaining water and the utility state");
                     helper.assertTrue(level.getBlockEntity(pos) == entity, "Rotation retains utility block entity");
                     expected = expected == Direction.NORTH ? Direction.EAST : Direction.NORTH;
                 }
@@ -451,18 +528,24 @@ public class ServiceTrenchGameTests {
             var forward = alongX ? Direction.EAST : Direction.SOUTH;
             var state = ModBlocks.SERVICE_TRENCH.get().defaultBlockState().setValue(ServiceTrenchBlock.FACING, facing);
             for (int i = 0; i < 3; i++) level.setBlockAndUpdate(start.relative(forward, i), state);
-            var shape = state.getCollisionShape(level, start);
-            helper.assertTrue(shape == state.getCollisionShape(level, start), "Collision shape is cached");
+            var middle = start.relative(forward);
+            var center = level.getBlockState(middle);
+            helper.assertTrue(!center.getValue(CAP_NEGATIVE) && !center.getValue(CAP_POSITIVE),
+                    "Aligned neighbors remove both interior caps");
+            helper.assertTrue(level.getBlockState(start).getValue(CAP_NEGATIVE)
+                    && level.getBlockState(start.relative(forward, 2)).getValue(CAP_POSITIVE),
+                    "Outer ends are capped");
+            var shape = center.getCollisionShape(level, middle);
+            helper.assertTrue(shape == center.getCollisionShape(level, middle), "Collision shape is cached");
             helper.assertTrue(!state.isSuffocating(level, start) && !state.canOcclude(), "Hollow trench does not suffocate or occlude");
             player.setPose(net.minecraft.world.entity.Pose.SWIMMING);
             player.refreshDimensions();
             helper.assertTrue(player.getBoundingBox().getYsize() <= 14.0 / 16, "Vanilla crawling dimensions fit interior");
-            player.setPos(start.getX() + (alongX ? -0.5 : 0.5), start.getY() + 1.0 / 16,
-                    start.getZ() + (alongX ? 0.5 : -0.5));
+            player.setPos(start.getX() + 0.5, start.getY() + 1.0 / 16, start.getZ() + 0.5);
             for (int step = 0; step < 40; step++)
                 player.move(net.minecraft.world.entity.MoverType.SELF, new Vec3(alongX ? 0.1 : 0, 0, alongX ? 0 : 0.1));
             double traveled = alongX ? player.getX() - start.getX() : player.getZ() - start.getZ();
-            helper.assertTrue(traveled > 3.4, "Crawling player enters, traverses and exits three trenches");
+            helper.assertTrue(traveled > 2.5 && traveled < 2.75, "Player crawls through the run and stops at the far cap");
             player.setPos(start.getX() + 0.5, start.getY() + 1.0 / 16, start.getZ() + 0.5);
             player.move(net.minecraft.world.entity.MoverType.SELF, new Vec3(alongX ? 0 : 2, 0, alongX ? 2 : 0));
             double lateral = alongX ? player.getZ() - start.getZ() : player.getX() - start.getX();
@@ -479,9 +562,13 @@ public class ServiceTrenchGameTests {
                 player.move(net.minecraft.world.entity.MoverType.SELF, new Vec3(alongX ? 0.1 : 0, -0.05, alongX ? 0 : 0.1));
                 helper.assertTrue(Math.abs(player.getY() - start.getY() - 1) < 0.0001, "Player walks continuously across grille gaps");
             }
-            var saved = net.minecraft.nbt.NbtUtils.writeBlockState(state);
+            var saved = net.minecraft.nbt.NbtUtils.writeBlockState(center);
             var loaded = net.minecraft.nbt.NbtUtils.readBlockState(level.holderLookup(net.minecraft.core.registries.Registries.BLOCK), saved);
-            helper.assertTrue(loaded.getCollisionShape(level, start) == shape, "Reload retains oriented collision");
+            helper.assertTrue(loaded.getCollisionShape(level, middle) == shape, "Reload retains oriented collision");
+            level.removeBlock(start.relative(forward, 2), false);
+            helper.assertTrue(level.getBlockState(middle).getValue(CAP_POSITIVE), "Removing a neighbor restores the cap");
+            level.setBlockAndUpdate(start.relative(forward, 2), state.setValue(FACING, forward.getClockWise()));
+            helper.assertTrue(level.getBlockState(middle).getValue(CAP_POSITIVE), "Perpendicular trenches do not join");
             for (int i = 0; i < 3; i++) level.setBlockAndUpdate(start.relative(forward, i), net.minecraft.world.level.block.Blocks.AIR.defaultBlockState());
         }
         for (var block : List.of(ModBlocks.SERVICE_TRENCH_PIPE.get(), ModBlocks.SERVICE_TRENCH_GLASS_PIPE.get(), ModBlocks.SERVICE_TRENCH_SHAFT.get())) {
@@ -489,6 +576,226 @@ public class ServiceTrenchGameTests {
             helper.assertTrue(state.isCollisionShapeFullBlock(level, start), "Encased utility collision stays full");
         }
         helper.succeed();
+    }
+
+    @GameTest(template = "empty")
+    public static void installAndReplaceUtilities(GameTestHelper helper) {
+        var level = helper.getLevel();
+        var pos = helper.absolutePos(new BlockPos(2, 2, 2));
+        var player = helper.makeMockPlayer(net.minecraft.world.level.GameType.SURVIVAL);
+        var base = ModBlocks.SERVICE_TRENCH.get().defaultBlockState().setValue(FACING, Direction.EAST)
+                .setValue(OPEN, true).setValue(WATERLOGGED, true);
+        level.setBlockAndUpdate(pos, base);
+        level.setBlockAndUpdate(pos.west(), AllBlocks.FLUID_PIPE.get().getAxisState(Direction.Axis.X));
+        var copper = AllBlocks.FLUID_PIPE.asStack(2);
+        helper.assertTrue(clickUtility(player, copper, hit(pos)) == InteractionResult.CONSUME && copper.getCount() == 1,
+                "Install regular pipe and consume one pipe without consuming a trench");
+        var installed = level.getBlockState(pos);
+        helper.assertTrue(installed.is(ModBlocks.SERVICE_TRENCH_PIPE.get())
+                && FluidPipeBlock.isOpenAt(installed, Direction.WEST) && FluidPipeBlock.isOpenAt(installed, Direction.EAST),
+                "Regular pipe follows Create's native connection state");
+        helper.assertTrue(installed.getValue(FACING) == Direction.EAST && installed.getValue(OPEN)
+                && installed.getValue(WATERLOGGED) && !installed.getValue(CAP_NEGATIVE), "Installation preserves housing and opens the connected end");
+
+        player.setShiftKeyDown(true);
+        helper.assertTrue(clickUtility(player, copper, hit(pos)) == InteractionResult.CONSUME,
+                "Sneak-use a spare copper pipe on the side to fit the straight glass variant");
+        var glazed = level.getBlockState(pos);
+        helper.assertTrue(glazed.is(ModBlocks.SERVICE_TRENCH_GLASS_PIPE.get()) && glazed.getValue(BlockStateProperties.AXIS) == Direction.Axis.X
+                && glazed.getValue(OPEN) && glazed.getValue(WATERLOGGED) && !glazed.getValue(CAP_NEGATIVE),
+                "Glass conversion preserves the straight axis and housing");
+        helper.assertTrue(pipeCount(player) == 1, "Glass conversion returns the removed regular pipe exactly once");
+        player.getMainHandItem().grow(1);
+        helper.assertTrue(clickUtility(player, player.getMainHandItem(), hit(pos)) == InteractionResult.CONSUME,
+                "Replace glass utility with regular pipe");
+        helper.assertTrue(level.getBlockState(pos).is(ModBlocks.SERVICE_TRENCH_PIPE.get())
+                && pipeCount(player) == 2, "Glass removal returns Create's regular pipe item");
+        var inventory = player.getInventory();
+        inventory.setItem(1, inventory.removeItemNoUpdate(inventory.selected));
+
+        var shaft = AllBlocks.SHAFT.asStack(2);
+        helper.assertTrue(clickUtility(player, shaft, hit(pos)) == InteractionResult.CONSUME && shaft.getCount() == 1,
+                "Replacing regular pipe with a shaft consumes one shaft");
+        var shaftState = level.getBlockState(pos);
+        helper.assertTrue(shaftState.is(ModBlocks.SERVICE_TRENCH_SHAFT.get()) && shaftState.getValue(BlockStateProperties.AXIS) == Direction.Axis.X
+                && shaftState.getValue(FACING) == Direction.EAST && shaftState.getValue(OPEN) && shaftState.getValue(WATERLOGGED),
+                "Shaft follows trench axis, retaining water and cover");
+        helper.assertTrue(!shaftState.getValue(CAP_NEGATIVE) && !shaftState.getValue(CAP_POSITIVE) && pipeCount(player) == 3,
+                "Shaft housing leaves both ends clear and the removed pipe is returned");
+        inventory.selected = 1;
+        helper.assertTrue(clickUtility(player, player.getMainHandItem(), hit(pos)) == InteractionResult.CONSUME,
+                "Replace shaft with regular pipe");
+        helper.assertTrue(level.getBlockState(pos).is(ModBlocks.SERVICE_TRENCH_PIPE.get()) && pipeCount(player) == 2
+                && inventory.items.stream().filter(AllBlocks.SHAFT::isIn).mapToInt(ItemStack::getCount).sum() == 2,
+                "Shaft replacement returns exactly one shaft");
+
+        var creative = helper.makeMockPlayer(net.minecraft.world.level.GameType.CREATIVE);
+        var second = pos.south();
+        level.setBlockAndUpdate(second, base);
+        var creativeShaft = AllBlocks.SHAFT.asStack();
+        helper.assertTrue(clickUtility(creative, creativeShaft, hit(second)) == InteractionResult.CONSUME
+                && creativeShaft.getCount() == 1 && level.getBlockState(second).is(ModBlocks.SERVICE_TRENCH_SHAFT.get()),
+                "Creative can install directly into an empty trench without consumption");
+        helper.succeed();
+    }
+
+    @GameTest(template = "empty", timeoutTicks = 120)
+    public static void replacePoweredShaft(GameTestHelper helper) {
+        var level = helper.getLevel();
+        var pos = helper.absolutePos(new BlockPos(2, 2, 2));
+        var player = helper.makeMockPlayer(net.minecraft.world.level.GameType.SURVIVAL);
+        level.setBlockAndUpdate(pos.west(), AllBlocks.CREATIVE_MOTOR.getDefaultState().setValue(BlockStateProperties.FACING, Direction.EAST));
+        level.setBlockAndUpdate(pos.east(), AllBlocks.SHAFT.getDefaultState().setValue(BlockStateProperties.AXIS, Direction.Axis.X));
+        level.setBlockAndUpdate(pos, ModBlocks.SERVICE_TRENCH.get().defaultBlockState().setValue(FACING, Direction.EAST));
+        helper.assertTrue(clickUtility(player, AllBlocks.SHAFT.asStack(), hit(pos)) == InteractionResult.CONSUME,
+                "Install a shaft directly into empty housing between kinetic blocks");
+        helper.startSequence().thenWaitUntil(() -> {
+            helper.assertTrue(((KineticBlockEntity) level.getBlockEntity(pos.east())).getSpeed() == 16,
+                    "Newly installed shaft transmits native speed");
+        }).thenExecute(() -> {
+            player.setShiftKeyDown(true);
+            helper.assertTrue(clickUtility(player, AllBlocks.FLUID_PIPE.asStack(), hit(pos)) == InteractionResult.CONSUME,
+                    "Replace a running shaft with a regular pipe");
+        }).thenWaitUntil(() -> {
+            helper.assertTrue(((KineticBlockEntity) level.getBlockEntity(pos.east())).getSpeed() == 0,
+                    "Replacing the running shaft detaches its network");
+        }).thenExecute(() -> {
+            helper.assertTrue(clickUtility(player, AllBlocks.SHAFT.asStack(), hit(pos)) == InteractionResult.CONSUME,
+                    "Refit a shaft into the occupied trench");
+        }).thenWaitUntil(() -> {
+            helper.assertTrue(((KineticBlockEntity) level.getBlockEntity(pos.east())).getSpeed() == 16,
+                    "Refitted shaft reconnects the downstream shaft");
+        }).thenSucceed();
+    }
+
+    @GameTest(template = "empty")
+    public static void openGrilleAndPlacementHelper(GameTestHelper helper) {
+        var level = helper.getLevel();
+        var pos = helper.absolutePos(new BlockPos(2, 2, 2));
+        var player = helper.makeMockPlayer(net.minecraft.world.level.GameType.SURVIVAL);
+        for (var facing : List.of(Direction.NORTH, Direction.EAST)) {
+            var base = ModBlocks.SERVICE_TRENCH.get().defaultBlockState().setValue(FACING, facing);
+            level.setBlockAndUpdate(pos, base);
+            helper.assertTrue(level.getBlockState(pos).getValue(CAP_NEGATIVE) && level.getBlockState(pos).getValue(CAP_POSITIVE),
+                    "Isolated housing caps both ends");
+            helper.assertTrue(base.useWithoutItem(level, player, hit(pos)).consumesAction(), "Empty hand opens the cover");
+            var open = level.getBlockState(pos);
+            helper.assertTrue(open.getValue(OPEN) && open.getLightBlock(level, pos) == 0 && !open.canOcclude(),
+                    "Open dry trench uses vanilla light transmission and no full-cube occlusion");
+            player.setPose(net.minecraft.world.entity.Pose.SWIMMING);
+            player.refreshDimensions();
+            player.setPos(pos.getX() + .5, pos.getY() + 1.1, pos.getZ() + .5);
+            player.move(net.minecraft.world.entity.MoverType.SELF, new Vec3(0, -1.2, 0));
+            helper.assertTrue(Math.abs(player.getY() - pos.getY() - 1.0 / 16) < .0001, "Player enters from above and lands on the floor");
+            helper.assertTrue(open.useWithoutItem(level, player, hit(pos)).consumesAction() && !level.getBlockState(pos).getValue(OPEN),
+                    "A second empty-hand use closes the cover");
+
+            var occupied = ModBlocks.SERVICE_TRENCH_SHAFT.get().defaultBlockState().setValue(FACING, facing)
+                    .setValue(BlockStateProperties.AXIS, facing.getAxis()).setValue(OPEN, true);
+            level.setBlockAndUpdate(pos, occupied);
+            var utility = level.getBlockEntity(pos);
+            var stack = new ItemStack(ModBlocks.SERVICE_TRENCH.get(), 2);
+            player.setItemInHand(InteractionHand.MAIN_HAND, stack);
+            var target = pos.relative(facing);
+            var endHit = new BlockHitResult(Vec3.atCenterOf(pos).relative(facing, 0.5), facing, pos, false);
+            player.setShiftKeyDown(true);
+            var createHelper = net.createmod.catnip.placement.PlacementHelpers.getHelpersView().stream()
+                    .filter(h -> h.matchesItem(stack) && h.matchesState(occupied)).findFirst().orElseThrow();
+            helper.assertTrue(!createHelper.getOffset(player, level, occupied, pos, endHit).isSuccessful(), "Sneak bypasses native placement assistance");
+            player.setShiftKeyDown(false);
+            level.setBlockAndUpdate(target, Blocks.STONE.defaultBlockState());
+            level.setBlockAndUpdate(pos.relative(facing.getOpposite()), Blocks.STONE.defaultBlockState());
+            helper.assertTrue(!createHelper.getOffset(player, level, occupied, pos, endHit).isSuccessful(), "Solid obstructions stop both helper directions");
+            level.removeBlock(target, false);
+            var preview = createHelper.getOffset(player, level, occupied, pos, endHit, stack);
+            helper.assertTrue(preview.isSuccessful() && preview.getBlockPos().equals(target)
+                    && preview.hasGhostState() && preview.getTransform().apply(preview.getGhostState()).is(base.getBlock()),
+                    "Native helper preview targets an empty trench at the selected end");
+            helper.assertTrue(stack.getItem().useOn(new UseOnContext(player, InteractionHand.MAIN_HAND, endHit)).consumesAction()
+                    && stack.getCount() == 1, "Native placement consumes exactly one trench");
+            var placed = level.getBlockState(target);
+            helper.assertTrue(placed.is(base.getBlock()) && placed.getValue(FACING) == facing && !placed.getValue(OPEN)
+                    && level.getBlockEntity(pos) == utility, "Helper extends the axis with an empty closed trench and preserves the utility");
+            player.setItemInHand(InteractionHand.MAIN_HAND, ItemStack.EMPTY);
+            level.removeBlock(target, false);
+            level.removeBlock(pos.relative(facing.getOpposite()), false);
+        }
+        helper.succeed();
+    }
+
+    @GameTest(template = "empty")
+    public static void wrenchThroughOpenGrille(GameTestHelper helper) {
+        var level = helper.getLevel();
+        var pos = helper.absolutePos(new BlockPos(2, 2, 2));
+        var empty = ModBlocks.SERVICE_TRENCH.get().defaultBlockState().setValue(FACING, Direction.EAST);
+        var copper = ModBlocks.SERVICE_TRENCH_PIPE.get().defaultBlockState()
+                .setValue(BlockStateProperties.EAST, true).setValue(BlockStateProperties.WEST, true);
+        var glass = ModBlocks.SERVICE_TRENCH_GLASS_PIPE.get().defaultBlockState()
+                .setValue(BlockStateProperties.AXIS, Direction.Axis.X);
+        var shaft = ModBlocks.SERVICE_TRENCH_SHAFT.get().defaultBlockState()
+                .setValue(BlockStateProperties.AXIS, Direction.Axis.X);
+        level.setBlockAndUpdate(pos.west(), empty);
+        for (var utility : List.of(copper, glass, shaft)) {
+            for (var mode : List.of(net.minecraft.world.level.GameType.SURVIVAL, net.minecraft.world.level.GameType.CREATIVE)) {
+                var player = helper.makeMockPlayer(mode);
+                var closed = utility.setValue(FACING, Direction.EAST).setValue(WATERLOGGED, true);
+                level.setBlockAndUpdate(pos, closed.setValue(CAP_NEGATIVE, true).setValue(CAP_POSITIVE, true));
+                var placed = level.getBlockState(pos);
+                helper.assertTrue(!placed.getValue(CAP_NEGATIVE) && !placed.getValue(CAP_POSITIVE),
+                        "Occupied casing clears old cap flags even with a closed grille");
+                var open = placed.setValue(OPEN, true);
+                helper.assertTrue(open.getCollisionShape(level, pos) == open.setValue(CAP_POSITIVE, true)
+                        .setValue(CAP_NEGATIVE, true).getCollisionShape(level, pos),
+                        "Legacy cap flags cannot add collision to open occupied casing");
+                level.setBlockAndUpdate(pos, open);
+                helper.assertTrue(wrench(player, hit(pos), true).consumesAction(), "Shift-wrench handles open utility");
+                var expected = empty.setValue(OPEN, true).setValue(WATERLOGGED, true).setValue(CAP_NEGATIVE, false);
+                helper.assertTrue(level.getBlockState(pos) == expected && level.getBlockEntity(pos) == null,
+                        "Utility removal preserves open housing, waterlogging and facing and recomputes empty end caps");
+                var saved = net.minecraft.nbt.NbtUtils.writeBlockState(level.getBlockState(pos));
+                helper.assertTrue(net.minecraft.nbt.NbtUtils.readBlockState(
+                        level.holderLookup(net.minecraft.core.registries.Registries.BLOCK), saved) == expected,
+                        "Open empty housing and its caps survive a save/load round trip");
+                var removed = utility == shaft ? AllBlocks.SHAFT.asStack() : AllBlocks.FLUID_PIPE.asStack();
+                helper.assertTrue(player.getInventory().countItem(removed.getItem()) == (player.isCreative() ? 0 : 1)
+                        && player.getInventory().countItem(ModBlocks.SERVICE_TRENCH.asItem()) == 0,
+                        "Only the original utility item is returned in Survival");
+            }
+        }
+
+        var player = helper.makeMockPlayer(net.minecraft.world.level.GameType.SURVIVAL);
+        var straight = copper.setValue(FACING, Direction.EAST).setValue(OPEN, true);
+        level.setBlockAndUpdate(pos, straight);
+        var end = new BlockHitResult(Vec3.atCenterOf(pos), Direction.EAST, pos, false);
+        helper.assertTrue(wrench(player, end, false) == InteractionResult.PASS && level.getBlockState(pos) == straight,
+                "An axial wrench click leaves a straight pipe unchanged");
+        var elbow = straight.setValue(BlockStateProperties.WEST, false).setValue(BlockStateProperties.NORTH, true);
+        var junction = straight.setValue(BlockStateProperties.NORTH, true);
+        for (var invalid : List.of(elbow, junction)) {
+            level.setBlockAndUpdate(pos, invalid);
+            helper.assertTrue(wrench(player, hit(pos), false) == InteractionResult.PASS && level.getBlockState(pos) == invalid,
+                    "Elbows and junctions refuse glass conversion and casing rotation");
+        }
+        helper.succeed();
+    }
+
+    private static InteractionResult wrench(net.minecraft.world.entity.player.Player player, BlockHitResult hit, boolean sneaking) {
+        player.setShiftKeyDown(sneaking);
+        player.setItemInHand(InteractionHand.MAIN_HAND, AllItems.WRENCH.asStack());
+        var result = AllItems.WRENCH.get().useOn(new UseOnContext(player, InteractionHand.MAIN_HAND, hit));
+        player.setItemInHand(InteractionHand.MAIN_HAND, ItemStack.EMPTY);
+        player.setShiftKeyDown(false);
+        return result;
+    }
+
+    private static InteractionResult clickUtility(net.minecraft.world.entity.player.Player player, ItemStack stack, BlockHitResult hit) {
+        player.setItemInHand(InteractionHand.MAIN_HAND, stack);
+        var event = NeoForge.EVENT_BUS.post(new PlayerInteractEvent.RightClickBlock(player, InteractionHand.MAIN_HAND, hit.getBlockPos(), hit));
+        return event.isCanceled() ? event.getCancellationResult() : InteractionResult.PASS;
+    }
+
+    private static int pipeCount(net.minecraft.world.entity.player.Player player) {
+        return player.getInventory().items.stream().filter(AllBlocks.FLUID_PIPE::isIn).mapToInt(ItemStack::getCount).sum();
     }
 
     @GameTest(template = "empty", timeoutTicks = 60)
