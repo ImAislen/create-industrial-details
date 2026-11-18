@@ -1,0 +1,456 @@
+{
+  "multipart": [
+    {
+      "when": {
+        "red": "x"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/cable_tray/cable_red",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "red": "y"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/cable_tray/cable_red",
+        "x": 270
+      }
+    },
+    {
+      "when": {
+        "red": "z"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/cable_tray/cable_red"
+      }
+    },
+    {
+      "when": {
+        "red": "south"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/cable_tray/cable_red",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "red": "west"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/cable_tray/cable_red",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "red": "wall_east"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/cable_tray/cable_red",
+        "x": 270,
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "red": "wall_north"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/cable_tray/cable_red",
+        "x": 270,
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "red": "wall_west"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/cable_tray/cable_red",
+        "x": 270,
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "yellow": "x"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/cable_tray/cable_yellow",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "yellow": "y"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/cable_tray/cable_yellow",
+        "x": 270
+      }
+    },
+    {
+      "when": {
+        "yellow": "z"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/cable_tray/cable_yellow"
+      }
+    },
+    {
+      "when": {
+        "yellow": "south"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/cable_tray/cable_yellow",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "yellow": "west"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/cable_tray/cable_yellow",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "yellow": "wall_east"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/cable_tray/cable_yellow",
+        "x": 270,
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "yellow": "wall_north"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/cable_tray/cable_yellow",
+        "x": 270,
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "yellow": "wall_west"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/cable_tray/cable_yellow",
+        "x": 270,
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "green": "x"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/cable_tray/cable_green",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "green": "y"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/cable_tray/cable_green",
+        "x": 270
+      }
+    },
+    {
+      "when": {
+        "green": "z"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/cable_tray/cable_green"
+      }
+    },
+    {
+      "when": {
+        "green": "south"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/cable_tray/cable_green",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "green": "west"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/cable_tray/cable_green",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "green": "wall_east"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/cable_tray/cable_green",
+        "x": 270,
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "green": "wall_north"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/cable_tray/cable_green",
+        "x": 270,
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "green": "wall_west"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/cable_tray/cable_green",
+        "x": 270,
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "blue": "x"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/cable_tray/cable_blue",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "blue": "y"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/cable_tray/cable_blue",
+        "x": 270
+      }
+    },
+    {
+      "when": {
+        "blue": "z"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/cable_tray/cable_blue"
+      }
+    },
+    {
+      "when": {
+        "blue": "south"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/cable_tray/cable_blue",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "blue": "west"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/cable_tray/cable_blue",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "blue": "wall_east"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/cable_tray/cable_blue",
+        "x": 270,
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "blue": "wall_north"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/cable_tray/cable_blue",
+        "x": 270,
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "blue": "wall_west"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/cable_tray/cable_blue",
+        "x": 270,
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "red": "wall_north_reversed"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/cable_tray/cable_red",
+        "x": 90
+      }
+    },
+    {
+      "when": {
+        "red": "wall_east_reversed"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/cable_tray/cable_red",
+        "x": 90,
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "red": "wall_south_reversed"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/cable_tray/cable_red",
+        "x": 90,
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "red": "wall_west_reversed"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/cable_tray/cable_red",
+        "x": 90,
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "yellow": "wall_north_reversed"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/cable_tray/cable_yellow",
+        "x": 90
+      }
+    },
+    {
+      "when": {
+        "yellow": "wall_east_reversed"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/cable_tray/cable_yellow",
+        "x": 90,
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "yellow": "wall_south_reversed"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/cable_tray/cable_yellow",
+        "x": 90,
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "yellow": "wall_west_reversed"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/cable_tray/cable_yellow",
+        "x": 90,
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "green": "wall_north_reversed"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/cable_tray/cable_green",
+        "x": 90
+      }
+    },
+    {
+      "when": {
+        "green": "wall_east_reversed"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/cable_tray/cable_green",
+        "x": 90,
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "green": "wall_south_reversed"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/cable_tray/cable_green",
+        "x": 90,
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "green": "wall_west_reversed"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/cable_tray/cable_green",
+        "x": 90,
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "blue": "wall_north_reversed"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/cable_tray/cable_blue",
+        "x": 90
+      }
+    },
+    {
+      "when": {
+        "blue": "wall_east_reversed"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/cable_tray/cable_blue",
+        "x": 90,
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "blue": "wall_south_reversed"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/cable_tray/cable_blue",
+        "x": 90,
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "blue": "wall_west_reversed"
+      },
+      "apply": {
+        "model": "create_industrial_details:block/cable_tray/cable_blue",
+        "x": 90,
+        "y": 270
+      }
+    }
+  ]
+}

@@ -22,6 +22,7 @@ import java.util.Set;
 
 public class CopycatDiagonalByteModelChecks {
     public static void main(String[] args) {
+        IndividualCableModelChecks.run();
         for (Direction face : Direction.values())
             for (boolean atlas : new boolean[]{false, true})
                 for (boolean rotatedUV : new boolean[]{false, true})

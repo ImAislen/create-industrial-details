@@ -1,5 +1,12 @@
 {
   "itemGroup.create_industrial_details": "Create: Industrial Details",
+  "block.create_industrial_details.control_box": "Control Box",
+  "create_industrial_details.control_box.channel.red": "Red",
+  "create_industrial_details.control_box.channel.yellow": "Yellow",
+  "create_industrial_details.control_box.channel.green": "Green",
+  "create_industrial_details.control_box.channel.blue": "Blue",
+  "create_industrial_details.control_box.value": "%s: %s",
+  "create_industrial_details.control_box.signal_strength": "Signal strength",
   "block.create_industrial_details.copycat_diagonal_byte": "Copycat Diagonal Byte",
   "block.create_industrial_details.cast_iron_block": "Cast Iron Block",
   "block.create_industrial_details.mooring_bollard": "Mooring Bollard",
@@ -11,12 +18,10 @@
   "block.create_industrial_details.steel_wall_bracket": "Steel Wall Bracket",
   "block.create_industrial_details.steel_wall_corner_bracket": "Steel Wall Corner Bracket",
   "block.create_industrial_details.industrial_steel_caged_lamp": "Industrial Steel Caged Lamp",
-
   "block.create_industrial_details.air_duct": "Air Duct",
   "block.create_industrial_details.air_vent": "Air Vent",
   "block.create_industrial_details.air_intake": "Air Intake",
   "block.create_industrial_details.cable_tray": "Cable Tray",
-
   "block.create_industrial_details.oak_wooden_beam": "Oak Wooden Beam",
   "block.create_industrial_details.stripped_oak_wooden_beam": "Stripped Oak Wooden Beam",
   "block.create_industrial_details.oak_plank_beam": "Oak Plank Beam",
@@ -50,7 +55,6 @@
   "block.create_industrial_details.bamboo_wooden_beam": "Bamboo Beam",
   "block.create_industrial_details.stripped_bamboo_wooden_beam": "Stripped Bamboo Beam",
   "block.create_industrial_details.bamboo_plank_beam": "Bamboo Plank Beam",
-
   "block.create_industrial_details.oak_wooden_post": "Oak Wooden Post",
   "block.create_industrial_details.stripped_oak_wooden_post": "Stripped Oak Wooden Post",
   "block.create_industrial_details.oak_plank_post": "Oak Plank Post",
@@ -84,7 +88,6 @@
   "block.create_industrial_details.bamboo_wooden_post": "Bamboo Post",
   "block.create_industrial_details.stripped_bamboo_wooden_post": "Stripped Bamboo Post",
   "block.create_industrial_details.bamboo_plank_post": "Bamboo Plank Post",
-
   "block.create_industrial_details.acacia_planked_planks": "Acacia Planked Planks",
   "block.create_industrial_details.bamboo_planked_planks": "Bamboo Planked Planks",
   "block.create_industrial_details.birch_planked_planks": "Birch Planked Planks",
@@ -96,7 +99,6 @@
   "block.create_industrial_details.oak_planked_planks": "Oak Planked Planks",
   "block.create_industrial_details.spruce_planked_planks": "Spruce Planked Planks",
   "block.create_industrial_details.warped_planked_planks": "Warped Planked Planks",
-
   "block.create_industrial_details.acacia_single_plank": "Acacia Single Plank",
   "block.create_industrial_details.bamboo_single_plank": "Bamboo Single Plank",
   "block.create_industrial_details.birch_single_plank": "Birch Single Plank",
@@ -108,9 +110,6 @@
   "block.create_industrial_details.oak_single_plank": "Oak Single Plank",
   "block.create_industrial_details.spruce_single_plank": "Spruce Single Plank",
   "block.create_industrial_details.warped_single_plank": "Warped Single Plank",
-
-
-
   "menu.create_industrial_details.industrial_steel_caged_lamp": "Caged Lamp Configuration",
   "menu.create_industrial_details.industrial_steel_caged_lamp.status": "Status: %s",
   "menu.create_industrial_details.industrial_steel_caged_lamp.mode": "Mode: %s",
@@ -123,9 +122,6 @@
   "menu.create_industrial_details.value.off": "Off",
   "menu.create_industrial_details.value.normal": "Normal",
   "menu.create_industrial_details.value.inverted": "Inverted",
-
-
-
   "block.create_industrial_details.industrial_steel_grate.tooltip.summary": "Can be _waterlogged_.",
   "block.create_industrial_details.industrial_steel_grate.tooltip.condition1": "Encased Fan",
   "block.create_industrial_details.industrial_steel_grate.tooltip.behaviour1": "Airflow passes through the grate.",
@@ -148,5 +144,26 @@
   "create_industrial_details.goggles.none": "None detected",
   "block.create_industrial_details.service_trench_glass_pipe": "Service Trench",
   "block.create_industrial_details.block_of_industrial_steel": "Block of Industrial Steel",
-  "block.create_industrial_details.block_of_plated_industrial_steel": "Block of Plated Industrial Steel"
+  "block.create_industrial_details.block_of_plated_industrial_steel": "Block of Plated Industrial Steel",
+  "create_industrial_details.cable_network.title": "Cable Network",
+  "create_industrial_details.cable_network.pending": "Unavailable or rebuilding",
+  "create_industrial_details.cable_network.zero": "No positive signals",
+  "create_industrial_details.cable_network.target": "Look directly at a Cable Tray, individual cable or sagging span.",
+  "item.create_industrial_details.red_control_cable": "Red Control Cable",
+  "item.create_industrial_details.yellow_control_cable": "Yellow Control Cable",
+  "item.create_industrial_details.green_control_cable": "Green Control Cable",
+  "item.create_industrial_details.blue_control_cable": "Blue Control Cable",
+  "block.create_industrial_details.individual_control_cable": "Individual Control Cables",
+  "create_industrial_details.cable.anchor_selected": "Cable start selected. Sneak-click another cable anchor; click this anchor again to cancel.",
+  "create_industrial_details.cable.port_obstructed": "This cable path would enter the Control Box enclosure. Choose an outward route.",
+  "create_industrial_details.cable.connected": "Cable span connected.",
+  "create_industrial_details.cable.cancelled": "Cable selection cancelled.",
+  "create_industrial_details.cable.invalid_anchor": "Target a matching cable segment, Control Box port or exposed Cable Tray lane end. The selected start is kept, if any.",
+  "create_industrial_details.cable.start_unavailable": "The selected start was removed, changed, or is not loaded here. Selection cancelled; select a new start.",
+  "create_industrial_details.cable.protected_anchor": "You cannot connect cables at a protected endpoint. The selected start is kept.",
+  "create_industrial_details.cable.too_far": "Cable spans may be at most %s blocks long. The selected start is kept.",
+  "create_industrial_details.cable.duplicate": "A cable of this color already joins these anchors. The selected start is kept.",
+  "create_industrial_details.cable.connection_failed": "These cable anchors could not be connected. Check that both are still loaded and contain this color.",
+  "create_industrial_details.cable.overlap": "Those cable paths would intersect. Rotate one cable first.",
+  "create_industrial_details.cable.materials": "This span requires %s cables in the held stack."
 }

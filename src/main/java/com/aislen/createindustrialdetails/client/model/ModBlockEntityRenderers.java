@@ -27,6 +27,8 @@ public final class ModBlockEntityRenderers {
     public static void registerRenderers(
             EntityRenderersEvent.RegisterRenderers event
     ) {
+        event.registerBlockEntityRenderer(ModBlockEntities.CONTROL_BOX.get(), ControlBoxRenderer::new);
+        event.registerBlockEntityRenderer(ModBlockEntities.INDIVIDUAL_CONTROL_CABLE.get(), IndividualCableRenderer::new);
         event.registerBlockEntityRenderer(ModBlockEntities.SERVICE_TRENCH_SHAFT.get(),
                 com.simibubi.create.content.kinetics.base.ShaftRenderer::new);
         event.registerBlockEntityRenderer(ModBlockEntities.SERVICE_TRENCH_GLASS_PIPE.get(),
@@ -65,6 +67,6 @@ public final class ModBlockEntityRenderers {
     @SubscribeEvent
     public static void registerReloadListener(RegisterClientReloadListenersEvent event) {
         event.registerReloadListener((ResourceManagerReloadListener)
-                resourceManager -> WoodenBeamModelBuilder.invalidateMeshes());
+                resourceManager -> { WoodenBeamModelBuilder.invalidateMeshes(); IndividualCableRenderer.reload(); });
     }
 }

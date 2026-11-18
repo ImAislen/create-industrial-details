@@ -155,8 +155,9 @@ publishing {
 }
 
 tasks.named('test', Test).configure {
-    exclude '**/*GameTests.class'
+    exclude '**/*GameTests*.class'
     exclude '**/CopycatDiagonalByteModelChecks*.class'
+    exclude '**/IndividualCableModelChecks*.class'
 }
 
 tasks.register('verifyCopycatGeometry', JavaExec) {

@@ -1,5 +1,7 @@
 package com.aislen.createindustrialdetails.registry;
 
+import com.aislen.createindustrialdetails.content.block.cable.individual.IndividualCableColor;
+import com.aislen.createindustrialdetails.content.block.cable.individual.IndividualCableItem;
 import com.aislen.createindustrialdetails.CreateIndustrialDetails;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
@@ -14,6 +16,20 @@ import java.util.function.BiFunction;
 public final class ModItems {
     public static final DeferredRegister.Items ITEMS =
             DeferredRegister.createItems(CreateIndustrialDetails.MOD_ID);
+
+    public static final DeferredItem<IndividualCableItem> RED_CONTROL_CABLE =
+            ITEMS.register("red_control_cable", () -> new IndividualCableItem(new Item.Properties(),
+                    IndividualCableColor.RED));
+    public static final DeferredItem<IndividualCableItem> YELLOW_CONTROL_CABLE =
+            ITEMS.register("yellow_control_cable", () -> new IndividualCableItem(new Item.Properties(),
+                    IndividualCableColor.YELLOW));
+
+    public static final DeferredItem<IndividualCableItem> GREEN_CONTROL_CABLE =
+            ITEMS.register("green_control_cable", () -> new IndividualCableItem(new Item.Properties(),
+                    IndividualCableColor.GREEN));
+    public static final DeferredItem<IndividualCableItem> BLUE_CONTROL_CABLE =
+            ITEMS.register("blue_control_cable", () -> new IndividualCableItem(new Item.Properties(),
+                    IndividualCableColor.BLUE));
 
     private ModItems() {
     }

@@ -8,6 +8,7 @@
     "create_industrial_details:steel_wall_bracket",
     "create_industrial_details:steel_wall_corner_bracket",
     "create_industrial_details:cable_tray",
+    "create_industrial_details:control_box",
     "create_industrial_details:service_trench",
     "create_industrial_details:service_trench_pipe",
     "create_industrial_details:service_trench_shaft",

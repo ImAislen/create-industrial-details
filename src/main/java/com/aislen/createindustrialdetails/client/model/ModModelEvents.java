@@ -1,5 +1,6 @@
 package com.aislen.createindustrialdetails.client.model;
 
+import com.aislen.createindustrialdetails.content.block.cable.individual.IndividualCableColor;
 import java.util.Map;
 
 import com.aislen.createindustrialdetails.CreateIndustrialDetails;
@@ -71,6 +72,11 @@ public final class ModModelEvents {
     public static void registerAdditional(
             ModelEvent.RegisterAdditional event
     ) {
+        ControlBoxRenderer.registerModels(event);
+        for (var color : IndividualCableColor.values()) {
+            event.register(ModelResourceLocation.standalone(id(color.modelPath())));
+            event.register(ModelResourceLocation.standalone(id(color.modelPath() + "_elevated")));
+        }
         event.register(ModelResourceLocation.standalone(END_A));
         event.register(ModelResourceLocation.standalone(END_B));
 
@@ -117,6 +123,11 @@ public final class ModModelEvents {
     ) {
         Map<ModelResourceLocation, BakedModel> models =
                 event.getModels();
+
+        var cableModels = new java.util.IdentityHashMap<BakedModel, BakedModel>();
+        for (BlockState state : ModBlocks.INDIVIDUAL_CONTROL_CABLE.get().getStateDefinition().getPossibleStates())
+            models.computeIfPresent(BlockModelShaper.stateToModelLocation(state),
+                    (key, original) -> cableModels.computeIfAbsent(original, IndividualCableConnectionModel::new));
 
         for (BlockState state : ModBlocks.COPYCAT_DIAGONAL_BYTE.get().getStateDefinition().getPossibleStates()) {
             models.computeIfPresent(BlockModelShaper.stateToModelLocation(state),

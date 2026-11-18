@@ -1,6 +1,8 @@
 package com.aislen.createindustrialdetails.registry;
 
+import com.aislen.createindustrialdetails.content.block.cable.individual.IndividualCableBlockEntity;
 import com.aislen.createindustrialdetails.CreateIndustrialDetails;
+import com.aislen.createindustrialdetails.content.block.cable.ControlBoxBlockEntity;
 import com.simibubi.create.content.decoration.copycat.CopycatBlockEntity;
 import com.aislen.createindustrialdetails.content.block.industrialsteel.trench.*;
 import com.aislen.createindustrialdetails.content.block.industrialsteel.lighting.cagedlamp.IndustrialSteelCagedLampBlockEntity;
@@ -60,6 +62,14 @@ public final class ModBlockEntities {
             BLOCK_ENTITY_TYPES.register("copycat_diagonal_byte", () -> BlockEntityType.Builder.of(
                     (pos, state) -> new CopycatBlockEntity(ModBlockEntities.COPYCAT_DIAGONAL_BYTE.get(), pos, state),
                     ModBlocks.COPYCAT_DIAGONAL_BYTE.get()).build(null));
+
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<ControlBoxBlockEntity>> CONTROL_BOX =
+            BLOCK_ENTITY_TYPES.register("control_box", () -> BlockEntityType.Builder.of(
+                    ControlBoxBlockEntity::new, ModBlocks.CONTROL_BOX.get()).build(null));
+
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<IndividualCableBlockEntity>> INDIVIDUAL_CONTROL_CABLE =
+            BLOCK_ENTITY_TYPES.register("individual_control_cable", () -> BlockEntityType.Builder.of(
+                    IndividualCableBlockEntity::new, ModBlocks.INDIVIDUAL_CONTROL_CABLE.get()).build(null));
 
     private ModBlockEntities() {
     }

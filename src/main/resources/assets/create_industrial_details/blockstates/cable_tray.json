@@ -1,6 +1,56 @@
 {
   "variants": {
-    "axis=z": { "model": "create_industrial_details:block/cable_tray/cable_tray" },
-    "axis=x": { "model": "create_industrial_details:block/cable_tray/cable_tray", "y": 90 }
+    "axis=z,facing=north": {
+      "model": "create_industrial_details:block/cable_tray/cable_tray",
+      "y": 0
+    },
+    "axis=z,facing=east": {
+      "model": "create_industrial_details:block/cable_tray/cable_tray",
+      "y": 0
+    },
+    "axis=z,facing=south": {
+      "model": "create_industrial_details:block/cable_tray/cable_tray",
+      "y": 180
+    },
+    "axis=z,facing=west": {
+      "model": "create_industrial_details:block/cable_tray/cable_tray",
+      "y": 0
+    },
+    "axis=x,facing=north": {
+      "model": "create_industrial_details:block/cable_tray/cable_tray",
+      "y": 90
+    },
+    "axis=x,facing=east": {
+      "model": "create_industrial_details:block/cable_tray/cable_tray",
+      "y": 90
+    },
+    "axis=x,facing=south": {
+      "model": "create_industrial_details:block/cable_tray/cable_tray",
+      "y": 90
+    },
+    "axis=x,facing=west": {
+      "model": "create_industrial_details:block/cable_tray/cable_tray",
+      "y": 270
+    },
+    "axis=y,facing=north": {
+      "model": "create_industrial_details:block/cable_tray/cable_tray",
+      "x": 270,
+      "y": 180
+    },
+    "axis=y,facing=east": {
+      "model": "create_industrial_details:block/cable_tray/cable_tray",
+      "x": 270,
+      "y": 270
+    },
+    "axis=y,facing=south": {
+      "model": "create_industrial_details:block/cable_tray/cable_tray",
+      "x": 270,
+      "y": 0
+    },
+    "axis=y,facing=west": {
+      "model": "create_industrial_details:block/cable_tray/cable_tray",
+      "x": 270,
+      "y": 90
+    }
   }
 }

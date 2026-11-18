@@ -1,5 +1,6 @@
 package com.aislen.createindustrialdetails.registry;
 
+import com.aislen.createindustrialdetails.content.block.cable.individual.IndividualCableBlock;
 import com.aislen.createindustrialdetails.CreateIndustrialDetails;
 import com.aislen.createindustrialdetails.content.block.industrialsteel.trench.*;
 import net.minecraft.world.level.block.Blocks;
@@ -8,6 +9,7 @@ import com.aislen.createindustrialdetails.content.block.airduct.AirDuctBlock;
 import com.aislen.createindustrialdetails.content.block.airduct.AirIntakeBlock;
 import com.aislen.createindustrialdetails.content.block.airduct.AirVentBlock;
 import com.aislen.createindustrialdetails.content.block.cable.CableTrayBlock;
+import com.aislen.createindustrialdetails.content.block.cable.ControlBoxBlock;
 import com.aislen.createindustrialdetails.content.block.copycat.CopycatDiagonalByteBlock;
 import com.aislen.createindustrialdetails.content.block.industrialsteel.IndustrialSteelGrateBlock;
 import com.aislen.createindustrialdetails.content.block.industrialsteel.IndustrialSteelHatchBlock;
@@ -298,6 +300,15 @@ public final class ModBlocks {
                     () -> new AirIntakeBlock(BlockBehaviour.Properties.ofFullCopy(AIR_DUCT.get()).noOcclusion()),
                     BlockItem::new
             );
+
+    public static final DeferredBlock<ControlBoxBlock> CONTROL_BOX =
+            registerBlockWithItem("control_box", () -> new ControlBoxBlock(
+                    BlockBehaviour.Properties.of().mapColor(MapColor.METAL).strength(3.5F, 6.0F)
+                            .sound(SoundType.METAL).requiresCorrectToolForDrops().noOcclusion()));
+
+    public static final DeferredBlock<IndividualCableBlock> INDIVIDUAL_CONTROL_CABLE =
+            BLOCKS.register("individual_control_cable", () -> new IndividualCableBlock(
+                    BlockBehaviour.Properties.of().strength(.5F).sound(SoundType.METAL).noOcclusion().pushReaction(PushReaction.DESTROY)));
 
     public static final DeferredBlock<CableTrayBlock> CABLE_TRAY =
             registerBlockWithItem(

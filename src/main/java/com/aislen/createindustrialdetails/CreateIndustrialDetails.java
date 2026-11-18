@@ -1,6 +1,7 @@
 package com.aislen.createindustrialdetails;
 
 import com.aislen.createindustrialdetails.registry.ModBlocks;
+import com.aislen.createindustrialdetails.registry.ControlBoxAliases;
 import com.aislen.createindustrialdetails.registry.IndustrialSteelAliases;
 import com.aislen.createindustrialdetails.registry.ModBlockEntities;
 import com.aislen.createindustrialdetails.registry.ModCreativeTabs;
@@ -28,6 +29,9 @@ public final class CreateIndustrialDetails {
             ModContainer modContainer
     ) {
         IndustrialSteelAliases.register();
+        ControlBoxAliases.register();
+        modEventBus.addListener(com.aislen.createindustrialdetails.content.block.cable.individual.CableSpanRemoval::register);
+        modEventBus.addListener(com.aislen.createindustrialdetails.content.block.cable.individual.CableSpanSync::register);
         ModDataComponents.register(modEventBus);
         ModBlocks.register(modEventBus);
         ModBlockEntities.register(modEventBus);

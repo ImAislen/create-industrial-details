@@ -57,6 +57,11 @@ public final class ModCreativeTabs {
                                 output.accept(ModBlocks.AIR_VENT.get());
                                 output.accept(ModBlocks.AIR_INTAKE.get());
                                 output.accept(ModBlocks.CABLE_TRAY.get());
+                                output.accept(ModBlocks.CONTROL_BOX.get());
+                                output.accept(ModItems.RED_CONTROL_CABLE.get());
+                                output.accept(ModItems.YELLOW_CONTROL_CABLE.get());
+                                output.accept(ModItems.GREEN_CONTROL_CABLE.get());
+                                output.accept(ModItems.BLUE_CONTROL_CABLE.get());
 
 
                                 output.accept(ModBlocks.ACACIA_PLANKED_PLANKS.get());
