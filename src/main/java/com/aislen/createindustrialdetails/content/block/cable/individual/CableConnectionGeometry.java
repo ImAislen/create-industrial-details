@@ -1,5 +1,6 @@
 package com.aislen.createindustrialdetails.content.block.cable.individual;
 
+import com.aislen.createindustrialdetails.content.block.industrialsteel.trench.ServiceTrenchCableBlock;
 import com.aislen.createindustrialdetails.content.block.cable.CablePhysicalConnections;
 import net.minecraft.core.*;
 import net.minecraft.world.level.LevelReader;
@@ -17,6 +18,7 @@ public final class CableConnectionGeometry {
         return IndividualCableGeometry.part(color, route).move(shift.x, shift.y, shift.z);
     }
     public static boolean elevated(LevelReader level, BlockPos pos, IndividualCableColor color, CableRoute route) {
+        if (level.getBlockState(pos).getBlock() instanceof ServiceTrenchCableBlock) return true;
         for (var contact : CablePhysicalConnections.contacts(level, pos, level.getBlockState(pos), color, route))
             if (contact.cable().add(offset(route)).distanceToSqr(contact.other()) < 1e-10) return true;
         return false;

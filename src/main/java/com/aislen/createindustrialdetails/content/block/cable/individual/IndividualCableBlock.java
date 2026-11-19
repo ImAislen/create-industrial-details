@@ -59,7 +59,7 @@ public final class IndividualCableBlock extends Block implements EntityBlock, IW
         if (level instanceof Level world) refreshCorners(world, pos);
         return state;
     }
-    static void refreshCorners(Level level, BlockPos pos) {
+    public static void refreshCorners(Level level, BlockPos pos) {
         for (var offset : BlockPos.betweenClosed(-1, -1, -1, 1, 1, 1)) {
             if (offset.equals(BlockPos.ZERO)) continue;
             var peer = pos.offset(offset);
@@ -86,12 +86,15 @@ public final class IndividualCableBlock extends Block implements EntityBlock, IW
         if (!level.getGameRules().getBoolean(GameRules.RULE_DOBLOCKDROPS)) return;
         while (amount > 0) { int count = Math.min(amount, 64); Block.popResource(level, pos, new ItemStack(color.item(), count)); amount -= count; }
     }
-    private IndividualCableComponents.Component selected(BlockState state, UseOnContext context) {
+    private static IndividualCableComponents.Component selected(BlockState state, UseOnContext context) {
         Player player = context.getPlayer(); if (player == null) return null;
         Vec3 start = player.getEyePosition(); Vec3 end = start.add(context.getClickLocation().subtract(start).normalize().scale(player.blockInteractionRange()));
         return IndividualCableComponents.target(context.getLevel(), context.getClickedPos(), state, start, end);
     }
     @Override public InteractionResult onSneakWrenched(BlockState state, UseOnContext context) {
+        return removeSelected(state, context);
+    }
+    public static InteractionResult removeSelected(BlockState state, UseOnContext context) {
         var component = selected(state, context); if (component == null) return InteractionResult.PASS;
         var color = component.color(); var route = component.route();
         if (context.getLevel() instanceof ServerLevel server) {
@@ -105,7 +108,12 @@ public final class IndividualCableBlock extends Block implements EntityBlock, IW
                 if (CableSpans.get(server).remove(span) && !player.isCreative()) returnItems(player, color, span.cost());
                 IWrenchable.playRemoveSound(server, pos); return InteractionResult.SUCCESS;
             }
-            ((IndividualCableBlockEntity) server.getBlockEntity(pos)).removeComponent(color, route);
+            if (server.getBlockState(pos) != state
+                    || !(server.getBlockEntity(pos) instanceof IndividualCableBlockEntity host)
+                    || !host.contains(color, route)) return InteractionResult.FAIL;
+            host.removeComponent(color, route);
+            if (server.getBlockEntity(pos) instanceof IndividualCableBlockEntity remaining && remaining.contains(color, route))
+                return InteractionResult.FAIL;
             if (!player.isCreative()) returnItems(player, color, 1);
             IWrenchable.playRemoveSound(server, pos);
         }

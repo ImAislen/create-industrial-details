@@ -57,6 +57,7 @@ public final class ServiceTrenchUtilities {
         ItemStack stack = context.getItemInHand();
         Utility requested = Utility.fromStack(stack);
         if (requested == null) return InteractionResult.PASS;
+        if (state.getBlock() instanceof ServiceTrenchCableBlock) return InteractionResult.FAIL;
 
         Utility existing = Utility.in(state);
         Player player = context.getPlayer();

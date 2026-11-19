@@ -1,5 +1,6 @@
 package com.aislen.createindustrialdetails.content.block.cable.individual;
 
+import com.aislen.createindustrialdetails.content.block.industrialsteel.trench.ServiceTrenchCableBlock;
 import com.aislen.createindustrialdetails.registry.ModBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
@@ -20,8 +21,12 @@ public final class IndividualCableBlockEntity extends BlockEntity {
     private final long[] secondaryTokens = new long[IndividualCableColor.values().length];
     private net.minecraft.world.phys.shapes.VoxelShape shape;
     public CableRoute secondary(IndividualCableColor color) { return secondary[color.ordinal()] == null ? CableRoute.NONE : secondary[color.ordinal()]; }
+    public CableRoute primary(IndividualCableColor color) {
+        return IndividualCableComponents.primary(getBlockState(), color);
+    }
+
     public List<CableRoute> routes(IndividualCableColor color) {
-        var primary = getBlockState().getValue(color.property); var extra = secondary(color);
+        var primary = primary(color); var extra = secondary(color);
         return primary == CableRoute.NONE ? List.of() : extra == CableRoute.NONE ? List.of(primary) : List.of(primary, extra);
     }
     public boolean contains(IndividualCableColor color, CableRoute route) { return routes(color).contains(route); }
@@ -32,8 +37,8 @@ public final class IndividualCableBlockEntity extends BlockEntity {
         return true;
     }
     public boolean canAdd(IndividualCableColor color, CableRoute route) {
-        var primary = getBlockState().getValue(color.property);
-        if (secondary(color) != CableRoute.NONE || !IndividualCableComponents.validPair(color, primary, route)) return false;
+        var primary = primary(color);
+        if (getBlockState().getBlock() instanceof ServiceTrenchCableBlock || secondary(color) != CableRoute.NONE || !IndividualCableComponents.validPair(color, primary, route)) return false;
         for (var other : IndividualCableColor.values()) if (other != color) for (var occupied : routes(other))
             if (net.minecraft.world.phys.shapes.Shapes.joinIsNotEmpty(IndividualCableGeometry.part(color, route), IndividualCableGeometry.part(other, occupied), net.minecraft.world.phys.shapes.BooleanOp.AND)) return false;
         return true;
@@ -44,8 +49,8 @@ public final class IndividualCableBlockEntity extends BlockEntity {
         changed(); topologyChanged(color); if (level != null) IndividualCableBlock.refreshCorners(level, worldPosition); return true;
     }
     public boolean canRotate(IndividualCableColor color, CableRoute old, CableRoute replacement) {
-        if (!contains(color, old) || replacement == CableRoute.NONE || old == replacement) return false;
-        var sibling = secondary(color) == old ? getBlockState().getValue(color.property) : secondary(color);
+        if (getBlockState().getBlock() instanceof ServiceTrenchCableBlock || !contains(color, old) || replacement == CableRoute.NONE || old == replacement) return false;
+        var sibling = secondary(color) == old ? primary(color) : secondary(color);
         if (sibling != CableRoute.NONE && !IndividualCableComponents.validPair(color, sibling, replacement)) return false;
         for (var other : IndividualCableColor.values()) if (other != color) for (var occupied : routes(other))
             if (net.minecraft.world.phys.shapes.Shapes.joinIsNotEmpty(IndividualCableGeometry.part(color, replacement), IndividualCableGeometry.part(other, occupied), net.minecraft.world.phys.shapes.BooleanOp.AND)) return false;
@@ -61,6 +66,14 @@ public final class IndividualCableBlockEntity extends BlockEntity {
         if (!contains(color, route) || level == null) return;
         if (level instanceof ServerLevel server) for (var span : CableSpans.get(server).detach(worldPosition, color, route))
             IndividualCableBlock.drop(server, worldPosition, color, span.cost());
+        if (getBlockState().getBlock() instanceof ServiceTrenchCableBlock) {
+            BlockState state = ServiceTrenchCableBlock.withLane(getBlockState(), color, false);
+            boolean empty = java.util.Arrays.stream(IndividualCableColor.values()).allMatch(c -> ServiceTrenchCableBlock.lane(state, c) == CableRoute.NONE);
+            level.setBlockAndUpdate(worldPosition, empty ? ServiceTrenchCableBlock.housing(state,
+                    com.aislen.createindustrialdetails.registry.ModBlocks.SERVICE_TRENCH.get().defaultBlockState()) : state);
+            if (!empty) renew(color);
+            return;
+        }
         if (secondary(color) == route) secondary[color.ordinal()] = CableRoute.NONE;
         else {
             var replacement = secondary(color); long identity = secondaryTokens[color.ordinal()];
@@ -132,7 +145,7 @@ public final class IndividualCableBlockEntity extends BlockEntity {
         byte[] routes = tag.getByteArray("SecondaryRoutes");
         java.util.Arrays.fill(secondary, CableRoute.NONE);
         for (int i = 0; i < Math.min(routes.length, secondary.length); i++) {
-            int id = routes[i]; if (id > 0 && id < CableRoute.values().length && IndividualCableComponents.validPair(IndividualCableColor.values()[i], getBlockState().getValue(IndividualCableColor.values()[i].property), CableRoute.values()[id])) secondary[i] = CableRoute.values()[id];
+            int id = routes[i]; if (id > 0 && id < CableRoute.values().length && IndividualCableComponents.validPair(IndividualCableColor.values()[i], primary(IndividualCableColor.values()[i]), CableRoute.values()[id])) secondary[i] = CableRoute.values()[id];
         }
         long[] identities = tag.getLongArray("SecondaryTokens"); System.arraycopy(identities, 0, secondaryTokens, 0, Math.min(identities.length, secondaryTokens.length)); shape = null;
         ListTag list = tag.getList("VisibleSpans", Tag.TAG_COMPOUND);

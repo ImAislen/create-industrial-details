@@ -1,5 +1,6 @@
 package com.aislen.createindustrialdetails.content.block.cable.individual;
 
+import com.aislen.createindustrialdetails.content.block.industrialsteel.trench.ServiceTrenchCableBlock;
 import com.aislen.createindustrialdetails.content.block.cable.*;
 import net.minecraft.core.*;
 import net.minecraft.world.level.BlockGetter;
@@ -19,7 +20,8 @@ public record CableEndpoint(BlockPos pos, CableRoute route, int port) {
         if (!level.hasChunkAt(pos)) return false;
         if (isPort()) return ControlBoxPorts.valid(level.getBlockState(pos), port);
         if (isTray()) return CableTrayPorts.valid(level, pos, port);
-        return level.getBlockEntity(pos) instanceof IndividualCableBlockEntity host && host.contains(color, route);
+        return !(level.getBlockState(pos).getBlock() instanceof ServiceTrenchCableBlock)
+                && level.getBlockEntity(pos) instanceof IndividualCableBlockEntity host && host.contains(color, route);
     }
     public long token(BlockGetter level, IndividualCableColor color) {
         if (isPort()) return level.getBlockEntity(pos) instanceof ControlBoxBlockEntity box ? box.cableToken() : 0;
@@ -48,7 +50,8 @@ public record CableEndpoint(BlockPos pos, CableRoute route, int port) {
         int port = ControlBoxPorts.target(level.getBlockState(pos), pos, face, hit, color);
         if (port == 0) port = CableTrayPorts.target(level, pos, face, hit, color);
         if (port != 0) return new CableEndpoint(pos, CableRoute.NONE, port);
-        if (!(level.getBlockEntity(pos) instanceof IndividualCableBlockEntity host) || host.routes(color).isEmpty()) return null;
+        if (level.getBlockState(pos).getBlock() instanceof ServiceTrenchCableBlock
+                || !(level.getBlockEntity(pos) instanceof IndividualCableBlockEntity host) || host.routes(color).isEmpty()) return null;
         return new CableEndpoint(pos, IndividualCableComponents.selectedRoute(host, color, eye, eye.add(hit.subtract(eye).normalize().scale(reach))), 0);
     }
 }

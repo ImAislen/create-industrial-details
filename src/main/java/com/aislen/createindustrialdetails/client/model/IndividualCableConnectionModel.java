@@ -1,6 +1,7 @@
 package com.aislen.createindustrialdetails.client.model;
 
 import com.aislen.createindustrialdetails.content.block.cable.individual.*;
+import com.aislen.createindustrialdetails.content.block.industrialsteel.trench.ServiceTrenchCableBlock;
 import com.simibubi.create.foundation.model.BakedModelWrapperWithData;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.block.model.BakedQuad;
@@ -23,7 +24,7 @@ public final class IndividualCableConnectionModel extends BakedModelWrapperWithD
         if (snapshot == null || snapshot.revision != host.revision) {
             var quads = new ArrayList<BakedQuad>();
             for (var color : IndividualCableColor.values()) {
-                var route = state.getValue(color.property); if (route == CableRoute.NONE) continue;
+                var route = host.primary(color); if (route == CableRoute.NONE) continue;
                 quads.addAll(IndividualCableRenderer.connectionComponent(host, color, route));
             }
             snapshot = new Snapshot(host.revision, List.copyOf(quads)); cache.put(host, snapshot);
@@ -31,7 +32,16 @@ public final class IndividualCableConnectionModel extends BakedModelWrapperWithD
         return builder.with(GEOMETRY, snapshot.quads);
     }
     @Override public List<BakedQuad> getQuads(BlockState state, Direction side, RandomSource random, ModelData data, RenderType type) {
-        if (data.has(GEOMETRY)) return side == null ? data.get(GEOMETRY) : List.of();
+        if (data.has(GEOMETRY)) {
+            if (state != null && state.getBlock() instanceof ServiceTrenchCableBlock) {
+                var casing = super.getQuads(state, side, random, data, type);
+                if (side != null || type != null && type != RenderType.solid()) return casing;
+                var quads = new ArrayList<>(casing);
+                quads.addAll(data.get(GEOMETRY));
+                return quads;
+            }
+            return side == null ? data.get(GEOMETRY) : List.of();
+        }
         return super.getQuads(state, side, random, data, type);
     }
 }

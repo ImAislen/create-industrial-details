@@ -1,5 +1,7 @@
 package com.aislen.createindustrialdetails.content.block.cable.individual;
 
+import com.aislen.createindustrialdetails.content.block.industrialsteel.trench.ServiceTrenchBlock;
+import com.aislen.createindustrialdetails.content.block.industrialsteel.trench.ServiceTrenchCableBlock;
 import com.aislen.createindustrialdetails.registry.ModBlocks;
 import com.aislen.createindustrialdetails.registry.ModDataComponents;
 import com.cake.struts.content.block.StrutBlock;
@@ -37,7 +39,7 @@ public final class IndividualCableItem extends Item {
     private static boolean boxWrenchInteraction(UseOnContext context) {
         var player = context.getPlayer();
         var block = context.getLevel().getBlockState(context.getClickedPos()).getBlock();
-        return (block instanceof com.aislen.createindustrialdetails.content.block.cable.ControlBoxBlock || block instanceof com.aislen.createindustrialdetails.content.block.cable.CableTrayBlock)
+        return (block instanceof com.aislen.createindustrialdetails.content.block.cable.ControlBoxBlock || block instanceof com.aislen.createindustrialdetails.content.block.cable.CableTrayBlock || block instanceof ServiceTrenchBlock)
                 && player != null && (CableSpanRemoval.isWrench(player.getMainHandItem()) || CableSpanRemoval.isWrench(player.getOffhandItem()));
     }
     @Override public InteractionResult onItemUseFirst(ItemStack stack, UseOnContext context) {
@@ -66,7 +68,14 @@ public final class IndividualCableItem extends Item {
         if (!level.isClientSide) clear(stack);
         BlockPos pos = context.getClickedPos(); BlockState state = level.getBlockState(pos);
         CableRoute route = context.getClickedFace().getAxis().isHorizontal() ? CableRoute.wall(context.getClickedFace()) : CableRoute.floor(player.getDirection());
-        if (state.getBlock() instanceof IndividualCableBlock) {
+        boolean trench = state.getBlock() instanceof ServiceTrenchBlock;
+        if (trench) {
+            if (!state.getValue(ServiceTrenchBlock.OPEN)) return InteractionResult.FAIL;
+            if (!(state.getBlock() instanceof ServiceTrenchCableBlock))
+                state = ServiceTrenchCableBlock.housing(state, ModBlocks.SERVICE_TRENCH_CABLE.get().defaultBlockState());
+            route = ServiceTrenchCableBlock.route(state);
+            if (!IndividualCablePlacement.valid(level, pos, state, color, route)) return reject(player, "overlap");
+        } else if (state.getBlock() instanceof IndividualCableBlock) {
             if (state.getValue(color.property) != CableRoute.NONE) return addSecondary(context, pos, route);
         } else {
             if (!state.canBeReplaced()) pos = pos.relative(context.getClickedFace());
@@ -75,9 +84,9 @@ public final class IndividualCableItem extends Item {
             if (!(state.getBlock() instanceof IndividualCableBlock)) state = ModBlocks.INDIVIDUAL_CONTROL_CABLE.get().defaultBlockState();
             if (state.getValue(color.property) != CableRoute.NONE) return addSecondary(context, pos, route);
         }
-        route = placementRoute(level, pos, state, route);
-        BlockState placed = state.setValue(color.property, route);
-        if (!IndividualCableGeometry.permits(placed) || level.getBlockEntity(pos) instanceof IndividualCableBlockEntity existing && !existing.clearOfOtherColors(color, route)) {
+        if (!trench) route = placementRoute(level, pos, state, route);
+        BlockState placed = trench ? ServiceTrenchCableBlock.withLane(state, color, true) : state.setValue(color.property, route);
+        if ((!trench && !IndividualCableGeometry.permits(placed)) || level.getBlockEntity(pos) instanceof IndividualCableBlockEntity existing && !existing.clearOfOtherColors(color, route)) {
             player.displayClientMessage(net.minecraft.network.chat.Component.translatable("create_industrial_details.cable.overlap"), true);
             return InteractionResult.FAIL;
         }
@@ -85,7 +94,7 @@ public final class IndividualCableItem extends Item {
                 || !level.isUnobstructed(placed, pos, CollisionContext.of(player))) return InteractionResult.FAIL;
         if (!level.isClientSide) {
             var snapshot = net.neoforged.neoforge.common.util.BlockSnapshot.create(level.dimension(), level, pos);
-            level.setBlockAndUpdate(pos, placed);
+            if (!level.setBlockAndUpdate(pos, placed)) return InteractionResult.FAIL;
             if (net.neoforged.neoforge.event.EventHooks.onBlockPlace(player, snapshot, context.getClickedFace())) {
                 snapshot.restore(3); return InteractionResult.FAIL;
             }
@@ -111,7 +120,7 @@ public final class IndividualCableItem extends Item {
     public static CableRoute pendingRoute(ItemStack stack, IndividualCableBlockEntity host) {
         int id = stack.getOrDefault(ModDataComponents.CABLE_FROM_ROUTE.get(), -1);
         var color = ((IndividualCableItem) stack.getItem()).color;
-        return id > 0 && id < CableRoute.values().length ? CableRoute.values()[id] : host.getBlockState().getValue(color.property);
+        return id > 0 && id < CableRoute.values().length ? CableRoute.values()[id] : host.primary(color);
     }
     private CableRoute placementRoute(Level level, BlockPos pos, BlockState state, CableRoute normal) {
         var continuation = IndividualCablePlacement.choose(level, pos, state, color, normal);
@@ -138,7 +147,7 @@ public final class IndividualCableItem extends Item {
         var from = stack.get(ModDataComponents.CABLE_FROM.get());
         if (from == null || !from.dimension().equals(level.dimension()) || !level.hasChunkAt(from.pos())) return null;
         int code = stack.getOrDefault(ModDataComponents.CABLE_FROM_ROUTE.get(), 0);
-        if (code == 0 && level.getBlockEntity(from.pos()) instanceof IndividualCableBlockEntity host) code = host.getBlockState().getValue(((IndividualCableItem) stack.getItem()).color.property).ordinal();
+        if (code == 0 && level.getBlockEntity(from.pos()) instanceof IndividualCableBlockEntity host) code = host.primary(((IndividualCableItem) stack.getItem()).color).ordinal();
         return CableEndpoint.selection(from.pos(), code);
     }
     private InteractionResult span(UseOnContext context) {

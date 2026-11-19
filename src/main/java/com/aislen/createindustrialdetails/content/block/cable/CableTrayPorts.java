@@ -32,7 +32,7 @@ public final class CableTrayPorts {
         var peer = pos.relative(side);
         if (!level.hasChunkAt(peer)) return false;
         var adjacent = level.getBlockState(peer);
-        if (adjacent.getBlock() instanceof IndividualCableBlock) return false;
+        if (com.aislen.createindustrialdetails.content.block.cable.individual.IndividualCableComponents.isHost(adjacent)) return false;
         if (CableConnections.canConnect(state, adjacent, side)) return false;
         return adjacent.getCollisionShape(level, peer).isEmpty();
     }

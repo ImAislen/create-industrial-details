@@ -23,6 +23,7 @@ public final class IndividualCableBends {
                 net.minecraft.world.phys.shapes.Shapes.or(own, theirs), net.minecraft.world.phys.shapes.BooleanOp.ONLY_FIRST).toAabbs();
     }
     public static List<Bend> find(LevelReader level, BlockPos pos, BlockState state) {
+        if (!(state.getBlock() instanceof IndividualCableBlock)) return List.of();
         var result = new ArrayList<Bend>();
         for (var offset : BlockPos.betweenClosed(-1, -1, -1, 1, 1, 1)) {
             if (offset.equals(BlockPos.ZERO)) continue;

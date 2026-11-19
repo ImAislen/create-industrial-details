@@ -27,8 +27,9 @@ public final class CableNetworkManager {
     private long key(BlockPos pos, IndividualCableColor color) {
         var node = new Node(pos.immutable(), color, null); var known = nodeIds.get(node);
         if (known != null) return known;
-        var chunk = loadedPosition(pos); var block = chunk == null ? null : chunk.getBlockState(pos).getBlock();
-        return block instanceof CableTrayBlock || block instanceof IndividualCableBlock || block instanceof ControlBoxBlock ? key(node) : 0;
+        var chunk = loadedPosition(pos); var state = chunk == null ? Blocks.AIR.defaultBlockState() : chunk.getBlockState(pos);
+        var block = state.getBlock();
+        return block instanceof CableTrayBlock || IndividualCableComponents.isHost(state) || block instanceof ControlBoxBlock ? key(node) : 0;
 
     }
     private long key(Node node) { return nodeIds.computeIfAbsent(node, n -> { long id = nextNode++; nodes.put(id, n); return id; }); }
@@ -37,8 +38,8 @@ public final class CableNetworkManager {
         if (node.span != null) return loadedPosition(node.span.to()) != null && node.span.start().exists(level, node.color)
                 && node.span.end().exists(level, node.color) && CableSpans.get(level).at(node.pos).contains(node.span);
         BlockState state = state(key);
-        return state.getBlock() instanceof CableTrayBlock || state.getBlock() instanceof IndividualCableBlock
-                && state.getValue(node.color.property) != CableRoute.NONE
+        return state.getBlock() instanceof CableTrayBlock || IndividualCableComponents.isHost(state)
+                && IndividualCableComponents.primary(state, node.color) != CableRoute.NONE
                 && loadedChunk(key).getBlockEntity(node.pos, LevelChunk.EntityCreationType.CHECK) != null;
     }
     static final int WORK_BUDGET = 2048;
@@ -167,11 +168,11 @@ public final class CableNetworkManager {
     public void topologyChanged(BlockPos pos, BlockState previous) {
         var colors = java.util.EnumSet.allOf(IndividualCableColor.class);
         var chunk = loadedPosition(pos); var current = chunk == null ? Blocks.AIR.defaultBlockState() : chunk.getBlockState(pos);
-        if (previous.getBlock() instanceof IndividualCableBlock && current.getBlock() instanceof IndividualCableBlock && !previous.equals(current))
-            colors.removeIf(color -> previous.getValue(color.property) == current.getValue(color.property));
+        if (IndividualCableComponents.isHost(previous) && IndividualCableComponents.isHost(current) && previous.getBlock() == current.getBlock() && !previous.equals(current))
+            colors.removeIf(color -> IndividualCableComponents.primary(previous, color) == IndividualCableComponents.primary(current, color));
         if (!(previous.getBlock() instanceof CableTrayBlock || previous.getBlock() instanceof ControlBoxBlock || current.getBlock() instanceof CableTrayBlock || current.getBlock() instanceof ControlBoxBlock))
-            colors.removeIf(color -> !(previous.getBlock() instanceof IndividualCableBlock && previous.getValue(color.property) != CableRoute.NONE)
-                    && !(current.getBlock() instanceof IndividualCableBlock && current.getValue(color.property) != CableRoute.NONE));
+            colors.removeIf(color -> !(IndividualCableComponents.isHost(previous) && IndividualCableComponents.primary(previous, color) != CableRoute.NONE)
+                    && !(IndividualCableComponents.isHost(current) && IndividualCableComponents.primary(current, color) != CableRoute.NONE));
         topologyChanged(pos, colors);
     }
     public void topologyChanged(BlockPos pos, BlockState previous, IndividualCableColor color) { topologyChanged(pos, java.util.List.of(color)); }
@@ -425,7 +426,7 @@ public final class CableNetworkManager {
             if (node.span != null) { endpoint(node.span.start()); endpoint(node.span.end()); return; }
             BlockState tray = state(key);
             if (tray.getBlock() instanceof CableTrayBlock) network.hasTray = true;
-            if (tray.getBlock() instanceof IndividualCableBlock) {
+            if (IndividualCableComponents.isHost(tray)) {
                 for (var link : IndividualCableTopology.links(level, pos, node.color))
                     if (!link.span()) add(CableNetworkManager.this.key(link.peer(), node.color));
                 for (var route : IndividualCableComponents.routes(level, pos, tray, node.color))
@@ -438,7 +439,7 @@ public final class CableNetworkManager {
                 BlockPos neighbor = pos.relative(direction);
                 long next = CableNetworkManager.this.key(neighbor, node.color);
                 BlockState adjacent = state(next);
-                if (adjacent.getBlock() instanceof IndividualCableBlock)
+                if (IndividualCableComponents.isHost(adjacent))
                     for (var route : IndividualCableComponents.routes(level, neighbor, adjacent, node.color))
                         if (CablePhysicalConnections.contacts(level, neighbor, adjacent, node.color, route).stream().anyMatch(c -> c.peer().equals(pos))) add(next);
                 if (!CableConnections.canConnect(tray, adjacent, direction)) continue;
@@ -474,9 +475,9 @@ public final class CableNetworkManager {
                 return true;
             }
             LevelChunkSection current = sections[section];
-            if (cell == 0 && !current.maybeHas(state -> state.getBlock() instanceof CableTrayBlock || state.getBlock() instanceof IndividualCableBlock)) { section++; return false; }
+            if (cell == 0 && !current.maybeHas(state -> state.getBlock() instanceof CableTrayBlock || IndividualCableComponents.isHost(state))) { section++; return false; }
             int x = cell & 15, z = cell >> 4 & 15, y = cell >> 8;
-            if (current.getBlockState(x, y, z).getBlock() instanceof CableTrayBlock || current.getBlockState(x, y, z).getBlock() instanceof IndividualCableBlock) {
+            if (current.getBlockState(x, y, z).getBlock() instanceof CableTrayBlock || IndividualCableComponents.isHost(current.getBlockState(x, y, z))) {
                 BlockPos pos = new BlockPos(chunk.getPos().getMinBlockX() + x, chunk.getMinBuildHeight() + section * 16 + y, chunk.getPos().getMinBlockZ() + z);
                 CableSpans.get(level).validate(pos);
                 CableSpans.get(level).validate(pos);

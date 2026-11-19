@@ -84,12 +84,12 @@ public final class CableSpans extends SavedData {
     public static IndividualCableBlockEntity endpoint(ServerLevel level, BlockPos pos, IndividualCableColor color) {
         var chunk = level.getChunkSource().getChunkNow(pos.getX() >> 4, pos.getZ() >> 4);
         if (chunk == null || !(chunk.getBlockEntity(pos, net.minecraft.world.level.chunk.LevelChunk.EntityCreationType.CHECK) instanceof IndividualCableBlockEntity cable)) return null;
-        return cable.getBlockState().getValue(color.property) == CableRoute.NONE ? null : cable;
+        return cable.primary(color) == CableRoute.NONE ? null : cable;
     }
     public boolean connect(IndividualCableColor color, BlockPos a, BlockPos b, int paid) {
         var first = endpoint(level, a, color); var second = endpoint(level, b, color);
         if (first == null || second == null) return false;
-        return connect(color, a, b, first.getBlockState().getValue(color.property), second.getBlockState().getValue(color.property), paid);
+        return connect(color, a, b, first.primary(color), second.primary(color), paid);
     }
     public boolean connect(IndividualCableColor color, BlockPos a, BlockPos b, CableRoute aRoute, CableRoute bRoute, int paid) {
         return connect(color, new CableEndpoint(a, aRoute, 0), new CableEndpoint(b, bRoute, 0), paid);
@@ -148,7 +148,7 @@ public final class CableSpans extends SavedData {
             var chunk = level.getChunkSource().getChunkNow(end.pos().getX() >> 4, end.pos().getZ() >> 4);
             if (chunk == null) continue;
             if (end.isTray() && !level.hasChunkAt(end.pos().relative(com.aislen.createindustrialdetails.content.block.cable.CableTrayPorts.side(end.port())))) continue;
-            if (!end.isPort() && chunk.getBlockState(end.pos()).getBlock() instanceof IndividualCableBlock
+            if (!end.isPort() && IndividualCableComponents.isHost(chunk.getBlockState(end.pos()))
                     && chunk.getBlockEntity(end.pos(), net.minecraft.world.level.chunk.LevelChunk.EntityCreationType.CHECK) == null) continue;
             if (!end.exists(level, span.color)) {
                 if (remove(span)) IndividualCableBlock.drop(level, pos, span.color, span.cost); break;

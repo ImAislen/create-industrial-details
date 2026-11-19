@@ -1,5 +1,6 @@
 package com.aislen.createindustrialdetails.content.block.cable;
 
+import com.aislen.createindustrialdetails.content.block.industrialsteel.trench.ServiceTrenchCableBlock;
 import com.aislen.createindustrialdetails.content.block.cable.individual.*;
 import net.minecraft.core.*;
 import net.minecraft.world.level.LevelReader;
@@ -25,6 +26,7 @@ public final class CablePhysicalConnections {
     }
     public static List<Contact> contacts(LevelReader level, BlockPos pos, BlockState state, IndividualCableColor color, CableRoute route) {
         var result = new ArrayList<Contact>();
+        boolean housed = state.getBlock() instanceof ServiceTrenchCableBlock;
         for (var side : Direction.values()) {
             if (side.getAxis() != route.axis()) continue;
             var peer = pos.relative(side); if (!level.hasChunkAt(peer)) continue;
@@ -35,11 +37,13 @@ public final class CablePhysicalConnections {
                 int port = ControlBoxPorts.encode(fromBox, other.getValue(ControlBoxBlock.FACING));
                 var cable = IndividualCableGeometry.end(pos, color, route, side.getAxisDirection() == Direction.AxisDirection.POSITIVE ? 1 : 0);
                 var point = ControlBoxPorts.point(peer, port, color);
-                if (compatible(cable, point, route)) result.add(new Contact(peer, cable, point, port));
+                if (housed) cable = cable.add(CableConnectionGeometry.offset(route));
+                if (housed ? cable.distanceToSqr(point) < 1e-10 : compatible(cable, point, route)) result.add(new Contact(peer, cable, point, port));
             } else if (other.getBlock() instanceof CableTrayBlock && other.getValue(CableTrayBlock.AXIS) == side.getAxis()) {
                 var cable = IndividualCableGeometry.end(pos, color, route, side.getAxisDirection() == Direction.AxisDirection.POSITIVE ? 1 : 0);
                 var point = trayEnd(peer, other, color, side.getOpposite());
-                if (compatible(cable, point, route))
+                if (housed) cable = cable.add(CableConnectionGeometry.offset(route));
+                if (housed ? cable.distanceToSqr(point) < 1e-10 : compatible(cable, point, route))
                     result.add(new Contact(peer, cable, point, 0));
             }
         }

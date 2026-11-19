@@ -147,7 +147,7 @@ public final class IndividualCableRenderer implements BlockEntityRenderer<Indivi
         var original = CableConnectionGeometry.part(level, pos, color, route).bounds();
         var shape = net.minecraft.world.phys.shapes.Shapes.create(original);
         if (host.secondary(color) == route) shape = net.minecraft.world.phys.shapes.Shapes.join(shape,
-                CableConnectionGeometry.part(level, pos, color, host.getBlockState().getValue(color.property)), net.minecraft.world.phys.shapes.BooleanOp.ONLY_FIRST);
+                CableConnectionGeometry.part(level, pos, color, host.primary(color)), net.minecraft.world.phys.shapes.BooleanOp.ONLY_FIRST);
         var result = new ArrayList<BakedQuad>();
         if (host.secondary(color) != route) result.addAll(source);
         else for (var box : shape.toAabbs()) result.addAll(CableCuboidQuads.crop(source, original, box));

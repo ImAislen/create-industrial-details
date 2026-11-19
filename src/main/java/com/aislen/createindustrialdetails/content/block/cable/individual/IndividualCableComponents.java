@@ -1,5 +1,6 @@
 package com.aislen.createindustrialdetails.content.block.cable.individual;
 
+import com.aislen.createindustrialdetails.content.block.industrialsteel.trench.ServiceTrenchCableBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.state.BlockState;
@@ -9,9 +10,19 @@ import java.util.List;
 public final class IndividualCableComponents {
     private IndividualCableComponents() {}
     public record Component(IndividualCableColor color, CableRoute route) {}
+    public static boolean isHost(BlockState state) {
+        return state.getBlock() instanceof IndividualCableBlock || state.getBlock() instanceof ServiceTrenchCableBlock;
+    }
+
+    public static CableRoute primary(BlockState state, IndividualCableColor color) {
+        if (state.getBlock() instanceof ServiceTrenchCableBlock) return ServiceTrenchCableBlock.lane(state, color);
+        return state.hasProperty(color.property) ? state.getValue(color.property) : CableRoute.NONE;
+    }
+
     public static List<CableRoute> routes(BlockGetter level, BlockPos pos, BlockState state, IndividualCableColor color) {
         if (level.getBlockEntity(pos) instanceof IndividualCableBlockEntity host) return host.routes(color);
-        return state.getValue(color.property) == CableRoute.NONE ? List.of() : List.of(state.getValue(color.property));
+        var route = primary(state, color);
+        return route == CableRoute.NONE ? List.of() : List.of(route);
     }
     public static boolean validPair(IndividualCableColor color, CableRoute a, CableRoute b) {
         if (a == CableRoute.NONE || b == CableRoute.NONE || a.vertical() == b.vertical()) return false;
@@ -32,7 +43,7 @@ public final class IndividualCableComponents {
         return result;
     }
     public static CableRoute selectedRoute(IndividualCableBlockEntity host, IndividualCableColor color, Vec3 from, Vec3 to) {
-        CableRoute result = host.getBlockState().getValue(color.property); double nearest = Double.POSITIVE_INFINITY;
+        CableRoute result = host.primary(color); double nearest = Double.POSITIVE_INFINITY;
         for (var route : host.routes(color)) {
             var hit = CableConnectionGeometry.shape(host.getLevel(), host.getBlockPos(), color, route).clip(from, to, host.getBlockPos());
             if (hit != null && hit.getLocation().distanceToSqr(from) < nearest) { nearest = hit.getLocation().distanceToSqr(from); result = route; }

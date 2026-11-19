@@ -69,7 +69,7 @@ public final class ModBlockEntities {
 
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<IndividualCableBlockEntity>> INDIVIDUAL_CONTROL_CABLE =
             BLOCK_ENTITY_TYPES.register("individual_control_cable", () -> BlockEntityType.Builder.of(
-                    IndividualCableBlockEntity::new, ModBlocks.INDIVIDUAL_CONTROL_CABLE.get()).build(null));
+                    IndividualCableBlockEntity::new, ModBlocks.INDIVIDUAL_CONTROL_CABLE.get(), ModBlocks.SERVICE_TRENCH_CABLE.get()).build(null));
 
     private ModBlockEntities() {
     }

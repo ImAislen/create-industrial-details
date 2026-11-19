@@ -1,5 +1,6 @@
 package com.aislen.createindustrialdetails.content.block.cable.individual;
 
+import com.aislen.createindustrialdetails.content.block.industrialsteel.trench.ServiceTrenchCableBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.state.BlockState;
@@ -8,6 +9,8 @@ public final class IndividualCablePlacement {
     private IndividualCablePlacement() {}
     public static boolean valid(LevelReader level, BlockPos pos, BlockState state, IndividualCableColor color, CableRoute route) {
         var host = level.getBlockEntity(pos) instanceof IndividualCableBlockEntity cable ? cable : null;
+        if (state.getBlock() instanceof ServiceTrenchCableBlock)
+            return route == ServiceTrenchCableBlock.route(state) && ServiceTrenchCableBlock.lane(state, color) == CableRoute.NONE;
         if (state.getValue(color.property) != CableRoute.NONE) return host != null && host.canAdd(color, route);
         return IndividualCableGeometry.permits(state.setValue(color.property, route)) && (host == null || host.clearOfOtherColors(color, route));
     }
@@ -39,10 +42,11 @@ public final class IndividualCablePlacement {
         for (var offset : BlockPos.betweenClosed(-1, -1, -1, 1, 1, 1)) {
             if (offset.equals(BlockPos.ZERO)) continue;
             var peer = pos.offset(offset); if (!level.hasChunkAt(peer)) continue;
-            var other = level.getBlockState(peer); if (!(other.getBlock() instanceof IndividualCableBlock)) continue;
+            var other = level.getBlockState(peer); if (!IndividualCableComponents.isHost(other)) continue;
             for (var route : IndividualCableComponents.routes(level, peer, other, color)) {
                 boolean straight = candidate.axis() == route.axis();
-                if (!straight && candidate.vertical() == route.vertical()) continue;
+                if (!straight && (other.getBlock() instanceof ServiceTrenchCableBlock
+                        || candidate.vertical() == route.vertical())) continue;
                 double limit = straight ? 1e-10 : .01;
                 boolean joins = false;
                 for (int a = 0; a < 2; a++) for (int b = 0; b < 2; b++)

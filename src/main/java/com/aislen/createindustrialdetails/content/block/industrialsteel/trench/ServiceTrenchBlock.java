@@ -30,7 +30,7 @@ public class ServiceTrenchBlock extends HorizontalDirectionalBlock implements Si
     }
 
     @Override
-    protected com.mojang.serialization.MapCodec<ServiceTrenchBlock> codec() {
+    protected com.mojang.serialization.MapCodec<? extends ServiceTrenchBlock> codec() {
         return simpleCodec(ServiceTrenchBlock::new);
     }
 

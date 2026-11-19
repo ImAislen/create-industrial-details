@@ -86,6 +86,9 @@ public final class ModBlocks {
     public static final DeferredBlock<ServiceTrenchGlassPipeBlock> SERVICE_TRENCH_GLASS_PIPE =
             BLOCKS.register("service_trench_glass_pipe", () -> new ServiceTrenchGlassPipeBlock(serviceTrenchProperties()));
 
+    public static final DeferredBlock<ServiceTrenchCableBlock> SERVICE_TRENCH_CABLE =
+            BLOCKS.register("service_trench_cable", () -> new ServiceTrenchCableBlock(serviceTrenchProperties()));
+
     private static BlockBehaviour.Properties serviceTrenchProperties() {
         return BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_GRAY).strength(3.0F, 6.0F)
                 .requiresCorrectToolForDrops().sound(SoundType.NETHERITE_BLOCK).noOcclusion();

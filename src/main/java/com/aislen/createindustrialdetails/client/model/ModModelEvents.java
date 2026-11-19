@@ -138,11 +138,17 @@ public final class ModModelEvents {
 
         var trenchModels = new java.util.IdentityHashMap<BakedModel, BakedModel>();
         for (var trench : java.util.List.of(ModBlocks.SERVICE_TRENCH, ModBlocks.SERVICE_TRENCH_PIPE,
-                ModBlocks.SERVICE_TRENCH_GLASS_PIPE, ModBlocks.SERVICE_TRENCH_SHAFT)) {
+                ModBlocks.SERVICE_TRENCH_GLASS_PIPE, ModBlocks.SERVICE_TRENCH_SHAFT, ModBlocks.SERVICE_TRENCH_CABLE)) {
             for (BlockState state : trench.get().getStateDefinition().getPossibleStates()) {
                 models.computeIfPresent(BlockModelShaper.stateToModelLocation(state),
                         (key, original) -> trenchModels.computeIfAbsent(original, model -> new ServiceTrenchCasingModel(model, TRENCH_CT)));
             }
+        }
+
+        var cableTrenchModels = new java.util.IdentityHashMap<BakedModel, BakedModel>();
+        for (BlockState state : ModBlocks.SERVICE_TRENCH_CABLE.get().getStateDefinition().getPossibleStates()) {
+            models.computeIfPresent(BlockModelShaper.stateToModelLocation(state),
+                    (key, original) -> cableTrenchModels.computeIfAbsent(original, IndividualCableConnectionModel::new));
         }
 
         var glassTrenchModels = new java.util.IdentityHashMap<BakedModel, BakedModel>();

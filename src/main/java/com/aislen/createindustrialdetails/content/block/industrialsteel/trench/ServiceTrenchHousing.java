@@ -29,7 +29,7 @@ final class ServiceTrenchHousing {
     }
 
     static BlockState defaults(BlockState state) {
-        boolean empty = state.getBlock() instanceof ServiceTrenchBlock;
+        boolean empty = state.getBlock() instanceof ServiceTrenchBlock && !(state.getBlock() instanceof ServiceTrenchCableBlock);
         return state.setValue(OPEN, false).setValue(CAP_NEGATIVE, empty).setValue(CAP_POSITIVE, empty);
     }
 
@@ -47,7 +47,7 @@ final class ServiceTrenchHousing {
     }
 
     static BlockState withCaps(BlockState state, LevelAccessor level, BlockPos pos) {
-        if (!(state.getBlock() instanceof ServiceTrenchBlock)) return withoutCaps(state);
+        if (!state.is(ModBlocks.SERVICE_TRENCH.get())) return withoutCaps(state);
         Direction negative = Direction.get(Direction.AxisDirection.NEGATIVE, state.getValue(FACING).getAxis());
         return withEnd(withEnd(state, level, pos, negative), level, pos, negative.getOpposite());
     }
@@ -58,7 +58,7 @@ final class ServiceTrenchHousing {
     }
 
     static BlockState updateEnd(BlockState state, Direction side, BlockState neighbor) {
-        if (!(state.getBlock() instanceof ServiceTrenchBlock)) return withoutCaps(state);
+        if (!state.is(ModBlocks.SERVICE_TRENCH.get())) return withoutCaps(state);
         if (side.getAxis() != state.getValue(FACING).getAxis()) return state;
         boolean continuation = isTrench(neighbor) && neighbor.getValue(FACING).getAxis() == side.getAxis();
         return state.setValue(side.getAxisDirection() == Direction.AxisDirection.NEGATIVE ? CAP_NEGATIVE : CAP_POSITIVE,
