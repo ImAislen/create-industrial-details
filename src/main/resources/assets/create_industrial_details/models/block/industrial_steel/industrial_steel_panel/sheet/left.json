@@ -1,0 +1,23 @@
+{
+  "parent": "create_industrial_details:block/industrial_steel/industrial_steel_panel/industrial_steel_panel",
+  "elements": [
+    {
+      "name": "Center Panel",
+      "from": [2, 2, 15],
+      "to": [14, 14, 16],
+      "faces": {
+        "north": {"uv": [0.0, 12.0, 2.75, 15.0], "texture": "#0"},
+        "south": {"uv": [3.5, 12.0, 6.25, 15.0], "texture": "#0"}
+      }
+    },
+    {
+      "name": "Flat Left Fill",
+      "from": [0, 2, 15],
+      "to": [2, 14, 16],
+      "faces": {
+        "north": {"uv": [2.75, 12.0, 2.25, 15.0], "texture": "#0"},
+        "south": {"uv": [4.0, 12.0, 3.5, 15.0], "texture": "#0"}
+      }
+    }
+  ]
+}

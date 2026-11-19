@@ -1,0 +1,41 @@
+{
+  "parent": "create_industrial_details:block/industrial_steel/industrial_steel_panel/industrial_steel_panel",
+  "elements": [
+    {
+      "name": "Center Panel",
+      "from": [2, 2, 15],
+      "to": [14, 14, 16],
+      "faces": {
+        "north": {"uv": [0.25, 12.0, 2.75, 14.75], "texture": "#0"},
+        "south": {"uv": [3.5, 12.0, 6.0, 14.75], "texture": "#0"}
+      }
+    },
+    {
+      "name": "Flat Right Fill",
+      "from": [14, 2, 15],
+      "to": [16, 14, 16],
+      "faces": {
+        "north": {"uv": [0.75, 12.0, 0.25, 14.75], "texture": "#0"},
+        "south": {"uv": [6.0, 12.0, 5.5, 14.75], "texture": "#0"}
+      }
+    },
+    {
+      "name": "Flat Bottom Fill",
+      "from": [2, 0, 15],
+      "to": [14, 2, 16],
+      "faces": {
+        "north": {"uv": [0.25, 14.75, 2.75, 14.25], "texture": "#0"},
+        "south": {"uv": [3.5, 14.75, 6.0, 14.25], "texture": "#0"}
+      }
+    },
+    {
+      "name": "Flat Left Fill",
+      "from": [0, 2, 15],
+      "to": [2, 14, 16],
+      "faces": {
+        "north": {"uv": [2.75, 12.0, 2.25, 14.75], "texture": "#0"},
+        "south": {"uv": [4.0, 12.0, 3.5, 14.75], "texture": "#0"}
+      }
+    }
+  ]
+}
