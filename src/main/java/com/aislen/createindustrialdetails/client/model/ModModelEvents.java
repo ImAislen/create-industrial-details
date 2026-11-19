@@ -8,6 +8,7 @@ import com.aislen.createindustrialdetails.content.block.industrialsteel.beam.Ind
 import com.aislen.createindustrialdetails.content.block.woodenbeam.WoodenBeamMaterial;
 import com.aislen.createindustrialdetails.registry.ModBlocks;
 import com.simibubi.create.content.decoration.girder.GirderBlock;
+import com.simibubi.create.foundation.block.connected.CTModel;
 
 import net.minecraft.client.renderer.block.BlockModelShaper;
 import net.minecraft.client.resources.model.BakedModel;
@@ -27,6 +28,7 @@ import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
 )
 public final class ModModelEvents {
     private static final PlatedIndustrialSteelCTBehaviour PLATED_STEEL_CT = new PlatedIndustrialSteelCTBehaviour();
+    private static final ServiceTrenchCTBehaviour TRENCH_CT = new ServiceTrenchCTBehaviour();
     private static final AirDuctCasingCTBehaviour AIR_DUCT_CT = new AirDuctCasingCTBehaviour(
             com.simibubi.create.CreateClient.CASING_CONNECTIVITY);
 
@@ -134,6 +136,15 @@ public final class ModModelEvents {
                     (key, original) -> new CopycatDiagonalByteModel(original));
         }
 
+        var trenchModels = new java.util.IdentityHashMap<BakedModel, BakedModel>();
+        for (var trench : java.util.List.of(ModBlocks.SERVICE_TRENCH, ModBlocks.SERVICE_TRENCH_PIPE,
+                ModBlocks.SERVICE_TRENCH_GLASS_PIPE, ModBlocks.SERVICE_TRENCH_SHAFT)) {
+            for (BlockState state : trench.get().getStateDefinition().getPossibleStates()) {
+                models.computeIfPresent(BlockModelShaper.stateToModelLocation(state),
+                        (key, original) -> trenchModels.computeIfAbsent(original, model -> new ServiceTrenchCasingModel(model, TRENCH_CT)));
+            }
+        }
+
         var glassTrenchModels = new java.util.IdentityHashMap<BakedModel, BakedModel>();
         for (BlockState state : ModBlocks.SERVICE_TRENCH_GLASS_PIPE.get().getStateDefinition().getPossibleStates()) {
             models.computeIfPresent(BlockModelShaper.stateToModelLocation(state),
@@ -149,7 +160,7 @@ public final class ModModelEvents {
 
         var platedState = ModBlocks.BLOCK_OF_PLATED_INDUSTRIAL_STEEL.get().defaultBlockState();
         models.computeIfPresent(BlockModelShaper.stateToModelLocation(platedState),
-                (key, original) -> new com.simibubi.create.foundation.block.connected.CTModel(
+                (key, original) -> new CTModel(
                         original, PLATED_STEEL_CT));
 
         for (BlockState state : ModBlocks.AIR_DUCT.get().getStateDefinition().getPossibleStates()) {

@@ -28,6 +28,7 @@ public class CopycatDiagonalByteModelChecks {
                 for (boolean rotatedUV : new boolean[]{false, true})
                     checkFace(face, atlas ? .375f : 0, atlas ? .25f : 0, atlas ? .125f : 1, rotatedUV);
         checkFallback();
+        checkTrenchInteriorLighting();
         System.out.println("Copycat Diagonal Byte: six-face coverage, original texture borders, CT atlas UVs, normals, metadata and empty-layer fallback checks passed.");
     }
 
@@ -101,6 +102,98 @@ public class CopycatDiagonalByteModelChecks {
             uvCorners.add((minU > .5 ? 1 : 0) | (minV > .5 ? 2 : 0));
         }
         require(uvCorners.size() == 4 && geometryCorners.size() == 4, "All four texture corners completely cover the face");
+    }
+
+    private static void checkTrenchInteriorLighting() {
+        for (Direction normal : Direction.Plane.HORIZONTAL) {
+            BakedQuad source = sourceQuad(normal, .25F, .25F, .25F, false);
+            Direction.Axis across = normal.getAxis();
+            Direction.Axis along = across == Direction.Axis.X ? Direction.Axis.Z : Direction.Axis.X;
+            boolean positive = normal.getAxisDirection() == Direction.AxisDirection.POSITIVE;
+            int[] vertices = source.getVertices();
+            for (int plane : new int[]{0, 1, 3, 13, 15, 16}) {
+                for (int vertex = 0; vertex < 4; vertex++)
+                    vertices[vertex * BakedQuadHelper.VERTEX_STRIDE + across.ordinal()] =
+                            Float.floatToIntBits(plane / 16F);
+                boolean interior = positive ? plane == 1 || plane == 3 : plane == 13 || plane == 15;
+                require(ServiceTrenchCasingModel.isInteriorWall(source, along) == interior
+                                && !ServiceTrenchCasingModel.isInteriorWall(source, across),
+                        "Only inward wall and rail faces are selected on either trench axis");
+            }
+            int light = 0x00600020;
+            BakedQuad lit = ServiceTrenchCasingModel.lightInteriorQuad(source, light);
+            require(!lit.hasAmbientOcclusion() && lit.isShade() == source.isShade()
+                            && lit.getSprite() == source.getSprite() && source.hasAmbientOcclusion(),
+                    "Trench interior keeps directional shading and its sprite while applying flat lighting");
+            for (int i = 0; i < vertices.length; i++) {
+                int offset = i % BakedQuadHelper.VERTEX_STRIDE;
+                require(lit.getVertices()[i] == (offset == BakedQuadHelper.LIGHT_OFFSET ? light : vertices[i]),
+                        "Interior lighting preserves geometry, CT UVs and other vertex data");
+            }
+        }
+        for (Direction normal : new Direction[]{Direction.UP, Direction.DOWN}) {
+            BakedQuad source = sourceQuad(normal, .25F, .25F, .25F, false);
+            for (float height : new float[]{0, 1 / 16f, 15 / 16f, 1}) {
+                for (int vertex = 0; vertex < 4; vertex++)
+                    source.getVertices()[vertex * BakedQuadHelper.VERTEX_STRIDE + Direction.Axis.Y.ordinal()] =
+                            Float.floatToIntBits(height);
+                require(ServiceTrenchCasingModel.isInteriorFloor(source) == (normal == Direction.UP && height == 1 / 16f),
+                        "Only the floor's upper face bypasses smooth lighting");
+            }
+            BakedQuad lit = ServiceTrenchCasingModel.lightInteriorQuad(source, 0);
+            require(!lit.hasAmbientOcclusion() && lit.isShade() == source.isShade()
+                            && Arrays.equals(lit.getVertices(), source.getVertices()),
+                    "A flat-lit floor keeps the world light sample and connected UVs");
+        }
+        for (String texture : List.of("block/pipes", "block/pipes_connected", "block/glass_fluid_pipe", "block/shaft")) {
+            var sprite = net.minecraft.resources.ResourceLocation.fromNamespaceAndPath("create", texture);
+            require(!ServiceTrenchCasingModel.usesFlatPipeLighting(false, sprite),
+                    "Closing the grille preserves the original pipe lighting");
+            require(ServiceTrenchCasingModel.usesFlatPipeLighting(true, sprite) == !texture.equals("block/shaft"),
+                    "Only exposed copper and glass pipe sprites opt into flat lighting");
+        }
+        checkStraightTrenchPipePartials();
+        System.out.println("Service Trench: casing and open pipe lighting flags passed.");
+    }
+
+    private static void checkStraightTrenchPipePartials() {
+        for (Direction move : new Direction[]{Direction.EAST, Direction.SOUTH}) {
+            var center = createPipeModel(move == Direction.EAST ? "lr_y" : "ud_y");
+            String inheritedCore = center.get("parent").getAsString().substring("create:block/fluid_pipe/".length());
+            var core = createPipeModel(inheritedCore);
+            var arms = List.of(createPipeModel("connection/" + move.getOpposite().getName()),
+                    createPipeModel("connection/" + move.getName()));
+            int axis = move.getAxis().ordinal();
+            checkPipeTopPartial(core, center, axis, 4, 12);
+            checkPipeTopPartial(arms.getFirst(), arms.getFirst(), axis, 0, 4);
+            checkPipeTopPartial(arms.getLast(), arms.getLast(), axis, 12, 16);
+        }
+    }
+
+    private static void checkPipeTopPartial(com.google.gson.JsonObject material, com.google.gson.JsonObject model,
+                                            int axis, int from, int to) {
+        var element = model.getAsJsonArray("elements").get(0).getAsJsonObject();
+        require(element.getAsJsonArray("from").get(axis).getAsInt() == from
+                        && element.getAsJsonArray("to").get(axis).getAsInt() == to
+                        && element.getAsJsonObject("faces").has("up"),
+                "Create's straight pipe top is split into two quarter-length arms and a half-length center");
+        String texture = element.getAsJsonObject("faces").getAsJsonObject("up").get("texture").getAsString();
+        var sprite = net.minecraft.resources.ResourceLocation.parse(
+                material.getAsJsonObject("textures").get(texture.substring(1)).getAsString());
+        require(ServiceTrenchCasingModel.usesFlatPipeLighting(true, sprite)
+                        && !ServiceTrenchCasingModel.usesFlatPipeLighting(false, sprite),
+                "Core and arms must use the same lighting mode for each grille state: " + sprite);
+    }
+
+    private static com.google.gson.JsonObject createPipeModel(String path) {
+        try (var stream = CopycatDiagonalByteModelChecks.class.getResourceAsStream(
+                "/assets/create/models/block/fluid_pipe/" + path + ".json")) {
+            if (stream == null) throw new AssertionError("Missing Create pipe model " + path);
+            return com.google.gson.JsonParser.parseReader(new java.io.InputStreamReader(
+                    stream, java.nio.charset.StandardCharsets.UTF_8)).getAsJsonObject();
+        } catch (java.io.IOException exception) {
+            throw new AssertionError("Could not read Create pipe model " + path, exception);
+        }
     }
 
     private static void checkFallback() {
