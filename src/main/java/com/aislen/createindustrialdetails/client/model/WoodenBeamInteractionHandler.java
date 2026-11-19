@@ -4,9 +4,8 @@ import com.aislen.createindustrialdetails.CreateIndustrialDetails;
 import com.aislen.createindustrialdetails.content.block.woodenbeam.WoodenBeamBlock;
 import com.aislen.createindustrialdetails.content.block.woodenbeam.WoodenBeamBlockEntity;
 import com.aislen.createindustrialdetails.content.block.woodenbeam.WoodenBeamConnectionEndpoints;
-import com.aislen.createindustrialdetails.content.block.woodenbeam.WoodenBeamEndpoints;
+import com.aislen.createindustrialdetails.content.block.woodenbeam.WoodenBeamGeometry;
 import com.cake.struts.content.connection.GirderConnectionNode;
-import com.cake.struts.content.shape.DefaultStrutConnectionShape;
 import com.cake.struts.content.shape.StrutConnectionShape;
 import com.cake.struts.content.shape.StrutInteractionHandler;
 import com.cake.struts.content.structure.ConnectionKey;
@@ -51,30 +50,11 @@ public final class WoodenBeamInteractionHandler {
         BlockPos pos = beam.getBlockPos();
         shapes.keySet().removeIf(key -> key.a().equals(pos) || key.b().equals(pos));
 
-        double halfWidth = beam.getModelType().shapeSizeXPixels() / 32.0;
-        double halfHeight = beam.getModelType().shapeSizeYPixels() / 32.0;
         for (GirderConnectionNode connection : beam.getConnectionsCopy()) {
             BlockPos peer = connection.absoluteFrom(pos);
             WoodenBeamConnectionEndpoints endpoints = beam.getEndpoints(connection);
-            WoodenBeamEndpoints.GeometrySpan geometrySpan = WoodenBeamEndpoints.geometrySpan(
-                    level,
-                    pos,
-                    endpoints.localFace(),
-                    endpoints.localSnap(),
-                    peer,
-                    endpoints.peerFace(),
-                    endpoints.peerSnap()
-            );
-            shapes.put(new ConnectionKey(pos, peer), new DefaultStrutConnectionShape(
-                    geometrySpan.from(),
-                    geometrySpan.to(),
-                    halfWidth,
-                    halfHeight,
-                    pos,
-                    endpoints.localFace(),
-                    peer,
-                    endpoints.peerFace()
-            ));
+            shapes.put(new ConnectionKey(pos, peer),
+                    new WoodenBeamSelectionShape(new WoodenBeamGeometry(level, pos, peer, endpoints)));
         }
     }
 

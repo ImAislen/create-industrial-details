@@ -158,6 +158,7 @@ tasks.named('test', Test).configure {
     exclude '**/*GameTests*.class'
     exclude '**/CopycatDiagonalByteModelChecks*.class'
     exclude '**/IndividualCableModelChecks*.class'
+    exclude '**/WoodenBeamModelChecks*.class'
 }
 
 tasks.register('verifyCopycatGeometry', JavaExec) {
@@ -167,8 +168,16 @@ tasks.register('verifyCopycatGeometry', JavaExec) {
     workingDir = layout.buildDirectory.get().asFile
 }
 
+tasks.register('verifyWoodenBeamGeometry', JavaExec) {
+    dependsOn tasks.named('testClasses')
+    classpath = sourceSets.test.runtimeClasspath
+    mainClass = 'com.aislen.createindustrialdetails.client.model.WoodenBeamModelChecks'
+    workingDir = layout.buildDirectory.get().asFile
+}
+
 tasks.named('check').configure {
     dependsOn tasks.named('verifyCopycatGeometry')
+    dependsOn tasks.named('verifyWoodenBeamGeometry')
 }
 
 tasks.withType(JavaCompile).configureEach {

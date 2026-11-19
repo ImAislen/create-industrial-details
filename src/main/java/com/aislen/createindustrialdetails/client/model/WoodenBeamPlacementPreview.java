@@ -2,12 +2,14 @@ package com.aislen.createindustrialdetails.client.model;
 
 import com.aislen.createindustrialdetails.CreateIndustrialDetails;
 import com.aislen.createindustrialdetails.content.block.woodenbeam.WoodenBeamBlockItem;
+import com.aislen.createindustrialdetails.content.block.woodenbeam.WoodenBeamBlockItem.EndpointSelection;
+import com.aislen.createindustrialdetails.content.block.woodenbeam.WoodenBeamConnectionEndpoints;
 import com.aislen.createindustrialdetails.content.block.woodenbeam.WoodenBeamEndpoints;
+import com.aislen.createindustrialdetails.content.block.woodenbeam.WoodenBeamGeometry;
 import com.aislen.createindustrialdetails.content.block.woodenbeam.WoodenBeamSnapPoint;
 import com.aislen.createindustrialdetails.registry.ModDataComponents;
 import com.cake.struts.content.StrutPreviewRenderTransforms;
 import com.cake.struts.content.block.StrutBlock;
-import com.cake.struts.content.shape.DefaultStrutConnectionShape;
 import com.cake.struts.content.shape.StrutConnectionShape;
 import com.cake.struts.internal.microliner.Microliner;
 import com.cake.struts.internal.microliner.MicrolinerCoordinateTransform;
@@ -22,6 +24,7 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
@@ -45,6 +48,8 @@ public final class WoodenBeamPlacementPreview {
             new MicrolinerParams(1 / 16f, .85f, .35f, .55f, .7f, 2);
     private static final int VALID_COLOR = packColor(.35f, .85f, .55f);
     private static final int INVALID_COLOR = packColor(.85f, .35f, .55f);
+    private static PreviewEndpoints cachedEndpoints;
+    private static StrutConnectionShape cachedShape;
 
     private WoodenBeamPlacementPreview() {
     }
@@ -108,34 +113,20 @@ public final class WoodenBeamPlacementPreview {
                 fromFace,
                 fromSnapId == null ? WoodenBeamSnapPoint.CENTER : WoodenBeamSnapPoint.byId(fromSnapId)
         );
-        WoodenBeamEndpoints.GeometrySpan geometrySpan = WoodenBeamEndpoints.geometrySpan(
-                level,
-                from.anchorPos(),
-                from.supportFace(),
-                from.snap(),
-                to.anchorPos(),
-                to.supportFace(),
-                to.snap()
-        );
-        Vec3 fromPoint = geometrySpan.from();
-        Vec3 toPoint = geometrySpan.to();
-        if (fromPoint.distanceToSqr(toPoint) < 1.0e-6) {
-            return;
-        }
-
         boolean valid = WoodenBeamBlockItem.isValidConnection(level, from, to);
         MicrolinerParams connectionStyle = valid ? VALID_CONNECTION_STYLE : INVALID_CONNECTION_STYLE;
         MicrolinerParams endpointStyle = valid ? VALID_ENDPOINT_STYLE : INVALID_ENDPOINT_STYLE;
-        StrutConnectionShape shape = new DefaultStrutConnectionShape(
-                fromPoint,
-                toPoint,
-                halfWidth,
-                halfHeight,
-                from.anchorPos(),
-                from.supportFace(),
-                to.anchorPos(),
-                to.supportFace()
+        var preview = new PreviewEndpoints(from, to,
+                level.getBlockState(from.anchorPos().relative(from.supportFace().getOpposite())),
+                level.getBlockState(to.anchorPos().relative(to.supportFace().getOpposite()))
         );
+        if (!preview.equals(cachedEndpoints)) {
+            var endpoints = new WoodenBeamConnectionEndpoints(from.supportFace(), from.snap(), to.supportFace(), to.snap());
+            cachedShape = new WoodenBeamSelectionShape(
+                    new WoodenBeamGeometry(level, from.anchorPos(), to.anchorPos(), endpoints));
+            cachedEndpoints = preview;
+        }
+        StrutConnectionShape shape = cachedShape;
         StrutPreviewRenderTransforms transforms = StrutPreviewRenderTransforms.resolve(
                 level,
                 from.anchorPos(),
@@ -221,5 +212,9 @@ public final class WoodenBeamPlacementPreview {
                 | ((int) (r * 255.0F) << 16)
                 | ((int) (g * 255.0F) << 8)
                 | (int) (b * 255.0F);
+    }
+
+    private record PreviewEndpoints(EndpointSelection from, EndpointSelection to,
+                                    BlockState fromSupport, BlockState toSupport) {
     }
 }

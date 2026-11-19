@@ -2,7 +2,7 @@ package com.aislen.createindustrialdetails.content.block.woodenbeam;
 
 import com.aislen.createindustrialdetails.content.block.woodenpost.WoodenPostBlock;
 import com.aislen.createindustrialdetails.content.block.woodenpost.WoodenPostPosition;
-import com.cake.struts.content.geometry.StrutGeometry;
+import com.cake.struts.content.shape.SurfaceClippingHelper.SurfacePlane;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Vec3i;
@@ -18,7 +18,6 @@ public final class WoodenBeamEndpoints {
     public static final double SNAP_SPACING = 4.0 / 16.0;
 
     private static final double ATTACHMENT_DEPTH = (6.0 / 16.0) + 1.0e-3;
-    private static final double CLIP_EXTRA_DEPTH = 4.0 / 16.0;
     private static final double MARKER_SURFACE_OFFSET = 1.0 / 256.0;
     private static final double BEAM_HALF_SIZE = 4.0 / 16.0;
 
@@ -26,79 +25,48 @@ public final class WoodenBeamEndpoints {
     }
 
     public static Vec3 attachment(BlockPos anchorPos, Direction supportFace, WoodenBeamSnapPoint snap) {
+        return snappedPoint(anchorPos, supportFace, snap, ATTACHMENT_DEPTH);
+    }
+
+    private static Vec3 snappedPoint(BlockPos anchorPos, Direction supportFace, WoodenBeamSnapPoint snap, double depth) {
         FaceBasis basis = basis(supportFace);
         return Vec3.atCenterOf(anchorPos)
-                .relative(supportFace, -ATTACHMENT_DEPTH)
+                .relative(supportFace, -depth)
                 .add(Vec3.atLowerCornerOf(basis.u()).scale(snap.gridU() * SNAP_SPACING))
                 .add(Vec3.atLowerCornerOf(basis.v()).scale(snap.gridV() * SNAP_SPACING));
     }
 
-    public static Vec3 physicalAttachment(
+    static Attachment geometryAttachment(
             @Nullable BlockGetter level,
             BlockPos anchorPos,
             Direction supportFace,
             WoodenBeamSnapPoint snap
     ) {
-        Vec3 logicalAttachment = attachment(anchorPos, supportFace, snap);
-        if (level == null) {
-            return logicalAttachment;
-        }
-
+        Vec3 facePoint = snappedPoint(anchorPos, supportFace, snap, 0.5);
+        Vec3 faceNormal = Vec3.atLowerCornerOf(supportFace.getNormal());
+        SurfacePlane blockFace = new SurfacePlane(facePoint, faceNormal);
         BlockPos supportPos = anchorPos.relative(supportFace.getOpposite());
-        var supportState = level.getBlockState(supportPos);
-        if (!(supportState.getBlock() instanceof WoodenPostBlock)) {
-            return logicalAttachment;
-        }
-
-        WoodenPostPosition postPosition = WoodenPostBlock.getSinglePosition(supportState);
+        var supportState = level == null ? null : level.getBlockState(supportPos);
+        WoodenPostPosition postPosition = supportState != null && supportState.getBlock() instanceof WoodenPostBlock
+                ? WoodenPostBlock.getSinglePosition(supportState) : null;
         if (postPosition == null) {
-            return logicalAttachment;
+            return new Attachment(facePoint, blockFace, null);
         }
-        AABB postBounds = postPosition.shape().bounds().move(supportPos);
+        AABB postBounds = postPosition.bounds().move(supportPos);
         double centreX = (postBounds.minX + postBounds.maxX) * 0.5;
         double centreZ = (postBounds.minZ + postBounds.maxZ) * 0.5;
         if (supportFace.getAxis().isHorizontal()) {
-            return new Vec3(centreX, logicalAttachment.y, centreZ);
+            return new Attachment(new Vec3(centreX, facePoint.y, centreZ), blockFace, postBounds);
         }
 
         double targetY = supportFace == Direction.UP
                 ? postBounds.maxY - BEAM_HALF_SIZE
                 : postBounds.minY + BEAM_HALF_SIZE;
-        return new Vec3(centreX, targetY, centreZ);
-    }
-
-    public static GeometrySpan geometrySpan(
-            @Nullable BlockGetter level,
-            BlockPos fromPos,
-            Direction fromFace,
-            WoodenBeamSnapPoint fromSnap,
-            BlockPos toPos,
-            Direction toFace,
-            WoodenBeamSnapPoint toSnap
-    ) {
-        Vec3 logicalFrom = attachment(fromPos, fromFace, fromSnap);
-        Vec3 logicalTo = attachment(toPos, toFace, toSnap);
-        boolean horizontal = Math.abs(logicalTo.y - logicalFrom.y) <= StrutGeometry.EPSILON;
-        if (!horizontal) {
-            return new GeometrySpan(logicalFrom, logicalTo, false);
-        }
-        return new GeometrySpan(
-                physicalAttachment(level, fromPos, fromFace, fromSnap),
-                physicalAttachment(level, toPos, toFace, toSnap),
-                true
-        );
-    }
-
-    public static Vec3 clippingPlanePoint(BlockPos anchorPos, Direction supportFace, WoodenBeamSnapPoint snap) {
-        return attachment(anchorPos, supportFace, snap).relative(supportFace, -CLIP_EXTRA_DEPTH);
+        return new Attachment(new Vec3(centreX, targetY, centreZ), blockFace, postBounds);
     }
 
     public static Vec3 markerPoint(BlockPos anchorPos, Direction supportFace, WoodenBeamSnapPoint snap) {
-        FaceBasis basis = basis(supportFace);
-        return Vec3.atCenterOf(anchorPos)
-                .relative(supportFace, -0.5 + MARKER_SURFACE_OFFSET)
-                .add(Vec3.atLowerCornerOf(basis.u()).scale(snap.gridU() * SNAP_SPACING))
-                .add(Vec3.atLowerCornerOf(basis.v()).scale(snap.gridV() * SNAP_SPACING));
+        return snappedPoint(anchorPos, supportFace, snap, 0.5 - MARKER_SURFACE_OFFSET);
     }
 
     public static WoodenBeamSnapPoint nearest(BlockPos anchorPos, Direction supportFace, Vec3 hitLocation) {
@@ -205,6 +173,6 @@ public final class WoodenBeamEndpoints {
     public record FaceBasis(Vec3i u, Vec3i v) {
     }
 
-    public record GeometrySpan(Vec3 from, Vec3 to, boolean horizontal) {
+    record Attachment(Vec3 center, SurfacePlane blockFace, @Nullable AABB postBounds) {
     }
 }

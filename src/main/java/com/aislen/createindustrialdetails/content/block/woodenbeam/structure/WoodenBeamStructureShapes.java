@@ -1,5 +1,7 @@
 package com.aislen.createindustrialdetails.content.block.woodenbeam.structure;
 
+import com.aislen.createindustrialdetails.content.block.woodenbeam.WoodenBeamConnectionEndpoints;
+import com.aislen.createindustrialdetails.content.block.woodenbeam.WoodenBeamGeometry;
 import com.aislen.createindustrialdetails.registry.ModBlocks;
 import com.cake.struts.content.StrutModelType;
 import com.cake.struts.content.structure.ConnectionKey;
@@ -10,7 +12,6 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.material.Fluids;
-import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
@@ -29,12 +30,11 @@ public final class WoodenBeamStructureShapes {
     public static void registerConnection(
             Level level,
             BlockPos from,
-            Vec3 fromAttachment,
             BlockPos to,
-            Vec3 toAttachment,
+            WoodenBeamConnectionEndpoints endpoints,
             StrutModelType modelType
     ) {
-        STORAGE.getForLevel(level).register(level, from, fromAttachment, to, toAttachment, modelType);
+        STORAGE.getForLevel(level).register(level, from, to, endpoints, modelType);
     }
 
     public static void unregisterConnection(Level level, BlockPos from, BlockPos to) {
@@ -84,29 +84,39 @@ public final class WoodenBeamStructureShapes {
     }
 
     private static final class ShapeRegistry {
-        private final Map<ConnectionKey, WoodenBeamLineGeometry> connections = new HashMap<>();
+        private final Map<ConnectionKey, Set<BlockPos>> connections = new HashMap<>();
         private final Map<BlockPos, WoodenBeamPositionData> positions = new HashMap<>();
         private final Set<BlockPos> queuedRestores = new LinkedHashSet<>();
 
-        void register(Level level, BlockPos from, Vec3 fromAttachment, BlockPos to, Vec3 toAttachment, StrutModelType type) {
+        void register(Level level, BlockPos from, BlockPos to, WoodenBeamConnectionEndpoints endpoints,
+                      StrutModelType type) {
             ConnectionKey key = new ConnectionKey(from, to);
-            if (connections.containsKey(key)) {
+            Set<BlockPos> existing = connections.get(key);
+            if (existing != null) {
+                // Struts briefly registers its own structure while loading
+                // the second anchor. Restore any proxies it just replaced.
+                if (!level.isClientSide) {
+                    placeConnectionBlocks(level, from, to, existing);
+                }
                 return;
             }
-            WoodenBeamLineGeometry geometry = new WoodenBeamLineGeometry(
-                    fromAttachment,
-                    toAttachment,
-                    type.shapeSizeXPixels(),
-                    type.shapeSizeYPixels(),
-                    type.voxelShapeResolutionPixels()
-            );
-            connections.put(key, geometry);
-            for (BlockPos pos : geometry.getPositions()) {
-                VoxelShape shape = geometry.getShapeForPosition(pos);
-                if (shape.isEmpty()) {
-                    continue;
-                }
-                positions.computeIfAbsent(pos, ignored -> new WoodenBeamPositionData()).add(key, shape);
+            var beam = from.compareTo(to) < 0
+                    ? new WoodenBeamGeometry(level, from, to, endpoints)
+                    : new WoodenBeamGeometry(level, to, from, endpoints.reversed());
+            var shapes = WoodenBeamLineGeometry.voxelize(beam, type.voxelShapeResolutionPixels());
+            Set<BlockPos> blocks = Set.copyOf(shapes.keySet());
+            connections.put(key, blocks);
+            for (var entry : shapes.entrySet()) {
+                positions.computeIfAbsent(entry.getKey(), ignored -> new WoodenBeamPositionData())
+                        .add(key, entry.getValue());
+            }
+            if (!level.isClientSide) {
+                placeConnectionBlocks(level, from, to, blocks);
+            }
+        }
+
+        private void placeConnectionBlocks(Level level, BlockPos from, BlockPos to, Set<BlockPos> blocks) {
+            for (BlockPos pos : blocks) {
                 if (!pos.equals(from) && !pos.equals(to)) {
                     placeStructureBlock(level, pos);
                 }
@@ -114,11 +124,11 @@ public final class WoodenBeamStructureShapes {
         }
 
         void unregister(Level level, ConnectionKey key) {
-            WoodenBeamLineGeometry geometry = connections.remove(key);
-            if (geometry == null) {
+            Set<BlockPos> blocks = connections.remove(key);
+            if (blocks == null) {
                 return;
             }
-            for (BlockPos pos : geometry.getPositions()) {
+            for (BlockPos pos : blocks) {
                 WoodenBeamPositionData data = positions.get(pos);
                 if (data == null) {
                     continue;
@@ -126,7 +136,7 @@ public final class WoodenBeamStructureShapes {
                 data.remove(key);
                 if (data.perConnection.isEmpty()) {
                     positions.remove(pos);
-                    if (level.getBlockState(pos).is(ModBlocks.WOODEN_BEAM_STRUCTURE.get())) {
+                    if (!level.isClientSide && level.getBlockState(pos).is(ModBlocks.WOODEN_BEAM_STRUCTURE.get())) {
                         level.removeBlock(pos, false);
                     }
                 }

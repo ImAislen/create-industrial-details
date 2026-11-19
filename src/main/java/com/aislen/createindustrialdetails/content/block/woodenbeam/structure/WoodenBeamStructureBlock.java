@@ -91,7 +91,7 @@ public final class WoodenBeamStructureBlock extends Block implements SimpleWater
 
     @Override
     protected void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean isMoving) {
-        if (!state.is(newState.getBlock()) && newState.isAir()) {
+        if (!level.isClientSide && !state.is(newState.getBlock()) && newState.isAir()) {
             for (ConnectionKey key : WoodenBeamStructureShapes.getConnectionsAt(level, pos)) {
                 WoodenBeamStructureShapes.unregisterConnection(level, key.a(), key.b());
                 removeFromAnchor(level, key.a(), key.b());

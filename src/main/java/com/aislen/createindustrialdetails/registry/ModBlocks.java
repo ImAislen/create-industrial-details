@@ -149,6 +149,7 @@ public final class ModBlocks {
                                     .replaceable()
                                     .noOcclusion()
                                     .noCollission()
+                            .dynamicShape()
                                     .pushReaction(PushReaction.DESTROY)
                                     .mapColor(MapColor.WOOD)
                                     .strength(2.0F)
@@ -471,7 +472,7 @@ public final class ModBlocks {
             DeferredBlock<WoodenBeamBlock> block = registerBlockWithItem(
                     variant.registryName(),
                     () -> new WoodenBeamBlock(
-                            structuralTimberProperties(variant),
+                            structuralTimberProperties(variant).dynamicShape(),
                             new StrutModelType(
                                     ResourceLocation.fromNamespaceAndPath(
                                             CreateIndustrialDetails.MOD_ID,

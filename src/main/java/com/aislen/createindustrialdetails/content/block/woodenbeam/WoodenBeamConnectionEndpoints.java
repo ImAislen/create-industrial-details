@@ -10,6 +10,10 @@ public record WoodenBeamConnectionEndpoints(
         Direction peerFace,
         WoodenBeamSnapPoint peerSnap
 ) {
+    public WoodenBeamConnectionEndpoints reversed() {
+        return new WoodenBeamConnectionEndpoints(peerFace, peerSnap, localFace, localSnap);
+    }
+
     public WoodenBeamConnectionEndpoints rotate(Rotation rotation) {
         return transform(rotation, Mirror.NONE);
     }

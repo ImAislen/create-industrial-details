@@ -24,6 +24,7 @@ public class WoodenBeamBlockEntity extends StrutBlockEntity {
 
     private static final String ENDPOINTS_TAG = "WoodenBeamEndpoints";
     private final Map<BlockPos, WoodenBeamConnectionEndpoints> endpointsByPeer = new HashMap<>();
+    private Map<BlockPos, WoodenBeamConnectionEndpoints> clientShapes = Map.of();
 
     public WoodenBeamBlockEntity(BlockPos pos, BlockState state) {
         super(ModBlockEntities.WOODEN_BEAM.get(), pos, state);
@@ -86,7 +87,11 @@ public class WoodenBeamBlockEntity extends StrutBlockEntity {
     @Override
     public void onLoad() {
         super.onLoad();
-        if (level == null || level.isClientSide) {
+        if (level == null) {
+            return;
+        }
+        if (level.isClientSide) {
+            updateClientShapes();
             return;
         }
         for (GirderConnectionNode connection : getConnectionsCopy()) {
@@ -107,8 +112,18 @@ public class WoodenBeamBlockEntity extends StrutBlockEntity {
                 );
             }
         }
-        if (level != null && level.isClientSide && CLIENT_ENDPOINT_REMOVE_LISTENER != null) {
-            CLIENT_ENDPOINT_REMOVE_LISTENER.accept(level, getBlockPos());
+        if (level != null && level.isClientSide) {
+            for (BlockPos peer : clientShapes.keySet()) {
+                if (!(level.getBlockEntity(peer) instanceof WoodenBeamBlockEntity other)
+                        || other.isRemoved()
+                        || !other.clientShapes.containsKey(getBlockPos())) {
+                    WoodenBeamStructureShapes.unregisterConnection(level, getBlockPos(), peer);
+                }
+            }
+            clientShapes = Map.of();
+            if (CLIENT_ENDPOINT_REMOVE_LISTENER != null) {
+                CLIENT_ENDPOINT_REMOVE_LISTENER.accept(level, getBlockPos());
+            }
         }
         super.setRemoved();
     }
@@ -116,7 +131,24 @@ public class WoodenBeamBlockEntity extends StrutBlockEntity {
     @Override
     public void handleUpdateTag(CompoundTag tag, HolderLookup.Provider registries) {
         super.handleUpdateTag(tag, registries);
-        if (level != null && level.isClientSide && CLIENT_ENDPOINT_UPDATE_LISTENER != null) {
+        if (level != null && level.isClientSide) {
+            updateClientShapes();
+        }
+    }
+
+    private void updateClientShapes() {
+        Map<BlockPos, WoodenBeamConnectionEndpoints> current = new HashMap<>();
+        for (GirderConnectionNode connection : getConnectionsCopy()) {
+            current.put(connection.absoluteFrom(getBlockPos()), getEndpoints(connection));
+        }
+        for (var old : clientShapes.entrySet()) {
+            if (!old.getValue().equals(current.get(old.getKey()))) {
+                WoodenBeamStructureShapes.unregisterConnection(level, getBlockPos(), old.getKey());
+            }
+        }
+        current.forEach(this::registerEndpointAwareShape);
+        clientShapes = current;
+        if (CLIENT_ENDPOINT_UPDATE_LISTENER != null) {
             CLIENT_ENDPOINT_UPDATE_LISTENER.accept(level, this);
         }
     }
@@ -184,21 +216,11 @@ public class WoodenBeamBlockEntity extends StrutBlockEntity {
         if (level == null) {
             return;
         }
-        WoodenBeamEndpoints.GeometrySpan geometrySpan = WoodenBeamEndpoints.geometrySpan(
-                level,
-                getBlockPos(),
-                endpoints.localFace(),
-                endpoints.localSnap(),
-                peerPos,
-                endpoints.peerFace(),
-                endpoints.peerSnap()
-        );
         WoodenBeamStructureShapes.registerConnection(
                 level,
                 getBlockPos(),
-                geometrySpan.from(),
                 peerPos,
-                geometrySpan.to(),
+                endpoints,
                 getModelType()
         );
     }
