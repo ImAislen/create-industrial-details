@@ -76,10 +76,9 @@ public class IndustrialSteelCagedLampBlockEntity
     }
 
     private void setFrequency(boolean first, ItemStack stack) {
-        ItemStack normalized = normalizeFrequency(stack);
         setFrequencies(
-                first ? normalized : frequencyFirst,
-                first ? frequencySecond : normalized
+                first ? stack : frequencyFirst,
+                first ? frequencySecond : stack
         );
     }
 

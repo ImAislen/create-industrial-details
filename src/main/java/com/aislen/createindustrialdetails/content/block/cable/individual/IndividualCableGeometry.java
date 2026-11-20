@@ -1,17 +1,19 @@
 package com.aislen.createindustrialdetails.content.block.cable.individual;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
 public final class IndividualCableGeometry {
-    private static final VoxelShape[][] PARTS = new VoxelShape[IndividualCableColor.values().length][CableRoute.values().length];
+    private static final IndividualCableColor[] COLORS = IndividualCableColor.values();
+    private static final int ROUTE_COUNT = CableRoute.values().length;
+    private static final VoxelShape[][] PARTS = new VoxelShape[COLORS.length][ROUTE_COUNT];
     private static final java.util.Map<Integer, VoxelShape> COMBINED = new java.util.concurrent.ConcurrentHashMap<>();
     static {
-        for (var color : IndividualCableColor.values()) for (var route : CableRoute.values()) {
+        var routes = CableRoute.values();
+        for (var color : COLORS) for (var route : routes) {
             if (route == CableRoute.NONE) { PARTS[color.ordinal()][0] = Shapes.empty(); continue; }
             double x = color.minX / 16;
             var a = route.transform(new Vec3(x, 0, 0));
@@ -22,15 +24,16 @@ public final class IndividualCableGeometry {
     private IndividualCableGeometry() {}
     public static VoxelShape part(IndividualCableColor color, CableRoute route) { return PARTS[color.ordinal()][route.ordinal()]; }
     public static VoxelShape shape(BlockState state) {
-        int key = 0; for (var color : IndividualCableColor.values()) key = key * CableRoute.values().length + state.getValue(color.property).ordinal();
+        int key = 0;
+        for (var color : COLORS) key = key * ROUTE_COUNT + state.getValue(color.property).ordinal();
         return COMBINED.computeIfAbsent(key, ignored -> {
             VoxelShape result = Shapes.empty();
-            for (var color : IndividualCableColor.values()) result = Shapes.or(result, part(color, state.getValue(color.property)));
-            return result.optimize();
+            for (var color : COLORS) result = Shapes.or(result, part(color, state.getValue(color.property)));
+            return result;
         });
     }
     public static boolean permits(BlockState state) {
-        for (var a : IndividualCableColor.values()) for (var b : IndividualCableColor.values()) {
+        for (var a : COLORS) for (var b : COLORS) {
             if (a.ordinal() >= b.ordinal()) continue;
             if (Shapes.joinIsNotEmpty(part(a, state.getValue(a.property)), part(b, state.getValue(b.property)), net.minecraft.world.phys.shapes.BooleanOp.AND)) return false;
         }
@@ -51,7 +54,7 @@ public final class IndividualCableGeometry {
     }
     public static IndividualCableColor target(BlockState state, BlockPos pos, Vec3 start, Vec3 end) {
         double closest = Double.POSITIVE_INFINITY; IndividualCableColor selected = null;
-        for (var color : IndividualCableColor.values()) {
+        for (var color : COLORS) {
             var hit = part(color, state.getValue(color.property)).clip(start, end, pos);
             if (hit != null && hit.getLocation().distanceToSqr(start) < closest) {
                 selected = color; closest = hit.getLocation().distanceToSqr(start);

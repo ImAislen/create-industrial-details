@@ -46,10 +46,12 @@ public final class CableSpanIndex {
     public record Hit(CableSpans.Span span, Vec3 point) {}
     public Set<CableSpans.Span> nearby(Vec3 point, double radius) {
         var candidates = new HashSet<CableSpans.Span>();
+        if (sections.isEmpty()) return candidates;
         eachSection(new AABB(point, point).inflate(radius), section -> candidates.addAll(sections.getOrDefault(section, Set.of())));
         return candidates;
     }
     public Hit trace(Vec3 from, Vec3 to) {
+        if (sections.isEmpty()) return null;
         var candidates = new HashSet<CableSpans.Span>();
         eachSection(new AABB(from, to).inflate(.065), section -> candidates.addAll(sections.getOrDefault(section, Set.of())));
         Hit result = null; double nearest = from.distanceToSqr(to) + 1e-8;

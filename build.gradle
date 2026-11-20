@@ -16,7 +16,7 @@ sourceSets.main.resources {
 
     exclude("**/*.bbmodel")
 
-    exclude("src/generated/**/.cache")
+    exclude("**/.cache/**")
 }
 
 repositories {
@@ -149,7 +149,7 @@ publishing {
     }
     repositories {
         maven {
-            url "file://${project.projectDir}/repo"
+            url = "file://${project.projectDir}/repo"
         }
     }
 }

@@ -384,14 +384,19 @@ public final class IndustrialSteelPanelBlock extends Block {
     }
 
     private static VoxelShape[][][] buildShapeCache() {
-        VoxelShape[][][] result =
-            new VoxelShape[Direction.values().length][16][16];
+        Direction[] facings = Direction.values();
+        VoxelShape[][][] result = new VoxelShape[facings.length][16][16];
 
-        for (Direction facing : Direction.values()) {
-            for (int connections = 0; connections < 16; connections++) {
+        for (int connections = 0; connections < 16; connections++) {
+            int connectedCorners = connectedCorners(connections);
+            for (Direction facing : facings) {
+                VoxelShape[] shapes = result[facing.ordinal()][connections];
                 for (int innerCorners = 0; innerCorners < 16; innerCorners++) {
-                    result[facing.ordinal()][connections][innerCorners] =
-                        buildShape(facing, connections, innerCorners);
+                    // A corner flag matters only when both adjacent sides connect.
+                    int relevantCorners = innerCorners & connectedCorners;
+                    shapes[innerCorners] = relevantCorners == innerCorners
+                        ? buildShape(facing, connections, connectedCorners & ~innerCorners)
+                        : shapes[relevantCorners];
                 }
             }
         }
@@ -399,24 +404,33 @@ public final class IndustrialSteelPanelBlock extends Block {
         return result;
     }
 
+    private static int connectedCorners(int connections) {
+        boolean top = (connections & TOP_BIT) != 0;
+        boolean right = (connections & RIGHT_BIT) != 0;
+        boolean bottom = (connections & BOTTOM_BIT) != 0;
+        boolean left = (connections & LEFT_BIT) != 0;
+        int corners = 0;
+        if (top && left) corners |= INNER_TOP_LEFT_BIT;
+        if (top && right) corners |= INNER_TOP_RIGHT_BIT;
+        if (bottom && left) corners |= INNER_BOTTOM_LEFT_BIT;
+        if (bottom && right) corners |= INNER_BOTTOM_RIGHT_BIT;
+        return corners;
+    }
+
     private static VoxelShape buildShape(
         Direction facing,
         int connectionMask,
-        int innerMask
+        int flatCornerMask
     ) {
         boolean top = (connectionMask & TOP_BIT) != 0;
         boolean right = (connectionMask & RIGHT_BIT) != 0;
         boolean bottom = (connectionMask & BOTTOM_BIT) != 0;
         boolean left = (connectionMask & LEFT_BIT) != 0;
 
-        boolean innerTopLeft =
-            (innerMask & INNER_TOP_LEFT_BIT) != 0;
-        boolean innerTopRight =
-            (innerMask & INNER_TOP_RIGHT_BIT) != 0;
-        boolean innerBottomLeft =
-            (innerMask & INNER_BOTTOM_LEFT_BIT) != 0;
-        boolean innerBottomRight =
-            (innerMask & INNER_BOTTOM_RIGHT_BIT) != 0;
+        boolean flatTopLeft = (flatCornerMask & INNER_TOP_LEFT_BIT) != 0;
+        boolean flatTopRight = (flatCornerMask & INNER_TOP_RIGHT_BIT) != 0;
+        boolean flatBottomLeft = (flatCornerMask & INNER_BOTTOM_LEFT_BIT) != 0;
+        boolean flatBottomRight = (flatCornerMask & INNER_BOTTOM_RIGHT_BIT) != 0;
 
         List<BoxDef> boxes = new ArrayList<>(9);
 
@@ -426,11 +440,6 @@ public final class IndustrialSteelPanelBlock extends Block {
         boxes.add(depthBox(14, 2, 16, 14, right));
         boxes.add(depthBox(2, 0, 14, 2, bottom));
         boxes.add(depthBox(0, 2, 2, 14, left));
-
-        boolean flatTopLeft = top && left && !innerTopLeft;
-        boolean flatTopRight = top && right && !innerTopRight;
-        boolean flatBottomLeft = bottom && left && !innerBottomLeft;
-        boolean flatBottomRight = bottom && right && !innerBottomRight;
 
         boxes.add(depthBox(0, 14, 2, 16, flatTopLeft));
         boxes.add(depthBox(14, 14, 16, 16, flatTopRight));

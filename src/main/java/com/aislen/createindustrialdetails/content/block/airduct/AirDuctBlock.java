@@ -44,6 +44,7 @@ public class AirDuctBlock extends PipeBlock implements IWrenchable, Transformabl
 
     public static final EnumProperty<Direction.Axis> AXIS = BlockStateProperties.AXIS;
     public static final EnumProperty<AirDuctCasing> CASING = EnumProperty.create("casing", AirDuctCasing.class);
+    private static final Direction[] DIRECTIONS = Direction.values();
     private static final int PLACEMENT_HELPER_ID = PlacementHelpers.register(new AirDuctPlacementHelper());
 
     public AirDuctBlock(Properties properties) {
@@ -209,17 +210,16 @@ public class AirDuctBlock extends PipeBlock implements IWrenchable, Transformabl
 
     static int casingOpenings(BlockState state) {
         int mask = 0;
-        for (Direction direction : Direction.values()) {
+        for (Direction direction : DIRECTIONS) {
             if (state.getValue(PROPERTY_BY_DIRECTION.get(direction))) mask |= 1 << direction.ordinal();
         }
         if (mask == 0) {
-            for (Direction direction : Direction.values()) {
-                if (direction.getAxis() == state.getValue(AXIS)) mask |= 1 << direction.ordinal();
-            }
-        } else if (Integer.bitCount(mask) == 1) {
-            for (Direction direction : Direction.values()) {
-                if ((mask & (1 << direction.ordinal())) != 0) return mask | (1 << direction.getOpposite().ordinal());
-            }
+            Direction end = Direction.get(Direction.AxisDirection.POSITIVE, state.getValue(AXIS));
+            return (1 << end.ordinal()) | (1 << end.getOpposite().ordinal());
+        }
+        if (Integer.bitCount(mask) == 1) {
+            Direction end = DIRECTIONS[Integer.numberOfTrailingZeros(mask)];
+            return mask | (1 << end.getOpposite().ordinal());
         }
         return mask;
     }
