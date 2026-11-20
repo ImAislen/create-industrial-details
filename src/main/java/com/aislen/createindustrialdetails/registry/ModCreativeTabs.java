@@ -73,6 +73,11 @@ public final class ModCreativeTabs {
         output.accept(ModItems.YELLOW_CONTROL_CABLE.get());
         output.accept(ModItems.GREEN_CONTROL_CABLE.get());
         output.accept(ModItems.BLUE_CONTROL_CABLE.get());
+        output.accept(ModBlocks.PNEUMATIC_LAUNCHER.get());
+        output.accept(ModItems.PNEUMATIC_TUBING.get());
+        output.accept(ModBlocks.PNEUMATIC_TUBE_SUPPORT.get());
+        output.accept(ModBlocks.PNEUMATIC_BOOSTER.get());
+        output.accept(ModBlocks.PNEUMATIC_RECEIVER.get());
     }
 
     private static void displayTimber(CreativeModeTab.Output output) {

@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "axis=x,upper=false": {
+      "model": "create_industrial_details:block/pneumatic_tube/pneumatic_tube_support",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y,upper=false": {
+      "model": "create_industrial_details:block/pneumatic_tube/pneumatic_tube_support"
+    },
+    "axis=z,upper=false": {
+      "model": "create_industrial_details:block/pneumatic_tube/pneumatic_tube_support",
+      "x": 90
+    },
+    "upper=true": {
+      "model": "create_industrial_details:block/pneumatic_tube/upper"
+    }
+  }
+}

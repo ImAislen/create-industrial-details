@@ -1,0 +1,5 @@
+{
+  "textures": {
+    "particle": "create_industrial_details:block/pneumatic_tube/pneumatic_launcher"
+  }
+}

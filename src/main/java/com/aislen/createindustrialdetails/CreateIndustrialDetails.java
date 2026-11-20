@@ -1,6 +1,9 @@
 package com.aislen.createindustrialdetails;
 
+import com.aislen.createindustrialdetails.content.block.pneumatic.PneumaticEvents;
+import com.aislen.createindustrialdetails.content.block.pneumatic.PneumaticArmPoint;
 import com.aislen.createindustrialdetails.content.variant.SelectItemVariant;
+import com.simibubi.create.api.stress.BlockStressValues;
 import com.aislen.createindustrialdetails.registry.ModBlocks;
 import com.aislen.createindustrialdetails.registry.ControlBoxAliases;
 import com.aislen.createindustrialdetails.registry.IndustrialSteelAliases;
@@ -34,6 +37,9 @@ public final class CreateIndustrialDetails {
         modEventBus.addListener(com.aislen.createindustrialdetails.content.block.cable.individual.CableSpanRemoval::register);
         modEventBus.addListener(com.aislen.createindustrialdetails.content.block.cable.individual.CableSpanSync::register);
         modEventBus.addListener(SelectItemVariant::register);
+        modEventBus.addListener(PneumaticArmPoint::register);
+        modEventBus.addListener(PneumaticEvents::register);
+        modEventBus.addListener(PneumaticEvents::capabilities);
         ModDataComponents.register(modEventBus);
         ModBlocks.register(modEventBus);
         ModBlockEntities.register(modEventBus);
@@ -50,6 +56,7 @@ public final class CreateIndustrialDetails {
     private static void commonSetup(FMLCommonSetupEvent event) {
         event.enqueueWork(() -> {
             ModTooltips.register();
+            BlockStressValues.IMPACTS.register(ModBlocks.PNEUMATIC_LAUNCHER.get(), () -> 4);
             com.simibubi.create.content.decoration.encasing.EncasingRegistry.addVariant(
                     com.simibubi.create.AllBlocks.FLUID_PIPE.get(), ModBlocks.SERVICE_TRENCH_PIPE.get());
             com.simibubi.create.content.decoration.encasing.EncasingRegistry.addVariant(

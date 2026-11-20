@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "upper=false": {
+      "model": "create_industrial_details:block/pneumatic_tube/pneumatic_launcher_resolved"
+    },
+    "upper=true": {
+      "model": "create_industrial_details:block/pneumatic_tube/upper"
+    }
+  }
+}

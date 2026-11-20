@@ -1,5 +1,6 @@
 package com.aislen.createindustrialdetails.registry;
 
+import com.aislen.createindustrialdetails.content.block.pneumatic.PneumaticTubingItem;
 import com.aislen.createindustrialdetails.content.block.cable.individual.IndividualCableColor;
 import com.aislen.createindustrialdetails.content.block.cable.individual.IndividualCableItem;
 import com.aislen.createindustrialdetails.CreateIndustrialDetails;
@@ -16,6 +17,9 @@ import java.util.function.BiFunction;
 public final class ModItems {
     public static final DeferredRegister.Items ITEMS =
             DeferredRegister.createItems(CreateIndustrialDetails.MOD_ID);
+
+    public static final DeferredItem<PneumaticTubingItem> PNEUMATIC_TUBING =
+            ITEMS.register("pneumatic_tubing", () -> new PneumaticTubingItem(new Item.Properties()));
 
     public static final DeferredItem<IndividualCableItem> RED_CONTROL_CABLE =
             ITEMS.register("red_control_cable", () -> new IndividualCableItem(new Item.Properties(),

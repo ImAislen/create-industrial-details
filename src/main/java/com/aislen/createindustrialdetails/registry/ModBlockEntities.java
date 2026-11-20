@@ -1,5 +1,6 @@
 package com.aislen.createindustrialdetails.registry;
 
+import com.aislen.createindustrialdetails.content.block.pneumatic.PneumaticLauncherBlockEntity;
 import com.aislen.createindustrialdetails.content.block.cable.individual.IndividualCableBlockEntity;
 import com.aislen.createindustrialdetails.CreateIndustrialDetails;
 import com.aislen.createindustrialdetails.content.block.cable.ControlBoxBlockEntity;
@@ -70,6 +71,10 @@ public final class ModBlockEntities {
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<IndividualCableBlockEntity>> INDIVIDUAL_CONTROL_CABLE =
             BLOCK_ENTITY_TYPES.register("individual_control_cable", () -> BlockEntityType.Builder.of(
                     IndividualCableBlockEntity::new, ModBlocks.INDIVIDUAL_CONTROL_CABLE.get(), ModBlocks.SERVICE_TRENCH_CABLE.get()).build(null));
+
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<PneumaticLauncherBlockEntity>> PNEUMATIC_LAUNCHER =
+            BLOCK_ENTITY_TYPES.register("pneumatic_launcher", () -> BlockEntityType.Builder.of(
+                    PneumaticLauncherBlockEntity::new, ModBlocks.PNEUMATIC_LAUNCHER.get()).build(null));
 
     private ModBlockEntities() {
     }

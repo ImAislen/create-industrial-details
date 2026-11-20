@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "create_industrial_details:pneumatic_launcher",
+    "create_industrial_details:pneumatic_tube_support",
+    "create_industrial_details:pneumatic_booster",
+    "create_industrial_details:pneumatic_receiver"
+  ]
+}

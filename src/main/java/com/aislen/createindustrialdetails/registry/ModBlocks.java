@@ -1,5 +1,7 @@
 package com.aislen.createindustrialdetails.registry;
 
+import com.aislen.createindustrialdetails.content.block.pneumatic.PneumaticStationBlock;
+import com.aislen.createindustrialdetails.content.block.pneumatic.PneumaticLauncherBlock;
 import com.aislen.createindustrialdetails.content.block.cable.individual.IndividualCableBlock;
 import com.aislen.createindustrialdetails.CreateIndustrialDetails;
 import com.aislen.createindustrialdetails.content.block.industrialsteel.trench.*;
@@ -70,6 +72,24 @@ public final class ModBlocks {
         return block;
     }
 
+
+    public static final DeferredBlock<PneumaticLauncherBlock> PNEUMATIC_LAUNCHER =
+            registerBlockWithItem("pneumatic_launcher", () -> new PneumaticLauncherBlock(pneumaticProperties()));
+    public static final DeferredBlock<PneumaticStationBlock> PNEUMATIC_TUBE_SUPPORT =
+            registerPneumaticStation("pneumatic_tube_support", PneumaticStationBlock.Kind.SUPPORT);
+    public static final DeferredBlock<PneumaticStationBlock> PNEUMATIC_BOOSTER =
+            registerPneumaticStation("pneumatic_booster", PneumaticStationBlock.Kind.BOOSTER);
+    public static final DeferredBlock<PneumaticStationBlock> PNEUMATIC_RECEIVER =
+            registerPneumaticStation("pneumatic_receiver", PneumaticStationBlock.Kind.RECEIVER);
+
+    private static DeferredBlock<PneumaticStationBlock> registerPneumaticStation(String id, PneumaticStationBlock.Kind kind) {
+        return registerBlockWithItem(id, () -> new PneumaticStationBlock(pneumaticProperties(), kind));
+    }
+
+    private static BlockBehaviour.Properties pneumaticProperties() {
+        return BlockBehaviour.Properties.of().strength(3).sound(SoundType.METAL).noOcclusion()
+                .requiresCorrectToolForDrops().pushReaction(PushReaction.BLOCK);
+    }
 
     public static final DeferredBlock<CopycatDiagonalByteBlock> COPYCAT_DIAGONAL_BYTE =
             registerBlockWithItem("copycat_diagonal_byte", () -> new CopycatDiagonalByteBlock(

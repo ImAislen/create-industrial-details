@@ -15,6 +15,10 @@
     "create_industrial_details:service_trench_glass_pipe",
     "create_industrial_details:service_trench_cable",
     "create_industrial_details:block_of_industrial_steel",
-    "create_industrial_details:block_of_plated_industrial_steel"
+    "create_industrial_details:block_of_plated_industrial_steel",
+    "create_industrial_details:pneumatic_launcher",
+    "create_industrial_details:pneumatic_tube_support",
+    "create_industrial_details:pneumatic_booster",
+    "create_industrial_details:pneumatic_receiver"
   ]
 }
